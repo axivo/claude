@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const MemoryBuilder = require('./lib/core/MemoryBuilder');
+const MemoryBuilder = require('./lib/core/Memory');
 
 /**
  * Memory Builder Entry Point
  * 
  * Simple command-line interface to the MemoryBuilder class.
- * All orchestration logic is now contained in lib/MemoryBuilder.js
+ * All orchestration logic is now contained in lib/Memory.js
  */
 
 if (require.main === module) {

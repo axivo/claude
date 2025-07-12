@@ -10,7 +10,7 @@
 const core = require('./core');
 const generators = require('./generators');
 const loaders = require('./loaders');
-const MemoryBuilder = require('./core/MemoryBuilder');
+const MemoryBuilder = require('./core/Memory');
 const processors = require('./processors');
 const Workflow = require('./Workflow');
 

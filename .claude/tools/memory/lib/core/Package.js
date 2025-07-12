@@ -3,7 +3,7 @@
  * 
  * Enhances npm init -y output with memory-builder specific configuration
  * 
- * @module lib/core/PackageBuilder
+ * @module lib/core/Package
  * @author AXIVO
  * @license BSD-3-Clause
  */

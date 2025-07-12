@@ -3,7 +3,7 @@
  * 
  * Main orchestrator class that coordinates the entire memory build process
  * 
- * @module lib/MemoryBuilder
+ * @module lib/Memory
  * @author AXIVO
  * @license BSD-3-Clause
  */

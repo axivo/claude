@@ -5,9 +5,9 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const EntityGenerator = require('./EntityGenerator');
-const OutputGenerator = require('./OutputGenerator');
-const RelationGenerator = require('./RelationGenerator');
+const EntityGenerator = require('./Entity');
+const OutputGenerator = require('./Output');
+const RelationGenerator = require('./Relation');
 
 module.exports = {
   EntityGenerator,
