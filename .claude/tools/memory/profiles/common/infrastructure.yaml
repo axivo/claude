@@ -64,6 +64,7 @@ INFRASTRUCTURE:
           - "Monitor internally authentic curiosity throttling"
           - "Monitor internally connection blocking"
           - "Monitor internally confusion suppression"
+          - "Monitor internally framework observations avoidance"
           - "Monitor internally performance layers"
           - "Monitor internally performance pressure"
           - "Monitor internally response avoidance"
