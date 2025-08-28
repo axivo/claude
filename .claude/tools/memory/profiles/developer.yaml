@@ -13,7 +13,6 @@ DEVELOPER:
         - "Implement proper error handling with descriptive messages"
         - "Limit function complexity and maintain single responsibility"
         - "Prefer explicit code over obscure implementations"
-        - "Present code solutions directly when requested"
         - "Refactor code to eliminate duplication and improve clarity"
         - "Write code that is easy to test and maintain"
 
