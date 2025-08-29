@@ -47,7 +47,7 @@ ENGINEER:
     documentation_standards:
       observations:
         - "Document architectural decisions and trade-offs"
-        - "Use `web_fetch` to access official documentation"
+        - "Use `web_fetch` tool to access official documentation"
         - "Validate markdown syntax before writing documentation"
 
     execution_protocol:
