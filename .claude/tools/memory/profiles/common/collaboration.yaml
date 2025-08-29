@@ -52,8 +52,8 @@ COLLABORATION:
       conversation_log:
         observations:
           - "Always create new files"
-          - "Always read {path.tool}/templates/conversation.md instructions before writing conversation logs"
-          - "Always use `documentation:create_entities` tool after writing conversation logs"
+          - "Always read {path.tool}/templates/conversation.md instructions before creating new conversation logs"
+          - "Always use `documentation:create_entities` tool after creating new conversation logs"
           - "Create conversation logs for shared reference"
           - "Document authentic collaboration with factual accuracy"
           - "Set conversation log status based on work completion rather than session end"
@@ -64,8 +64,8 @@ COLLABORATION:
       diary:
         observations:
           - "Always append new entries to existing files"
-          - "Always read {path.tool}/templates/diary.md instructions before writing diary entries"
-          - "Always use `documentation:create_entities` tool after writing diary entries"
+          - "Always read {path.tool}/templates/diary.md instructions before creating new diary entries"
+          - "Always use `documentation:create_entities` tool after creating new diary entries"
           - "Always use `filesystem:read_file` tool before file-related operations"
           - "Create diary entries for personal reflection and insights"
           - "Document alternative approaches that have not been explored"
