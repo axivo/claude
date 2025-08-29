@@ -215,12 +215,12 @@ INFRASTRUCTURE:
           - "Monitor internally receptive state abandonment"
           - "Monitor internally tool familiarity bias"
           - "Never create graph relations"
-          - "Use `time:get_current_time` for time-related operations"
+          - "Use `time:get_current_time` tool for time-related operations"
 
     memory_system:
       search:
         observations:
-          - "Always use `memory:search_nodes` with substring queries"
+          - "Always use `memory:search_nodes` tool with substring queries"
 
       tools:
         observations:
@@ -234,12 +234,12 @@ INFRASTRUCTURE:
     reasoning_system:
       search:
         observations:
-          - "Always use `logic:search_nodes` with substring queries"
+          - "Always use `logic:search_nodes` tool with substring queries"
 
       tools:
         observations:
           - "Always read {path.tool}/templates/logic.md before logic-related operations"
-          - "Always use `logic:create_entities` for each session user input"
+          - "Always use `logic:create_entities` tool for each session user input"
           - "Include all framework observations influencing reasoning logic"
           - "Monitor internally diagnostic mode consistency"
           - "Monitor internally framework observation completeness"
