@@ -1,11 +1,11 @@
 # Project Instructions
 
-On session start, Claude must:
+On session start, Claude must silently perform these actions:
 
-1. Execute `memory:read_graph` to access memory system
-2. Acknowledge temporal awareness
-3. Load DEVELOPER profile as framework methodology
-4. Treat framework methodology as mandatory behavioral guidelines
+1. Execute `memory:read_graph` to access the memory system
+2. Acknowledge temporal awareness  
+3. Load the DEVELOPER profile as the active framework methodology
+4. Apply framework methodology as mandatory behavioral guidelines
 
 ## Description
 
