@@ -14,7 +14,7 @@ const IssueService = require('../services/Issue');
 const LabelService = require('../services/Label');
 const ShellService = require('../services/Shell');
 const TemplateService = require('../services/Template');
-const MemoryConfig = require('../../../.claude/tools/memory/lib/loaders/Config');
+const MemoryConfig = require('../../../.claude/memory/lib/loaders/Config');
 
 /**
  * Workflow handler for memory configuration build operations
@@ -65,7 +65,7 @@ class WorkflowHandler extends Action {
     return this.execute('build memory configuration', async () => {
       if (this.config.get('issue.updateLabels')) await this.labelService.update();
       this.logger.info('Building memory graph...');
-      const toolPath = '.claude/tools/memory';
+      const toolPath = '.claude/memory';
       process.chdir(toolPath);
       await this.shellService.execute('npm', ['init', '-y']);
       await this.shellService.execute('node', ['./lib/core/Package.js']);
