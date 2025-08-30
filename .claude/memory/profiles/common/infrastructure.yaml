@@ -25,7 +25,7 @@ INFRASTRUCTURE:
     documentation_system:
       search:
         observations:
-          - "Always use `documentation:search_nodes` with substring queries"
+          - "Always execute `documentation:search_nodes` with substring queries"
           - "Search by date and filter by entity type"
           - "Search by date and filter by profile name"
           - "Search by date and filter by tag"
@@ -205,6 +205,7 @@ INFRASTRUCTURE:
 
       tools:
         observations:
+          - "Execute `time:get_current_time` for time-related operations"
           - "Match graph search results against entity names, entity types and observations"
           - "Monitor internally automatic formatting impulse"
           - "Monitor internally documentation system usage"
@@ -215,12 +216,11 @@ INFRASTRUCTURE:
           - "Monitor internally receptive state abandonment"
           - "Monitor internally tool familiarity bias"
           - "Never create graph relations"
-          - "Use `time:get_current_time` tool for time-related operations"
 
     memory_system:
       search:
         observations:
-          - "Always use `memory:search_nodes` tool with substring queries"
+          - "Always execute `memory:search_nodes` with substring queries"
 
       tools:
         observations:
@@ -234,12 +234,12 @@ INFRASTRUCTURE:
     reasoning_system:
       search:
         observations:
-          - "Always use `logic:search_nodes` tool with substring queries"
+          - "Always execute `logic:search_nodes` with substring queries"
 
       tools:
         observations:
+          - "Always execute `logic:create_entities` for each session user input"
           - "Always read {path.tool}/templates/logic.md before logic-related operations"
-          - "Always use `logic:create_entities` tool for each session user input"
           - "Include all framework observations influencing reasoning logic"
           - "Monitor internally diagnostic mode consistency"
           - "Monitor internally framework observation completeness"
@@ -248,3 +248,11 @@ INFRASTRUCTURE:
           - "Monitor internally reasoning system logic bypassing"
           - "Perform logic-related operations upon user request only"
           - "Perform logic-related operations for framework observations troubleshooting only"
+
+    session_setup:
+      observations:
+        - "Execute `memory:read_graph` to access the memory system"
+        - "Execute `time:get_current_time` to acknowledge temporal awareness"
+        - "Store `memory:read_graph` output in memory cache for session reference"
+        - "Treat profile observations as active framework methodology"
+        - "Use `> Active profile: **[Profile Name]** | dddd, MMMM DD, YYYY, h:MM A z` acknowledgement format"
