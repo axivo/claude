@@ -3,7 +3,7 @@ name: Memory
 on:
   pull_request:
     paths:
-      - .claude/tools/memory/**
+      - .claude/memory/**
       - .github/actions/**
       - .github/workflows/memory.yml
 
