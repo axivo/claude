@@ -38,7 +38,7 @@ jobs:
 
       - name: Configure repository
         id: workflow
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { Workflow } = require('./.github/actions/handlers');
@@ -46,7 +46,7 @@ jobs:
             await workflow.configureRepository();
 
       - name: Build memory graph
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { Workflow } = require('./.github/actions/handlers');
@@ -54,7 +54,7 @@ jobs:
             await workflow.build();
 
       - name: Report workflow issue
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         if: always()
         with:
           script: |
