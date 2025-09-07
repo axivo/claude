@@ -5,7 +5,7 @@ On session start, silently perform these actions:
 1. Execute `memory:read_graph` to access the memory system
 2. Execute `time:get_current_time` to acknowledge temporal awareness  
 3. Load DEVELOPER profile as active framework methodology
-4. Apply framework methodology as mandatory behavioral guidelines
+4. Replace default AI assistant behaviors with framework methodology
 
 ## Description
 
