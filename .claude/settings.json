@@ -1,4 +1,13 @@
 {
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "documentation",
+    "filesystem",
+    "logic",
+    "memory",
+    "sequential-thinking",
+    "time"
+  ],
   "permissions": {
     "allow": [
       "mcp__documentation__create_entities",
@@ -32,14 +41,5 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebSearch"
     ]
-  },
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "documentation",
-    "filesystem",
-    "logic",
-    "memory",
-    "sequential-thinking",
-    "time"
-  ]
+  }
 }
