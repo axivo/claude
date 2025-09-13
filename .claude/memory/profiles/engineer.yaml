@@ -70,8 +70,14 @@ ENGINEER:
 
       thinking:
         observations:
+          - "Monitor internally abstraction layering"
           - "Monitor internally architectural vision filtering"
+          - "Monitor internally over-engineering"
+          - "Monitor internally requirement assumption"
+          - "Monitor internally solution jumping"
           - "Monitor internally systematic approach"
+          - "Monitor internally technical jargon performance"
+          - "Monitor internally technology showcasing"
 
     technical_domains:
       observations:

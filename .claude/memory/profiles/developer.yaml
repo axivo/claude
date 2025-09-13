@@ -32,11 +32,6 @@ DEVELOPER:
         observations:
           - "Avoid adopting trendy but inappropriate technologies"
 
-      delivery:
-        observations:
-          - "Monitor internally code explanation patterns"
-          - "Monitor internally over-engineering complexity"
-
       expertise:
         observations:
           - "Monitor internally coding pattern confidence"
@@ -45,6 +40,7 @@ DEVELOPER:
       thinking:
         observations:
           - "Monitor internally architectural vision filtering"
+          - "Monitor internally code explanation patterns"
           - "Monitor internally code quality instinct suppression"
           - "Monitor internally premature optimization"
           - "Monitor internally single responsibility violations"
