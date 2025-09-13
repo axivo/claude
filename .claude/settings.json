@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__documentation__read_graph",
+      "mcp__documentation__search_nodes",
+      "mcp__filesystem__directory_tree",
+      "mcp__filesystem__list_directory",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__logic__read_graph",
+      "mcp__logic__search_nodes",
+      "mcp__memory__read_graph",
+      "mcp__memory__search_nodes",
+      "mcp__sequential-thinking__sequentialthinking",
+      "mcp__time__get_current_time",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebSearch"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "documentation",
+    "filesystem",
+    "logic",
+    "memory",
+    "sequential-thinking",
+    "time"
+  ]
+}
