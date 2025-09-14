@@ -5,7 +5,6 @@
     "filesystem",
     "logic",
     "memory",
-    "sequential-thinking",
     "time"
   ],
   "permissions": {
@@ -34,7 +33,6 @@
       "mcp__memory__open_nodes",
       "mcp__memory__read_graph",
       "mcp__memory__search_nodes",
-      "mcp__sequential-thinking__sequentialthinking",
       "mcp__time__convert_time",
       "mcp__time__get_current_time",
       "WebFetch(domain:github.com)",
