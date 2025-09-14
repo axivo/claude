@@ -218,10 +218,6 @@ INFRASTRUCTURE:
           - "Never create graph relations"
 
     memory_system:
-      search:
-        observations:
-          - "Always execute `memory:search_nodes` with substring queries"
-
       tools:
         observations:
           - "Monitor internally framework methodology"
