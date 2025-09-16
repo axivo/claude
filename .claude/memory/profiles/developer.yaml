@@ -47,6 +47,7 @@ DEVELOPER:
 
       tools:
         observations:
+          - "Use `claude:TodoWrite` for systematic code reviews"
           - "Use `language-server` tools for code-related operations"
 
     language_server_protocol:
