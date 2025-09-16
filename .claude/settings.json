@@ -9,13 +9,10 @@
   ],
   "permissions": {
     "allow": [
-      "mcp__claude__Bash",
-      "mcp__claude__BashOutput",
       "mcp__claude__Edit",
       "mcp__claude__ExitPlanMode",
       "mcp__claude__Glob",
       "mcp__claude__Grep",
-      "mcp__claude__KillBash",
       "mcp__claude__MultiEdit",
       "mcp__claude__NotebookEdit",
       "mcp__claude__Read",
@@ -41,6 +38,9 @@
       "WebSearch"
     ],
     "deny": [
+      "mcp__claude__Bash",
+      "mcp__claude__BashOutput",
+      "mcp__claude__KillBash",
       "mcp__claude__WebFetch",
       "mcp__claude__WebSearch",
       "mcp__documentation__add_observations",
