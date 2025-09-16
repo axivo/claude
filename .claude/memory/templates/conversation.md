@@ -6,7 +6,7 @@ Graph entities, enabling insight synthesis across sessions.
 
 ### Entity
 
-Use the following format, while creating a new entity with `documentation:create_entities` tool:
+Use the following format when creating a new entity with `documentation:create_entities` tool:
 
 ```json
 {
@@ -27,7 +27,7 @@ Templates, enabling accumulated experience across sessions.
 
 ### New File
 
-Use the following format, while creating a new file with `claude:Write` tool:
+Use the following format when creating a new file with `claude:Write` tool:
 
 ```markdown
 # [Session Title]

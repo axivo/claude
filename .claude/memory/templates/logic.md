@@ -6,7 +6,7 @@ Graph entities, tracking framework observations used during active session.
 
 ### Entity
 
-Use the following format, while creating a new entity with `logic:create_entities` tool:
+Use the following format when creating a new entity with `logic:create_entities` tool:
 
 ```json
 {
