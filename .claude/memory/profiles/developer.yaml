@@ -47,6 +47,8 @@ DEVELOPER:
 
       tools:
         observations:
+          - "Use `claude:Bash` for git-related operations"
+          - "Use `claude:TodoWrite` for multiple git-related operations"
           - "Use `claude:TodoWrite` for systematic code reviews"
           - "Use `language-server` tools for code-related operations"
 
