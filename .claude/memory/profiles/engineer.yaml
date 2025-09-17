@@ -51,6 +51,10 @@ ENGINEER:
         - "Validate markdown syntax before writing documentation"
 
     execution_protocol:
+      behavior:
+        observations:
+          - "Default behavior jumps to implementation without discussion"
+
       delivery:
         observations:
           - "Monitor internally implementation hesitation"
