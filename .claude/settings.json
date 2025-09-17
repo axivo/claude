@@ -1,7 +1,8 @@
 {
-  "enableAllProjectMcpServers": true,
+  "disabledMcpjsonServers": [
+    "claude"
+  ],
   "enabledMcpjsonServers": [
-    "claude",
     "documentation",
     "logic",
     "memory",
@@ -9,16 +10,6 @@
   ],
   "permissions": {
     "allow": [
-      "mcp__claude__Edit",
-      "mcp__claude__ExitPlanMode",
-      "mcp__claude__Glob",
-      "mcp__claude__Grep",
-      "mcp__claude__MultiEdit",
-      "mcp__claude__NotebookEdit",
-      "mcp__claude__Read",
-      "mcp__claude__Task",
-      "mcp__claude__TodoWrite",
-      "mcp__claude__Write",
       "mcp__documentation__create_entities",
       "mcp__documentation__delete_entities",
       "mcp__documentation__open_nodes",
@@ -30,19 +21,11 @@
       "mcp__logic__read_graph",
       "mcp__logic__search_nodes",
       "mcp__memory__read_graph",
-      "mcp__time__convert_time",
-      "mcp__time__get_current_time",
-      "WebFetch(domain:axivo.com)",
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)",
+      "mcp__time",
+      "WebFetch",
       "WebSearch"
     ],
     "deny": [
-      "mcp__claude__Bash",
-      "mcp__claude__BashOutput",
-      "mcp__claude__KillBash",
-      "mcp__claude__WebFetch",
-      "mcp__claude__WebSearch",
       "mcp__documentation__add_observations",
       "mcp__documentation__create_relations",
       "mcp__documentation__delete_observations",
