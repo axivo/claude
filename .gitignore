@@ -1,4 +1,10 @@
 # Claude
+.claude/plugins
+.claude/shell-snapshots
+.claude/statsig
+.claude/todos
+.claude/.claude.json
+.claude/.claude.json.backup
 .claude/lsp.json
 .claude/mcp.json
 .claude/settings.local.json
