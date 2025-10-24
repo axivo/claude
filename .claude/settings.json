@@ -11,19 +11,6 @@
   "env": {
     "DISABLE_AUTOUPDATER": "1"
   },
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'Always apply CLAUDE.md project instructions during response formulation.'"
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
     "allow": [
       "mcp__documentation__create_entities",
