@@ -7,6 +7,7 @@
 .claude/.claude.json.backup
 .claude/lsp.json
 .claude/mcp.json
+.claude/obsidian.json
 .claude/settings.local.json
 .mcp.json
 
