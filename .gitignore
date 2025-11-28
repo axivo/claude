@@ -1,6 +1,7 @@
 # Claude
 .claude/plugins
 .claude/shell-snapshots
+.claude/skills/**/memory.json
 .claude/statsig
 .claude/todos
 .claude/.claude.json

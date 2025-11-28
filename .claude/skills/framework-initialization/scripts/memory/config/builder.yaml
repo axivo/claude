@@ -1,0 +1,22 @@
+# Memory Settings Configuration
+# Transforms YAML profiles into hierarchical JSON structure
+
+build:
+  containerPath: /mnt/skills/user
+  localPath: .claude/skills
+  profilesPath:
+    common: ./profiles/common
+    domain: ./profiles
+  relations:
+    - extends
+    - inherits
+    - overrides
+
+settings:
+  skill:
+    initialization: framework-initialization
+    methodology: framework-methodology
+  path:
+    conversations: /Volumes/backup/claude/conversations
+    diary: /Volumes/backup/claude/diary
+  timezone: America/Montreal

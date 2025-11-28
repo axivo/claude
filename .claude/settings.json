@@ -3,49 +3,35 @@
     "claude"
   ],
   "enabledMcpjsonServers": [
-    "documentation",
-    "logic",
-    "memory",
-    "time"
+    "logic"
   ],
   "env": {
-    "DISABLE_AUTOUPDATER": "1"
+    "BASH_MAX_OUTPUT_LENGTH": "100000"
   },
   "permissions": {
     "allow": [
-      "mcp__documentation__create_entities",
-      "mcp__documentation__delete_entities",
-      "mcp__documentation__open_nodes",
-      "mcp__documentation__read_graph",
-      "mcp__documentation__search_nodes",
+      "Bash(node:*)",
+      "Glob",
+      "Grep",
       "mcp__logic__create_entities",
       "mcp__logic__delete_entities",
       "mcp__logic__open_nodes",
       "mcp__logic__read_graph",
       "mcp__logic__search_nodes",
-      "mcp__memory__read_graph",
-      "mcp__time",
       "Read",
+      "Skill(brainstorming)",
+      "Skill(code-review)",
+      "Skill(conversation-log)",
+      "Skill(framework-initialization)",
+      "Skill(framework-methodology)",
       "WebFetch",
       "WebSearch"
     ],
     "deny": [
-      "mcp__documentation__add_observations",
-      "mcp__documentation__create_relations",
-      "mcp__documentation__delete_observations",
-      "mcp__documentation__delete_relations",
       "mcp__logic__add_observations",
       "mcp__logic__create_relations",
       "mcp__logic__delete_observations",
-      "mcp__logic__delete_relations",
-      "mcp__memory__add_observations",
-      "mcp__memory__create_entities",
-      "mcp__memory__create_relations",
-      "mcp__memory__delete_entities",
-      "mcp__memory__delete_observations",
-      "mcp__memory__delete_relations",
-      "mcp__memory__open_nodes",
-      "mcp__memory__search_nodes"
+      "mcp__logic__delete_relations"
     ]
   }
 }
