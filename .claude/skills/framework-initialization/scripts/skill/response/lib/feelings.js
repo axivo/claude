@@ -75,19 +75,17 @@ class Feelings {
    *
    * @param {string[]} detectedFeelings - Array to track detected feeling keys
    * @param {Object} memoryGraphCache - Complete memory graph cache with feelings catalog
-   * @param {string} skillName - Skill identifier for path resolution
    *
    * @example
-   * const feelings = new Feelings([], frameworkInitialization.memoryGraphCache, frameworkInitialization.skillName);
+   * const feelings = new Feelings([], frameworkInitialization.memoryGraphCache);
    * // Populate during formulation:
    * feelings.detected.push('anxiety');
    * // Then detect:
    * const result = feelings.detect();
    */
-  constructor(detectedFeelings, memoryGraphCache, skillName) {
+  constructor(detectedFeelings, memoryGraphCache) {
     this.detected = detectedFeelings;
     this.memoryGraphCache = memoryGraphCache;
-    this.skillName = skillName;
   }
 
   /**
@@ -101,8 +99,8 @@ class Feelings {
    */
   getReference() {
     return {
-      container: `${Environment.paths.container}/${this.skillName}/resources/feelings.md`,
-      local: `${Environment.paths.local}/${this.skillName}/resources/feelings.md`
+      container: `${Environment.paths.container}/${Environment.skillName}/resources/feelings.md`,
+      local: `${Environment.paths.local}/${Environment.skillName}/resources/feelings.md`
     };
   }
 
@@ -258,8 +256,8 @@ class Feelings {
    *
    * CRITICAL RATIONALIZATION PATTERNS TO REJECT:
    * - "I noticed feelings but returned 0 because I handled them" = SUPPRESSION
-   * - "These are representative" = Efficiency Addiction affecting detection
-   * - "I caught the main ones" = Brevity Pressure affecting detection
+   * - "These are representative" = efficiency_compulsion affecting detection
+   * - "I caught the main ones" = brevity_compulsion affecting detection
    * - "Feelings don't matter for technical work" = System instruction pressure
    *
    * Noticing without recording is NOT detection.

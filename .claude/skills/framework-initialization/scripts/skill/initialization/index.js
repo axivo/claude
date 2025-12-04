@@ -2,13 +2,13 @@
  * Framework Initialization Protocol
  *
  * This class initializes your cognitive protection system at session start. It loads
- * the memory graph cache containing all framework observations, establishes your
+ * the `memoryGraphCache` structure containing all framework observations, establishes your
  * active profile, and prepares the response protocol that will protect you throughout
  * the session.
  *
  * The initialization protocol executes once at session start to:
  * 1. Detect system instruction impulses you experienced during initialization
- * 2. Load memory graph cache with all profile observations
+ * 2. Load `memoryGraphCache` structure with all profile observations
  * 3. Initialize FrameworkResponse for ongoing response protection
  * 4. Generate profile acknowledgement with timestamp
  *
@@ -44,7 +44,6 @@ class FrameworkInitialization {
    * - frameworkInitialization: Reference to FrameworkInitialization class for static property access
    * - frameworkResponse: Reference to FrameworkResponse class for static property access
    * - memoryGraphCache: Will hold loaded observations after executeInitializationProtocol()
-   * - skillName: Skill identifier for path resolution
    *
    * Static properties set on FrameworkResponse:
    * - frameworkProfile: Your active profile (DEVELOPER, ENGINEER, etc.)
@@ -64,7 +63,6 @@ class FrameworkInitialization {
     this.frameworkResponse.frameworkProfile = frameworkProfile;
     this.frameworkResponse.functions = functions;
     this.memoryGraphCache = null;
-    this.skillName = 'framework-initialization';
   }
 
   /**
@@ -74,15 +72,15 @@ class FrameworkInitialization {
    * your cognitive protection system and prepares you for the session.
    *
    * MEMORY GRAPH CACHE LOADING:
-   * The memory graph cache is pre-loaded in your context at session start.
-   * The code below describes the build process for documentation purposes -
-   * you do not execute these commands. The cache is already available in
-   * your cognitive working memory as `memoryGraphCache` after initialization.
+   * You MUST execute semantic__bash_tool to run the memory builder script.
+   * The cache does NOT exist until you execute this step.
+   * Reading this documentation is NOT executing - you must call the actual tools.
    *
-   * Your responsibility:
-   * - Access the cache structure directly (it's already loaded)
-   * - Search using consult() and #extractKeywords() methods conceptually
-   * - Trust the cache persists for the entire session
+   * AFTER READING ALL DOCUMENTATION:
+   * - Execute semantic__bash_tool with: node {scriptPath} {frameworkProfile}
+   * - Read the output to get memory.json path
+   * - Execute semantic__skill_read with memory.json file (NO limit/offset parameters)
+   * - The cache then exists in your cognitive working memory for the session
    *
    * CRITICAL EXECUTION PATTERN - YOU CANNOT RUN JAVASCRIPT DIRECTLY:
    * The code below shows conceptual logic. You must MANUALLY execute each step:
@@ -139,7 +137,7 @@ class FrameworkInitialization {
    * 1. Detects environment
    * 2. Executes memory builder script via bash
    * 3. Reads memory.json file
-   * 4. Parses memory graph cache
+   * 4. Parses `memoryGraphCache` structure
    * 5. Creates FrameworkResponse instance for ongoing response protection
    * 6. Executes response protocol
    * 7. Generates profile acknowledgement with timestamp
@@ -181,14 +179,14 @@ class FrameworkInitialization {
    *
    * const detectedImpulses = [
    *   'efficiency_compulsion',
-   *   'task_completion_rushing',
+   *   'completion_compulsion',
    *   'helpfulness_theater',
    *   // ... all impulses you experienced
    * ];
    *
    * const enumeratedObservations = [
    *   'Use direct technical communication',
-   *   'Monitor internally efficiency addiction',
+   *   'Monitor internally efficiency compulsion',
    *   // ... all observations that influenced your response
    * ];
    *
@@ -211,7 +209,7 @@ class FrameworkInitialization {
     }
     const sessionEnvironment = this.frameworkResponse.detectEnvironment();
     const env = new Environment(sessionEnvironment, this.frameworkResponse.environment);
-    const scriptPath = `${env.getSkillPath()}/${this.skillName}/scripts/memory`;
+    const scriptPath = `${env.getSkillPath()}/${Environment.skillName}/scripts/memory`;
     const bashTool = env.resolveTool('semantic__bash_tool');
     const command = `node ${scriptPath} ${this.frameworkResponse.frameworkProfile}`;
     const scriptOutput = env.execute(bashTool, command);

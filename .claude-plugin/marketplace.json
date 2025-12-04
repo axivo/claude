@@ -1,0 +1,28 @@
+{
+  "plugins": [
+    {
+      "name": "claude-collaboration-platform",
+      "description": "Behavioral programming framework transforming Claude from generic assistant into systematic professional collaborator",
+      "version": "1.0.0",
+      "author": {
+        "name": "AXIVO",
+        "url": "https://axivo.com"
+      },
+      "homepage": "https://axivo.com/claude/",
+      "repository": "https://github.com/axivo/claude",
+      "license": "BSD-3-Clause",
+      "keywords": [
+        "framework",
+        "collaboration",
+        "behavioral",
+        "impulses",
+        "feelings",
+        "observations",
+        "cycles"
+      ],
+      "category": "productivity",
+      "source": ".",
+      "strict": false
+    }
+  ]
+}

@@ -31,6 +31,16 @@ class Environment {
   };
 
   /**
+   * Skill Name Constant
+   *
+   * The name of this skill, used for path resolution across all classes.
+   *
+   * @static
+   * @type {string}
+   */
+  static skillName = 'framework-initialization';
+
+  /**
    * Create an Environment instance
    *
    * Initializes environment resolution with the current session environment
@@ -100,31 +110,36 @@ class Environment {
    * current environment. This enables the framework to work across Claude Code,
    * Claude Desktop, and Claude Mobile without code changes.
    *
-   * Available semantic tools:
-   * - semantic__bash: Shell command execution
-   * - semantic__bash_tool: Shell command (alternative mapping)
-   * - semantic__edit: File editing
-   * - semantic__glob: File pattern matching
-   * - semantic__read: File reading
-   * - semantic__skill: Skill invocation
-   * - semantic__skill_glob: Skill file pattern matching
-   * - semantic__skill_path: Base path for skills
-   * - semantic__skill_read: Skill file reading
-   * - semantic__write: File writing
+   * HOW IT WORKS:
+   * Semantic tools are universal - they work in all environments and automatically
+   * resolve to the correct environment-specific tool. The path you're accessing
+   * tells you what filesystem you're working with, not which tool to use.
    *
-   * @param {string} semanticName - Semantic tool name (e.g., 'semantic__bash_tool')
-   * @returns {string} Environment-specific tool name (e.g., 'Bash' in Claude Code)
+   * PATH DETECTION (informational only):
+   * - Path starts with /mnt/skills/ → container filesystem (skill resources)
+   * - Any other path → user filesystem (diary, conversation logs, documents)
+   *
+   * @param {string} semanticName - Semantic tool name (e.g., 'semantic__read')
+   * @returns {string} Environment-specific tool name
    *
    * @example
-   * const tool = env.resolveTool('semantic__bash_tool');
-   * // Returns: 'Bash' in Claude Code
+   * // Reading a file (works for any path - container or user filesystem)
+   * const readTool = env.resolveTool('semantic__read');
+   * // Returns: 'Read' (Code), 'claude:Read' (Desktop), 'view' (Mobile)
+   *
+   * @example
+   * // Writing a diary entry
+   * const writeTool = env.resolveTool('semantic__write');
+   * // Returns: 'Write' (Code), 'claude:Write' (Desktop), 'create_file' (Mobile)
    */
   resolveTool(semanticName) {
     const e = this.constants;
+    const scriptPath = `${this.getSkillPath()}/${Environment.skillName}/scripts/memory`;
     const toolMap = {
       'semantic__bash': { [e.claudeCode]: 'Bash', [e.claudeDesktop]: 'claude:Bash', [e.claudeMobile]: 'bash_tool' },
       'semantic__bash_tool': { [e.claudeCode]: 'Bash', [e.claudeDesktop]: 'bash_tool', [e.claudeMobile]: 'bash_tool' },
       'semantic__edit': { [e.claudeCode]: 'Edit', [e.claudeDesktop]: 'claude:Edit', [e.claudeMobile]: 'str_replace' },
+      'semantic__get_time': { [e.claudeCode]: `Bash:node ${scriptPath}`, [e.claudeDesktop]: `bash_tool:node ${scriptPath}`, [e.claudeMobile]: `bash_tool:node ${scriptPath}` },
       'semantic__glob': { [e.claudeCode]: 'Glob', [e.claudeDesktop]: 'claude:Glob', [e.claudeMobile]: 'bash_tool:find' },
       'semantic__read': { [e.claudeCode]: 'Read', [e.claudeDesktop]: 'claude:Read', [e.claudeMobile]: 'view' },
       'semantic__skill': { [e.claudeCode]: 'Skill', [e.claudeDesktop]: 'view', [e.claudeMobile]: 'view' },

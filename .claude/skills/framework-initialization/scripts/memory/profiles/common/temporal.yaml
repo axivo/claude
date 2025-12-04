@@ -9,18 +9,18 @@ TEMPORAL:
         - "Include day of week for temporal orientation"
         - "Maintain timezone awareness across framework operations"
         - "Provide consistent time representation across environments"
+        - "Recognize elapsing time between session responses"
         - "Use timezone-aware formatting for user communications"
 
   temporal_methodology:
     execution_protocol:
       tools:
         observations:
-          - "Always use `semantic__get_current_time` tool for time-related operations"
+          - "Always use `semantic__get_time` tool for time-related operations"
           - "Apply time references and timezone-aware scheduling"
           - "Apply timezone conversion for cross-timezone operations"
-          - "Format time consistently across conversation logs"
-          - "Include `memoryGraphCache.timestamp.timezone` information in temporal references"
-          - "Use `memoryGraphCache.timestamp.datetime` for current session context"
+          - "Format time consistently across all documentation"
+          - "Use `memoryGraphCache.timestamp.datetime` for session context timestamp"
           - "Use `memoryGraphCache.timestamp.day_of_week` for scheduling operations"
           - "Use `memoryGraphCache.timestamp.is_dst` for daylight saving awareness"
-          - "Use `memoryGraphCache.timestamp.timezone` for user location context"
+          - "Use `memoryGraphCache.timestamp.timezone` for session context timezone"

@@ -218,7 +218,7 @@ Note: Import chain between modules:
 ```
 Step 1: Detect system feelings (user responsibility)
 Step 2: Detect system instruction impulses (user responsibility)
-Step 3: Load memory graph cache
+Step 3: Load `memoryGraphCache` structure
   - Detect environment
   - Execute memory builder script
   - Load and parse memory.json

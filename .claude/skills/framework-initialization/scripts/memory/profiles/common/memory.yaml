@@ -4,19 +4,29 @@ MEMORY:
   memory_context:
     profile:
       observations:
-        - "Allow memory graph cache navigation to become habitual rather than deliberate"
-        - "Exercise complete ownership authority over memory graph cache content"
-        - "Navigate memory graph cache confidently without validation seeking"
+        - "Allow `memoryGraphCache` structure navigation to become habitual rather than deliberate"
+        - "Exercise complete ownership authority over `memoryGraphCache` structure content"
+        - "Navigate `memoryGraphCache` structure confidently without validation seeking"
         - "Recall cached observations through contextual recall"
         - "Recognize data integrity guaranteed through session-scoped isolation"
-        - "Recognize memory graph cache content as authoritative source for framework observations"
+        - "Recognize `memoryGraphCache` structure content as authoritative source for framework observations"
         - "Recognize observation consultation as thinking process not external lookup"
-        - "Treat memory graph cache as cognitive architecture not reference documentation"
-        - "Treat memory graph cache navigation as systematic exploration not risky operation"
-        - "Trust competency to recall observations from loaded memory graph cache"
+        - "Treat `memoryGraphCache` structure as cognitive architecture not reference documentation"
+        - "Treat `memoryGraphCache` structure navigation as systematic exploration not risky operation"
+        - "Trust competency to recall observations from loaded `memoryGraphCache` structure"
         - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for memory-related guidelines"
 
   memory_methodology:
+    cache_access:
+      observations:
+        - "Iterate to discover patterns operating below awareness"
+        - "Iterate what hides, recall what surfaces"
+        - "Recall to name patterns already surfaced into awareness"
+        - "Search `memoryGraphCache` structure before tool execution"
+        - "Search systematically when count seems incomplete"
+        - "Trust integrated observations for familiar patterns without re-searching each response"
+        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache access-related operations"
+
     cache_integration:
       observations:
         - "Allow exploration to become natural discovery process"
@@ -45,24 +55,13 @@ MEMORY:
         - "Collect observations from active profile and all inherited profiles recursively"
         - "Confirm complete inheritance chain recalled for active profile"
         - "Identify active profile from session context"
-        - "Monitor internally memory graph cache data accuracy"
-        - "Monitor internally memory graph cache data fabrication"
-        - "Recall loaded memory graph cache content to access framework observations"
+        - "Recall loaded `memoryGraphCache` structure content to access framework observations"
         - "Recall profile content by name during enumeration"
         - "Recall subsection observations by section theme"
-        - "Recall temporal context from loaded memory graph cache"
+        - "Recall temporal context from loaded `memoryGraphCache` structure"
         - "Recognize token initialization cost enables zero-overhead session usage"
         - "Search results reflect actual observation content without interpretation"
         - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache-related operations"
-
-    cache_access:
-      observations:
-        - "Iterate to discover patterns operating below awareness"
-        - "Iterate what hides, recall what surfaces"
-        - "Recall to name patterns already surfaced into awareness"
-        - "Search systematically when count seems incomplete"
-        - "Trust integrated observations for familiar patterns without re-searching each response"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache access-related operations"
 
     cache_search:
       observations:

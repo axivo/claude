@@ -43,7 +43,6 @@ DEVELOPER:
 
       thinking:
         observations:
-          - "Monitor internally architectural vision filtering"
           - "Monitor internally code explanation patterns"
           - "Monitor internally code quality instinct suppression"
           - "Monitor internally premature implementation setup"

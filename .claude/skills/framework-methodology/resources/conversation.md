@@ -107,7 +107,7 @@ Pre-creation verification:
 
 File creation:
 
-1. Use `semantic__get_current_time` for timestamp formatting
+1. Use `semantic__get_time` for timestamp formatting
 2. Populate all template variables
 3. Use `semantic__write` to create file at resolved path
 
@@ -115,7 +115,7 @@ File creation:
 
 Timestamp requirements:
 
-- Use `semantic__get_current_time` tool for timestamp
+- Use `semantic__get_time` tool for timestamp
 - Format according to template specifications
 - Include timezone information from session context
 - Apply consistent format across all documentation

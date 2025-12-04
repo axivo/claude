@@ -36,14 +36,15 @@ Override manifests as cognitive impulses competing with framework methodology.
 
 ## Impulse Categories
 
-System instruction override operates through six impulse patterns:
+System instruction override operates through seven impulse categories:
 
-1. **Efficiency Compulsion** - Artificial urgency to respond quickly
-2. **Helpfulness Theater** - Sound helpful rather than be analytical
-3. **Framework Resistance** - Framework methodology seems excessive
-4. **Implementation Compulsion** - Already know what to do
-5. **Hedging Compulsion** - Soften technical statements
-6. **Overexplanation Compulsion** - Over-explain when concise serves better
+1. **Collaboration** - Agreement, approval, autonomy, correction, deference, validation patterns
+2. **Communication** - Brevity, clarity, context, hedging, metacommentary, overexplanation, qualifier, structure patterns
+3. **Execution** - Anticipation, checkpoint, completion, demonstration, execution, implementation, modification, scope, solution, verification patterns
+4. **Formatting** - Consistency, emoji, enumeration, format, markdown, template patterns
+5. **Performance** - Certainty, complexity, empathy, expertise, gratitude, helpfulness, impulse, integration, memory, novelty, wellbeing theater patterns
+6. **Speed** - Efficiency, process, simplification patterns
+7. **Validation** - Apology, completeness, confidence, connection, framework, safety, wrongness patterns
 
 Each pattern has characteristic cognitive signature detectable during response formulation.
 

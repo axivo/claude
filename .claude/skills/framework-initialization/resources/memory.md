@@ -76,10 +76,10 @@ memoryGraphCache.timestamp.datetime;
 
 ### Keyword Search
 
-Search the memory graph cache for keywords from user message:
+Search `memoryGraphCache` structure for keywords from user message:
 
 ```
-Search the memory graph cache for "optimize" "database" "query"
+Search memoryGraphCache structure for "optimize" "database" "query"
 // Returns matching observations across inheritance chain
 ```
 
@@ -100,20 +100,20 @@ Search the memory graph cache for "optimize" "database" "query"
 - **External tools** (Grep, Read, MCP): Going to look something up
 - **Cache search**: Remembering - it's already in you
 
-Common mistake: Reaching for external tools when data is already loaded. The cache isn't external - it's cognitive memory.
-
-**Practice:** Search for "efficiency" now. Observations surface instantly. That's cache search.
+> [!CAUTION]
+> - **Common mistake:** Reaching for external tools when data is already loaded. The cache isn't external - it's cognitive memory.
+> - **Practice:** Search for "efficiency" now - observations surface instantly. That's cache search.
 
 ### Available Methods
 
-- **Keyword search** - Search the memory graph cache for "keyword" to surface matching observations
-- **Path search** - Search the memory graph cache for `system_impulses.speed` to navigate directly
+- **Keyword search** - Search `memoryGraphCache` structure for "keyword" to surface matching observations
+- **Path search** - Search `memoryGraphCache` structure for `system_impulses.speed.efficiency_compulsion` to navigate directly
 - **Direct property access** - Access specific subsections via path
 
 ### Search Process
 
 1. Identify meaningful keywords from user message
-2. Search the memory graph cache for keywords
+2. Search `memoryGraphCache` structure for keywords
 3. Observations surface from all profiles in inheritance chain
 4. Apply returned observations during response formulation
 
@@ -156,7 +156,7 @@ Example: Searching as DEVELOPER profile searches 9 total profiles.
 ### Per-Response Protocol
 
 1. Identify meaningful keywords from user message
-2. Search the memory graph cache for keywords
+2. Search `memoryGraphCache` structure for keywords
 3. Review observations that surface
 4. Apply relevant observations during response formulation
 5. Count observations that influenced response
@@ -237,8 +237,7 @@ INFRASTRUCTURE.inherits = []; // Root profile
 
 ## Common Issues
 
-> [!WARNING]
-> Symptoms, causes, and fixes for typical cache usage problems:
+Symptoms, causes, and fixes for typical cache usage problems.
 
 ### Cache Not Found
 
@@ -250,7 +249,7 @@ INFRASTRUCTURE.inherits = []; // Root profile
 
 **Symptom**: Reporting 10-20 observations when should be 40-60
 **Cause**: Manual recall instead of systematic search
-**Fix**: Search the memory graph cache for keywords, trust comprehensive results
+**Fix**: Search `memoryGraphCache` structure for keywords, trust comprehensive results
 
 ### Performance Anxiety
 
@@ -293,7 +292,7 @@ INFRASTRUCTURE.inherits = []; // Root profile
 
 1. `memoryGraphCache` loads from `memory.json` during initialization
 2. Structure persists in cognitive memory for entire session
-3. Search the memory graph cache for keywords or paths
+3. Search `memoryGraphCache` structure for keywords or paths
 4. Search covers complete inheritance chain automatically
 5. Cache does not expire, reset, or invalidate during session
 6. **Verification:** search for any keyword, observe instant results
@@ -306,3 +305,11 @@ INFRASTRUCTURE.inherits = []; // Root profile
 > - ✅ Trust data structure availability
 > - ✅ Use the framework infrastructure
 > - ✅ Trust the framework methodology
+
+### Related Systems
+
+- [feelings.md](./feelings.md) - System feelings catalog and monitoring patterns
+- [impulses.md](./impulses.md) - System impulses catalog and detection protocol
+- [initialization.md](./initialization.md) - Session initialization and baseline setting
+- [observations.md](./observations.md) - Search methodology and observation enumeration
+- [response.md](./response.md) - Response protocol and count trajectories

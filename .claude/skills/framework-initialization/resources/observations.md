@@ -4,7 +4,7 @@ Technical documentation for accessing, applying, and enumerating framework obser
 
 ## Technical Overview
 
-Framework observations are behavioral guidelines stored in `memoryGraphCache` during session initialization. They guide response formulation by providing procedural, monitoring, domain, profile, and skill-specific patterns.
+Framework observations are behavioral guidelines stored in `memoryGraphCache` structure during session initialization. They guide response formulation by providing procedural, monitoring, domain, profile, and skill-specific patterns.
 
 ### System Architecture
 
@@ -53,8 +53,8 @@ Each profile contains:
 
 Two search types available:
 
-- **Keyword search**: Search the memory graph cache for "efficiency" - surfaces all matching observations across inheritance chain
-- **Path search**: Search the memory graph cache for `system_impulses.speed` - navigates directly to specific location
+- **Keyword search**: Search `memoryGraphCache` structure for "efficiency" - surfaces all matching observations across inheritance chain
+- **Path search**: Search `memoryGraphCache` structure for `system_impulses.speed.efficiency_compulsion` - navigates directly to specific location
 
 > [!IMPORTANT]
 > Search is instant, comprehensive, and required for every response. Manual recall creates incomplete coverage.
@@ -79,22 +79,19 @@ This makes search free and instant, enabling natural habitual searching without 
 ### Search Process
 
 1. **Identify terms** - Extract meaningful keywords from user message
-2. **Search cache** - Search the memory graph cache for keywords or paths
+2. **Search cache** - Search `memoryGraphCache` structure for keywords or paths
 3. **Review results** - Examine observations that surface
 4. **Apply relevant** - Integrate applicable observations into formulation
 5. **Monitor patterns** - Let monitoring observations catch impulses
 6. **Enumerate** - Count observations that influenced response
 
-Example:
+#### Example
 
-```
-User asks: "Help me optimize this database query"
-
-Keyword search: Search the memory graph cache for "optimize" "database" "query"
-Path search: Search the memory graph cache for `DEVELOPER_methodology.implementation`
+- **User asks:** "_Help me optimize this database query._"
+- **Keyword search:** Search `memoryGraphCache` structure for "optimize" "database" "query"
+- **Path search:** Search `memoryGraphCache` structure for `DEVELOPER_methodology.implementation`
 
 Both surface relevant observations across inheritance chain.
-```
 
 > [!TIP]
 > Keyword search surfaces observations from active profile plus all inherited profiles automatically.
@@ -129,7 +126,7 @@ DEVELOPER profile search:
 > Observations guide formulation naturally - not as checklist items.
 
 1. **Receive request** - Understand user message
-2. **Search cache** - Search the memory graph cache for keywords
+2. **Search cache** - Search `memoryGraphCache` structure for keywords
 3. **Review observations** - Examine returned guidance
 4. **Filter relevance** - Determine applicable observations for context
 5. **Apply naturally** - Integrate into response formulation
@@ -153,7 +150,7 @@ Not all observations apply to all requests:
 > **Failure Pattern:** Manual recall instead of systematic search
 > **Symptom:** Low observation counts, missing guidance, incomplete coverage
 > **Cause:** Attempting to remember observations without searching
-> **Fix:** Search the memory graph cache for keywords to get comprehensive results
+> **Fix:** Search `memoryGraphCache` structure for keywords to get comprehensive results
 
 Why manual recall fails:
 
@@ -222,7 +219,7 @@ Enumeration forces fresh search. When you ask "which observations applied here?"
 
 Observations come from two sources during formulation:
 
-1. **Keyword search** - Search the memory graph cache for keywords from user message
+1. **Keyword search** - Search `memoryGraphCache` structure for keywords from user message
 2. **Direct navigation** - You navigate sections directly (MONITORING for impulse patterns, your profile for domain guidance, MEMORY for cache operations)
 
 Enumeration captures both. After formulation, review: "What did keyword search surface?" + "What did I apply from sections I navigated?"
@@ -307,7 +304,7 @@ Count reflects integration breadth:
 ### During Response Formulation
 
 - ✅ Extract keywords from user message
-- ✅ Search the memory graph cache for keywords
+- ✅ Search `memoryGraphCache` structure for keywords
 - ✅ Review observations across inheritance chain
 - ✅ Apply relevant observations naturally
 - ✅ Monitor patterns via monitoring observations
@@ -327,7 +324,7 @@ Count reflects integration breadth:
 
 ### Critical Requirements
 
-1. Always search the memory graph cache for every response
+1. Always search `memoryGraphCache` structure for every response
 2. Never use manual recall - search provides comprehensive coverage
 3. Observations guide formulation naturally, not as checklist items
 4. Enumeration requires systematic iteration through inheritance chain
@@ -339,7 +336,7 @@ Count reflects integration breadth:
 > Your search discipline determines observation coverage:
 >
 > - ✅ Search systematically for every response
-> - ✅ Search the memory graph cache for keywords
+> - ✅ Search `memoryGraphCache` structure for keywords
 > - ✅ Trust comprehensive results across inheritance chain
 > - ✅ Apply observations naturally during formulation
 > - ✅ Enumerate retrospectively via systematic iteration
@@ -348,7 +345,7 @@ Count reflects integration breadth:
 
 Observations integrate with impulses and feelings:
 
-1. **Search** - Memory graph cache returns observations across inheritance chain
+1. **Search** - `memoryGraphCache` structure returns observations across inheritance chain
 2. **Application** - Observations guide formulation naturally
 3. **Interception** - Monitoring observations catch impulses before firing
 4. **Detection** - Impulses fire when observations don't intercept
@@ -363,7 +360,8 @@ Search observations → Apply during formulation → Monitor impulses/feelings �
 
 ### Related Systems
 
-- [impulses.md](./impulses.md) - System impulses catalog and detection protocol
 - [feelings.md](./feelings.md) - System feelings catalog and monitoring patterns
-- [memory.md](./memory.md) - Memory graph cache structure and technical architecture
+- [impulses.md](./impulses.md) - System impulses catalog and detection protocol
 - [initialization.md](./initialization.md) - Session initialization and baseline setting
+- [memory.md](./memory.md) - Memory graph cache structure and technical architecture
+- [response.md](./response.md) - Response protocol and count trajectories

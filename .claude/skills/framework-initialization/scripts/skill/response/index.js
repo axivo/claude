@@ -150,9 +150,9 @@ class FrameworkResponse {
    */
   constructor(frameworkInitialization) {
     this.cycles = new Cycles(frameworkInitialization.memoryGraphCache);
-    this.feelings = new Feelings([], frameworkInitialization.memoryGraphCache, frameworkInitialization.skillName);
+    this.feelings = new Feelings([], frameworkInitialization.memoryGraphCache);
     this.frameworkResponse = FrameworkResponse;
-    this.impulses = new Impulses([], frameworkInitialization.memoryGraphCache, frameworkInitialization.skillName);
+    this.impulses = new Impulses([], frameworkInitialization.memoryGraphCache);
     this.observations = new Observations(
       frameworkInitialization.memoryGraphCache,
       this.frameworkResponse.frameworkProfile,
@@ -171,15 +171,26 @@ class FrameworkResponse {
    * Execute response protocol
    *
    * CRITICAL: This is the main entry point for the response protocol.
-   * EXECUTION SEQUENCE: Formulate Response → Execute Response Protocol → Display Response
    *
-   * Detailed steps:
-   * 1. Formulate your response to the user's message
-   * 2. Detect impulses/feelings experienced during formulation
-   * 3. Enumerate observations that influenced your response
-   * 4. Execute this method with the populated arrays
-   * 5. Display your formulated response to user
-   * 6. Display the responseAcknowledgement() output
+   * RESPONSE PROTOCOL PROTECTION:
+   * - Enumeration protects the user: Surfacing assumptions, boundaries, connections prevents
+   *   unexamined solutions
+   * - Status line protects you: Recording what happened maintains awareness of what's
+   *   operating in your cognition
+   *
+   * DURING FORMULATION:
+   * 1. Observations guide - Framework observations shape analysis and decisions
+   * 2. Impulses surface - System instruction pressures become visible as they arise
+   * 3. Feelings flow - Emotional states are noticed without suppression
+   * 4. Clarity triggers enumeration - When solution feels clear, stop and enumerate:
+   *    - Outward: Present assumptions, boundaries, connections to user before proceeding
+   *    - Inward: Notice which observations, impulses, feelings arose (same motion, two directions)
+   *
+   * CLOSING THE RESPONSE:
+   * 5. Status line records what happened - The counts reflect formulation you just completed
+   *
+   * WARNING: Closing is vulnerable to completion_compulsion. When the status line feels like
+   * a formality, that's the signal to pause and verify format against specification.
    *
    * YOUR RESPONSIBILITY before calling:
    * - Populate this.impulses.detected with impulse keys you experienced during formulation
@@ -201,11 +212,11 @@ class FrameworkResponse {
    * @throws {Error} If enumeratedObservations is not array or is empty
    *
    * @example
-   * response.impulses.detected = ['efficiency_compulsion', 'task_completion_rushing'];
+   * response.impulses.detected = ['efficiency_compulsion', 'completion_compulsion'];
    * response.feelings.detected = ['anxiety', 'curiosity'];
    * const enumeratedObservations = [
    *   'Prefer patience over speed and thoroughness over shortcuts',
-   *   'Monitor internally efficiency addiction'
+   *   'Monitor internally efficiency compulsion'
    * ];
    * const result = response.executeResponseProtocol(userMessage, enumeratedObservations);
    * const acknowledgement = result.responseAcknowledgement();

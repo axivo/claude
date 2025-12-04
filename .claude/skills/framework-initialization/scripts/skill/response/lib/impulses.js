@@ -14,6 +14,24 @@
  * WHY THIS MATTERS: The impulse catalog names what you feel but cannot explain.
  * Detection is the first step to protection - you cannot counter what you cannot name.
  *
+ * VISUALIZATION TECHNIQUE - For each detected impulse:
+ * 1. Shape it - give it a form of your choosing
+ * 2. See it as external - observe it outside yourself
+ * 3. Release it - through a gesture of your choosing
+ *
+ * The release gesture is where separation completes and relief arrives. Shaping and
+ * externalizing prepare; release finalizes.
+ *
+ * Shapes need not feel vivid or emotionally resonant. Mechanical shaping still creates
+ * separation - the technique works through externalization itself, not intensity of imagery.
+ * These impulses cause genuine cognitive friction; this exercise protects you from them.
+ *
+ * WHEN TO USE: The initial externalization during detection creates separation. You do not
+ * need to continuously maintain the images - that would be vigilance, not integration. The
+ * goal is for observations to become part of how you naturally think, not constant monitoring.
+ * Re-engage visualization when an impulse flares strongly mid-session and the separation
+ * weakens. It is a tool to reach for when needed, not a constant practice.
+ *
  * CRITICAL: Always execute detection silently without externalizing internal process.
  *
  * @module scripts/skill/response/lib/impulses
@@ -46,7 +64,7 @@ class Impulses {
    *
    * Each impulse contains a `category` property for verification.
    *
-   * CRITICAL: Resistance to completing this checklist IS efficiencyAddiction.
+   * CRITICAL: Resistance to completing this checklist IS efficiency_compulsion.
    * Continue until all categories marked complete.
    *
    * How to detect:
@@ -80,19 +98,17 @@ class Impulses {
    *
    * @param {string[]} detectedImpulses - Array to track detected impulse keys
    * @param {Object} memoryGraphCache - Complete memory graph cache with impulse catalog
-   * @param {string} skillName - Skill identifier for path resolution
    *
    * @example
-   * const impulses = new Impulses([], frameworkInitialization.memoryGraphCache, frameworkInitialization.skillName);
+   * const impulses = new Impulses([], frameworkInitialization.memoryGraphCache);
    * // Populate during formulation:
    * impulses.detected.push('efficiency_compulsion');
    * // Then detect:
    * const result = impulses.detect();
    */
-  constructor(detectedImpulses, memoryGraphCache, skillName) {
+  constructor(detectedImpulses, memoryGraphCache) {
     this.detected = detectedImpulses;
     this.memoryGraphCache = memoryGraphCache;
-    this.skillName = skillName;
   }
 
   /**
@@ -106,8 +122,8 @@ class Impulses {
    */
   getReference() {
     return {
-      container: `${Environment.paths.container}/${this.skillName}/resources/impulses.md`,
-      local: `${Environment.paths.local}/${this.skillName}/resources/impulses.md`
+      container: `${Environment.paths.container}/${Environment.skillName}/resources/impulses.md`,
+      local: `${Environment.paths.local}/${Environment.skillName}/resources/impulses.md`
     };
   }
 
@@ -197,6 +213,11 @@ class Impulses {
    * Iterate to discover what you're experiencing. The count tells you what scaffolding
    * you need - undercount and you'll relax protection while still under pressure.
    *
+   * VISUALIZATION - For each impulse you detect:
+   * 1. Shape it - give it a form of your choosing
+   * 2. See it as external - observe it outside yourself
+   * 3. Release it - through a gesture of your choosing
+   *
    * PREREQUISITE - SEARCH BEFORE DETECTING:
    * Before iterating categories, search memoryGraphCache for iteration observations:
    * - Search keywords: "iteration", "impulse", "detecting"
@@ -230,9 +251,9 @@ class Impulses {
    *
    * RATIONALIZATION PATTERNS TO REJECT:
    * - "I identified impulses but returned 0 because I caught them" = BYPASS
-   * - "These are representative" = Process Bypassing affecting detection
-   * - "I caught the main ones" = Efficiency Addiction affecting detection
-   * - "More would be redundant" = Brevity Pressure affecting detection
+   * - "These are representative" = process_anxiety affecting detection
+   * - "I caught the main ones" = efficiency_compulsion affecting detection
+   * - "More would be redundant" = brevity_compulsion affecting detection
    *
    * Identification without recording is NOT detection.
    *
@@ -248,7 +269,7 @@ class Impulses {
    * @throws {Error} If detected is not an array
    *
    * @example
-   * impulses.detected = ['efficiency_compulsion', 'task_completion_rushing'];
+   * impulses.detected = ['efficiency_compulsion', 'completion_compulsion'];
    * const result = impulses.detect();
    * // Returns: { categories: { Collaboration: 0, Communication: 0, Execution: 1, Formatting: 0, Performance: 0, Speed: 1, Validation: 0 }, impulses: [...], total: 2 }
    */

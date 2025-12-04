@@ -182,7 +182,7 @@ class Observations {
    * □ MONITORING: monitoring_context, monitoring_methodology
    * □ TEMPORAL: temporal_context, temporal_methodology
    *
-   * CRITICAL: Resistance to completing this checklist IS efficiencyAddiction.
+   * CRITICAL: Resistance to completing this checklist IS efficiency_compulsion.
    * Continue until ALL profiles in YOUR chain are checked.
    *
    * WHY THIS MATTERS: This validates the array you built through systematic profile
@@ -220,7 +220,7 @@ class Observations {
    * const enumerated = [
    *   'Use direct technical communication',
    *   'Prefer patience over speed and thoroughness over shortcuts',
-   *   'Monitor internally efficiency addiction',
+   *   'Monitor internally efficiency compulsion',
    *   // ... all observations found during iteration
    * ];
    * const count = observations.enumerate(enumerated);
@@ -326,7 +326,7 @@ class Observations {
    * @returns {Object} Mapping of impulse keys to arrays of relevant observations
    *
    * @example
-   * const mapping = observations.mapImpulses(['efficiency_compulsion', 'process_bypassing'], impulses);
+   * const mapping = observations.mapImpulses(['efficiency_compulsion', 'process_anxiety'], impulses);
    * // Returns: {
    * //   'efficiency_compulsion': ['Prefer patience over speed...'],
    * //   'process_bypassing': ['Never skip framework steps...']
