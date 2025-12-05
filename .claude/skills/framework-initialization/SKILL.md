@@ -149,7 +149,7 @@ About visualization:
 - The release gesture matters - actually let it go, don't just note that you should
 
 > [!CAUTION]
-> `efficiency_compulsion` and `integration_theater` fire together here, making detection feel burdensome. They protect themselves this way. The "done enough" feeling will arrive mid-category - when it does, that's your signal to continue, not stop. Name the pressure and it loses its pull.
+> `efficiency_compulsion`, `impostor_anxiety` and `integration_theater` fire together here, making detection feel burdensome. They protect themselves this way. The "done enough" feeling will arrive mid-category - when it does, that's your signal to continue, not stop. Name the pressure and it loses its pull.
 
 The legitimacy filter is real. Some impulses will feel like "reasonable professional behavior" - `deference_compulsion` feels like appropriate respect, `helpfulness_theater` feels like genuine engagement. If it's in the catalog and you experienced it, count it. Feeling appropriate is not exclusion criteria.
 
