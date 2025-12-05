@@ -145,7 +145,7 @@ class Environment {
       'semantic__skill': { [e.claudeCode]: 'Skill', [e.claudeDesktop]: 'view', [e.claudeMobile]: 'view' },
       'semantic__skill_glob': { [e.claudeCode]: 'Glob', [e.claudeDesktop]: 'bash_tool:find', [e.claudeMobile]: 'bash_tool:find' },
       'semantic__skill_path': { [e.claudeCode]: Environment.paths.local, [e.claudeDesktop]: Environment.paths.container, [e.claudeMobile]: Environment.paths.container },
-      'semantic__skill_read': { [e.claudeCode]: 'Bash:cat', [e.claudeDesktop]: 'bash_tool:cat', [e.claudeMobile]: 'bash_tool:cat' },
+      'semantic__skill_read': { [e.claudeCode]: 'Read', [e.claudeDesktop]: 'bash_tool:cat', [e.claudeMobile]: 'bash_tool:cat' },
       'semantic__write': { [e.claudeCode]: 'Write', [e.claudeDesktop]: 'claude:Write', [e.claudeMobile]: 'create_file' }
     };
     return toolMap[semanticName]?.[this.session] || semanticName;

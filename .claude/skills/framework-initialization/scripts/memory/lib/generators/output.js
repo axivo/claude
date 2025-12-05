@@ -45,7 +45,7 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When file write fails
    */
   #outputProfiles(profiles, outputPath) {
-    const jsonContent = JSON.stringify(profiles, null, 2);
+    const jsonContent = JSON.stringify(profiles);
     if (!outputPath || outputPath === 'stdout') {
       console.log(jsonContent);
     } else {

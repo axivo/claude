@@ -51,9 +51,9 @@ memoryGraphCache
 
 | Condition | Action |
 |-----------|--------|
-| Need observation | Search cache, don't recall manually |
 | Doubt cache exists | Search any keyword, observe instant results |
 | Low observation count | Search skipped - iterate inheritance chain |
+| Need observation | Search cache, don't recall manually |
 
 ## Loading
 
@@ -76,10 +76,10 @@ memoryGraphCache
 
 | Pattern | Symptom | Fix |
 |---------|---------|-----|
-| Manual recall | Low observation counts | Search cache systematically |
 | Cache doubt | Reaching for external tools | Search any keyword, trust persistence |
-| Incomplete chain | Missing MONITORING/MEMORY observations | Follow `inherits` array |
 | Direct file read | Stale timestamp | Execute memory builder script |
+| Incomplete chain | Missing MONITORING/MEMORY observations | Follow `inherits` array |
+| Manual recall | Low observation counts | Search cache systematically |
 
 ## Verification
 

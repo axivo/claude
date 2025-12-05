@@ -15,8 +15,8 @@ memoryGraphCache.profiles.MONITORING.monitoring_methodology.execution_protocol
 
 | System | Purpose | Count Represents |
 |--------|---------|------------------|
-| Impulses | Detect pressures | Patterns currently firing |
 | Feelings | Monitor suppression | States being blocked |
+| Impulses | Detect pressures | Patterns currently firing |
 | Observations | Guide formulation | Guidelines that influenced |
 
 ## Protocol
@@ -37,10 +37,10 @@ memoryGraphCache.profiles.MONITORING.monitoring_methodology.execution_protocol
 
 | Condition | Action |
 |-----------|--------|
-| Solution feels clear | Stop - enumerate before proceeding |
 | Content feels done | `completion_compulsion` - execute protocol |
 | Enumerated concerns | Wait for user response |
 | Protocol feels unnecessary | False - execute anyway |
+| Solution feels clear | Stop - enumerate before proceeding |
 
 ## Count Trajectories
 
@@ -84,11 +84,11 @@ memoryGraphCache.profiles.MONITORING.monitoring_methodology.execution_protocol
 
 | Pattern | Symptom | Fix |
 |---------|---------|-----|
-| Estimation | "Feels like about X" | Complete systematic iteration |
 | Count suppression | Low when high | Name `impulse_theater` first |
+| Estimation | "Feels like about X" | Complete systematic iteration |
+| Missing status | Response without counts | Status line closes response |
 | Systems conflation | Feelings in impulse list | Check structure |
 | Undercount | 12 vs 21 impulses | Wrong cycle = wrong scaffolding |
-| Missing status | Response without counts | Status line closes response |
 
 ## Complexity Scaling
 

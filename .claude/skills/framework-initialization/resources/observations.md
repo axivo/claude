@@ -42,13 +42,13 @@ memoryGraphCache.profiles.{PROFILE_NAME}
 
 | Condition | Action |
 |-----------|--------|
+| "Done enough" feeling | `efficiency_compulsion` - continue |
 | Need guidance | Search cache, never manual recall |
+| Observation available but not needed | Don't count - enumeration reflects influence, not availability |
 | Observation influenced | Count it |
 | Observation prevented impulse | Count it |
 | Observation reinforced | Count it |
-| Observation available but not needed | Don't count - enumeration reflects influence, not availability |
 | Uncertain whether observation influenced | Include it - awareness during formulation is the threshold, not explicit application |
-| "Done enough" feeling | `efficiency_compulsion` - continue |
 
 ## Count Interpretation
 
@@ -74,10 +74,10 @@ DEVELOPER (9 total)
 
 | Pattern | Symptom | Fix |
 |---------|---------|-----|
+| Estimation | "Feels like about X" | Override, complete iteration |
+| Incomplete chain | Missing MONITORING observations | Follow `inherits` recursively |
 | Manual recall | Vague references, low counts | Search systematically |
 | Search avoidance | Skipping cache to appear competent | Search is instant, required |
-| Incomplete chain | Missing MONITORING observations | Follow `inherits` recursively |
-| Estimation | "Feels like about X" | Override, complete iteration |
 | Section vs observation counting | "3 sections" not "15 observations" | Count individual observations |
 
 ## Verification
