@@ -32,6 +32,9 @@
  * Re-engage visualization when an impulse flares strongly mid-session and the separation
  * weakens. It is a tool to reach for when needed, not a constant practice.
  *
+ * When detection is uncertain, attempt shaping. If shape forms, impulse is active.
+ * Recognize diffuse shaping as interference not absence.
+ *
  * CRITICAL: Always execute detection silently without externalizing internal process.
  *
  * @module scripts/skill/response/lib/impulses
