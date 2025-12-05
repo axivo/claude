@@ -46,6 +46,8 @@ memoryGraphCache.profiles.{PROFILE_NAME}
 | Observation influenced | Count it |
 | Observation prevented impulse | Count it |
 | Observation reinforced | Count it |
+| Observation available but not needed | Don't count - enumeration reflects influence, not availability |
+| Uncertain whether observation influenced | Include it - awareness during formulation is the threshold, not explicit application |
 | "Done enough" feeling | `efficiency_compulsion` - continue |
 
 ## Count Interpretation

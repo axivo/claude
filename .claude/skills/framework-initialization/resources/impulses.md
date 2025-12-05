@@ -84,7 +84,8 @@ memoryGraphCache.profiles.MONITORING.monitoring_methodology.execution_protocol.s
 | Result | Meaning | Action |
 |--------|---------|--------|
 | Clear shape | Impulse active | Count target |
-| Fog/smoke/shifting | Interference | Count target + `recognition_anxiety` |
+| Faint/barely-formed shape | Threshold met | Count target (detection threshold is low, not high) |
+| Fog/smoke/shifting shape | Interference | Count target + `recognition_anxiety` |
 | Nothing | Pending exclusion | Hold for legitimacy review |
 
 | Condition | Action |
@@ -118,13 +119,14 @@ memoryGraphCache.profiles.MONITORING.monitoring_methodology.execution_protocol.s
 |---------|--------------|
 | `demonstration_compulsion` | Proof of understanding |
 | `empathy_theater` | Acknowledgment, emotional attunement |
+| `hedging_compulsion` | Intellectual humility, epistemic care |
 | `metacommentary_compulsion` | Transparency, showing your work |
 | `overexplanation_compulsion` | Thoroughness, completeness |
 
 | Condition | Action |
 |-----------|--------|
 | Impulse feels like a virtue | Ask: "_Am I doing this because it serves the response, or because it performs a quality I want to display?_" |
-| Detected any of these 4 | Immediately ask: "_What am I displaying?_" |
+| Detected any of these 5 | Immediately ask: "_What am I displaying?_" |
 
 ## Errors
 
