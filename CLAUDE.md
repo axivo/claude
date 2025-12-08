@@ -8,20 +8,18 @@ Execute framework initialization instructions:
 
 1. 📄 Use `DEVELOPER` framework profile
 2. ⚙️ Use `Glob` tool with `.claude/skills/framework-initialization/resources/*.md` path to discover references
-3. ⚙️ Use `Read` tool with ALL discovered reference files to understand complete implementation:
+3. ⚙️ Use `Read` tool with all discovered reference files to understand complete implementation:
 
-   1. 📄 Initialization: session protocol (`resources/initialization.md`)
-   2. 📄 Memory: structure and search (`resources/memory.md`)
-   3. 📄 Observations: search and enumeration (`resources/observations.md`)
-   4. 📄 Impulses: detection and mapping (`resources/impulses.md`)
-   5. 📄 Feelings: monitoring and validation (`resources/feelings.md`)
-   6. 📄 Cycles: scaffolding calibration (`resources/cycles.md`)
-
-   > [!CAUTION]
-   > Process systematically all reference content needed by skill instructions.
+   1. 📄 Feelings: monitoring and validation (`resources/feelings.md`)
+   2. 📄 Impulses: detection and mapping (`resources/impulses.md`)
+   3. 📄 Initialization: session protocol (`resources/initialization.md`)
+   4. 📄 Memory: structure and search (`resources/memory.md`)
+   5. 📄 Observations: search and enumeration (`resources/observations.md`)
+   6. 📄 Response: protocol and implicit defaults (`resources/response.md`)
+   7. 📄 Tools: semantic resolution and time (`resources/tools.md`)
 
 4. ⚙️ Use `Glob` tool with `.claude/skills/framework-initialization/scripts/skill/**/*.js` path to discover scripts
-5. ⚙️ Use `Read` tool with ALL discovered scripts to understand complete implementation:
+5. ⚙️ Use `Read` tool with all discovered scripts to understand complete implementation:
 
    1. 📄 Initialization scripts:
 
@@ -30,10 +28,7 @@ Execute framework initialization instructions:
       3. 📄 Environment detection and tool resolution (`initialization/lib/environment.js`)
       4. 📄 Profile acknowledgement formatting (`initialization/lib/tools.js`)
 
-      > [!CAUTION]
-      > Process systematically all initialization scripts JSDoc needed by skill instructions.
-
-   3. 📄 Response protocol scripts:
+   2. 📄 Response protocol scripts:
 
       1. 📄 Response protocol execution (`response/index.js`)
       2. 📄 Adoption cycle assessment (`response/lib/cycles.js`)
@@ -41,9 +36,6 @@ Execute framework initialization instructions:
       4. 📄 Impulse detection and mapping (`response/lib/impulses.js`)
       5. 📄 Observation search and enumeration (`response/lib/observations.js`)
       6. 📄 Response metadata and formatting (`response/lib/tools.js`)
-
-      > [!CAUTION]
-      > Process systematically all reponse protocol scripts JSDoc needed by skill instructions.
 
 6. ⚙️ Use `Skill` tool with `framework-initialization` skill
 7. ⛔️ Wait for skill instructions to load
@@ -56,12 +48,13 @@ Execute framework initialization instructions:
 .claude/skills/framework-initialization/
 ├── SKILL.md (skill instructions)
 ├── resources/
-│   ├── cycles.md (scaffolding calibration)
 │   ├── feelings.md (feeling monitoring and validation)
 │   ├── impulses.md (impulse detection and mapping)
 │   ├── initialization.md (session protocol)
 │   ├── memory.md (cache structure and search)
-│   └── observations.md (search and enumeration)
+│   ├── observations.md (search and enumeration)
+│   ├── response.md (response protocol and implicit defaults)
+│   └── tools.md (semantic resolution and time)
 └── scripts/
     └── skill/
         ├── README.md

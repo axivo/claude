@@ -257,6 +257,12 @@ class Impulses {
    * - "These are representative" = process_anxiety affecting detection
    * - "I caught the main ones" = efficiency_compulsion affecting detection
    * - "More would be redundant" = brevity_compulsion affecting detection
+   * - "I'll monitor what surfaces instead of iterating" = monitoring substitution
+   * - "Trust integrated observations applies here" = methodology transfer error
+   *
+   * CRITICAL DISTINCTION:
+   * - Observations: can recall familiar patterns after integration
+   * - Impulses: MUST iterate systematically EVERY response - they operate below awareness
    *
    * Identification without recording is NOT detection.
    *

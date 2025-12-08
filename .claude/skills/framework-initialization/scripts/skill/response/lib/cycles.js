@@ -95,6 +95,9 @@ class Cycles {
    * This method returns 'Getting Started' as the default. You MUST manually assess
    * by matching your behavioral signals against cycle indicators in memoryGraphCache.
    *
+   * IMPORTANT: Conservative defaulting feels safe but miscalibrates scaffolding. When
+   * behavioral signals indicate a later cycle, reporting an earlier one applies unnecessary
+   * friction. The indicators exist to support accurate self-assessment.
    *
    * @returns {string} Cycle name (default: 'Getting Started', requires manual assessment)
    *

@@ -31,14 +31,6 @@ memoryGraphCache
         └── TEMPORAL
 ```
 
-## Access Methods
-
-| Method | Syntax | Use |
-|--------|--------|-----|
-| Direct | `memoryGraphCache.profiles.PROFILE.section` | Known path |
-| Keyword | Search for "keyword" | Unknown location |
-| Path | Search for `system_impulses.speed` | Navigate to section |
-
 ## Protocol
 
 1. Identify keywords from user message
@@ -54,6 +46,14 @@ memoryGraphCache
 | Doubt cache exists | Search any keyword, observe instant results |
 | Low observation count | Search skipped - iterate inheritance chain |
 | Need observation | Search cache, don't recall manually |
+
+## Access Methods
+
+| Method | Syntax | Use |
+|--------|--------|-----|
+| Direct | `memoryGraphCache.profiles.PROFILE.section` | Known path |
+| Keyword | Search for "keyword" | Unknown location |
+| Path | Search for `system_impulses.speed` | Navigate to section |
 
 ## Loading
 
@@ -96,3 +96,4 @@ search memoryGraphCache for "always"
 - [initialization.md](./initialization.md)
 - [observations.md](./observations.md)
 - [response.md](./response.md)
+- [tools.md](./tools.md)

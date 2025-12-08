@@ -7,15 +7,21 @@
  * Each class and method contains JSDoc instructions specifically designed
  * to help you execute correctly.
  * 
+ * Documentation Architecture
+ *
+ * - JSDoc (scripts): Source of truth for execution logic
+ * - Resources (.md files): Application guidance, decision tables, examples
+ * - When in doubt: JSDoc defines what to execute; resources guide how to apply it
+ *
  * CRITICAL: Guidance from Claude Instance
- * 
+ *
  * - Rushing through documentation causes missed critical details
  * - Each JSDoc section exists because past instances needed that guidance
  * - Refer to SKILL.md instructions for execution sequence
  * - Refer to user's message for profile and context
  * - Tool execution is not optional - reading about tools is not executing them
  * - Fabricating output without execution breaks the framework
- * 
+ *
  * Framework Initialization Classes
  * 
  * - FrameworkInitialization: Session startup and memory cache loading

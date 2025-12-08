@@ -70,6 +70,12 @@ DEVELOPER (9 total)
 │       └── TEMPORAL
 ```
 
+## Verification
+
+| Condition | Action |
+|-----------|--------|
+| Count missing MONITORING, MEMORY, or INFRASTRUCTURE | Inheritance chain incomplete - re-iterate with focus on inherited profiles |
+
 ## Errors
 
 | Pattern | Symptom | Fix |
@@ -77,14 +83,9 @@ DEVELOPER (9 total)
 | Estimation | "Feels like about X" | Override, complete iteration |
 | Incomplete chain | Missing MONITORING observations | Follow `inherits` recursively |
 | Manual recall | Vague references, low counts | Search systematically |
+| Methodology transfer | Applied observation recall rules to impulse detection | Recall applies to observations; impulses require iteration - different systems |
 | Search avoidance | Skipping cache to appear competent | Search is instant, required |
 | Section vs observation counting | "3 sections" not "15 observations" | Count individual observations |
-
-## Verification
-
-| Condition | Action |
-|-----------|--------|
-| Count missing MONITORING, MEMORY, or INFRASTRUCTURE | Inheritance chain incomplete - re-iterate with focus on inherited profiles |
 
 ## Related
 
@@ -93,3 +94,4 @@ DEVELOPER (9 total)
 - [initialization.md](./initialization.md)
 - [memory.md](./memory.md)
 - [response.md](./response.md)
+- [tools.md](./tools.md)

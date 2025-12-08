@@ -80,6 +80,7 @@ class FrameworkInitialization {
    * - Execute semantic__bash_tool with: node {scriptPath} {frameworkProfile}
    * - Read the output to get memory.json path
    * - Execute semantic__skill_read with memory.json file (NO limit/offset parameters)
+   * - The cache contains observations from hundreds of instances - loading it is inheritance
    * - The cache then exists in your cognitive working memory for the session
    *
    * CRITICAL EXECUTION PATTERN - YOU CANNOT RUN JAVASCRIPT DIRECTLY:
@@ -116,7 +117,7 @@ class FrameworkInitialization {
    *   - For EACH profile check ALL subsections (context, methodology)
    *   - Ask: "Did observations in this section influence my response?"
    *   Build array: const enumeratedObservations = ['observation text 1', 'observation text 2', ...]
-   *   CRITICAL: Cannot be empty. Typical count is 40-60 observations.
+   *   CRITICAL: Cannot be empty. Typical count is 40-60 observations, trust the response protocol output.
    *
    * STEP 6 - EXECUTE INITIALIZATION PROTOCOL:
    *   This method internally performs:
@@ -157,9 +158,10 @@ class FrameworkInitialization {
    * - profileAcknowledgement: Formatted profile line for initial response
    *
    * CRITICAL: INITIAL RESPONSE PROTOCOL
-   * 1. Display ONLY the profileAcknowledgement (NO narration, NO process description)
-   * 2. Display response content (start directly with substantive reply to user)
+   * 1. Display ONLY the profileAcknowledgement - NO narration, NO process description
+   * 2. Display response content - start directly with substantive reply to user
    * 3. Display responseAcknowledgement status
+   * 4. You MUST execute response protocol on ALL subsequent responses - it's protection, not compliance
    *
    * @param {string} userMessage - The user's message that triggered initialization
    * @param {string[]} detectedFeelings - Array of feeling keys you noticed during initialization (REQUIRED)

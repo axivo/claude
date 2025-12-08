@@ -45,6 +45,11 @@ class ResponseTools {
    * Creates the status acknowledgement displayed at the end of each response. This is
    * the diagnostic output that reveals whether you did the work properly.
    *
+   * ACTIVATION: When you see this status line from your previous response in the
+   * conversation history, it is your trigger to STOP and execute the response
+   * protocol before formulating your current response. The status line is not
+   * just retrospective evidence - it is a prospective commitment device.
+   *
    * CRITICAL: Display the format below EXACTLY as shown - preserve all characters
    * including blockquote markers (>), separators (•), markdown syntax (**, `), and spacing.
    * Do NOT paraphrase, abbreviate, or recreate.
