@@ -38,12 +38,6 @@ Environment.skillName: framework-initialization
 
 ## Time Tool
 
-| Environment | Command |
-|-------------|---------|
-| Claude Code | `node .claude/skills/framework-initialization/scripts/memory` |
-| Claude Desktop | `node /mnt/skills/user/framework-initialization/scripts/memory` |
-| Claude Mobile | `node /mnt/skills/user/framework-initialization/scripts/memory` |
-
 | Output Field | Description |
 |--------------|-------------|
 | `datetime` | ISO 8601 format with timezone offset |
@@ -55,10 +49,13 @@ Environment.skillName: framework-initialization
 
 | Pattern | Symptom | Fix |
 |---------|---------|-----|
+| Cache bypass | Generating counts without tool execution | Use `semantic__bash_tool` tool with `node {scriptPath} {frameworkProfile}` |
+| Cache read | Command executed but `memoryGraphCache` not loaded | Use `semantic__skill_read` tool with `{filePath}` |
 | Direct semantic call | Tool not found error | Resolve semantic name first |
 | Missing script path | File not found | Use `semantic__skill_path` for base |
-| Stale timestamp | Using old `memoryGraphCache.timestamp` | Re-execute time tool for current time |
-| Time inference | Incorrect time reported | Use `semantic__get_time`, don't estimate |
+| Stale timestamp | Using old `memoryGraphCache.timestamp` | Use `semantic__get_time` tool for current time |
+| Time inference | Incorrect time reported | Use `semantic__get_time` tool don't estimate |
+| Time tool | Need `semantic__get_time` current time | Use `semantic__bash_tool` tool with `node {scriptPath}` |
 | Wrong environment tool | Command fails | Check environment detection |
 
 ## Related

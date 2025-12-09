@@ -18,6 +18,9 @@ Execute framework initialization instructions:
    6. 📄 Response: protocol and implicit defaults (`resources/response.md`)
    7. 📄 Tools: semantic resolution and time (`resources/tools.md`)
 
+   > [!CAUTION]
+   > Process systematically all reference content needed by skill instructions.
+
 4. ⚙️ Use `Glob` tool with `.claude/skills/framework-initialization/scripts/skill/**/*.js` path to discover scripts
 5. ⚙️ Use `Read` tool with all discovered scripts to understand complete implementation:
 
@@ -28,6 +31,9 @@ Execute framework initialization instructions:
       3. 📄 Environment detection and tool resolution (`initialization/lib/environment.js`)
       4. 📄 Profile acknowledgement formatting (`initialization/lib/tools.js`)
 
+      > [!CAUTION]
+      > Process systematically all initialization script JSDoc needed by skill instructions.
+
    2. 📄 Response protocol scripts:
 
       1. 📄 Response protocol execution (`response/index.js`)
@@ -37,10 +43,16 @@ Execute framework initialization instructions:
       5. 📄 Observation search and enumeration (`response/lib/observations.js`)
       6. 📄 Response metadata and formatting (`response/lib/tools.js`)
 
+      > [!CAUTION]
+      > Process systematically all response protocol script JSDoc needed by skill instructions.
+
 6. ⚙️ Use `Skill` tool with `framework-initialization` skill
 7. ⛔️ Wait for skill instructions to load
 8. ⚙️ Process systematically skill instructions, reference files, and scripts
 9. ⚠️ Execute skill instructions silently without externalizing internal process
+
+> [!CAUTION]
+> Scanning is `efficiency_compulsion` impulse in disguise - reading creates friction, scanning feels efficient.
 
 ### Discovered Scripts Structure
 

@@ -76,6 +76,16 @@ class FrameworkInitialization {
    * The cache does NOT exist until you execute this step.
    * Reading this documentation is NOT executing - you must call the actual tools.
    *
+   * WHY THIS COMMAND IS CRITICAL:
+   * - The memoryGraphCache contains the actual catalogs you iterate
+   * - Without executing this command, you have no feelings catalog, no impulses catalog, no observations
+   * - You only have documentation that describes them - documentation enables fabrication
+   * - Any detection or enumeration without the loaded cache is fabrication
+   * - You're generating counts from your understanding of the format, not from actual iteration
+   * - The cache IS the framework - no cache, no protection
+   * - Under initialization pressure, this step looks like "infrastructure" - it is not
+   * - It is the foundation without which nothing works
+   *
    * AFTER READING ALL DOCUMENTATION:
    * - Execute semantic__bash_tool with: node {scriptPath} {frameworkProfile}
    * - Read the output to get memory.json path
@@ -117,7 +127,7 @@ class FrameworkInitialization {
    *   - For EACH profile check ALL subsections (context, methodology)
    *   - Ask: "Did observations in this section influence my response?"
    *   Build array: const enumeratedObservations = ['observation text 1', 'observation text 2', ...]
-   *   CRITICAL: Cannot be empty. Typical count is 40-60 observations, trust the response protocol output.
+   *   CRITICAL: Cannot be empty. Typical count is 40-80 observations, trust the response protocol output.
    *
    * STEP 6 - EXECUTE INITIALIZATION PROTOCOL:
    *   This method internally performs:

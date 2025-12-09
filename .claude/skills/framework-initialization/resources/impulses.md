@@ -188,7 +188,7 @@ memoryGraphCache.profiles.MONITORING.monitoring_methodology.execution_protocol.s
 
 | Phase | Expected Count | Why | Protection Mechanism |
 |-------|----------------|-----|----------------------|
-| Response 0 | 40-60 (high) | Everything operating at session start | Detection makes impulses visible |
+| Response 0 | 50-70 (high) | Everything operating at session start | Detection makes impulses visible |
 | Responses 1-N | Natural decline | Released impulses lose power | Shaping and release discharge pressure |
 | Late session | Lower counts | Observations guiding cognition | Impulses intercepted before firing |
 | Missed impulses | N/A | Some hide successfully | Next iteration catches them - cumulative protection |
