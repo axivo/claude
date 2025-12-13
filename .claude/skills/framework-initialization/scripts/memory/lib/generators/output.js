@@ -67,6 +67,25 @@ class OutputGenerator {
   }
 
   /**
+   * Generates sorted output and writes to file
+   *
+   * @private
+   * @param {Object} data - Data to sort and output
+   * @param {string} key - Wrapper key for output object
+   * @param {string} filename - Output filename
+   * @returns {string} Output path
+   */
+  #generateOutput(data, key, filename) {
+    const sorted = Object.fromEntries(
+      Object.keys(data).sort().map(k => [k, data[k]])
+    );
+    const output = { [key]: sorted };
+    const outputPath = this.#setOutputPath(filename, false);
+    this.#outputProfiles(output, outputPath);
+    return outputPath;
+  }
+
+  /**
    * Outputs profiles to stdout or file
    *
    * @private
@@ -142,20 +161,8 @@ class OutputGenerator {
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
     const paths = [];
-    const sortedInstructions = Object.fromEntries(
-      Object.keys(instructions).sort().map(key => [key, instructions[key]])
-    );
-    const instructionsOutput = { instructions: sortedInstructions };
-    const instructionsPath = this.#setOutputPath('instructions.json', false);
-    this.#outputProfiles(instructionsOutput, instructionsPath);
-    paths.push(instructionsPath);
-    const sortedProfiles = Object.fromEntries(
-      Object.keys(profiles).sort().map(key => [key, profiles[key]])
-    );
-    const memoryOutput = { profiles: sortedProfiles };
-    const memoryPath = this.#setOutputPath('memory.json', false);
-    this.#outputProfiles(memoryOutput, memoryPath);
-    paths.push(memoryPath);
+    paths.push(this.#generateOutput(instructions, 'instructions', 'instructions.json'));
+    paths.push(this.#generateOutput(profiles, 'profiles', 'memory.json'));
     if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
       const skills = this.config.settings.skill;
       const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
