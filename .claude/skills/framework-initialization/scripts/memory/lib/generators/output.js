@@ -9,6 +9,7 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
+const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const EnvironmentManager = require('../core/environment');
@@ -28,11 +29,41 @@ class OutputGenerator {
    *
    * @param {Object} config - Configuration object for output generation
    * @param {string} [projectRoot] - Project root directory path
+   * @param {boolean} [packageMode] - User explicitly requested container packaging (-c flag)
+   * @param {boolean} [isContainer] - Running in container or container mode requested
    */
-  constructor(config, projectRoot = null) {
+  constructor(config, projectRoot = null, packageMode = false, isContainer = false) {
     this.config = config;
     this.environmentManager = new EnvironmentManager(config.settings);
     this.projectRoot = projectRoot || process.cwd();
+    this.packageMode = packageMode;
+    this.isContainer = isContainer;
+  }
+
+  /**
+   * Creates zip archive of a single skill directory
+   *
+   * @private
+   * @param {string} skillName - Name of the skill to zip
+   * @returns {string} Path to created zip file
+   * @throws {MemoryBuilderError} When zip creation fails
+   */
+  #createZip(skillName) {
+    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
+    const skillPath = path.join(localPath, skillName);
+    const zipPath = `${localPath}/${skillName}.zip`;
+    if (!fs.existsSync(skillPath)) {
+      return null;
+    }
+    try {
+      if (fs.existsSync(zipPath)) {
+        fs.unlinkSync(zipPath);
+      }
+      execSync(`zip -r "${skillName}.zip" "${skillName}/"`, { cwd: localPath, stdio: 'pipe' });
+      return zipPath;
+    } catch (error) {
+      throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
+    }
   }
 
   /**
@@ -64,7 +95,7 @@ class OutputGenerator {
           fs.closeSync(fd);
         }
       } catch (error) {
-        throw new MemoryBuilderError(`Failed to write output file: ${resolvedPath} - ${error.message}`, 'OUTPUT_WRITE_ERROR');
+        throw new MemoryBuilderError(`Failed to write ${resolvedPath} output file: ${error.message}`, 'OUTPUT_WRITE_ERROR');
       }
     }
   }
@@ -82,11 +113,14 @@ class OutputGenerator {
       return 'stdout';
     }
     const skill = this.config.settings.skill.initialization;
-    if (this.environmentManager.isClaudeContainer()) {
+    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
+    if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
+      return `${localPath}/${filename}`;
+    }
+    if (this.isContainer) {
       const containerPath = this.config.settings.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
     }
-    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
     return `${localPath}/${skill}/resources/${filename}`;
   }
 
@@ -124,6 +158,15 @@ class OutputGenerator {
     const memoryPath = this.#setOutputPath('memory.json', false);
     this.#outputProfiles(memoryOutput, memoryPath);
     paths.push(memoryPath);
+    if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
+      const skills = this.config.settings.skill;
+      for (const key of Object.keys(skills)) {
+        const zipPath = this.#createZip(skills[key]);
+        if (zipPath) {
+          paths.push(zipPath);
+        }
+      }
+    }
     const stdoutOutput = {
       paths,
       timestamp
