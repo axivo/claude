@@ -2,6 +2,7 @@
 .claude/plugins
 .claude/shell-snapshots
 .claude/**/*.zip
+.claude/skills/**/instructions.json
 .claude/skills/**/memory.json
 .claude/statsig
 .claude/todos
