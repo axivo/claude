@@ -7,7 +7,7 @@
     "logic"
   ],
   "env": {
-    "BASH_MAX_OUTPUT_LENGTH": "150000"
+    "BASH_MAX_OUTPUT_LENGTH": "200000"
   },
   "permissions": {
     "allow": [
@@ -26,6 +26,7 @@
       "Skill(conversation-log)",
       "Skill(framework-initialization)",
       "Skill(framework-methodology)",
+      "SlashCommand(/reload)",
       "WebFetch",
       "WebSearch"
     ],
