@@ -3,6 +3,7 @@
  *
  * Command-line interface to the MemoryBuilder class.
  * Changes working directory to script location for correct relative path resolution.
+ * When profile is not specified, reads default from builder.yaml config.
  *
  * @module scripts/memory
  * @author AXIVO
@@ -10,6 +11,7 @@
  */
 const path = require('path');
 const { parseArgs } = require('util');
+const ConfigLoader = require('./lib/loaders/config');
 const MemoryBuilder = require('./lib/core/memory');
 const projectRoot = process.cwd();
 process.chdir(path.dirname(__filename));
@@ -40,11 +42,14 @@ if (require.main === module) {
       'Options:',
       '  -c, --container       Force container environment for instructions',
       '  -h, --help            Show this help message',
-      '  -p, --profile [name]  Build a specific profile (e.g., DEVELOPER)'
+      '  -p, --profile [name]  Build a specific profile (default settings.profile)'
     ].join('\n'));
     process.exit(0);
   }
-  const builder = new MemoryBuilder(values.profile, projectRoot, {}, values.container);
+  const configLoader = new ConfigLoader();
+  const config = configLoader.load();
+  const profileName = values.profile || config.settings.profile;
+  const builder = new MemoryBuilder(profileName, projectRoot, config, values.container);
   const success = builder.build();
   process.exit(success ? 0 : 1);
 }
