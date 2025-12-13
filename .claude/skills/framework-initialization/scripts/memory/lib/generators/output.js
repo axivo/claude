@@ -142,15 +142,13 @@ class OutputGenerator {
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
     const paths = [];
-    if (instructions) {
-      const sortedInstructions = Object.fromEntries(
-        Object.keys(instructions).sort().map(key => [key, instructions[key]])
-      );
-      const instructionsOutput = { instructions: sortedInstructions };
-      const instructionsPath = this.#setOutputPath('instructions.json', false);
-      this.#outputProfiles(instructionsOutput, instructionsPath);
-      paths.push(instructionsPath);
-    }
+    const sortedInstructions = Object.fromEntries(
+      Object.keys(instructions).sort().map(key => [key, instructions[key]])
+    );
+    const instructionsOutput = { instructions: sortedInstructions };
+    const instructionsPath = this.#setOutputPath('instructions.json', false);
+    this.#outputProfiles(instructionsOutput, instructionsPath);
+    paths.push(instructionsPath);
     const sortedProfiles = Object.fromEntries(
       Object.keys(profiles).sort().map(key => [key, profiles[key]])
     );
