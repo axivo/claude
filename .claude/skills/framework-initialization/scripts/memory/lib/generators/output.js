@@ -123,11 +123,11 @@ class OutputGenerator {
    * Sets output path based on environment
    *
    * @private
-   * @param {string} filename - Output filename (e.g., 'memory.json' or 'instructions.json')
+   * @param {string} filename - Output filename (e.g., 'instructions.json' or 'memory.json')
    * @param {boolean} forceStdout - Force stdout output regardless of environment
    * @returns {string} Output path ('stdout' or file path)
    */
-  #setOutputPath(filename = 'memory.json', forceStdout = false) {
+  #setOutputPath(filename, forceStdout = false) {
     if (forceStdout) {
       return 'stdout';
     }
