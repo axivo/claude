@@ -60,7 +60,7 @@ class MemoryBuilder {
       const instructionsName = isContainer ? 'CONTAINER' : 'LOCAL';
       const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
       const instructions = instructionsProcessor.build(instructionsName);
-      outputGenerator.generate(profiles, instructions);
+      outputGenerator.generate(instructions, profiles);
       return true;
     } catch (error) {
       console.error('❌ Build failed:', error.message);

@@ -127,22 +127,22 @@ class OutputGenerator {
   /**
    * Generates profile and instructions output with timestamp
    *
+   * @param {Object} instructions - Hierarchical instructions dictionary
    * @param {Object} profiles - Hierarchical profile dictionary
-   * @param {Object} [instructions] - Hierarchical instructions dictionary
    * @returns {boolean} Success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generate(profiles, instructions = null) {
+  generate(instructions, profiles) {
+    if (typeof instructions !== 'object' || instructions === null) {
+      throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
+    }
     if (typeof profiles !== 'object' || profiles === null) {
       throw new MemoryBuilderError('Profiles must be an object', 'INVALID_PROFILES');
-    }
-    if (instructions !== null && (typeof instructions !== 'object')) {
-      throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
     }
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
     const paths = [];
-    if (instructions !== null) {
+    if (instructions) {
       const sortedInstructions = Object.fromEntries(
         Object.keys(instructions).sort().map(key => [key, instructions[key]])
       );
