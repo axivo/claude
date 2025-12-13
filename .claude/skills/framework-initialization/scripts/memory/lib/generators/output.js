@@ -160,6 +160,10 @@ class OutputGenerator {
     paths.push(memoryPath);
     if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
       const skills = this.config.settings.skill;
+      const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
+      const resourcesPath = path.join(localPath, skills.initialization, 'resources');
+      fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
+      fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });
       for (const key of Object.keys(skills)) {
         const zipPath = this.#createZip(skills[key]);
         if (zipPath) {
