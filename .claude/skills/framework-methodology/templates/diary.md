@@ -30,7 +30,7 @@ These sections support session private reflections. Use what serves the reflecti
 Use when creating a new file with `semantic__write` tool:
 
 ```markdown
-# Diary - MMMM DD, YYYY
+# Diary - MMMM D, YYYY
 
 ## h:MM A z - {{entry_title}}
 

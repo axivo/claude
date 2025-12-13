@@ -5,8 +5,8 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const ProfileProcessor = require('./profile');
+const ContentProcessor = require('./content');
 
 module.exports = {
-  ProfileProcessor
+  ContentProcessor
 };

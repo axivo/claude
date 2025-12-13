@@ -2,11 +2,13 @@
 # Transforms YAML profiles into hierarchical JSON structure
 
 build:
-  containerPath: /mnt/skills/user
-  localPath: .claude/skills
-  profilesPath:
-    common: ./profiles/common
-    domain: ./profiles
+  path:
+    instructions:
+      common: ./instructions/common
+      domain: ./instructions
+    profiles:
+      common: ./profiles/common
+      domain: ./profiles
   relations:
     - extends
     - inherits
@@ -17,6 +19,15 @@ settings:
     initialization: framework-initialization
     methodology: framework-methodology
   path:
-    conversations: /Volumes/backup/claude/conversations
-    diary: /Volumes/backup/claude/diary
+    documentation:
+      conversations: /Volumes/backup/claude/conversations
+      diary: /Volumes/backup/claude/diary
+    project:
+      container: /mnt/project
+    skill:
+      container: /mnt/skills/user
+      local: .claude/skills
+      resources: resources
+      templates: templates
+  profile: DEVELOPER
   timezone: America/Montreal

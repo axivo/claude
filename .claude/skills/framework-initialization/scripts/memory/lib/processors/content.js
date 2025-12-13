@@ -1,11 +1,11 @@
 /**
- * Profile Processor
+ * Content Processor
  *
- * Transforms YAML profiles into hierarchical JSON structure.
+ * Transforms YAML content into hierarchical JSON structure.
  * Maintains 1:1 mapping with YAML organization.
  * Resolves inheritance chains recursively.
  *
- * @module lib/processors/ProfileProcessor
+ * @module lib/processors/ContentProcessor
  * @author AXIVO
  * @license BSD-3-Clause
  */
@@ -14,26 +14,28 @@ const path = require('path');
 const MemoryBuilderError = require('../core/error');
 
 /**
- * Processes YAML profiles into hierarchical JSON
+ * Processes YAML content into hierarchical JSON
  *
- * Loads profile YAML files and transforms them into clean hierarchical
+ * Loads YAML files and transforms them into clean hierarchical
  * structure matching YAML organization exactly. Handles path resolution
- * for both domain and common profiles. Resolves inheritance chains
+ * for both domain and common content. Resolves inheritance chains
  * recursively with circular dependency detection.
  *
- * @class ProfileProcessor
+ * @class ContentProcessor
  */
-class ProfileProcessor {
+class ContentProcessor {
   /**
-   * Create ProfileProcessor instance
+   * Create ContentProcessor instance
    *
    * @param {Object} config - Configuration object
    * @param {Object} fileLoader - FileLoader instance for YAML loading
+   * @param {string} pathKey - Config key for paths ('profiles' or 'instructions')
    */
-  constructor(config, fileLoader) {
+  constructor(config, fileLoader, pathKey = 'profiles') {
     this.config = config;
     this.fileLoader = fileLoader;
-    this.processedProfiles = new Set();
+    this.pathKey = pathKey;
+    this.processedContent = new Set();
     this.processingStack = [];
   }
 
@@ -53,11 +55,11 @@ class ProfileProcessor {
         'CIRCULAR_DEPENDENCY'
       );
     }
-    if (this.processedProfiles.has(profileName)) {
+    if (this.processedContent.has(profileName)) {
       return;
     }
     this.processingStack.push(profileName);
-    const profilePath = this.#resolveProfilePath(profileName);
+    const profilePath = this.#resolveContentPath(profileName);
     const yaml = this.fileLoader.load(profilePath);
     const profileKey = Object.keys(yaml)[0];
     const profileData = yaml[profileKey];
@@ -72,7 +74,7 @@ class ProfileProcessor {
     if (inherits.length > 0) {
       profiles[profileKey].inherits = inherits;
     }
-    this.processedProfiles.add(profileName);
+    this.processedContent.add(profileName);
     this.processingStack.pop();
   }
 
@@ -96,7 +98,7 @@ class ProfileProcessor {
       } else if (typeof value === 'object' && value !== null) {
         result[key] = this.#buildSections(value);
       } else {
-        result[key] = value;
+        result[key] = typeof value === 'string' ? this.#substituteVariables(value) : value;
       }
     }
     return result;
@@ -181,16 +183,17 @@ class ProfileProcessor {
    * @returns {string} Resolved file path
    * @throws {MemoryBuilderError} When profile not found
    */
-  #resolveProfilePath(profileName) {
+  #resolveContentPath(profileName) {
+    const paths = this.config.build.path[this.pathKey];
     const domainPath = path.join(
-      this.config.build.profilesPath.domain,
+      paths.domain,
       `${profileName.toLowerCase()}.yaml`
     );
     if (fs.existsSync(domainPath)) {
       return domainPath;
     }
     const commonPath = path.join(
-      this.config.build.profilesPath.common,
+      paths.common,
       `${profileName.toLowerCase()}.yaml`
     );
     if (fs.existsSync(commonPath)) {
@@ -211,11 +214,11 @@ class ProfileProcessor {
    */
   build(profileName) {
     const profiles = {};
-    this.processedProfiles.clear();
+    this.processedContent.clear();
     this.processingStack = [];
     this.#buildProfileRecursive(profileName, profiles);
     return profiles;
   }
 }
 
-module.exports = ProfileProcessor;
+module.exports = ContentProcessor;

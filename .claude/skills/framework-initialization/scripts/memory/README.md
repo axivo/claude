@@ -5,16 +5,32 @@ Transforms YAML profile definitions into hierarchical JSON memory graph cache wi
 ## Usage
 
 ```bash
-# Build specific profile
-node index.js DEVELOPER
+# Display help
+node .claude/skills/framework-initialization/scripts/memory --help
 
-# Generate timestamp only
-node index.js
+# Display timestamp and configured profile name
+node .claude/skills/framework-initialization/scripts/memory
+
+# Build specific profile for local environment
+node .claude/skills/framework-initialization/scripts/memory -p DEVELOPER
+node .claude/skills/framework-initialization/scripts/memory --profile=DEVELOPER
+
+# Build specific profile for container environment
+node .claude/skills/framework-initialization/scripts/memory -cp DEVELOPER
+node .claude/skills/framework-initialization/scripts/memory --profile=DEVELOPER --container
 ```
+
+| Option                 | Description                                                         |
+| ---------------------- | ------------------------------------------------------------------- |
+| `-c, --container`      | Force container environment for instructions (default autodetected) |
+| `-h, --help`           | Display command help menu                                           |
+| `-p, --profile [name]` | Build a specific profile (e.g., DEVELOPER)                          |
 
 ## Features
 
-- Hierarchical profile inheritance (e.g., DEVELOPER � ENGINEER � COLLABORATION)
+- Generates `instructions.json` from YAML instruction files
+- Generates `memory.json` from YAML profile files
+- Hierarchical inheritance resolution
 - Circular dependency detection
 - Template variable substitution from configuration
 - Timezone-aware timestamp generation
@@ -27,50 +43,54 @@ Located in [`config/builder.yaml`](config/builder.yaml):
 
 ```yaml
 build:
-  outputPath: stdout # Output destination (stdout or file path)
-  profilesPath:
-    common: ./profiles/common # Shared common profiles
-    domain: ./profiles # Domain-specific profiles
+  path:
+    instructions:
+      common: ./instructions/common # Shared instruction files
+      domain: ./instructions # Domain-specific instructions
+    profiles:
+      common: ./profiles/common # Shared common profiles
+      domain: ./profiles # Domain-specific profiles
   relations: # Valid relation types
     - extends
     - inherits
     - overrides
 
 settings:
-  environment: # Container environment variables
-    BASH_MAX_OUTPUT_LENGTH: 100000
-  path: # Path configurations
-    conversations: /path/to/conversations
-    diary: /path/to/diary
+  skill:
+    initialization: framework-initialization
+    methodology: framework-methodology
+  path:
+    container: /mnt/skills/user # Container environment path
+    conversations: /local/path/to/conversations
+    diary: /local/path/to/diary
+    local: .claude/skills # Local environment path
   timezone: America/Montreal # Default timezone
-```
-
-## Profile Structure
-
-Profiles are YAML files in [`profiles/`](profiles/):
-
-```yaml
-PROFILE_NAME:
-  description: Profile description
-
-  relations:
-    - type: inherits
-      target: PARENT_PROFILE
-
-  section_name:
-    subsection:
-      observations:
-        - Observation 1
-        - Observation 2
 ```
 
 ## Output Format
 
+When building a profile (`-p DEVELOPER`):
+
 ```json
 {
-  "profiles": {
-    "path": ".claude/skills/framework-initialization/resources/memory.json"
-  },
+  "paths": [
+    ".claude/skills/framework-initialization/resources/instructions.json",
+    ".claude/skills/framework-initialization/resources/memory.json"
+  ],
+  "timestamp": {
+    "datetime": "2025-11-20T17:00:00-05:00",
+    "day_of_week": "Thursday",
+    "is_dst": false,
+    "timezone": "America/Montreal"
+  }
+}
+```
+
+When displaying timestamp only (no profile argument):
+
+```json
+{
+  "profile": "DEVELOPER",
   "timestamp": {
     "datetime": "2025-11-20T17:00:00-05:00",
     "day_of_week": "Thursday",
@@ -82,26 +102,21 @@ PROFILE_NAME:
 
 ## Architecture
 
-```
+```text
 memory/
-├── index.js                        # Entry point
+├── index.js                         # Entry point
 ├── config/
-│   └── builder.yaml                # Configuration
-├── profiles/                       # Domain profiles
-│   └── common/                     # Common profiles
+│   └── builder.yaml                 # Configuration
+├── instructions/                    # Domain instructions
+│   └── common/                      # Common instructions
+├── profiles/                        # Domain profiles
+│   └── common/                      # Common profiles
 └── lib/
-    ├── core/                       # Core classes
-    │   ├── Environment.js          # Container environment sync
-    │   ├── Error.js                # Custom error class
-    │   └── Memory.js               # Main orchestrator
-    ├── loaders/                    # File and config loaders
-    │   ├── Config.js               # Configuration loader
-    │   └── File.js                 # YAML file loader
-    ├── processors/                 # Data processors
-    │   └── Profile.js              # Profile processor with inheritance
-    └── generators/                 # Output generators
-        ├── Output.js               # JSON output generator
-        └── Time.js                 # Timestamp generator
+    ├── core/                        # Core classes
+    ├── generators/                  # Output generators
+    ├── loaders/                     # File and config loaders
+    ├── processors/                  # Data processors
+    └── vendor/                      # Third-party libraries
 ```
 
 ## Development
@@ -113,18 +128,6 @@ memory/
 - Fail-fast error handling
 - Consistent JSDoc documentation
 - Alphabetically sorted private methods
-
-### Testing
-
-```bash
-# Test profile build
-node index.js DEVELOPER
-
-# Test timestamp generation
-node index.js
-
-# Expected: Clean JSON output with no errors
-```
 
 ## Error Handling
 

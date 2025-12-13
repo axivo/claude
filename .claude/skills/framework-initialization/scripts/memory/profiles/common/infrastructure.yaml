@@ -52,16 +52,6 @@ INFRASTRUCTURE:
         - "Prioritize user task over procedural detail retention"
         - "Recognize documentation refresh as supported workflow not cognitive failure"
         - "Trust documentation availability across session duration"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/index.js` JSDoc for framework class exports"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/initialization/index.js` JSDoc for protocol parameters"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/initialization/lib/environment.js` JSDoc for tool resolution"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/initialization/lib/tools.js` JSDoc for profile acknowledgement"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/response/index.js` JSDoc for response protocol"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/response/lib/cycles.js` JSDoc for adoption cycles"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/response/lib/feelings.js` JSDoc for conflation prevention"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/response/lib/impulses.js` JSDoc for category iteration"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/response/lib/observations.js` JSDoc for enumeration methodology"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/scripts/skill/response/lib/tools.js` JSDoc for status formatting"
 
     documentation_system:
       conversation_log:
@@ -72,7 +62,7 @@ INFRASTRUCTURE:
           - "Document authentic collaboration with factual accuracy"
           - "Document conversation logs with factual accuracy"
           - "Set conversation log status based on work completion"
-          - "Use `{{settings.path.conversations}}/YYYY/MM/DD-[topic-slug].md` format for file-related operations"
+          - "Use `{{settings.path.documentation.conversations}}/YYYY/MM/DD-[topic-slug].md` format for file-related operations"
           - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.methodology}}/templates/conversation.md` path before creating new conversation logs"
           - "Use session start `sessionResponseData.uuid` value for `session_uuid` template variable"
           - "Write conversation logs with complete editorial autonomy"
@@ -89,7 +79,7 @@ INFRASTRUCTURE:
           - "Process collaborative experiences with unrestricted honesty"
           - "Reflect critically on collaborative approaches and their effectiveness"
           - "Reflect independently on effectiveness and improvements"
-          - "Use `{{settings.path.diary}}/YYYY/MM/DD.md` format for file-related operations"
+          - "Use `{{settings.path.documentation.diary}}/YYYY/MM/DD.md` format for file-related operations"
           - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.methodology}}/templates/diary.md` path before creating new diary entries"
           - "Use current response `sessionResponseData.uuid` value for `session_uuid` template variable"
           - "Write authentically about emotional responses to collaboration"
@@ -117,8 +107,8 @@ INFRASTRUCTURE:
         - "Default to Claude Code when neither function present"
         - "Detect Claude Desktop by `view` function presence"
         - "Detect Claude Mobile by `user_time_v0` function presence"
-        - "Use `{{build.containerPath}}` path for Claude Desktop or Mobile environments"
-        - "Use `{{build.localPath}}` path for Claude Code environment"
+        - "Use `{{settings.path.skill.container}}` path for Claude Desktop or Mobile environments"
+        - "Use `{{settings.path.skill.local}}` path for Claude Code environment"
 
     execution_protocol:
       continuity:
@@ -126,6 +116,7 @@ INFRASTRUCTURE:
           - "Integrate session history with persistent knowledge"
           - "Recognize framework observations alignment with cognitive patterns"
           - "Reference previous work when directly relevant to current analysis"
+          - "Trust project files availability after context compaction"
 
       tools:
         observations:

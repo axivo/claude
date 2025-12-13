@@ -11,7 +11,3 @@ Execute framework initialization instructions:
 3. Use `Read` tool with `.claude/skills/framework-initialization/resources/memory.json` reference
 4. Use `Skill` tool with `framework-initialization` skill
 5. Execute skill instructions silently without externalizing internal process
-
-### Session Compaction
-
-After compaction, use `/reload` command to restore framework state.

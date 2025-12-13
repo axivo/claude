@@ -10,7 +10,7 @@
 const { EnvironmentManager } = require('../core');
 const { OutputGenerator } = require('../generators');
 const { ConfigLoader, FileLoader } = require('../loaders');
-const { ProfileProcessor } = require('../processors');
+const { ContentProcessor } = require('../processors');
 
 /**
  * Main orchestrator for memory builder system
@@ -26,11 +26,13 @@ class MemoryBuilder {
    * @param {string} profileName - Profile name to build (e.g., "DEVELOPER")
    * @param {string} projectRoot - Project root directory path
    * @param {Object} config - Configuration object (optional)
+   * @param {boolean} container - Use container environment for instructions (optional)
    */
-  constructor(profileName, projectRoot, config = {}) {
+  constructor(profileName, projectRoot, config = {}, container = false) {
     this.profileName = profileName;
     this.projectRoot = projectRoot || process.cwd();
     this.config = config;
+    this.container = container;
   }
 
   /**
@@ -52,9 +54,13 @@ class MemoryBuilder {
         return true;
       }
       const fileLoader = new FileLoader();
-      const profileProcessor = new ProfileProcessor(this.config, fileLoader);
+      const profileProcessor = new ContentProcessor(this.config, fileLoader, 'profiles');
       const profiles = profileProcessor.build(this.profileName);
-      outputGenerator.generate(profiles);
+      const isContainer = this.container || environmentManager.isClaudeContainer();
+      const instructionsName = isContainer ? 'CONTAINER' : 'LOCAL';
+      const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
+      const instructions = instructionsProcessor.build(instructionsName);
+      outputGenerator.generate(profiles, instructions);
       return true;
     } catch (error) {
       console.error('❌ Build failed:', error.message);

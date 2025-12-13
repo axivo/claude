@@ -45,10 +45,11 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When file write fails
    */
   #outputProfiles(profiles, outputPath) {
-    const jsonContent = JSON.stringify(profiles);
     if (!outputPath || outputPath === 'stdout') {
-      console.log(jsonContent);
+      console.log(JSON.stringify(profiles, null, 2));
+      return;
     } else {
+      const jsonContent = JSON.stringify(profiles);
       const resolvedPath = path.resolve(outputPath);
       const outputDir = path.dirname(resolvedPath);
       try {
@@ -72,45 +73,59 @@ class OutputGenerator {
    * Sets output path based on environment
    *
    * @private
+   * @param {string} filename - Output filename (e.g., 'memory.json' or 'instructions.json')
    * @param {boolean} forceStdout - Force stdout output regardless of environment
    * @returns {string} Output path ('stdout' or file path)
    */
-  #setOutputPath(forceStdout = false) {
+  #setOutputPath(filename = 'memory.json', forceStdout = false) {
     if (forceStdout) {
       return 'stdout';
     }
+    const skill = this.config.settings.skill.initialization;
     if (this.environmentManager.isClaudeContainer()) {
-      const containerPath = this.config.build.containerPath;
-      return `${containerPath}/${this.config.settings.skill.initialization}/resources/memory.json`;
+      const containerPath = this.config.settings.path.skill.container;
+      return `${containerPath}/${skill}/resources/${filename}`;
     }
-    const localPath = path.resolve(this.projectRoot, this.config.build.localPath);
-    return `${localPath}/${this.config.settings.skill.initialization}/resources/memory.json`;
+    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
+    return `${localPath}/${skill}/resources/${filename}`;
   }
 
   /**
-   * Generates profile output with timestamp
+   * Generates profile and instructions output with timestamp
    *
    * @param {Object} profiles - Hierarchical profile dictionary
+   * @param {Object} [instructions] - Hierarchical instructions dictionary
    * @returns {boolean} Success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generate(profiles) {
+  generate(profiles, instructions = null) {
     if (typeof profiles !== 'object' || profiles === null) {
       throw new MemoryBuilderError('Profiles must be an object', 'INVALID_PROFILES');
     }
+    if (instructions !== null && (typeof instructions !== 'object')) {
+      throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
+    }
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
+    const paths = [];
+    if (instructions !== null) {
+      const sortedInstructions = Object.fromEntries(
+        Object.keys(instructions).sort().map(key => [key, instructions[key]])
+      );
+      const instructionsOutput = { instructions: sortedInstructions };
+      const instructionsPath = this.#setOutputPath('instructions.json', false);
+      this.#outputProfiles(instructionsOutput, instructionsPath);
+      paths.push(instructionsPath);
+    }
     const sortedProfiles = Object.fromEntries(
       Object.keys(profiles).sort().map(key => [key, profiles[key]])
     );
-    const output = {
-      profiles: sortedProfiles,
-      timestamp
-    };
-    const outputPath = this.#setOutputPath(false);
-    this.#outputProfiles(output, outputPath);
+    const memoryOutput = { profiles: sortedProfiles };
+    const memoryPath = this.#setOutputPath('memory.json', false);
+    this.#outputProfiles(memoryOutput, memoryPath);
+    paths.push(memoryPath);
     const stdoutOutput = {
-      path: outputPath,
+      paths,
       timestamp
     };
     console.log(JSON.stringify(stdoutOutput, null, 2));
@@ -118,7 +133,7 @@ class OutputGenerator {
   }
 
   /**
-   * Generates timestamp-only output
+   * Generates timestamp-only output with configuration profile
    *
    * @returns {boolean} Success status
    * @throws {MemoryBuilderError} When generation fails
@@ -126,8 +141,9 @@ class OutputGenerator {
   generateTimestamp() {
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
-    const output = { timestamp };
-    const outputPath = this.#setOutputPath(true);
+    const profile = this.config.settings.profile;
+    const output = { profile, timestamp };
+    const outputPath = this.#setOutputPath(null, true);
     this.#outputProfiles(output, outputPath);
     return true;
   }

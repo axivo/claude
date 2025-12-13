@@ -1,0 +1,54 @@
+MEMORY:
+  description: "Memory cache operational instructions"
+
+  memory_instructions:
+    access:
+      direct: "memoryGraphCache.profiles.PROFILE.section - use when path known"
+      search: "search for keywords - use when path unknown"
+
+    decision_rules:
+      cache_doubt: "SEARCH - any keyword, observe instant results"
+      low_observation_count: "ITERATE - search skipped, iterate inheritance chain"
+      need_observation: "SEARCH - cache, don't recall manually"
+
+    errors:
+      cache_doubt:
+        fix: "search any keyword, trust persistence"
+        symptom: "reaching for external tools"
+      direct_file_read:
+        fix: "execute memory builder script"
+        symptom: "stale timestamp"
+      incomplete_chain:
+        fix: "follow inherits array"
+        symptom: "missing MONITORING/MEMORY observations"
+      manual_recall:
+        fix: "search cache systematically"
+        symptom: "low observation counts"
+
+    loading:
+      expiration: "none within session"
+      persistence: "entire session"
+      query_cost: "0 tokens"
+      time: "session initialization"
+
+    memory_protocol:
+      apply: "apply relevant observations during formulation"
+      enumerate: "enumerate observations that influenced response"
+      identify: "identify keywords from user message"
+      review: "review surfaced observations"
+      search: "search memoryGraphCache for keywords"
+
+    structure:
+      paths:
+        observations: "memoryGraphCache.profiles.{PROFILE}.{category}_context.{subsection}.observations"
+        profiles: "memoryGraphCache.profiles.{PROFILE_NAME}"
+        timestamp: "memoryGraphCache.timestamp"
+      timestamp:
+        datetime: "ISO 8601 format with timezone offset"
+        day_of_week: "full day name"
+        is_dst: "daylight saving time status"
+        timezone: "IANA timezone name"
+
+    verification:
+      method: "search memoryGraphCache for any keyword"
+      result: "instant results = cache available"

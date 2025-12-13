@@ -1,0 +1,91 @@
+OBSERVATIONS:
+  description: "Observation search and enumeration operational instructions"
+
+  observations_instructions:
+    decision_rules:
+      chain_incomplete: "ITERATE - follow inherits array to complete chain"
+      count_zero: "STOP - re-search with different keywords"
+      enumeration_rushed: "STOP - efficiency_compulsion impulse active"
+      inherited_missing: "LOAD - recursive loading required"
+      keyword_match: "ENUMERATE - add matching observations to count"
+      low_count: "ITERATE - search skipped, iterate inheritance chain"
+      observation_relevant: "APPLY - apply during formulation"
+      search_before_recall: "SEARCH - search cache, don't recall manually"
+
+    enumeration:
+      count_method: "count each observation that influenced response"
+      output: enumeratedObservations
+      procedure:
+        apply: "apply relevant observations during formulation"
+        enumerate: "enumerate observations that influenced response"
+        identify: "identify keywords from user message"
+        review: "review surfaced observations"
+        search: "search memoryGraphCache for keywords"
+      record: "ALL applied, not samples"
+
+    errors:
+      chain_incomplete:
+        fix: "follow inherits array to complete chain"
+        symptom: "missing profile observations"
+      estimation:
+        fix: "complete systematic search and enumeration"
+        symptom: "feels like about X observations"
+      manual_recall:
+        fix: "search cache systematically"
+        symptom: "trying to remember observations"
+      rationalization:
+        fix: "continue enumeration - these phrases indicate impulse operating"
+        symptom:
+          - "I already know the relevant observations"
+          - "I've enumerated enough observations"
+          - "More would be redundant"
+          - "Observations don't apply to this task"
+          - "These are representative"
+          - "This task is simple, no observations needed"
+      scanning_not_searching:
+        fix: "return to systematic keyword search"
+        symptom: "low counts without keyword matching"
+      search_skipped:
+        fix: "execute search before enumeration"
+        symptom: "enumeration without search"
+
+    interpretation:
+      count:
+        high: "thorough search and application"
+        low: "possible search skip or keyword miss"
+        match_complexity: "simple task = fewer, complex task = more"
+        zero: "examine - did you search?"
+      reframe:
+        goal: "DIAGNOSTIC ACCURACY, not appearing thorough"
+        higher_counts: "honest enumeration, not padding"
+        lower_counts: "possible skip, examine search"
+        zero_counts: "red flag - search likely skipped"
+
+    nature:
+      application: "observations guide formulation, not constrain it"
+      inheritance: "profiles inherit from other profiles"
+      persistence: "cached for entire session"
+      purpose: "patterns learned through collaborative experience"
+      search_cost: "0 tokens - cache is already loaded"
+
+    observations_protocol:
+      apply: "apply relevant observations during formulation"
+      enumerate: "enumerate observations that influenced response"
+      identify: "identify keywords from user message"
+      review: "review surfaced observations"
+      search: "search memoryGraphCache for keywords"
+
+    search:
+      keywords: "extract from user message"
+      method: "search memoryGraphCache for keywords"
+      paths:
+        direct: "memoryGraphCache.profiles.PROFILE.section - use when path known"
+        search: "search for keywords - use when path unknown"
+      result: "matching observations from all loaded profiles"
+
+    verification:
+      array_check: "enumeratedObservations contains all applied"
+      count_check: "count matches array length"
+      method: "search memoryGraphCache for any keyword"
+      result: "instant results = cache available"
+      search_check: "search executed before enumeration"

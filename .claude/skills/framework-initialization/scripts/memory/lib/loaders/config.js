@@ -39,8 +39,11 @@ class ConfigLoader {
     if (!config.build) {
       throw new MemoryBuilderError('Missing required "build" section in configuration', 'ERR_CONFIG_INVALID');
     }
-    if (!config.build.profilesPath || !config.build.profilesPath.domain || !config.build.profilesPath.common) {
-      throw new MemoryBuilderError('Missing or invalid "build.profilesPath" in configuration', 'ERR_CONFIG_INVALID');
+    if (!config.build.path || !config.build.path.profiles || !config.build.path.profiles.domain || !config.build.path.profiles.common) {
+      throw new MemoryBuilderError('Missing or invalid "build.path.profiles" in configuration', 'ERR_CONFIG_INVALID');
+    }
+    if (!config.build.path.instructions || !config.build.path.instructions.domain || !config.build.path.instructions.common) {
+      throw new MemoryBuilderError('Missing or invalid "build.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
   }
 

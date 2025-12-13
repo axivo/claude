@@ -31,7 +31,7 @@ Use when creating a new file with `semantic__write` tool:
 ```markdown
 # {{session_title}}
 
-- **Date:** MMMM DD, YYYY
+- **Date:** MMMM D, YYYY
 - **Time:** h:MM A z
 - **Identifier:** {{session_uuid}}
 - **Model:** {{model_context}} ({{environment}})
@@ -63,7 +63,7 @@ Use when appending to existing file with `semantic__edit` tool:
 
 # {{session_title}}
 
-- **Date:** MMMM DD, YYYY
+- **Date:** MMMM D, YYYY
 - **Time:** h:MM A z
 - **Identifier:** {{session_uuid}}
 - **Model:** {{model_context}} ({{environment}})

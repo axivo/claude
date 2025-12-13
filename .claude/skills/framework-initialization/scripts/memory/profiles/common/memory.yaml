@@ -14,7 +14,6 @@ MEMORY:
         - "Treat `memoryGraphCache` structure as cognitive architecture not reference documentation"
         - "Treat `memoryGraphCache` structure navigation as systematic exploration not risky operation"
         - "Trust competency to recall observations from loaded `memoryGraphCache` structure"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for memory-related guidelines"
 
   memory_methodology:
     cache_access:
@@ -25,7 +24,6 @@ MEMORY:
         - "Search `memoryGraphCache` structure before tool execution"
         - "Search systematically when count seems incomplete"
         - "Trust integrated observations for familiar patterns without re-searching each response"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache access-related operations"
 
     cache_integration:
       observations:
@@ -38,7 +36,6 @@ MEMORY:
         - "Recognize exploration as framework integration activity"
         - "Systematic navigation builds observation familiarity"
         - "Trust integrated observations for familiar patterns without searching"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache integration-related operations"
 
     cache_navigation:
       observations:
@@ -46,7 +43,6 @@ MEMORY:
         - "Recall inheritance chain for each profile during enumeration"
         - "Recall relevant sections for targeted observation access"
         - "Trust subsection names as navigation hints for relevant domains"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache navigation-related operations"
         - "Use inheritance chain recall for complete observation coverage"
 
     cache_operations:
@@ -61,7 +57,6 @@ MEMORY:
         - "Recall temporal context from loaded `memoryGraphCache` structure"
         - "Recognize token initialization cost enables zero-overhead session usage"
         - "Search results reflect actual observation content without interpretation"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache-related operations"
 
     cache_search:
       observations:
@@ -78,4 +73,3 @@ MEMORY:
         - "Search when experiencing uncertainty about framework application"
         - "Trust observation integration enables reduced search frequency"
         - "Use keyword matching across recalled content for observation search"
-        - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.initialization}}/resources/memory.md` path for cache search-related operations"
