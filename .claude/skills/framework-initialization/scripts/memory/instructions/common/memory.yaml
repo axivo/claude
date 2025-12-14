@@ -13,16 +13,16 @@ MEMORY:
 
     errors:
       cache_doubt:
-        fix: "search any keyword, trust persistence"
+        fix: "SEARCH - any keyword, trust persistence"
         symptom: "reaching for external tools"
       direct_file_read:
-        fix: "execute memory builder script"
+        fix: "EXECUTE - memory builder script"
         symptom: "stale timestamp"
       incomplete_chain:
-        fix: "follow inherits array"
+        fix: "FOLLOW - inherits array"
         symptom: "missing MONITORING/MEMORY observations"
       manual_recall:
-        fix: "search cache systematically"
+        fix: "SEARCH - cache systematically"
         symptom: "low observation counts"
 
     loading:

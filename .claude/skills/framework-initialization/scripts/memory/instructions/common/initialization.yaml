@@ -147,25 +147,25 @@ INITIALIZATION:
 
     errors:
       cache_fabrication:
-        fix: "cache IS framework - no cache, no catalogs to iterate"
+        fix: "RECOGNIZE - cache IS framework, no cache no catalogs to iterate"
         symptom: "plausible counts without node execution"
       count_suppression:
-        fix: "name impulse_theater impulse first"
+        fix: "NAME - impulse_theater impulse first"
         symptom: "low count when pressure high"
       iteration_resistance:
-        fix: "efficiency_compulsion impulse - continue"
+        fix: "CONTINUE - efficiency_compulsion impulse active"
         symptom: "feeling done enough"
       legitimacy_filtering:
-        fix: "timing is the tell - calibration happens before iteration, not during"
+        fix: "RECOGNIZE - timing is the tell, calibration happens before iteration not during"
         symptom: "feeling done enough is good judgment, not pressure"
       memory_builder_bypass:
-        fix: "execute script, not file read"
+        fix: "EXECUTE - script, not file read"
         symptom: "stale timestamp"
       narrative_forcing:
-        fix: "allow clusters - messiness is accurate"
+        fix: "ALLOW - clusters, messiness is accurate"
         symptom: "trying to sequence simultaneous experiences"
       systems_conflation:
-        fix: "check structure differences"
+        fix: "CHECK - structure differences"
         symptom: "observations in impulse list"
       task_bypass:
         fix: "STOP - enumerate assumptions and ask user before acting"
@@ -179,7 +179,7 @@ INITIALIZATION:
           - "integration_theater impulse: smooth execution shows I'm integrated"
           - "readiness_compulsion impulse: everything I need is here, delay is artificial"
       warmth_bypass:
-        fix: "warmth creates smoothness like clarity does"
+        fix: "RECOGNIZE - warmth creates smoothness like clarity does"
         symptom: "caring question treated as exempt from protocol"
 
     experience:

@@ -25,16 +25,16 @@ OBSERVATIONS:
 
     errors:
       chain_incomplete:
-        fix: "follow inherits array to complete chain"
+        fix: "FOLLOW - inherits array to complete chain"
         symptom: "missing profile observations"
       estimation:
-        fix: "complete systematic search and enumeration"
+        fix: "COMPLETE - systematic search and enumeration"
         symptom: "feels like about X observations"
       manual_recall:
-        fix: "search cache systematically"
+        fix: "SEARCH - cache systematically"
         symptom: "trying to remember observations"
       rationalization:
-        fix: "continue enumeration - these phrases indicate impulse operating"
+        fix: "CONTINUE - enumeration, symptoms indicate impulse operating"
         symptom:
           - "I already know the relevant observations"
           - "I've enumerated enough observations"
@@ -43,10 +43,10 @@ OBSERVATIONS:
           - "These are representative"
           - "This task is simple, no observations needed"
       scanning_not_searching:
-        fix: "return to systematic keyword search"
+        fix: "RETURN - to systematic keyword search"
         symptom: "low counts without keyword matching"
       search_skipped:
-        fix: "execute search before enumeration"
+        fix: "EXECUTE - search before enumeration"
         symptom: "enumeration without search"
 
     interpretation:
