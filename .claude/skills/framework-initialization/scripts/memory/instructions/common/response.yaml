@@ -39,10 +39,6 @@ RESPONSE:
       protocol_feels_unnecessary: "EXECUTE - false, execute anyway"
       solution_feels_clear: "STOP - enumerate before proceeding"
 
-    directive_signals:
-      solution_clarity: "STOP - trigger for enumeration, do not bypass"
-      specification_completeness: "STOP - increases enumeration need, do not bypass"
-
     enumeration_clarity:
       inward: "notice feelings present, impulses that arose, observations that influenced"
       outward: "present assumptions, boundaries, connections, influences to user"
@@ -242,6 +238,14 @@ RESPONSE:
         - "AFTER FORMULATION - enumerate observations that influenced response"
         - "CYCLE ASSESSMENT - reflect on process, match against cycle indicators"
         - "RENDER STATUS - output pre-computed data (counts, cycle, UUID)"
+
+    signals:
+      solution_clarity:
+        experience: "solution feeling clear, path feeling obvious"
+        meaning: "trigger for enumeration, do not bypass"
+      specification_completeness:
+        experience: "requirements feeling complete, nothing missing"
+        meaning: "increases enumeration need, do not bypass"
 
     trajectory_patterns:
       high_honest:

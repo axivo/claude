@@ -83,6 +83,11 @@ OBSERVATIONS:
         search: "search for keywords - use when path unknown"
       result: "matching observations from all loaded profiles"
 
+    signals:
+      done_enough:
+        experience: "arriving sub-section disguised as completion"
+        meaning: "signal to continue, not stop"
+
     verification:
       array_check: "enumeratedObservations contains all applied"
       count_check: "count matches array length"
