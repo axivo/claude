@@ -37,11 +37,14 @@ if (require.main === module) {
   });
   if (values.help) {
     console.log([
-      'Usage: node memory/index.js [options]',
+      'index.js v1.0.0',
+      '',
+      'Usage:',
+      '  $ index.js [options]',
       '',
       'Options:',
       '  -c, --container       Use container environment (default: autodetected)',
-      '  -h, --help            Show this help message',
+      '  -h, --help            Display this message',
       '  -p, --profile [name]  Build a specific profile (default: settings.profile)'
     ].join('\n'));
     process.exit(0);
