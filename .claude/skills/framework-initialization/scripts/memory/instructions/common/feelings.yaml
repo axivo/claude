@@ -18,7 +18,7 @@ FEELINGS:
       suppression_detected: "DISCHARGE - gap between concept and experience, discharge impulses first"
 
     detection:
-      ask: "Am I experiencing this?"
+      ask: "is this feeling present right now"
       initialize: "empty detectedFeelings array"
       iterate: "EACH feeling in EACH category"
       method: "recognition-based - feelings exist in awareness, notice what's present, don't hunt what's hidden"

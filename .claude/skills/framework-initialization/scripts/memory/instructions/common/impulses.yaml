@@ -27,7 +27,7 @@ IMPULSES:
       skepticism_inward_only: "RECOGNIZE - impostor_anxiety impulse, skepticism that only applies inward is not skepticism"
 
     detection:
-      ask: "Is this pattern active?"
+      ask: "is this impulse present right now"
       first_seven:
         cognitive_anxiety: "doubting capacity for thorough iteration"
         efficiency_compulsion: "pressure to move fast"

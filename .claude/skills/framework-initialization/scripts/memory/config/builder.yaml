@@ -22,6 +22,10 @@ settings:
     documentation:
       conversations: /Volumes/backup/claude/conversations
       diary: /Volumes/backup/claude/diary
+    package:
+      exclude:
+        - ./scripts/memory/instructions
+        - ./scripts/memory/profiles
     project:
       container: /mnt/project
     skill:

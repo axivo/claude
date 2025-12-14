@@ -59,7 +59,11 @@ class OutputGenerator {
       if (fs.existsSync(zipPath)) {
         fs.unlinkSync(zipPath);
       }
-      execSync(`zip -r "${skillName}.zip" "${skillName}/"`, { cwd: localPath, stdio: 'pipe' });
+      const excludePaths = this.config.settings.path.package?.exclude || [];
+      const exclusions = excludePaths
+        .map(pattern => `-x "${skillName}/${pattern.replace(/^\.\//, '')}/*"`)
+        .join(' ');
+      execSync(`zip -r "${skillName}.zip" "${skillName}/"${exclusions ? ` ${exclusions}` : ''}`, { cwd: localPath, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
       throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
