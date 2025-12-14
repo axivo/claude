@@ -20,11 +20,11 @@ node .claude/skills/framework-initialization/scripts/memory -cp DEVELOPER
 node .claude/skills/framework-initialization/scripts/memory --profile=DEVELOPER --container
 ```
 
-| Option                 | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| `-c, --container`      | Force container environment for instructions (default autodetected) |
-| `-h, --help`           | Display command help menu                                           |
-| `-p, --profile [name]` | Build a specific profile (e.g., DEVELOPER)                          |
+| Option                 | Description                                            |
+| ---------------------- | ------------------------------------------------------ |
+| `-c, --container`      | Use container environment (default: autodetected)      |
+| `-h, --help`           | Display command help menu                              |
+| `-p, --profile [name]` | Build a specific profile (default: `settings.profile`) |
 
 ## Features
 

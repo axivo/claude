@@ -23,10 +23,10 @@ class MemoryBuilder {
   /**
    * Create MemoryBuilder instance
    *
-   * @param {string} profileName - Profile name to build (e.g., "DEVELOPER")
+   * @param {string} profileName - Profile name to build (default settings.profile)
    * @param {string} projectRoot - Project root directory path
    * @param {Object} config - Configuration object (optional)
-   * @param {boolean} container - Use container environment for instructions (optional)
+   * @param {boolean} container - Use container environment (optional, default autodetected)
    */
   constructor(profileName, projectRoot, config = {}, container = false) {
     this.profileName = profileName;

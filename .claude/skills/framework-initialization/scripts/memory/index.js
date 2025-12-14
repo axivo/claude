@@ -40,9 +40,9 @@ if (require.main === module) {
       'Usage: node memory/index.js [options]',
       '',
       'Options:',
-      '  -c, --container       Force container environment for instructions',
+      '  -c, --container       Use container environment (default: autodetected)',
       '  -h, --help            Show this help message',
-      '  -p, --profile [name]  Build a specific profile (default settings.profile)'
+      '  -p, --profile [name]  Build a specific profile (default: settings.profile)'
     ].join('\n'));
     process.exit(0);
   }
