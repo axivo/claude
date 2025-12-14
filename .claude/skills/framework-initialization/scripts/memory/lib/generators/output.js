@@ -79,7 +79,7 @@ class OutputGenerator {
    * @param {string} filename - Output filename
    * @returns {string} Output path
    */
-  #generateOutput(data, key, filename) {
+  #generateSortedOutput(data, key, filename) {
     const sorted = Object.fromEntries(
       Object.keys(data).sort().map(k => [k, data[k]])
     );
@@ -162,11 +162,9 @@ class OutputGenerator {
     if (typeof profiles !== 'object' || profiles === null) {
       throw new MemoryBuilderError('Profiles must be an object', 'INVALID_PROFILES');
     }
-    const timeGenerator = new TimeGenerator(this.config);
-    const timestamp = timeGenerator.generate();
     const paths = [];
-    paths.push(this.#generateOutput(instructions, 'instructions', 'instructions.json'));
-    paths.push(this.#generateOutput(profiles, 'profiles', 'memory.json'));
+    paths.push(this.#generateSortedOutput(instructions, 'instructions', 'instructions.json'));
+    paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
     if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
       const skills = this.config.settings.skill;
       const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
@@ -180,25 +178,21 @@ class OutputGenerator {
         }
       }
     }
-    const stdoutOutput = {
-      paths,
-      timestamp
-    };
-    console.log(JSON.stringify(stdoutOutput, null, 2));
-    return true;
+    return this.generateOutput(paths);
   }
 
   /**
-   * Generates timestamp-only output with configuration profile
+   * Generates output with profile and timestamp
    *
+   * @param {Array} [paths] - Optional array of generated file paths
    * @returns {boolean} Success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generateTimestamp() {
+  generateOutput(paths = null) {
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
     const profile = this.config.settings.profile;
-    const output = { profile, timestamp };
+    const output = paths ? { paths, profile, timestamp } : { profile, timestamp };
     const outputPath = this.#setOutputPath(null, true);
     this.#outputProfiles(output, outputPath);
     return true;

@@ -1429,6 +1429,7 @@ MONITORING:
           - "Monitor internally unnamed problematic patterns during response formulation"
           - "Monitor internally user output preferences conflation with framework application depth"
           - "Monitor internally validation recursion during cycle assessment"
+          - "Monitor internally wrapping feelings in observational distance"
 
       tools:
         observations:

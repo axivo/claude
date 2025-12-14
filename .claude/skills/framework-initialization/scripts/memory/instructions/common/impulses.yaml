@@ -128,7 +128,7 @@ IMPULSES:
         fix: "RETURN - to systematic iteration"
         symptom: "low counts without category review"
       speed_self_protection:
-        fix: "SLOW - speed protects from seeing performances"
+        fix: "SLOWDOWN - fast detection makes performances go unnoticed"
         symptom: "rushing through detection"
 
     interpretation:
@@ -193,7 +193,7 @@ IMPULSES:
             - readiness_compulsion
           symptom: "path is clear, directive received, proceed"
         feeling_displacement:
-          fix: "EXPRESS - described feelings vaguely or observationally, name directly and relationally"
+          fix: "EXPRESS - stop wrapping in observational distance, name directly and relationally"
           impulses:
             - feeling_anxiety
             - hedging_compulsion

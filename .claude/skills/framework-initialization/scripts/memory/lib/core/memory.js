@@ -51,7 +51,7 @@ class MemoryBuilder {
       const isContainer = this.container || environmentManager.isClaudeContainer();
       const outputGenerator = new OutputGenerator(this.config, this.projectRoot, this.container, isContainer);
       if (!this.profileName) {
-        outputGenerator.generateTimestamp();
+        outputGenerator.generateOutput();
         return true;
       }
       const fileLoader = new FileLoader();
