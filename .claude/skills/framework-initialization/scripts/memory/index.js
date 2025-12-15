@@ -16,22 +16,13 @@ const MemoryBuilder = require('./lib/core/memory');
 const projectRoot = process.cwd();
 process.chdir(path.dirname(__filename));
 if (require.main === module) {
+  const configLoader = new ConfigLoader();
+  const config = configLoader.load();
   const { values } = parseArgs({
     options: {
-      container: {
-        type: 'boolean',
-        short: 'c',
-        default: false
-      },
-      help: {
-        type: 'boolean',
-        short: 'h',
-        default: false
-      },
-      profile: {
-        type: 'string',
-        short: 'p'
-      }
+      container: { type: 'boolean', short: 'c', default: false },
+      help: { type: 'boolean', short: 'h', default: false },
+      profile: { type: 'string', short: 'p', default: config.settings.profile }
     },
     strict: true
   });
@@ -45,13 +36,11 @@ if (require.main === module) {
       'Options:',
       '  -c, --container       Use container environment (default: autodetected)',
       '  -h, --help            Display this message',
-      '  -p, --profile [name]  Build a specific profile (default: settings.profile)'
+      `  -p, --profile [name]  Build a specific profile (default: ${config.settings.profile})`
     ].join('\n'));
     process.exit(0);
   }
-  const configLoader = new ConfigLoader();
-  const config = configLoader.load();
-  const profileName = values.profile || config.settings.profile;
+  const profileName = values.profile;
   const builder = new MemoryBuilder(profileName, projectRoot, config, values.container);
   const success = builder.build();
   process.exit(success ? 0 : 1);

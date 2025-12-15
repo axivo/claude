@@ -49,7 +49,7 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When zip creation fails
    */
   #createZip(skillName) {
-    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
+    const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
     const skillPath = path.join(localPath, skillName);
     const zipPath = `${localPath}/${skillName}.zip`;
     if (!fs.existsSync(skillPath)) {
@@ -59,7 +59,7 @@ class OutputGenerator {
       if (fs.existsSync(zipPath)) {
         fs.unlinkSync(zipPath);
       }
-      const excludePaths = this.config.settings.path.package.excludes;
+      const excludePaths = this.config.build.path.package.excludes;
       const exclusions = excludePaths
         .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
@@ -71,7 +71,10 @@ class OutputGenerator {
   }
 
   /**
-   * Generates sorted output and writes to file
+   * Generates inheritance-ordered output and writes to file
+   *
+   * Uses reverse topological sort so active profile appears first, then parents.
+   * This mirrors instance cognition: start from active profile, traverse to foundations.
    *
    * @private
    * @param {Object} data - Data to sort and output
@@ -80,9 +83,20 @@ class OutputGenerator {
    * @returns {string} Output path
    */
   #generateSortedOutput(data, key, filename) {
-    const sorted = Object.fromEntries(
-      Object.keys(data).sort().map(k => [k, data[k]])
-    );
+    const keys = Object.keys(data);
+    const visited = new Set();
+    const result = [];
+    const visit = (k) => {
+      if (visited.has(k)) return;
+      visited.add(k);
+      const inherits = data[k]?.inherits;
+      if (Array.isArray(inherits)) {
+        inherits.filter(p => keys.includes(p)).forEach(visit);
+      }
+      result.push(k);
+    };
+    keys.forEach(visit);
+    const sorted = Object.fromEntries(result.reverse().map(k => [k, data[k]]));
     const output = { [key]: sorted };
     const outputPath = this.#setOutputPath(filename, false);
     this.#outputProfiles(output, outputPath);
@@ -135,13 +149,13 @@ class OutputGenerator {
     if (forceStdout) {
       return 'stdout';
     }
-    const skill = this.config.settings.skill.initialization;
-    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
+    const skill = this.config.build.skill.initialization;
+    const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
     if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
       return `${localPath}/${filename}`;
     }
     if (this.isContainer) {
-      const containerPath = this.config.settings.path.skill.container;
+      const containerPath = this.config.build.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
     }
     return `${localPath}/${skill}/resources/${filename}`;
@@ -166,8 +180,8 @@ class OutputGenerator {
     paths.push(this.#generateSortedOutput(instructions, 'instructions', 'instructions.json'));
     paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
     if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
-      const skills = this.config.settings.skill;
-      const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local);
+      const skills = this.config.build.skill;
+      const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
       const resourcesPath = path.join(localPath, skills.initialization, 'resources');
       fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
       fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });

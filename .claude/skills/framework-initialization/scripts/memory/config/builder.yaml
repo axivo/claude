@@ -6,33 +6,31 @@ build:
     instructions:
       common: ./instructions/common
       domain: ./instructions
-    profiles:
-      common: ./profiles/common
-      domain: ./profiles
-  relations:
-    - extends
-    - inherits
-    - overrides
-
-settings:
-  skill:
-    initialization: framework-initialization
-    methodology: framework-methodology
-  path:
-    documentation:
-      conversations: /Volumes/backup/claude/conversations
-      diary: /Volumes/backup/claude/diary
     package:
       excludes:
         - resources
         - scripts/memory/instructions
         - scripts/memory/profiles
+    profiles:
+      common: ./profiles/common
+      domain: ./profiles
     project:
       container: /mnt/project
     skill:
       container: /mnt/skills/user
       local: .claude/skills
-      resources: resources
-      templates: templates
+  relations:
+    - extends
+    - inherits
+    - overrides
+  skill:
+    initialization: framework-initialization
+    methodology: framework-methodology
+
+settings:
+  path:
+    documentation:
+      conversations: /Volumes/backup/claude/conversations
+      diary: /Volumes/backup/claude/diary
   profile: DEVELOPER
   timezone: America/Montreal

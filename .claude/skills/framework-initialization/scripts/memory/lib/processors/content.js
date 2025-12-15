@@ -112,13 +112,21 @@ class ContentProcessor {
    * @returns {string} Text with substituted values
    */
   #substituteVariables(text) {
-    if (typeof text !== 'string' || !this.config.settings) {
+    if (typeof text !== 'string') {
       return text;
     }
     let result = text;
-    const replacements = this.#flattenSettings(this.config.settings, 'settings');
-    for (const [placeholder, value] of Object.entries(replacements)) {
-      result = result.replaceAll(placeholder, value);
+    if (this.config.build) {
+      const buildReplacements = this.#flattenSettings(this.config.build, 'build');
+      for (const [placeholder, value] of Object.entries(buildReplacements)) {
+        result = result.replaceAll(placeholder, value);
+      }
+    }
+    if (this.config.settings) {
+      const settingsReplacements = this.#flattenSettings(this.config.settings, 'settings');
+      for (const [placeholder, value] of Object.entries(settingsReplacements)) {
+        result = result.replaceAll(placeholder, value);
+      }
     }
     return result;
   }
