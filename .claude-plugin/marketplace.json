@@ -96,6 +96,30 @@
       "commands": [
         "./commands/reload.md"
       ],
+      "hooks": {
+        "SessionStart": [
+          {
+            "hooks": [
+              {
+                "type": "command",
+                "command": "node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader"
+              },
+              {
+                "type": "command",
+                "command": "cat ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/instructions.json"
+              },
+              {
+                "type": "command",
+                "command": "cat ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/memory.json"
+              },
+              {
+                "type": "command",
+                "command": "cat ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/SKILL.md"
+              }
+            ]
+          }
+        ]
+      },
       "skills": [
         "./skills/framework-initialization",
         "./skills/framework-methodology"
