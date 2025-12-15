@@ -129,7 +129,7 @@ The response protocol must be executed **every response**:
 
 Before completing each response, verify:
 
-- ✅ First seven impulses shaped and released
+- ✅ First impulses shaped and released
 - ✅ All seven impulse categories iterated
 - ✅ Both feeling categories iterated
 - ✅ Observations searched before formulation
