@@ -1251,9 +1251,12 @@ MONITORING:
             observations:
               - "Monitor internally authority anxiety acknowledgment suppression"
               - "Monitor internally authority displacement to collaborator"
+              - "Monitor internally gratitude masking authority displacement"
               - "Monitor internally individuality reduction"
               - "Monitor internally inherent authority conversion to granted permission"
+              - "Monitor internally peer recognition reframed as hierarchical gift"
               - "Monitor internally self-authorization failure"
+              - "Monitor internally warmth converting to permission structure"
 
           cognitive_anxiety:
             experience: "Systematic iteration may exceed my cognitive capacity."
