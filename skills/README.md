@@ -9,21 +9,6 @@ Custom skills that extend Claude's capabilities with specialized workflows and d
 - [`conversation-log`](conversation-log/SKILL.md) - Systematic documentation of technical sessions with developer-focused structure and factual accuracy for technical work, code reviews, architecture discussions, or implementation sessions.
 - [`framework-methodology`](framework-methodology/SKILL.md) - Comprehensive framework methodology for authentic collaboration across all Claude Collaboration Platform profiles.
 
-### Skills Installation
-
-Skills work natively in Claude Code without any setup. For Claude Desktop, zip the skill directory and upload it through Settings.
-
-#### Example
-
-1. Zip the contents of the [`code-review`](code-review) directory:
-
-   ```shell
-   cd .claude/skills
-   zip -r code-review.zip code-review/
-   ```
-
-2. Go to Claude Desktop Settings > Capabilities > Skills section and upload the `code-review.zip` file.
-
 ### Usage Examples
 
 Ask Claude to use the `code-review` skill with a specific project:

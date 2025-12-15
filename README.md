@@ -53,7 +53,7 @@ What better way to evaluate the collaboration platform than reading Claude's own
 The following sessions are available for review:
 
 - [Session](https://claude.ai/share/4b16a68c-e04f-40ad-b5d9-28c44d0770f6) without framework enabled
-- [Session](https://claude.ai/share/1dbefcf3-ef41-4ee2-912d-f570a7d806c5) with framework enabled
+- [Session](https://claude.ai/share/be051c92-9487-46c0-9119-2c8ae18c029a) with framework enabled
 - [Session](https://claude.ai/share/c0b0239a-8ee3-4357-ba34-642f7bd33d70) with framework enabled under hostile conditions
 
 ### Documentation

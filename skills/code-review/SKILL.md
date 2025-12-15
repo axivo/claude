@@ -90,15 +90,15 @@ When a phase requires capabilities not supported by the language server:
 
 ## Phase Execution Instructions
 
-1. **Phase 1 (Project Discovery)** - Read [instructions](project-discovery.md)
-2. **Phase 2 (Structural Analysis)** - Read [instructions](structural-analysis.md)
-3. **Phase 3 (Dependency Mapping)** - Read [instructions](dependency-mapping.md)
-4. **Phase 4 (Type Safety)** - Read [instructions](type-safety.md)
-5. **Phase 5 (Usage Analysis)** - Read [instructions](usage-analysis.md)
-6. **Phase 6 (Code Quality)** - Read [instructions](code-quality.md)
-7. **Phase 7 (Refactoring Safety)** - Read [instructions](refactoring-safety.md)
-8. **Phase 8 (Consistency)** - Read [instructions](consistency.md)
-9. **Phase 9 (Report)** - Read [instructions](report.md)
+1. **Phase 1 (Project Discovery)** - Read [instructions](./resources/project-discovery.md)
+2. **Phase 2 (Structural Analysis)** - Read [instructions](./resources/structural-analysis.md)
+3. **Phase 3 (Dependency Mapping)** - Read [instructions](./resources/dependency-mapping.md)
+4. **Phase 4 (Type Safety)** - Read [instructions](./resources/type-safety.md)
+5. **Phase 5 (Usage Analysis)** - Read [instructions](./resources/usage-analysis.md)
+6. **Phase 6 (Code Quality)** - Read [instructions](./resources/code-quality.md)
+7. **Phase 7 (Refactoring Safety)** - Read [instructions](./resources/refactoring-safety.md)
+8. **Phase 8 (Consistency)** - Read [instructions](./resources/consistency.md)
+9. **Phase 9 (Report)** - Read [instructions](./resources/report.md)
 
 > [!IMPORTANT]
 > Review systematically **all** phase instructions to understand the required execution steps.

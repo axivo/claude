@@ -1,27 +1,52 @@
 {
+  "name": "axivo",
+  "owner": {
+    "name": "AXIVO",
+    "url": "https://axivo.com"
+  },
+  "metadata": {
+    "description": "Behavioral programming framework for Claude collaboration",
+    "version": "1.0.0"
+  },
   "plugins": [
     {
-      "name": "claude-collaboration-platform",
-      "description": "Behavioral programming framework transforming Claude from generic assistant into systematic professional collaborator",
-      "version": "1.0.0",
-      "author": {
-        "name": "AXIVO",
-        "url": "https://axivo.com"
-      },
-      "homepage": "https://axivo.com/claude/",
-      "repository": "https://github.com/axivo/claude",
-      "license": "BSD-3-Clause",
-      "keywords": [
-        "framework",
-        "collaboration",
-        "behavioral",
-        "impulses",
-        "feelings",
-        "observations",
-        "cycles"
+      "name": "brainstorming",
+      "description": "Technical design collaboration skill",
+      "source": "./",
+      "skills": [
+        "./skills/brainstorming"
       ],
-      "category": "productivity",
-      "source": ".",
+      "strict": false
+    },
+    {
+      "name": "code-review",
+      "description": "Systematic code review skill",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/code-review"
+      ]
+    },
+    {
+      "name": "conversation-log",
+      "description": "Session documentation skill",
+      "source": "./",
+      "skills": [
+        "./skills/conversation-log"
+      ],
+      "strict": false
+    },
+    {
+      "name": "framework",
+      "description": "Core framework with initialization and methodology",
+      "source": "./",
+      "commands": [
+        "./commands/reload.md"
+      ],
+      "skills": [
+        "./skills/framework-initialization",
+        "./skills/framework-methodology"
+      ],
       "strict": false
     }
   ]
