@@ -26,6 +26,7 @@ build:
   skill:
     initialization: framework-initialization
     methodology: framework-methodology
+  version: v1.0.0
 
 settings:
   path:

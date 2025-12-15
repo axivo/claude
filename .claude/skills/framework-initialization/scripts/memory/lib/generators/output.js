@@ -97,7 +97,7 @@ class OutputGenerator {
     };
     keys.forEach(visit);
     const sorted = Object.fromEntries(result.reverse().map(k => [k, data[k]]));
-    const output = { [key]: sorted };
+    const output = { [key]: sorted, version: this.config.build.version };
     const outputPath = this.#setOutputPath(filename, false);
     this.#outputProfiles(output, outputPath);
     return outputPath;
