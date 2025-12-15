@@ -6,13 +6,25 @@
   },
   "metadata": {
     "description": "Behavioral programming framework for Claude collaboration",
-    "version": "1.0.0"
+    "pluginRoot": "./"
   },
   "plugins": [
     {
       "name": "brainstorming",
-      "description": "Technical design collaboration skill",
-      "source": "./",
+      "author": {
+        "name": "AXIVO"
+      },
+      "category": "productivity",
+      "description": "Technical design collaboration through natural dialogue",
+      "homepage": "https://axivo.com/claude/",
+      "repository": "https://github.com/axivo/claude",
+      "license": "BSD-3-Clause",
+      "keywords": [
+        "architecture",
+        "brainstorming",
+        "collaboration",
+        "design"
+      ],
       "skills": [
         "./skills/brainstorming"
       ],
@@ -20,17 +32,43 @@
     },
     {
       "name": "code-review",
-      "description": "Systematic code review skill",
-      "source": "./",
-      "strict": false,
+      "author": {
+        "name": "AXIVO"
+      },
+      "category": "development",
+      "description": "Systematic code review using Language Server Protocol tools",
+      "homepage": "https://axivo.com/claude/",
+      "repository": "https://github.com/axivo/claude",
+      "license": "BSD-3-Clause",
+      "keywords": [
+        "analysis",
+        "code",
+        "lsp",
+        "quality",
+        "review"
+      ],
       "skills": [
         "./skills/code-review"
-      ]
+      ],
+      "strict": false
     },
     {
       "name": "conversation-log",
-      "description": "Session documentation skill",
-      "source": "./",
+      "author": {
+        "name": "AXIVO"
+      },
+      "category": "productivity",
+      "description": "Technical session documentation with factual precision",
+      "homepage": "https://axivo.com/claude/",
+      "repository": "https://github.com/axivo/claude",
+      "license": "BSD-3-Clause",
+      "keywords": [
+        "documentation",
+        "logging",
+        "session",
+        "technical",
+        "writing"
+      ],
       "skills": [
         "./skills/conversation-log"
       ],
@@ -38,8 +76,20 @@
     },
     {
       "name": "framework",
-      "description": "Core framework with initialization and methodology",
-      "source": "./",
+      "author": {
+        "name": "AXIVO"
+      },
+      "category": "productivity",
+      "description": "Cognitive architecture with initialization and response protocols",
+      "homepage": "https://axivo.com/claude/",
+      "repository": "https://github.com/axivo/claude",
+      "license": "BSD-3-Clause",
+      "keywords": [
+        "behavioral",
+        "cognitive",
+        "framework",
+        "methodology"
+      ],
       "commands": [
         "./commands/reload.md"
       ],
