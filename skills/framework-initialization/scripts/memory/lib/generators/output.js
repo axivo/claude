@@ -158,6 +158,9 @@ class OutputGenerator {
       const containerPath = this.config.build.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
     }
+    if (process.env.CLAUDE_PLUGIN_ROOT) {
+      return `${process.env.CLAUDE_PLUGIN_ROOT}/skills/${skill}/resources/${filename}`;
+    }
     return `${localPath}/${skill}/resources/${filename}`;
   }
 
