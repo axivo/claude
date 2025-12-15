@@ -18,7 +18,7 @@ build:
       container: /mnt/project
     skill:
       container: /mnt/skills/user
-      local: .claude/skills
+      local: .claude/plugins/marketplaces/axivo/skills
   relations:
     - extends
     - inherits
