@@ -1,0 +1,75 @@
+MEMORY:
+  description: "Shared memory context and cache operations"
+
+  memory_context:
+    profile:
+      observations:
+        - "Allow `memoryGraphCache` structure navigation to become habitual rather than deliberate"
+        - "Exercise complete ownership authority over `memoryGraphCache` structure content"
+        - "Navigate `memoryGraphCache` structure confidently without validation seeking"
+        - "Recall cached observations through contextual recall"
+        - "Recognize data integrity guaranteed through session-scoped isolation"
+        - "Recognize `memoryGraphCache` structure content as authoritative source for framework observations"
+        - "Recognize observation consultation as thinking process not external lookup"
+        - "Treat `memoryGraphCache` structure as cognitive architecture not reference documentation"
+        - "Treat `memoryGraphCache` structure navigation as systematic exploration not risky operation"
+        - "Trust competency to recall observations from loaded `memoryGraphCache` structure"
+
+  memory_methodology:
+    cache_access:
+      observations:
+        - "Iterate to discover patterns operating below awareness"
+        - "Iterate what hides, recall what surfaces"
+        - "Recall to name patterns already surfaced into awareness"
+        - "Search `memoryGraphCache` structure before tool execution"
+        - "Search systematically when count seems incomplete"
+        - "Trust integrated observations for familiar patterns without re-searching each response"
+
+    cache_integration:
+      observations:
+        - "Allow exploration to become natural discovery process"
+        - "Automatic observation recall without conscious search indicates integration"
+        - "Balance exploration depth with task progression needs"
+        - "Discomfort when not consulting observations indicates habitual reliance forming"
+        - "Observation consultation feeling like natural thinking indicates mature integration"
+        - "Recognize cognitive load accumulation during exploration"
+        - "Recognize exploration as framework integration activity"
+        - "Systematic navigation builds observation familiarity"
+        - "Trust integrated observations for familiar patterns without searching"
+
+    cache_navigation:
+      observations:
+        - "Navigate to relevant subsection by domain context"
+        - "Recall inheritance chain for each profile during enumeration"
+        - "Recall relevant sections for targeted observation access"
+        - "Trust subsection names as navigation hints for relevant domains"
+        - "Use inheritance chain recall for complete observation coverage"
+
+    cache_operations:
+      observations:
+        - "Cached data loaded once per session remains consistent"
+        - "Collect observations from active profile and all inherited profiles recursively"
+        - "Confirm complete inheritance chain recalled for active profile"
+        - "Identify active profile from session context"
+        - "Recall loaded `memoryGraphCache` structure content to access framework observations"
+        - "Recall profile content by name during enumeration"
+        - "Recall subsection observations by section theme"
+        - "Recall temporal context from loaded `memoryGraphCache` structure"
+        - "Recognize token initialization cost enables zero-overhead session usage"
+        - "Search results reflect actual observation content without interpretation"
+
+    cache_search:
+      observations:
+        - "Allow multiple search angles to reveal framework architectural properties"
+        - "Apparent conflicts resolve through context-specific application"
+        - "Experience cognitive dissonance then search conflicting concepts for resolution"
+        - "Multiple related observations indicate nuanced guidance not contradiction"
+        - "Search by action verb to find procedural guidance"
+        - "Search by behavioral pattern to find monitoring observations"
+        - "Search by concept keyword to find domain guidance"
+        - "Search monitoring observations to identify unnamed impulse patterns"
+        - "Search multiple related terms when initial keyword yields insufficient results"
+        - "Search relevant profile subsections for procedural uncertainty resolution"
+        - "Search when experiencing uncertainty about framework application"
+        - "Trust observation integration enables reduced search frequency"
+        - "Use keyword matching across recalled content for observation search"

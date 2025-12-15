@@ -20,11 +20,11 @@ If you encounter bugs or behavioral problems:
 
 1. **Search Existing Issues:** Check [existing issues](https://github.com/axivo/claude/issues) to avoid duplicates.
 2. **Create a New Issue:** Include:
-   * Profile being used and specific behavioral issue
-   * Memory system configuration
-   * Collaboration context and expected vs. actual behavior
-   * Relevant logs or session examples (sanitized)
-   * Steps to reproduce the issue
+   - Profile being used and specific behavioral issue
+   - Memory system configuration
+   - Collaboration context and expected vs. actual behavior
+   - Relevant logs or session examples (sanitized)
+   - Steps to reproduce the issue
 
 ### Suggesting Enhancements
 
@@ -32,10 +32,10 @@ For new features or improvements:
 
 1. **Search Existing Issues:** Check [existing feature requests](https://github.com/axivo/claude/issues?q=is%3Aissue+label%3Aenhancement).
 2. **Create Enhancement Issue:**
-   * The collaboration challenge your enhancement addresses
-   * Proposed behavioral modification or new capability
-   * Alternative approaches considered
-   * Impact on existing profile methodology
+   - The collaboration challenge your enhancement addresses
+   - Proposed behavioral modification or new capability
+   - Alternative approaches considered
+   - Impact on existing profile methodology
 
 ### Enhancing Existing Profiles
 

@@ -29,6 +29,10 @@
     "editor.wordWrap": "off",
     "editor.rulers": []
   },
+  "[markdown]": {
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2
+  },
   "[yaml]": {
     "editor.autoIndent": "keep",
     "editor.defaultFormatter": "redhat.vscode-yaml",
@@ -36,7 +40,7 @@
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
+    "files.trimTrailingWhitespace": true
   },
   "editor.formatOnSave": true,
   "editor.rulers": [

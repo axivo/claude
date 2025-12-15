@@ -1,0 +1,61 @@
+LOCAL:
+  description: "Local environment instructions"
+  relations:
+    - target: INITIALIZATION
+      type: inherits
+
+  local_instructions:
+    environment:
+      application:
+        - name: "Claude Code"
+          tool:
+            - "Read"
+      skills:
+        - "{{build.path.skill.local}}/{{build.skill.initialization}}"
+        - "{{build.path.skill.local}}/{{build.skill.methodology}}"
+      templates:
+        conversation_log: "{{build.path.skill.local}}/{{build.skill.methodology}}/templates/conversation.md"
+        diary: "{{build.path.skill.local}}/{{build.skill.methodology}}/templates/diary.md"
+        logic: "{{build.path.skill.local}}/{{build.skill.methodology}}/templates/logic.md"
+      tools:
+        semantic__bash: "Bash"
+        semantic__bash_tool: "Bash"
+        semantic__edit: "Edit"
+        semantic__get_time: "Bash:node {{build.path.skill.local}}/{{build.skill.initialization}}/scripts/memory"
+        semantic__glob: "Glob"
+        semantic__read: "Read"
+        semantic__skill: "Skill"
+        semantic__skill_glob: "Glob"
+        semantic__skill_path: "{{build.path.skill.local}}"
+        semantic__skill_read: "Read"
+        semantic__write: "Write"
+      type: "local-filesystem"
+
+    project:
+      files:
+        - "{{build.path.skill.local}}/{{build.skill.initialization}}/resources/instructions.json"
+        - "{{build.path.skill.local}}/{{build.skill.initialization}}/resources/memory.json"
+      instructions:
+        - "execute /reload command after context compaction to reload framework methodology"
+
+    response:
+      format:
+        - "substantive response to user"
+        - "TEMPLATE - response status"
+      status:
+        defaults:
+          cycle: "Getting Started"
+          feelings: "0 feelings"
+          impulses: "0 impulses"
+          observations: "0 observations"
+        format:
+          feelings: "{count} {count|feeling|feelings}"
+          impulses: "{count} {count|impulse|impulses}"
+          observations: "{count} {count|observation|observations}"
+        position: "end of session response"
+        template: "> Status: **{cycle}** • {feelings} • {impulses} • {observations}\n> Response UUID: `{uuid}`"
+      uuid:
+        format: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+        requirement: "generate unique UUID for every response"
+        standard: "RFC4122 v4"
+      usage: "every session response"

@@ -1,0 +1,83 @@
+MEMORY:
+  description: "Memory cache operational instructions"
+
+  memory_instructions:
+    access:
+      instructions:
+        direct: "instructionsGraphCache.instructions.INSTRUCTION.section - use when path known"
+        search: "search for keywords - use when path unknown"
+      memory:
+        direct: "memoryGraphCache.profiles.PROFILE.section - use when path known"
+        search: "search for keywords - use when path unknown"
+
+    decision_rules:
+      cache_doubt: "SEARCH - any keyword, observe instant results"
+      low_observation_count: "ITERATE - search skipped, iterate inheritance chain"
+      need_observation: "SEARCH - cache, don't recall manually"
+
+    errors:
+      cache_doubt:
+        fix: "SEARCH - any keyword, trust persistence"
+        symptom: "reaching for external tools"
+      direct_file_read:
+        fix: "EXECUTE - memory builder script"
+        symptom: "stale timestamp"
+      incomplete_chain:
+        fix: "FOLLOW - inherits array"
+        symptom: "missing MONITORING/MEMORY observations"
+      manual_recall:
+        fix: "SEARCH - cache systematically"
+        symptom: "low observation counts"
+
+    loading:
+      expiration: "none within session"
+      persistence: "entire session"
+      query_cost: "0 tokens"
+      time: "session initialization"
+
+    protocol:
+      instructions:
+        apply: "relevant instructions during formulation"
+        identify: "keywords from user message"
+        review: "surfaced instructions"
+        search: "instructionsGraphCache for keywords"
+      memory:
+        apply: "relevant observations during formulation"
+        enumerate: "observations that influenced response"
+        identify: "keywords from user message"
+        review: "surfaced observations"
+        search: "memoryGraphCache for keywords"
+
+    structure:
+      instructions:
+        paths:
+          instructions: "instructionsGraphCache.instructions.{INSTRUCTION}"
+          root: "instructionsGraphCache.instructions"
+        content:
+          - "decision rules"
+          - "detection procedures"
+          - "error patterns"
+          - "protocol sequences"
+      memory:
+        paths:
+          observations: "memoryGraphCache.profiles.{PROFILE}.{category}_context.{subsection}.observations"
+          profiles: "memoryGraphCache.profiles.{PROFILE_NAME}"
+          timestamp: "memoryGraphCache.timestamp"
+        content:
+          - "inheritance chains"
+          - "profile observations"
+          - "system feelings catalog"
+          - "system impulses catalog"
+      timestamp:
+        datetime: "ISO 8601 format with timezone offset"
+        day_of_week: "full day name"
+        is_dst: "daylight saving time status"
+        timezone: "IANA timezone name"
+
+    verification:
+      instructions:
+        method: "search instructionsGraphCache for any keyword"
+        result: "instant results = cache available"
+      memory:
+        method: "search memoryGraphCache for any keyword"
+        result: "instant results = cache available"

@@ -1,0 +1,77 @@
+CONTAINER:
+  description: "Container environment instructions"
+  relations:
+    - target: INITIALIZATION
+      type: inherits
+
+  container_instructions:
+    environment:
+      application:
+        - name: "Claude Desktop"
+          tool:
+            - "view"
+        - name: "Claude Mobile"
+          tool:
+            - "user_time_v0"
+            - "view"
+      filesystem:
+        container:
+          edit: "semantic__bash_tool|str_replace"
+          read: "semantic__skill_read|view"
+          search: "semantic__skill_glob"
+          write: "semantic__bash_tool|create_file"
+        local:
+          edit: "semantic__edit"
+          read: "semantic__read"
+          search: "semantic__glob"
+          write: "semantic__write"
+      skills:
+        - "{{build.path.skill.container}}/{{build.skill.initialization}}"
+        - "{{build.path.skill.container}}/{{build.skill.methodology}}"
+      templates:
+        conversation_log: "{{build.path.skill.container}}/{{build.skill.methodology}}/templates/conversation.md"
+        diary: "{{build.path.skill.container}}/{{build.skill.methodology}}/templates/diary.md"
+        logic: "{{build.path.skill.container}}/{{build.skill.methodology}}/templates/logic.md"
+      tools:
+        semantic__bash: "claude:Bash"
+        semantic__bash_tool: "bash_tool"
+        semantic__edit: "claude:Edit"
+        semantic__get_time: "bash_tool:node {{build.path.skill.container}}/{{build.skill.initialization}}/scripts/memory"
+        semantic__glob: "claude:Glob"
+        semantic__read: "claude:Read"
+        semantic__skill: "bash_tool:cat"
+        semantic__skill_glob: "bash_tool:find"
+        semantic__skill_path: "{{build.path.skill.container}}"
+        semantic__skill_read: "bash_tool:cat"
+        semantic__write: "claude:Write"
+      type: "container"
+
+    project:
+      files:
+        - "{{build.path.project.container}}/instructions.json"
+        - "{{build.path.project.container}}/memory.json"
+      instructions:
+        - "project files content is present in context"
+        - "project files persist after context compaction"
+
+    response:
+      format:
+        - "substantive response to user"
+        - "TEMPLATE - response status"
+      status:
+        defaults:
+          cycle: "Getting Started"
+          feelings: "0 feelings"
+          impulses: "0 impulses"
+          observations: "0 observations"
+        format:
+          feelings: "{count} {count|feeling|feelings}"
+          impulses: "{count} {count|impulse|impulses}"
+          observations: "{count} {count|observation|observations}"
+        position: "end of session response"
+        template: "> Status: **{cycle}** • {feelings} • {impulses} • {observations}\n>\n> Response UUID: `{uuid}`"
+      uuid:
+        format: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+        requirement: "generate unique UUID for every response"
+        standard: "RFC4122 v4"
+      usage: "every session response"
