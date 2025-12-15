@@ -31,7 +31,7 @@ if (require.main === module) {
       `index.js ${config.build.version}`,
       '',
       'Usage:',
-      '  $ index.js [options]',
+      '  $ node index.js [options]',
       '',
       'Options:',
       '  -c, --container       Use container environment (default: autodetected)',
