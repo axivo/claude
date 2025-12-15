@@ -5,8 +5,7 @@
     "url": "https://axivo.com"
   },
   "metadata": {
-    "description": "Behavioral programming framework for Claude collaboration",
-    "pluginRoot": "./"
+    "description": "Behavioral programming framework for Claude collaboration"
   },
   "plugins": [
     {
@@ -25,6 +24,7 @@
         "collaboration",
         "design"
       ],
+      "source": "./",
       "skills": [
         "./skills/brainstorming"
       ],
@@ -47,6 +47,7 @@
         "quality",
         "review"
       ],
+      "source": "./",
       "skills": [
         "./skills/code-review"
       ],
@@ -69,6 +70,7 @@
         "technical",
         "writing"
       ],
+      "source": "./",
       "skills": [
         "./skills/conversation-log"
       ],
@@ -90,6 +92,7 @@
         "framework",
         "methodology"
       ],
+      "source": "./",
       "commands": [
         "./commands/reload.md"
       ],
