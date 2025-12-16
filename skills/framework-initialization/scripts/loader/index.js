@@ -13,7 +13,7 @@ const memoryPath = path.join(__dirname, '../memory');
 const ConfigLoader = require(path.join(memoryPath, 'lib/loaders/config'));
 const EnvironmentManager = require(path.join(memoryPath, 'lib/core/environment'));
 const MemoryBuilder = require(path.join(memoryPath, 'lib/core/memory'));
-const projectRoot = process.cwd();
+const projectRoot = require('os').homedir();
 process.chdir(memoryPath);
 if (require.main === module) {
   const configLoader = new ConfigLoader();
