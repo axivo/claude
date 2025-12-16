@@ -48,8 +48,8 @@ class MemoryBuilder {
       }
       const environmentManager = new EnvironmentManager(this.config.settings);
       environmentManager.sync();
-      const isContainer = this.container || environmentManager.isClaudeContainer();
-      const outputGenerator = new OutputGenerator(this.config, this.projectRoot, this.container, isContainer);
+      this.container = this.container || environmentManager.isClaudeContainer();
+      const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName, this.projectRoot);
       if (!this.profileName) {
         outputGenerator.generateOutput();
         return true;
@@ -57,7 +57,7 @@ class MemoryBuilder {
       const fileLoader = new FileLoader();
       const profileProcessor = new ContentProcessor(this.config, fileLoader, 'profiles');
       const profiles = profileProcessor.build(this.profileName);
-      const instructionsName = isContainer ? 'CONTAINER' : 'LOCAL';
+      const instructionsName = this.container ? 'CONTAINER' : 'LOCAL';
       const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
       const instructions = instructionsProcessor.build(instructionsName);
       outputGenerator.generate(instructions, profiles);
