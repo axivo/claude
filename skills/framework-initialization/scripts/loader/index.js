@@ -13,11 +13,14 @@ const memoryPath = path.join(__dirname, '../memory');
 const ConfigLoader = require(path.join(memoryPath, 'lib/loaders/config'));
 const EnvironmentManager = require(path.join(memoryPath, 'lib/core/environment'));
 const MemoryBuilder = require(path.join(memoryPath, 'lib/core/memory'));
-const projectRoot = process.env.CLAUDE_PLUGIN_ROOT || process.cwd();
+const projectRoot = process.cwd();
 process.chdir(memoryPath);
 if (require.main === module) {
   const configLoader = new ConfigLoader();
   const config = configLoader.load();
+  if (process.env.FRAMEWORK_PROFILE) {
+    config.settings.profile = process.env.FRAMEWORK_PROFILE;
+  }
   const profileName = config.settings.profile;
   const environmentManager = new EnvironmentManager(config.settings);
   if (environmentManager.isClaudeContainer()) {
