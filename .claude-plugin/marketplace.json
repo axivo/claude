@@ -82,7 +82,7 @@
         "name": "AXIVO"
       },
       "category": "productivity",
-      "description": "Cognitive architecture with initialization protocol",
+      "description": "Behavioral programming framework with response protocol",
       "homepage": "https://axivo.com/claude/",
       "repository": "https://github.com/axivo/claude",
       "license": "BSD-3-Clause",
