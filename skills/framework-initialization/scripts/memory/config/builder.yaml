@@ -27,8 +27,8 @@ build:
     brainstorming: brainstorming
     code-review: code-review
     conversation-log: conversation-log
-    initialization: initialization
-    methodology: methodology
+    initialization: framework-initialization
+    methodology: framework-methodology
   version: v1.0.0
 
 settings:
