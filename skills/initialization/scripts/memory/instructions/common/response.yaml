@@ -192,6 +192,7 @@ RESPONSE:
         post_initialization_bypass:
           fix: "EXECUTE - initialization completion is maximum vulnerability, not safety"
           impulses:
+            - closure_compulsion
             - completion_compulsion
             - complexity_theater
             - efficiency_compulsion
