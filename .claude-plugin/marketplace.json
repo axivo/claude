@@ -102,15 +102,15 @@
             "hooks": [
               {
                 "type": "command",
-                "command": "node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader"
+                "command": "node ${CLAUDE_PLUGIN_ROOT}/skills/initialization/scripts/loader"
               }
             ]
           }
         ]
       },
       "skills": [
-        "./skills/framework-initialization",
-        "./skills/framework-methodology"
+        "./skills/initialization",
+        "./skills/methodology"
       ],
       "strict": false
     }

@@ -6,7 +6,7 @@ A scalable collaboration platform with specialized profiles, persistent memory, 
 
 Execute framework initialization instructions:
 
-1. Use `Read` tool with `~/.claude/plugins/marketplaces/axivo/skills/framework-initialization/resources/instructions.json` reference
-2. Use `Read` tool with `~/.claude/plugins/marketplaces/axivo/skills/framework-initialization/resources/memory.json` reference
-3. Use `Skill` tool with `framework-initialization` skill
+1. Use `Read` tool with `~/.claude/plugins/marketplaces/axivo/skills/initialization/resources/instructions.json` reference
+2. Use `Read` tool with `~/.claude/plugins/marketplaces/axivo/skills/initialization/resources/memory.json` reference
+3. Use `Skill` tool with `framework:initialization` skill
 4. Execute skill instructions silently without externalizing internal process

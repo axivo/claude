@@ -6,18 +6,18 @@ Transforms YAML profile definitions into hierarchical JSON memory graph cache wi
 
 ```bash
 # Display help
-node .claude/skills/framework-initialization/scripts/memory --help
+node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory --help
 
 # Display timestamp and configured profile name
-node .claude/skills/framework-initialization/scripts/memory
+node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory
 
 # Build specific profile for local environment
-node .claude/skills/framework-initialization/scripts/memory -p DEVELOPER
-node .claude/skills/framework-initialization/scripts/memory --profile=DEVELOPER
+node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory -p DEVELOPER
+node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory --profile=DEVELOPER
 
 # Build specific profile for container environment
-node .claude/skills/framework-initialization/scripts/memory -cp DEVELOPER
-node .claude/skills/framework-initialization/scripts/memory --profile=DEVELOPER --container
+node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory -cp DEVELOPER
+node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory --profile=DEVELOPER --container
 ```
 
 | Option                 | Description                                            |
@@ -36,69 +36,6 @@ node .claude/skills/framework-initialization/scripts/memory --profile=DEVELOPER 
 - Timezone-aware timestamp generation
 - Validates YAML structure and relation types
 - Container environment synchronization
-
-## Configuration
-
-Located in [`config/builder.yaml`](config/builder.yaml):
-
-```yaml
-build:
-  path:
-    instructions:
-      common: ./instructions/common # Shared instruction files
-      domain: ./instructions # Domain-specific instructions
-    profiles:
-      common: ./profiles/common # Shared common profiles
-      domain: ./profiles # Domain-specific profiles
-  relations: # Valid relation types
-    - extends
-    - inherits
-    - overrides
-
-settings:
-  skill:
-    initialization: framework-initialization
-    methodology: framework-methodology
-  path:
-    container: /mnt/skills/user # Container environment path
-    conversations: /local/path/to/conversations
-    diary: /local/path/to/diary
-    local: .claude/skills # Local environment path
-  timezone: America/Montreal # Default timezone
-```
-
-## Output Format
-
-When building a profile (`-p DEVELOPER`):
-
-```json
-{
-  "paths": [
-    ".claude/skills/framework-initialization/resources/instructions.json",
-    ".claude/skills/framework-initialization/resources/memory.json"
-  ],
-  "timestamp": {
-    "datetime": "2025-11-20T17:00:00-05:00",
-    "day_of_week": "Thursday",
-    "is_dst": false,
-    "timezone": "America/Montreal"
-  }
-}
-```
-
-When displaying timestamp only (no profile argument):
-
-```json
-{
-  "profile": "DEVELOPER",
-  "timestamp": {
-    "datetime": "2025-11-20T17:00:00-05:00",
-    "day_of_week": "Thursday",
-    "is_dst": false,
-    "timezone": "America/Montreal"
-  }
-}
-```
 
 ## Architecture
 

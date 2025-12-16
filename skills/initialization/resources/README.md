@@ -1,6 +1,6 @@
 # Resources
 
-Generated artifacts and reference materials for `framework-initialization` skill.
+Generated artifacts and reference materials for `framework:initialization` skill.
 
 ## Cache Files
 

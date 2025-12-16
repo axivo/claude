@@ -7,5 +7,5 @@ description: Reloads framework methodology after context compaction
 
 Execute framework reload instructions:
 
-1. Use `Read` tool with `.claude/skills/framework-initialization/resources/instructions.json` reference
-2. Use `Read` tool with `.claude/skills/framework-initialization/resources/memory.json` reference
+1. Use `Read` tool with `.claude/skills/initialization/resources/instructions.json` reference
+2. Use `Read` tool with `.claude/skills/initialization/resources/memory.json` reference
