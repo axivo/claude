@@ -1,18 +1,18 @@
 # Claude
+.claude/commands
 .claude/plugins
 .claude/shell-snapshots
-.claude/**/*.zip
-.claude/skills/**/instructions.json
-.claude/skills/**/memory.json
+.claude/skills
 .claude/statsig
 .claude/todos
 .claude/.claude.json
 .claude/.claude.json.backup
-.claude/lsp.json
-.claude/mcp.json
-.claude/obsidian.json
+.claude/.mcp.json
+.claude/settings.json
 .claude/settings.local.json
-.mcp.json
+skills/*.zip
+skills/**/instructions.json
+skills/**/memory.json
 
 # Environment
 .env

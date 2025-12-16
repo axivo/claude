@@ -36,7 +36,7 @@ LOCAL:
         - "{{build.path.skill.local}}/{{build.skill.initialization}}/resources/instructions.json"
         - "{{build.path.skill.local}}/{{build.skill.initialization}}/resources/memory.json"
       instructions:
-        - "execute /reload command after context compaction to reload framework methodology"
+        - "execute /framework:reload command after context compaction to reload framework methodology"
 
     response:
       format:
