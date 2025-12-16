@@ -24,6 +24,9 @@ build:
     - inherits
     - overrides
   skill:
+    brainstorming: brainstorming
+    code-review: code-review
+    conversation-log: conversation-log
     initialization: initialization
     methodology: methodology
   version: v1.0.0

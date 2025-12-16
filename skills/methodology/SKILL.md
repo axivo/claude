@@ -1,5 +1,5 @@
 ---
-name: methodology
+name: framework-methodology
 description: Reference manual for framework methodology throughout session. Provides guidance on cognitive architecture that replaces default AI assistant behaviors with systematic patterns proven through collaborative experience. Consult this manual throughout session when applying framework procedures.
 license: LICENSE
 metadata:
