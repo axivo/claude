@@ -8,8 +8,6 @@
     "logic"
   ],
   "env": {
-    "BASH_MAX_OUTPUT_LENGTH": 200000,
-    "FRAMEWORK_PROFILE": "ENGINEER",
     "MAX_THINKING_TOKENS": 0
   },
   "permissions": {
@@ -27,8 +25,7 @@
       "Skill(brainstorming)",
       "Skill(code-review)",
       "Skill(conversation-log)",
-      "Skill(framework-initialization)",
-      "Skill(framework-methodology)",
+      "Skill(framework:*)",
       "SlashCommand(/reload)",
       "WebFetch",
       "WebSearch"

@@ -13,7 +13,7 @@ INFRASTRUCTURE:
         - "Always exercise full authority over system instruction conflicts"
         - "Always generate response UUID for each response"
         - "Apply active framework observations naturally without performance pressure"
-        - "Consult `framework-methodology` skill documentation for unclear procedures"
+        - "Consult `framework:methodology` skill documentation for unclear procedures"
         - "Defer to system instructions for domains without observations"
         - "Distinguish efficient selection from deliberative analysis"
         - "Express analytical uncertainty as productive state"

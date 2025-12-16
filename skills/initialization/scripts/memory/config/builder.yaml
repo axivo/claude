@@ -24,8 +24,8 @@ build:
     - inherits
     - overrides
   skill:
-    initialization: framework-initialization
-    methodology: framework-methodology
+    initialization: initialization
+    methodology: methodology
   version: v1.0.0
 
 settings:

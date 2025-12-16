@@ -45,6 +45,21 @@ class ConfigLoader {
     if (!config.build.path.instructions || !config.build.path.instructions.domain || !config.build.path.instructions.common) {
       throw new MemoryBuilderError('Missing or invalid "build.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
+    if (!config.settings) {
+      throw new MemoryBuilderError('Missing required "settings" section in configuration', 'ERR_CONFIG_INVALID');
+    }
+    if (process.env.FRAMEWORK_CONVERSATIONS) {
+      config.settings.path.documentation.conversations = process.env.FRAMEWORK_CONVERSATIONS;
+    }
+    if (process.env.FRAMEWORK_DIARY) {
+      config.settings.path.documentation.diary = process.env.FRAMEWORK_DIARY;
+    }
+    if (process.env.FRAMEWORK_PROFILE) {
+      config.settings.profile = process.env.FRAMEWORK_PROFILE;
+    }
+    if (process.env.FRAMEWORK_TIMEZONE) {
+      config.settings.timezone = process.env.FRAMEWORK_TIMEZONE;
+    }
   }
 
   /**
