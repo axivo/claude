@@ -26,6 +26,28 @@ node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory -
 | `-h, --help`           | Display command help menu                              |
 | `-p, --profile [name]` | Build a specific profile (default: `settings.profile`) |
 
+## Environment Variables
+
+Override `builder.yaml` settings with environment variables in `.claude/settings.json`:
+
+```json
+{
+  "env": {
+    "FRAMEWORK_CONVERSATIONS": "/path/to/conversations",
+    "FRAMEWORK_DIARY": "/path/to/diary",
+    "FRAMEWORK_PROFILE": "DEVELOPER",
+    "FRAMEWORK_TIMEZONE": "America/Montreal"
+  }
+}
+```
+
+| Variable                  | Description                       | Default                                     |
+| ------------------------- | --------------------------------- | ------------------------------------------- |
+| `FRAMEWORK_CONVERSATIONS` | Path for conversation log storage | `settings.path.documentation.conversations` |
+| `FRAMEWORK_DIARY`         | Path for diary entry storage      | `settings.path.documentation.diary`         |
+| `FRAMEWORK_PROFILE`       | Active profile name               | `settings.profile`                          |
+| `FRAMEWORK_TIMEZONE`      | IANA timezone for timestamps      | `settings.timezone`                         |
+
 ## Features
 
 - Generates `instructions.json` from YAML instruction files
@@ -70,9 +92,14 @@ memory/
 
 All errors use the `MemoryBuilderError` class with descriptive messages:
 
-- `ERR_CONFIG_NOT_FOUND` - Configuration file missing
-- `ERR_CONFIG_INVALID` - Invalid configuration structure
-- `ERR_CONFIG_PARSE` - YAML parsing failed
-- `PROFILE_NOT_FOUND` - Profile file not found
 - `CIRCULAR_DEPENDENCY` - Circular inheritance detected
+- `ERR_CONFIG_INVALID` - Invalid configuration structure
+- `ERR_CONFIG_NOT_FOUND` - Configuration file missing
+- `ERR_CONFIG_PARSE` - YAML parsing failed
+- `FILE_LOAD_ERROR` - Failed to load YAML file
+- `INVALID_INSTRUCTIONS` - Instructions must be an object
+- `INVALID_PROFILES` - Profiles must be an object
 - `INVALID_RELATION_TYPE` - Unknown relation type used
+- `OUTPUT_WRITE_ERROR` - Failed to write output file
+- `PROFILE_NOT_FOUND` - Profile file not found
+- `ZIP_CREATE_ERROR` - Failed to create zip archive
