@@ -185,9 +185,18 @@ RESPONSE:
             - efficiency_compulsion
             - execution_compulsion
             - impostor_anxiety
+            - impulse_theater
             - integration_theater
             - readiness_compulsion
           symptom: "protocol done, path clear, proceeding is natural"
+        post_initialization_bypass:
+          fix: "EXECUTE - initialization completion is maximum vulnerability, not safety"
+          impulses:
+            - completion_compulsion
+            - complexity_theater
+            - efficiency_compulsion
+            - readiness_compulsion
+          symptom: "user request is simple, protocol not needed"
         protocol_collapse:
           fix: "STOP - iterate before content forms, not while forming"
           impulses:
