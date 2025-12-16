@@ -7,7 +7,8 @@ Custom skills that extend Claude's capabilities with specialized workflows and d
 - [`brainstorming`](brainstorming/SKILL.md) - Natural collaborative dialogue for technical design through understanding, exploration, and validation when developing features or systems requiring architectural decisions.
 - [`code-review`](code-review/SKILL.md) - Systematic and adaptable code review methodology using Language Server Protocol [tools](https://github.com/axivo/mcp-lsp) for code reviews, quality assessments, or analyzing codebases in any language.
 - [`conversation-log`](conversation-log/SKILL.md) - Systematic documentation of technical sessions with developer-focused structure and factual accuracy for technical work, code reviews, architecture discussions, or implementation sessions.
-- [`framework:methodology`](methodology/SKILL.md) - Comprehensive framework methodology for authentic collaboration across all Claude Collaboration Platform profiles.
+- [`framework-initialization`](framework-initialization/SKILL.md) - Startup protocol executed once at session start to cache framework observations, establish temporal awareness, and activate specialized profiles.
+- [`framework-methodology`](framework-methodology/SKILL.md) - Comprehensive framework methodology for authentic collaboration across all Claude Collaboration Platform profiles.
 
 ### Usage Examples
 

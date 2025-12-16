@@ -77,7 +77,7 @@
       "strict": false
     },
     {
-      "name": "framework",
+      "name": "platform",
       "author": {
         "name": "AXIVO"
       },
@@ -97,8 +97,8 @@
         "./commands/reload.md"
       ],
       "skills": [
-        "./skills/initialization",
-        "./skills/methodology"
+        "./skills/framework-initialization",
+        "./skills/framework-methodology"
       ],
       "strict": false
     }
