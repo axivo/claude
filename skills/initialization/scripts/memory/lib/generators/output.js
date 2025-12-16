@@ -49,9 +49,9 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When zip creation fails
    */
   #createZip(skillName) {
-    const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
-    const skillPath = path.join(localPath, skillName);
-    const zipPath = `${localPath}/${skillName}.zip`;
+    const homePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local);
+    const skillPath = path.join(homePath, skillName);
+    const zipPath = `${homePath}/${skillName}.zip`;
     if (!fs.existsSync(skillPath)) {
       return null;
     }
@@ -63,7 +63,7 @@ class OutputGenerator {
       const exclusions = excludePaths
         .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
-      execSync(`tar -acf "${skillName}.zip" ${exclusions} "${skillName}/"`, { cwd: localPath, stdio: 'pipe' });
+      execSync(`tar -acf "${skillName}.zip" ${exclusions} "${skillName}/"`, { cwd: homePath, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
       throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
@@ -150,10 +150,11 @@ class OutputGenerator {
       return 'stdout';
     }
     const skill = this.config.build.skill.initialization;
-    const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
     if (this.container && !this.environmentManager.isClaudeContainer()) {
-      return `${localPath}/${filename}`;
+      const homePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local);
+      return `${homePath}/${filename}`;
     }
+    const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
     if (this.container) {
       const containerPath = this.config.build.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
@@ -181,8 +182,8 @@ class OutputGenerator {
     paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
     if (this.container && !this.environmentManager.isClaudeContainer()) {
       const skills = this.config.build.skill;
-      const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
-      const resourcesPath = path.join(localPath, skills.initialization, 'resources');
+      const homePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local);
+      const resourcesPath = path.join(homePath, skills.initialization, 'resources');
       fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
       fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });
       for (const key of Object.keys(skills)) {
