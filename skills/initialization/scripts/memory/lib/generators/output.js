@@ -51,7 +51,7 @@ class OutputGenerator {
   #createZip(skillName) {
     const homePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local);
     const skillPath = path.join(homePath, skillName);
-    const zipPath = `${homePath}/${skillName}.zip`;
+    const zipPath = `${homePath}/framework-${skillName}.zip`;
     if (!fs.existsSync(skillPath)) {
       return null;
     }
