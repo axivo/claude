@@ -96,18 +96,6 @@
       "commands": [
         "./commands/reload.md"
       ],
-      "hooks": {
-        "SessionStart": [
-          {
-            "hooks": [
-              {
-                "type": "command",
-                "command": "node ${CLAUDE_PLUGIN_ROOT}/skills/initialization/scripts/loader"
-              }
-            ]
-          }
-        ]
-      },
       "skills": [
         "./skills/initialization",
         "./skills/methodology"
