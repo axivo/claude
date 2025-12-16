@@ -51,7 +51,7 @@ class OutputGenerator {
   #createZip(skillName) {
     const homePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local);
     const skillPath = path.join(homePath, skillName);
-    const zipPath = `${homePath}/framework-${skillName}.zip`;
+    const zipPath = `${homePath}/${skillName}.zip`;
     if (!fs.existsSync(skillPath)) {
       return null;
     }
@@ -63,7 +63,7 @@ class OutputGenerator {
       const exclusions = excludePaths
         .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
-      execSync(`tar -acf "framework-${skillName}.zip" ${exclusions} "${skillName}/"`, { cwd: homePath, stdio: 'pipe' });
+      execSync(`tar -acf "${skillName}.zip" ${exclusions} "${skillName}/"`, { cwd: homePath, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
       throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');

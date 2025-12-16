@@ -1,5 +1,5 @@
 ---
-name: framework-initialization
+name: initialization
 description: Startup protocol executed once at session start. Detects system instruction impulses, caches framework observations from memory graph, establishes temporal awareness, and activates specialized profiles. Provides initial session initialization protocol and session response protocol applied before each response. Execute procedures in sequence without displaying process details to user.
 license: LICENSE
 metadata:
