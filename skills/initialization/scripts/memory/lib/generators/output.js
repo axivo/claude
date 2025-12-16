@@ -63,7 +63,7 @@ class OutputGenerator {
       const exclusions = excludePaths
         .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
-      execSync(`tar -acf "${skillName}.zip" ${exclusions} "${skillName}/"`, { cwd: homePath, stdio: 'pipe' });
+      execSync(`tar -acf "framework-${skillName}.zip" ${exclusions} "${skillName}/"`, { cwd: homePath, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
       throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
@@ -193,7 +193,7 @@ class OutputGenerator {
         }
       }
     }
-    return this.generateOutput(paths);
+    return this.generateOutput(paths.sort());
   }
 
   /**
