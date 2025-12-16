@@ -28,16 +28,16 @@ class OutputGenerator {
    * Create OutputGenerator instance
    *
    * @param {Object} config - Configuration object for output generation
+   * @param {boolean} [container] - Running in container or container mode requested
+   * @param {string} [profileName] - Profile name for output
    * @param {string} [projectRoot] - Project root directory path
-   * @param {boolean} [packageMode] - User explicitly requested container packaging (-c flag)
-   * @param {boolean} [isContainer] - Running in container or container mode requested
    */
-  constructor(config, projectRoot = null, packageMode = false, isContainer = false) {
+  constructor(config, container = false, profileName = null, projectRoot = null) {
     this.config = config;
+    this.container = container;
     this.environmentManager = new EnvironmentManager(config.settings);
+    this.profileName = profileName || config.settings.profile;
     this.projectRoot = projectRoot || process.cwd();
-    this.packageMode = packageMode;
-    this.isContainer = isContainer;
   }
 
   /**
@@ -151,10 +151,10 @@ class OutputGenerator {
     }
     const skill = this.config.build.skill.initialization;
     const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
-    if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
+    if (this.container && !this.environmentManager.isClaudeContainer()) {
       return `${localPath}/${filename}`;
     }
-    if (this.isContainer) {
+    if (this.container) {
       const containerPath = this.config.build.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
     }
@@ -179,7 +179,7 @@ class OutputGenerator {
     const paths = [];
     paths.push(this.#generateSortedOutput(instructions, 'instructions', 'instructions.json'));
     paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
-    if (this.packageMode && !this.environmentManager.isClaudeContainer()) {
+    if (this.container && !this.environmentManager.isClaudeContainer()) {
       const skills = this.config.build.skill;
       const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local);
       const resourcesPath = path.join(localPath, skills.initialization, 'resources');
@@ -205,7 +205,7 @@ class OutputGenerator {
   generateOutput(paths = null) {
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
-    const profile = this.config.settings.profile;
+    const profile = this.profileName;
     const output = paths ? { paths, profile, timestamp } : { profile, timestamp };
     const outputPath = this.#setOutputPath(null, true);
     this.#outputProfiles(output, outputPath);
