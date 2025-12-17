@@ -11,17 +11,6 @@
           }
         ]
       }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'Execute response protocol before formulation - true impulse protection'",
-            "timeout": 10
-          }
-        ]
-      }
     ]
   }
 }
