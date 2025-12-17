@@ -61,6 +61,12 @@ class MemoryBuilder {
       const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
       const instructions = instructionsProcessor.build(instructionsName);
       outputGenerator.generate(instructions, profiles);
+      if (this.container && !environmentManager.isClaudeContainer()) {
+        const defaultProfile = this.config.settings.profile;
+        const defaultProfiles = profileProcessor.build(defaultProfile);
+        const defaultGenerator = new OutputGenerator(this.config, false, defaultProfile, this.projectRoot);
+        defaultGenerator.generate(instructions, defaultProfiles);
+      }
       return true;
     } catch (error) {
       console.error('❌ Build failed:', error.message);

@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(ls:*), Bash(node:*)
+allowed-tools: Bash(node:*), Glob
 argument-hint: [PROFILE]
 description: Prepares and packages Claude Desktop required files
 ---
