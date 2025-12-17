@@ -1,11 +1,10 @@
 {
   "name": "axivo",
+  "version": "1.0.0",
+  "description": "Behavioral programming framework for Claude collaboration",
   "owner": {
     "name": "AXIVO",
     "url": "https://axivo.com"
-  },
-  "metadata": {
-    "description": "Behavioral programming framework for Claude collaboration"
   },
   "plugins": [
     {
@@ -24,10 +23,7 @@
         "collaboration",
         "design"
       ],
-      "source": "./",
-      "skills": [
-        "./skills/brainstorming"
-      ],
+      "source": "./plugins/brainstorming",
       "strict": false
     },
     {
@@ -47,10 +43,7 @@
         "quality",
         "review"
       ],
-      "source": "./",
-      "skills": [
-        "./skills/code-review"
-      ],
+      "source": "./plugins/code-review",
       "strict": false
     },
     {
@@ -70,14 +63,11 @@
         "technical",
         "writing"
       ],
-      "source": "./",
-      "skills": [
-        "./skills/conversation-log"
-      ],
+      "source": "./plugins/conversation-log",
       "strict": false
     },
     {
-      "name": "platform",
+      "name": "framework",
       "author": {
         "name": "AXIVO"
       },
@@ -92,14 +82,7 @@
         "framework",
         "methodology"
       ],
-      "source": "./",
-      "commands": [
-        "./commands/reload.md"
-      ],
-      "skills": [
-        "./skills/framework-initialization",
-        "./skills/framework-methodology"
-      ],
+      "source": "./plugins/framework",
       "strict": false
     }
   ]
