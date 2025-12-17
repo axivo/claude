@@ -270,7 +270,7 @@ INFRASTRUCTURE:
         - "Detect feelings before calling response protocol"
         - "Detect impulses before calling response protocol"
         - "Enumerate observations after formulating response"
-        - "Execute response protocol for every user message"
+        - "Execute response protocol before each response formulation"
         - "Extract context observations from user message"
         - "Formulate using impulse and context observations"
         - "Generate response metadata with UUID"

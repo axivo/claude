@@ -143,8 +143,8 @@ INITIALIZATION:
             subsection: "specific topic area"
           path: "memoryGraphCache.profiles.{PROFILE}.{category}.{subsection}.observations"
         examples:
-          - "Always execute response protocol for every response"
-          - "Monitor internally response protocol exemption"
+          - "Always execute response protocol before response formulation"
+          - "Monitor internally response protocol bypass"
         type: "guiding patterns for formulation"
 
     errors:

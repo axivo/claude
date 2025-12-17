@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'Response protocol is the only impulse protection - execute before response formulation'",
+            "command": "echo 'Execute response protocol before formulation - true impulse protection'",
             "timeout": 10
           }
         ]
