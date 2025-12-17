@@ -16,7 +16,7 @@ Before starting, load the conversation-log skill to ensure you follow the method
 
 ## Establish Context
 
-If $ARGUMENTS is provided, use that as the session title. Otherwise, ask:
+If `$ARGUMENTS` is provided, use that as the session title. Otherwise, ask:
 
 "What session would you like to document?"
 
@@ -82,4 +82,4 @@ Create searchable tags based on session content:
 - **Capture decisions** - Include rationale for choices made
 - **Be honest** - Document problems and blocks accurately
 
-Begin by establishing the session context. If $ARGUMENTS was provided, acknowledge the title and proceed to gather session details.
+Begin by establishing the session context. If `$ARGUMENTS` is provided, acknowledge the title and proceed to gather session details.

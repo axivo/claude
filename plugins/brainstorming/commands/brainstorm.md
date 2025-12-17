@@ -16,7 +16,7 @@ Before starting, load the brainstorming skill to ensure you follow the methodolo
 
 ## Establish Context
 
-If $ARGUMENTS is provided, use that as the brainstorming topic. Otherwise, ask:
+If `$ARGUMENTS` is provided, use that as the brainstorming topic. Otherwise, ask:
 
 "What would you like to brainstorm today?"
 
@@ -105,4 +105,4 @@ If the user requests documentation of this session, suggest using the `conversat
 - **Challenge complexity** - Every layer of complexity needs clear justification
 - **Be ready to iterate** - Circle back when something doesn't make sense
 
-Begin by establishing the brainstorming topic. If $ARGUMENTS was provided, acknowledge the topic and proceed to the Understanding stage.
+Begin by establishing the brainstorming topic. If `$ARGUMENTS` is provided, acknowledge the topic and proceed to the Understanding stage.

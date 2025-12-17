@@ -16,7 +16,7 @@ Before starting, load the code-review skill to ensure you follow the methodology
 
 ## Establish Scope
 
-If $ARGUMENTS is provided, use that as the review scope. Otherwise, ask:
+If `$ARGUMENTS` is provided, use that as the review scope. Otherwise, ask:
 
 "What would you like me to review? Please provide a file path, directory, or describe the scope."
 
@@ -71,4 +71,4 @@ Synthesize all findings into an actionable report:
 - **Document limitations** - Note when tools are unavailable
 - **Be thorough** - Quality over speed
 
-Begin by establishing the review scope. If $ARGUMENTS was provided, acknowledge the scope and proceed to Phase 1.
+Begin by establishing the review scope. If `$ARGUMENTS` is provided, acknowledge the scope and proceed to Phase 1.
