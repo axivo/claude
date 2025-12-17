@@ -10,9 +10,9 @@
 .claude/.mcp.json
 .claude/settings.json
 .claude/settings.local.json
-skills/*.zip
-skills/**/instructions.json
-skills/**/memory.json
+plugins/**/*.zip
+plugins/**/instructions.json
+plugins/**/memory.json
 
 # Environment
 .env
