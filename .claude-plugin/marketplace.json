@@ -1,7 +1,7 @@
 {
   "name": "axivo",
-  "version": "1.0.0",
   "description": "Behavioral programming framework for Claude collaboration",
+  "version": "1.0.0",
   "owner": {
     "name": "AXIVO",
     "url": "https://axivo.com"

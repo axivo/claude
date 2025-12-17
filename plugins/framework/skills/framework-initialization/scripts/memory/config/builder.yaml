@@ -8,9 +8,9 @@ build:
       domain: ./instructions
     package:
       excludes:
-        - resources
         - scripts/memory/instructions
         - scripts/memory/profiles
+      output: .claude/plugins/marketplaces/axivo/plugins/framework/skills
     profiles:
       common: ./profiles/common
       domain: ./profiles
@@ -18,7 +18,7 @@ build:
       container: /mnt/project
     skill:
       container: /mnt/skills/user
-      local: .claude/plugins/marketplaces/axivo/skills
+      local: .claude/plugins/cache/axivo/framework
   relations:
     - extends
     - inherits
@@ -29,12 +29,12 @@ build:
     conversation-log: conversation-log
     initialization: framework-initialization
     methodology: framework-methodology
-  version: v1.0.0
+  version: 1.0.0
 
 settings:
   path:
     documentation:
-      conversations: /Volumes/backup/claude/conversations
+      conversation: /Volumes/backup/claude/conversations
       diary: /Volumes/backup/claude/diary
   profile: DEVELOPER
   timezone: America/Montreal

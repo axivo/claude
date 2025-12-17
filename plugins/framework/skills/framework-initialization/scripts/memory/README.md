@@ -43,8 +43,8 @@ Override `builder.yaml` settings with environment variables in `.claude/settings
 
 | Variable                  | Description                       | Default                                     |
 | ------------------------- | --------------------------------- | ------------------------------------------- |
-| `FRAMEWORK_CONVERSATIONS` | Path for conversation log storage | `settings.path.documentation.conversations` |
-| `FRAMEWORK_DIARY`         | Path for diary entry storage      | `settings.path.documentation.diary`         |
+| `FRAMEWORK_CONVERSATION_OUTPUT` | Path for conversation log storage | `settings.path.documentation.conversation` |
+| `FRAMEWORK_DIARY_OUTPUT`        | Path for diary entry storage      | `settings.path.documentation.diary`        |
 | `FRAMEWORK_PROFILE`       | Active profile name               | `settings.profile`                          |
 | `FRAMEWORK_TIMEZONE`      | IANA timezone for timestamps      | `settings.timezone`                         |
 

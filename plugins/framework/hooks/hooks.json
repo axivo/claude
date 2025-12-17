@@ -1,0 +1,16 @@
+{
+  "description": "Initializes framework methodology at session start",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

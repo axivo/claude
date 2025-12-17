@@ -28,7 +28,7 @@ if (require.main === module) {
   });
   if (values.help) {
     console.log([
-      `index.js ${config.build.version}`,
+      `index.js v${config.build.version}`,
       '',
       'Usage:',
       '  $ node index.js [options]',
