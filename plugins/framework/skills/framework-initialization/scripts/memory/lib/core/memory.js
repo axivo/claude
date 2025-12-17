@@ -51,7 +51,8 @@ class MemoryBuilder {
       this.container = this.container || environmentManager.isClaudeContainer();
       const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName, this.projectRoot);
       if (!this.profileName) {
-        outputGenerator.generateOutput();
+        const defaultGenerator = new OutputGenerator(this.config, false, this.config.settings.profile, this.projectRoot);
+        defaultGenerator.generateOutput();
         return true;
       }
       const fileLoader = new FileLoader();
@@ -60,12 +61,16 @@ class MemoryBuilder {
       const instructionsName = this.container ? 'CONTAINER' : 'LOCAL';
       const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
       const instructions = instructionsProcessor.build(instructionsName);
-      outputGenerator.generate(instructions, profiles);
       if (this.container && !environmentManager.isClaudeContainer()) {
+        const results = [];
+        results.push(outputGenerator.generate(instructions, profiles, true));
         const defaultProfile = this.config.settings.profile;
         const defaultProfiles = profileProcessor.build(defaultProfile);
         const defaultGenerator = new OutputGenerator(this.config, false, defaultProfile, this.projectRoot);
-        defaultGenerator.generate(instructions, defaultProfiles);
+        results.push(defaultGenerator.generate(instructions, defaultProfiles, true));
+        outputGenerator.output(results, 'stdout');
+      } else {
+        outputGenerator.generate(instructions, profiles);
       }
       return true;
     } catch (error) {

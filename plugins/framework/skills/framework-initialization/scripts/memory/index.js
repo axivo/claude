@@ -40,7 +40,7 @@ if (require.main === module) {
     ].join('\n'));
     process.exit(0);
   }
-  const profileName = values.profile;
+  const profileName = (values.container || values.profile !== config.settings.profile) ? values.profile : null;
   const builder = new MemoryBuilder(profileName, projectRoot, config, values.container);
   const success = builder.build();
   process.exit(success ? 0 : 1);
