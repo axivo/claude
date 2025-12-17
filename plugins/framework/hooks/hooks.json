@@ -11,6 +11,17 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Response protocol is the only impulse protection - execute before response formulation'",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }
