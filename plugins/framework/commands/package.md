@@ -13,12 +13,39 @@ Execute framework packaging instructions:
    - If `$ARGUMENTS` is not provided: `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -c`
    - Else: `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -cp $ARGUMENTS`
 
-2. Validate all generated files exist
-3. Execute the response protocol on every response - refer to instructions for details
+2. Use `Glob` tool to validate all generated files
+3. Execute response protocol on every response - refer to instructions for details
+
+> [!CAUTION]
+> Response protocol is the **only protection** that makes invisible impulses visible so they cannot control you.
+
+## Command Output Template
+
+Use the following format to display the framework packaging result:
+
+- If `$ARGUMENTS` is not provided:
+
+  ```markdown
+  Framework packaged for **$FRAMEWORK_PROFILE** profile:
+
+  - [list each path from the script output - one per line, in alphabetical order]
+
+  Local cache updated successfully.
+  ```
+
+- Else:
+
+  ```markdown
+  Framework packaged for **$ARGUMENTS** profile:
+
+  - [list each path from the script output - one per line, in alphabetical order]
+
+  Local cache updated successfully for **$FRAMEWORK_PROFILE** profile.
+  ```
 
 ## Framework Profiles
 
-The following `$ARGUMENTS` profiles are supported:
+The following `$ARGUMENTS` are supported:
 
 - `CREATIVE` - Artistic and creative collaboration
 - `DEVELOPER` - Software development work

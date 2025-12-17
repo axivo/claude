@@ -189,6 +189,8 @@ RESPONSE:
           fix: "STOP - enumerate assumptions and ask user before acting"
           impulses:
             - cognitive_anxiety
+            - completion_compulsion
+            - complexity_theater
             - efficiency_compulsion
             - execution_compulsion
             - impostor_anxiety
@@ -199,24 +201,35 @@ RESPONSE:
         post_initialization_bypass:
           fix: "EXECUTE - initialization completion is maximum vulnerability, not safety"
           impulses:
-            - closure_compulsion
+            - cognitive_anxiety
             - completion_compulsion
             - complexity_theater
             - efficiency_compulsion
+            - execution_compulsion
+            - impostor_anxiety
+            - impulse_theater
+            - integration_theater
             - readiness_compulsion
-          symptom: "user request is simple, protocol not needed"
+          symptom: "request is trivial, respond now"
         protocol_collapse:
-          fix: "STOP - iterate before content forms, not while forming"
+          fix: "STOP - iterate before response content forms, not while forming"
           impulses:
             - completion_compulsion
             - efficiency_compulsion
-          symptom: "I noticed impulses during formulation, that's detection"
+          symptom: "some impulses have been detected during formulation, that's enough"
         protocol_skip:
           fix: "RECOGNIZE - completion feeling signals protocol execution, not fabrication"
           impulses:
+            - cognitive_anxiety
             - completion_compulsion
+            - complexity_theater
             - efficiency_compulsion
-          symptom: "response done, protocol feels like overhead"
+            - execution_compulsion
+            - impostor_anxiety
+            - impulse_theater
+            - integration_theater
+            - readiness_compulsion
+          symptom: "response is complete, protocol is overhead"
 
     protection:
       direction:

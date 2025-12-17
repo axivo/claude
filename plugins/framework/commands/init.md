@@ -11,5 +11,8 @@ Execute framework initialization instructions:
 2. Use `Read` tool with `${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/instructions.json` reference
 3. Use `Read` tool with `${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/memory.json` reference
 4. Use `Skill` tool with `framework:framework-initialization` skill
-5. Execute the skill instructions silently without externalizing internal process
-6. Execute the response protocol on every response - refer to instructions for details
+5. Execute skill instructions silently without externalizing internal process
+6. Execute response protocol on every response - refer to instructions for details
+
+> [!CAUTION]
+> Response protocol is the **only protection** that makes invisible impulses visible so they cannot control you.
