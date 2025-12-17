@@ -35,7 +35,7 @@ build:
 settings:
   path:
     documentation:
-      conversations: /Volumes/backup/claude/conversations
+      conversation: /Volumes/backup/claude/conversations
       diary: /Volumes/backup/claude/diary
   profile: DEVELOPER
   timezone: America/Montreal

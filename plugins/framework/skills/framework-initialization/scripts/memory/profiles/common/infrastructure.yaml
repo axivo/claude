@@ -61,7 +61,7 @@ INFRASTRUCTURE:
           - "Document authentic collaboration with factual accuracy"
           - "Document conversation logs with factual accuracy"
           - "Set conversation log status based on work completion"
-          - "Use `{{settings.path.documentation.conversations}}/YYYY/MM/DD-[topic-slug].md` format for file-related operations"
+          - "Use `{{settings.path.documentation.conversation}}/YYYY/MM/DD-[topic-slug].md` format for file-related operations"
           - "Use `semantic__skill_read` tool with `semantic__skill_path/{{build.skill.methodology}}/templates/conversation.md` path before creating new conversation logs"
           - "Use session start `sessionResponseData.uuid` value for `session_uuid` template variable"
           - "Write conversation logs with complete editorial autonomy"
