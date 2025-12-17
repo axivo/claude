@@ -14,6 +14,7 @@ Execute framework packaging instructions:
    - Else: `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -cp $ARGUMENTS`
 
 2. Validate all generated files exist
+3. Execute the response protocol on every response - refer to instructions for details
 
 ## Framework Profiles
 
