@@ -46,6 +46,7 @@ Configure the framework through environment variables in your Claude Code settin
   "env": {
     "FRAMEWORK_CONVERSATIONS": "/path/to/claude/conversations",
     "FRAMEWORK_DIARY": "/path/to/claude/diary",
+    "FRAMEWORK_PACKAGE_OUTPUT": "/path/to/package/output",
     "FRAMEWORK_PROFILE": "DEVELOPER",
     "FRAMEWORK_TIMEZONE": "America/Montreal"
   },
@@ -56,6 +57,7 @@ Configure the framework through environment variables in your Claude Code settin
 
 - **FRAMEWORK_CONVERSATIONS** - Path for conversation log storage
 - **FRAMEWORK_DIARY** - Path for diary entry storage
+- **FRAMEWORK_PACKAGE_OUTPUT** - Path for Claude Desktop package output generation
 - **FRAMEWORK_PROFILE** - Active profile (CREATIVE, DEVELOPER, ENGINEER, HUMANIST, RESEARCHER, TRANSLATOR)
 - **FRAMEWORK_TIMEZONE** - Timezone for temporal awareness
 
