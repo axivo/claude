@@ -45,8 +45,8 @@ class ConfigLoader {
     if (!config.build.path.instructions || !config.build.path.instructions.domain || !config.build.path.instructions.common) {
       throw new MemoryBuilderError('Missing or invalid "build.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
-    if (process.env.FRAMEWORK_PACKAGES_OUTPUT) {
-      config.build.path.package.output = process.env.FRAMEWORK_PACKAGES_OUTPUT;
+    if (process.env.FRAMEWORK_PACKAGE_OUTPUT) {
+      config.build.path.package.output = process.env.FRAMEWORK_PACKAGE_OUTPUT;
     }
     if (!config.settings) {
       throw new MemoryBuilderError('Missing required "settings" section in configuration', 'ERR_CONFIG_INVALID');
