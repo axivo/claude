@@ -8,7 +8,6 @@ build:
       domain: ./instructions
     package:
       excludes:
-        - resources
         - scripts/memory/instructions
         - scripts/memory/profiles
       output: .claude/plugins/marketplaces/axivo/plugins/framework/skills
