@@ -8,12 +8,16 @@ description: Prepares and packages Claude Desktop required files
 
 Execute framework packaging instructions:
 
-1. Use `Bash` tool with `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -c${ARGUMENTS:+p $ARGUMENTS}` command
+1. Use `Bash` tool with the appropriate command:
+
+   - If `$ARGUMENTS` is not provided: `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -c`
+   - Else: `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -cp $ARGUMENTS`
+
 2. Validate all generated files exist
 
 ## Framework Profiles
 
-The following $ARGUMENTS profiles are supported:
+The following `$ARGUMENTS` profiles are supported:
 
 - `CREATIVE` - Artistic and creative collaboration
 - `DEVELOPER` - Software development work
