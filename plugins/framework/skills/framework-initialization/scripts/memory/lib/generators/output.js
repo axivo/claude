@@ -100,42 +100,8 @@ class OutputGenerator {
     const sorted = Object.fromEntries(result.reverse().map(k => [k, data[k]]));
     const output = { [key]: sorted, version: this.config.build.version };
     const outputPath = this.#setOutputPath(filename, false);
-    this.#outputProfiles(output, outputPath);
+    this.output(output, outputPath);
     return outputPath;
-  }
-
-  /**
-   * Outputs profiles to stdout or file
-   *
-   * @private
-   * @param {Object} profiles - Hierarchical profile dictionary
-   * @param {string} outputPath - Output file path (optional, uses stdout if not specified)
-   * @returns {void}
-   * @throws {MemoryBuilderError} When file write fails
-   */
-  #outputProfiles(profiles, outputPath) {
-    if (!outputPath || outputPath === 'stdout') {
-      console.log(JSON.stringify(profiles, null, 2));
-      return;
-    } else {
-      const jsonContent = JSON.stringify(profiles);
-      const resolvedPath = path.resolve(outputPath);
-      const outputDir = path.dirname(resolvedPath);
-      try {
-        if (!fs.existsSync(outputDir)) {
-          fs.mkdirSync(outputDir, { recursive: true });
-        }
-        const fd = fs.openSync(resolvedPath, 'w');
-        try {
-          fs.writeFileSync(fd, jsonContent, { encoding: 'utf8' });
-          fs.fsyncSync(fd);
-        } finally {
-          fs.closeSync(fd);
-        }
-      } catch (error) {
-        throw new MemoryBuilderError(`Failed to write ${resolvedPath} output file: ${error.message}`, 'OUTPUT_WRITE_ERROR');
-      }
-    }
   }
 
   /**
@@ -168,10 +134,11 @@ class OutputGenerator {
    *
    * @param {Object} instructions - Hierarchical instructions dictionary
    * @param {Object} profiles - Hierarchical profile dictionary
-   * @returns {boolean} Success status
+   * @param {boolean} [returnOnly] - Return object instead of printing to stdout
+   * @returns {Object|boolean} Output object if returnOnly, otherwise success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generate(instructions, profiles) {
+  generate(instructions, profiles, returnOnly = false) {
     if (typeof instructions !== 'object' || instructions === null) {
       throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
     }
@@ -194,24 +161,58 @@ class OutputGenerator {
         }
       }
     }
-    return this.generateOutput(paths.sort());
+    return this.generateOutput(paths.sort(), returnOnly);
   }
 
   /**
    * Generates output with profile and timestamp
    *
    * @param {Array} [paths] - Optional array of generated file paths
-   * @returns {boolean} Success status
+   * @param {boolean} [returnOnly] - Return object instead of printing to stdout
+   * @returns {Object|boolean} Output object if returnOnly, otherwise success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generateOutput(paths = null) {
+  generateOutput(paths = null, returnOnly = false) {
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate();
     const profile = this.profileName;
     const output = paths ? { paths, profile, timestamp } : { profile, timestamp };
-    const outputPath = this.#setOutputPath(null, true);
-    this.#outputProfiles(output, outputPath);
+    if (returnOnly) {
+      return output;
+    }
+    this.output(output, 'stdout');
     return true;
+  }
+
+  /**
+   * Outputs data to stdout or file
+   *
+   * @param {Object|Array} data - Data to output
+   * @param {string} outputPath - Output file path ('stdout' for console)
+   * @throws {MemoryBuilderError} When file write fails
+   */
+  output(data, outputPath) {
+    if (!outputPath || outputPath === 'stdout') {
+      console.log(JSON.stringify(data, null, 2));
+      return;
+    }
+    const jsonContent = JSON.stringify(data);
+    const resolvedPath = path.resolve(outputPath);
+    const outputDir = path.dirname(resolvedPath);
+    try {
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+      const fd = fs.openSync(resolvedPath, 'w');
+      try {
+        fs.writeFileSync(fd, jsonContent, { encoding: 'utf8' });
+        fs.fsyncSync(fd);
+      } finally {
+        fs.closeSync(fd);
+      }
+    } catch (error) {
+      throw new MemoryBuilderError(`Failed to write ${resolvedPath} output file: ${error.message}`, 'OUTPUT_WRITE_ERROR');
+    }
   }
 }
 
