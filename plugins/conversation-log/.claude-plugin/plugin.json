@@ -1,0 +1,18 @@
+{
+  "name": "conversation-log",
+  "version": "1.0.0",
+  "description": "Technical session documentation with factual precision",
+  "author": {
+    "name": "AXIVO"
+  },
+  "homepage": "https://axivo.com/claude/",
+  "repository": "https://github.com/axivo/claude",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "documentation",
+    "logging",
+    "session",
+    "technical",
+    "writing"
+  ]
+}

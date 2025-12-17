@@ -1,0 +1,17 @@
+{
+  "name": "brainstorming",
+  "version": "1.0.0",
+  "description": "Technical design collaboration through natural dialogue",
+  "author": {
+    "name": "AXIVO"
+  },
+  "homepage": "https://axivo.com/claude/",
+  "repository": "https://github.com/axivo/claude",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "architecture",
+    "brainstorming",
+    "collaboration",
+    "design"
+  ]
+}
