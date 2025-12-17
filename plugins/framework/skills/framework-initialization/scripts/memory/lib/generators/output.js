@@ -49,9 +49,10 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When zip creation fails
    */
   #createZip(skillName) {
-    const homePath = path.resolve(require('os').homedir(), this.config.build.path.package.output);
-    const skillPath = path.join(homePath, skillName);
-    const zipPath = `${homePath}/${skillName}.zip`;
+    const outputPath = path.resolve(require('os').homedir(), this.config.build.path.package.output);
+    const sourcePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local, this.config.build.version, 'skills');
+    const zipPath = `${outputPath}/${skillName}.zip`;
+    const skillPath = path.join(sourcePath, skillName);
     if (!fs.existsSync(skillPath)) {
       return null;
     }
@@ -63,7 +64,7 @@ class OutputGenerator {
       const exclusions = excludePaths
         .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
-      execSync(`tar -acf "${skillName}.zip" ${exclusions} "${skillName}/"`, { cwd: homePath, stdio: 'pipe' });
+      execSync(`tar -acf "${zipPath}" ${exclusions} "${skillName}/"`, { cwd: sourcePath, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
       throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
