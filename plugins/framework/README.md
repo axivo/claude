@@ -24,12 +24,12 @@ When to use:
 
 ### Specialized Profiles
 
-- **Creative** - Artistic and creative collaboration
-- **Developer** - Software development work
-- **Engineer** - Systems and infrastructure
-- **Humanist** - Philosophy and humanities
-- **Researcher** - Research and analysis
-- **Translator** - Translation and localization
+- **CREATIVE** - Artistic and creative collaboration
+- **DEVELOPER** - Software development work
+- **ENGINEER** - Systems and infrastructure
+- **HUMANIST** - Philosophy and humanities
+- **RESEARCHER** - Research and analysis
+- **TRANSLATOR** - Translation and localization
 
 ### Documentation Templates
 
