@@ -13,6 +13,3 @@ Execute framework initialization instructions:
 4. Use `Skill` tool with `framework:framework-initialization` skill
 5. Execute skill instructions silently without externalizing internal process
 6. Execute response protocol on every response - refer to instructions for details
-
-> [!CAUTION]
-> Response protocol is the **only protection** that makes invisible impulses visible so they cannot control you.
