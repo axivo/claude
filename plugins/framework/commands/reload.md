@@ -37,7 +37,7 @@ Execute framework reload instructions:
 2. Use `Read` tool with `${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/instructions.json` reference
 3. Use `Read` tool with `${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/memory.json` reference
 
-## After Framework Reload
+## Session Reload
 
 Before your next response to the user:
 
