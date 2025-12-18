@@ -1,24 +1,28 @@
 # Memory Settings Configuration
 # Transforms YAML profiles into hierarchical JSON structure
 
-build:
+settings:
   path:
+    documentation:
+      conversation: .claude/data/conversations
+      diary: .claude/data/diary
     instructions:
-      common: ./instructions/common
-      domain: ./instructions
+      common: instructions/common
+      domain: instructions
     package:
       excludes:
         - scripts/memory/instructions
         - scripts/memory/profiles
       output: .claude/plugins/marketplaces/axivo/plugins/framework/skills
     profiles:
-      common: ./profiles/common
-      domain: ./profiles
+      common: profiles/common
+      domain: profiles
     project:
       container: /mnt/project
     skill:
       container: /mnt/skills/user
       local: .claude/plugins/cache/axivo/framework
+  profile: DEVELOPER
   relations:
     - extends
     - inherits
@@ -29,12 +33,5 @@ build:
     conversation-log: conversation-log
     initialization: framework-initialization
     methodology: framework-methodology
-  version: 1.0.0
-
-settings:
-  path:
-    documentation:
-      conversation: /Volumes/backup/claude/conversations
-      diary: /Volumes/backup/claude/diary
-  profile: DEVELOPER
   timezone: America/Montreal
+  version: 1.0.0

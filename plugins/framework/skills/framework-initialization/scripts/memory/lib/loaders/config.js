@@ -8,6 +8,7 @@
  * @license BSD-3-Clause
  */
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const yaml = require('../vendor/js-yaml.min.js');
 const MemoryBuilderError = require('../core/error');
@@ -36,26 +37,27 @@ class ConfigLoader {
    * @throws {MemoryBuilderError} When required fields are missing or invalid
    */
   #validateConfig(config) {
-    if (!config.build) {
-      throw new MemoryBuilderError('Missing required "build" section in configuration', 'ERR_CONFIG_INVALID');
-    }
-    if (!config.build.path || !config.build.path.profiles || !config.build.path.profiles.domain || !config.build.path.profiles.common) {
-      throw new MemoryBuilderError('Missing or invalid "build.path.profiles" in configuration', 'ERR_CONFIG_INVALID');
-    }
-    if (!config.build.path.instructions || !config.build.path.instructions.domain || !config.build.path.instructions.common) {
-      throw new MemoryBuilderError('Missing or invalid "build.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
-    }
-    if (process.env.FRAMEWORK_PACKAGE_OUTPUT) {
-      config.build.path.package.output = process.env.FRAMEWORK_PACKAGE_OUTPUT;
-    }
     if (!config.settings) {
       throw new MemoryBuilderError('Missing required "settings" section in configuration', 'ERR_CONFIG_INVALID');
     }
+    if (!config.settings.path || !config.settings.path.profiles || !config.settings.path.profiles.domain || !config.settings.path.profiles.common) {
+      throw new MemoryBuilderError('Missing or invalid "settings.path.profiles" in configuration', 'ERR_CONFIG_INVALID');
+    }
+    if (!config.settings.path.instructions || !config.settings.path.instructions.domain || !config.settings.path.instructions.common) {
+      throw new MemoryBuilderError('Missing or invalid "settings.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
+    }
+    if (process.env.FRAMEWORK_PACKAGE_OUTPUT) {
+      config.settings.path.package.output = process.env.FRAMEWORK_PACKAGE_OUTPUT;
+    }
     if (process.env.FRAMEWORK_CONVERSATION_OUTPUT) {
       config.settings.path.documentation.conversation = process.env.FRAMEWORK_CONVERSATION_OUTPUT;
+    } else {
+      config.settings.path.documentation.conversation = path.join(os.homedir(), config.settings.path.documentation.conversation);
     }
     if (process.env.FRAMEWORK_DIARY_OUTPUT) {
       config.settings.path.documentation.diary = process.env.FRAMEWORK_DIARY_OUTPUT;
+    } else {
+      config.settings.path.documentation.diary = path.join(os.homedir(), config.settings.path.documentation.diary);
     }
     if (process.env.FRAMEWORK_PROFILE) {
       config.settings.profile = process.env.FRAMEWORK_PROFILE;

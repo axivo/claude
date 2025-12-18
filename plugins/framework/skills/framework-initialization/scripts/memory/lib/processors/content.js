@@ -116,12 +116,6 @@ class ContentProcessor {
       return text;
     }
     let result = text;
-    if (this.config.build) {
-      const buildReplacements = this.#flattenSettings(this.config.build, 'build');
-      for (const [placeholder, value] of Object.entries(buildReplacements)) {
-        result = result.replaceAll(placeholder, value);
-      }
-    }
     if (this.config.settings) {
       const settingsReplacements = this.#flattenSettings(this.config.settings, 'settings');
       for (const [placeholder, value] of Object.entries(settingsReplacements)) {
@@ -169,7 +163,7 @@ class ContentProcessor {
     if (!profileData.relations || !Array.isArray(profileData.relations)) {
       return [];
     }
-    const validRelationTypes = this.config.build.relations;
+    const validRelationTypes = this.config.settings.relations;
     profileData.relations.forEach(relation => {
       if (relation.type && !validRelationTypes.includes(relation.type)) {
         throw new MemoryBuilderError(
@@ -192,7 +186,7 @@ class ContentProcessor {
    * @throws {MemoryBuilderError} When profile not found
    */
   #resolveContentPath(profileName) {
-    const paths = this.config.build.path[this.pathKey];
+    const paths = this.config.settings.path[this.pathKey];
     const domainPath = path.join(
       paths.domain,
       `${profileName.toLowerCase()}.yaml`

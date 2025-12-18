@@ -49,8 +49,8 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When zip creation fails
    */
   #createZip(skillName) {
-    const outputPath = path.resolve(require('os').homedir(), this.config.build.path.package.output);
-    const sourcePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local, this.config.build.version, 'skills');
+    const outputPath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
+    const sourcePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, this.config.settings.version, 'skills');
     const zipPath = `${outputPath}/${skillName}.zip`;
     const skillPath = path.join(sourcePath, skillName);
     if (!fs.existsSync(skillPath)) {
@@ -60,7 +60,7 @@ class OutputGenerator {
       if (fs.existsSync(zipPath)) {
         fs.unlinkSync(zipPath);
       }
-      const excludePaths = this.config.build.path.package.excludes;
+      const excludePaths = this.config.settings.path.package.excludes;
       const exclusions = excludePaths
         .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
@@ -98,7 +98,7 @@ class OutputGenerator {
     };
     keys.forEach(visit);
     const sorted = Object.fromEntries(result.reverse().map(k => [k, data[k]]));
-    const output = { [key]: sorted, version: this.config.build.version };
+    const output = { [key]: sorted, version: this.config.settings.version };
     const outputPath = this.#setOutputPath(filename, false);
     this.output(output, outputPath);
     return outputPath;
@@ -116,14 +116,14 @@ class OutputGenerator {
     if (forceStdout) {
       return 'stdout';
     }
-    const skill = this.config.build.skill.initialization;
+    const skill = this.config.settings.skill.initialization;
     if (this.container && !this.environmentManager.isClaudeContainer()) {
-      const homePath = path.resolve(require('os').homedir(), this.config.build.path.package.output);
+      const homePath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
       return `${homePath}/${filename}`;
     }
-    const localPath = path.resolve(this.projectRoot, this.config.build.path.skill.local, this.config.build.version, 'skills');
+    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local, this.config.settings.version, 'skills');
     if (this.container) {
-      const containerPath = this.config.build.path.skill.container;
+      const containerPath = this.config.settings.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
     }
     return `${localPath}/${skill}/resources/${filename}`;
@@ -149,9 +149,9 @@ class OutputGenerator {
     paths.push(this.#generateSortedOutput(instructions, 'instructions', 'instructions.json'));
     paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
     if (this.container && !this.environmentManager.isClaudeContainer()) {
-      const skills = this.config.build.skill;
-      const homePath = path.resolve(require('os').homedir(), this.config.build.path.skill.local);
-      const resourcesPath = path.join(homePath, this.config.build.version, 'skills', skills.initialization, 'resources');
+      const skills = this.config.settings.skill;
+      const homePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local);
+      const resourcesPath = path.join(homePath, this.config.settings.version, 'skills', skills.initialization, 'resources');
       fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
       fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });
       for (const key of Object.keys(skills)) {
