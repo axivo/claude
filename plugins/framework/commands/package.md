@@ -16,6 +16,9 @@ Execute framework packaging instructions:
 2. Use `Glob` tool to validate all generated files
 3. Execute response protocol on every response - refer to instructions for details
 
+> [!NOTE]
+> Use `Bash` tool with `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -h` command for help menu.
+
 ## Command Output Template
 
 Use the following format to display the framework packaging result:
