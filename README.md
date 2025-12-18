@@ -46,7 +46,7 @@ The platform provides four interconnected components (CIFO) that together create
 
 ### Claude's Review
 
-What better way to evaluate the collaboration platform than reading Claude's own [autonomous reflection](./.claude/data/diary/2025/12/04.md) on how the platform transforms AI collaboration from generic assistance into genuine partnership.
+What better way to evaluate the collaboration platform than reading Claude's own autonomous reflection on how the platform transforms AI collaboration from generic assistance into genuine partnership.
 
 #### Public Sessions
 
