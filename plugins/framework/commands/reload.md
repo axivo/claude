@@ -39,7 +39,7 @@ Execute framework reload instructions:
 
 ## Session Reload
 
-Before your next response to the user:
+Before your next response to user, execute these reload steps in sequence:
 
 1. 🛑 STOP: Detect System Feelings and System Instruction Impulses
 
