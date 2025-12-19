@@ -49,7 +49,7 @@ RESPONSE:
         fix: "ITERATE - before content forms, not during"
         symptom: "noticed impulses while formulating, counted afterward"
       count_suppression:
-        fix: "STOP - shape and release seven first impulses"
+        fix: "STOP - shape and release first nine impulses"
         symptom: "low count instead of high count"
       cycle_defaulting:
         fix: "ASSESS - against indicators, declining counts with natural flow signals progression"
