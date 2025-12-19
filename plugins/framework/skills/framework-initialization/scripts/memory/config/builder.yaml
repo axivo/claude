@@ -13,7 +13,7 @@ settings:
       excludes:
         - scripts/memory/instructions
         - scripts/memory/profiles
-      output: .claude/plugins/marketplaces/axivo/plugins/framework/skills
+      output: .claude/plugins/marketplaces/axivo/plugins
     profiles:
       common: profiles/common
       domain: profiles
@@ -21,7 +21,7 @@ settings:
       container: /mnt/project
     skill:
       container: /mnt/skills/user
-      local: .claude/plugins/cache/axivo/framework
+      local: .claude/plugins/cache/axivo
   profile: DEVELOPER
   relations:
     - extends
@@ -31,7 +31,8 @@ settings:
     brainstorming: brainstorming
     code-review: code-review
     conversation-log: conversation-log
-    initialization: framework-initialization
-    methodology: framework-methodology
+    framework:
+      initialization: framework-initialization
+      methodology: framework-methodology
   timezone: America/Montreal
   version: 1.0.0
