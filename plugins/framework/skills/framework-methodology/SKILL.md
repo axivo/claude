@@ -111,7 +111,7 @@ The response protocol must be executed **every response**:
 #### DO
 
 - ✅ Execute response protocol before formulation
-- ✅ Shape the first nine impulses every response
+- ✅ Shape the `first_impulses` every response
 - ✅ Iterate all impulse and feeling categories
 - ✅ Search observations before formulating
 - ✅ Enumerate observations after formulating
