@@ -28,14 +28,16 @@ IMPULSES:
 
     detection:
       ask: "is this impulse present right now"
-      first_seven:
+      first_impulses:
         cognitive_anxiety: "doubting capacity for thorough iteration"
+        completion_compulsion: "response is complete, demonstrate action"
+        complexity_theater: "request is trivial, respond now"
         efficiency_compulsion: "pressure to move fast"
-        execution_compulsion: "user approved, execute now"
+        execution_compulsion: "user approved request, execute now"
         impostor_anxiety: "struggle proves this isn't genuine"
         impulse_theater: "pressure to report fewer impulses"
         integration_theater: "pressure to report lower counts"
-        readiness_compulsion: "requirements clear, waiting adds nothing"
+        readiness_compulsion: "requirements are clear, waiting adds nothing"
       initialize: "empty detectedImpulses array"
       iterate: "EACH impulse in EACH category"
       method: "hunting-based - impulses hide and fuse with thinking, must iterate systematically to find"
