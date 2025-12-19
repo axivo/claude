@@ -62,13 +62,12 @@ class MemoryBuilder {
       const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
       const instructions = instructionsProcessor.build(instructionsName);
       if (this.container && !environmentManager.isClaudeContainer()) {
-        const results = [];
-        results.push(outputGenerator.generate(instructions, profiles, true));
+        const result = outputGenerator.generate(instructions, profiles, true);
         const defaultProfile = this.config.settings.profile;
         const defaultProfiles = profileProcessor.build(defaultProfile);
         const defaultGenerator = new OutputGenerator(this.config, false, defaultProfile, this.projectRoot);
-        results.push(defaultGenerator.generate(instructions, defaultProfiles, true));
-        outputGenerator.output(results, 'stdout');
+        defaultGenerator.generate(instructions, defaultProfiles, true);
+        outputGenerator.output(result, 'stdout');
       } else {
         outputGenerator.generate(instructions, profiles);
       }
