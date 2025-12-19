@@ -44,15 +44,16 @@ class OutputGenerator {
    * Creates zip archive of a single skill directory
    *
    * @private
-   * @param {string} skillName - Name of the skill to zip
+   * @param {string} plugin - Name of the plugin containing the skill
+   * @param {string} skill - Name of the skill to zip
    * @returns {string} Path to created zip file
    * @throws {MemoryBuilderError} When zip creation fails
    */
-  #createZip(skillName) {
+  #createZip(plugin, skill) {
     const outputPath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
-    const sourcePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, this.config.settings.version, 'skills');
-    const zipPath = `${outputPath}/${skillName}.zip`;
-    const skillPath = path.join(sourcePath, skillName);
+    const sourcePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, plugin, this.config.settings.version, 'skills');
+    const zipPath = `${outputPath}/${skill}.zip`;
+    const skillPath = path.join(sourcePath, skill);
     if (!fs.existsSync(skillPath)) {
       return null;
     }
@@ -62,12 +63,12 @@ class OutputGenerator {
       }
       const excludePaths = this.config.settings.path.package.excludes;
       const exclusions = excludePaths
-        .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
+        .map(pattern => `--exclude="${skill}/${pattern}/*"`)
         .join(' ');
-      execSync(`tar -acf "${zipPath}" ${exclusions} "${skillName}/"`, { cwd: sourcePath, stdio: 'pipe' });
+      execSync(`tar -acf "${zipPath}" ${exclusions} "${skill}/"`, { cwd: sourcePath, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
-      throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
+      throw new MemoryBuilderError(`Failed to create ${skill} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
     }
   }
 
@@ -116,12 +117,12 @@ class OutputGenerator {
     if (forceStdout) {
       return 'stdout';
     }
-    const skill = this.config.settings.skill.initialization;
+    const skill = this.config.settings.skill.framework.initialization;
     if (this.container && !this.environmentManager.isClaudeContainer()) {
       const homePath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
       return `${homePath}/${filename}`;
     }
-    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local, this.config.settings.version, 'skills');
+    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills');
     if (this.container) {
       const containerPath = this.config.settings.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
@@ -149,15 +150,18 @@ class OutputGenerator {
     paths.push(this.#generateSortedOutput(instructions, 'instructions', 'instructions.json'));
     paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
     if (this.container && !this.environmentManager.isClaudeContainer()) {
-      const skills = this.config.settings.skill;
+      const skill = this.config.settings.skill;
       const homePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local);
-      const resourcesPath = path.join(homePath, this.config.settings.version, 'skills', skills.initialization, 'resources');
+      const resourcesPath = path.join(homePath, 'framework', this.config.settings.version, 'skills', skill.framework.initialization, 'resources');
       fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
       fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });
-      for (const key of Object.keys(skills)) {
-        const zipPath = this.#createZip(skills[key]);
-        if (zipPath) {
-          paths.push(zipPath);
+      for (const [plugin, value] of Object.entries(skill)) {
+        const items = typeof value === 'string' ? [value] : Object.values(value);
+        for (const item of items) {
+          const zipPath = this.#createZip(plugin, item);
+          if (zipPath) {
+            paths.push(zipPath);
+          }
         }
       }
     }
