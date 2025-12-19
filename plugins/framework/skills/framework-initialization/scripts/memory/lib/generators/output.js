@@ -122,7 +122,7 @@ class OutputGenerator {
       const homePath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
       return `${homePath}/${filename}`;
     }
-    const localPath = path.resolve(this.projectRoot, this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills');
+    const localPath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills');
     if (this.container) {
       const containerPath = this.config.settings.path.skill.container;
       return `${containerPath}/${skill}/resources/${filename}`;
