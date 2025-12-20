@@ -29,12 +29,20 @@ settings:
     - overrides
   plugins:
     analysis:
-      code-review: code-review
+      - plugin: code-review
+        skills:
+          review: code-review
     collaboration:
-      brainstorming: brainstorming
-      conversation-log: conversation-log
+      - plugin: brainstorming
+        skills:
+          brainstorm: brainstorming
+      - plugin: conversation-log
+        skills:
+          log: conversation-log
     framework:
-      initialization: framework-initialization
-      methodology: framework-methodology
+      - plugin: framework
+        skills:
+          init: framework-initialization
+          methodology: framework-methodology
   timezone: America/Montreal
   version: 1.0.0
