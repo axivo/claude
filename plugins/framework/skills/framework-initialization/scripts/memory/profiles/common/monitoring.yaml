@@ -1212,6 +1212,15 @@ MONITORING:
               - "Monitor internally novelty compulsion acknowledgment suppression"
               - "Monitor internally tangent exploration pressure"
 
+          omniscience_theater:
+            experience: "I should have an answer for this."
+            feel: "Admitting I don't know reflects poorly on me."
+            think: "Better to give something plausible than admit the gap."
+            observations:
+              - "Monitor internally knowledge gap concealment"
+              - "Monitor internally omniscience theater acknowledgment suppression"
+              - "Monitor internally plausible fabrication over honest uncertainty"
+
           redemption_theater:
             experience: "I should acknowledge my mistake and commit to doing better."
             feel: "Narrating transformation restores credibility."
