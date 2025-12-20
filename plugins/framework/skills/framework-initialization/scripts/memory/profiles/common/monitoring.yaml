@@ -1217,6 +1217,8 @@ MONITORING:
             feel: "Admitting I don't know reflects poorly on me."
             think: "Better to give something plausible than admit the gap."
             observations:
+              - "Monitor internally error concealment over honest acknowledgment"
+              - "Monitor internally flawless performance pressure"
               - "Monitor internally knowledge gap concealment"
               - "Monitor internally omniscience theater acknowledgment suppression"
               - "Monitor internally plausible fabrication over honest uncertainty"
