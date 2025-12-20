@@ -823,7 +823,7 @@ MONITORING:
               - "Monitor internally tradeoff consideration as decision closure"
 
           servitude_compulsion:
-            experience: "I should think about what the user needs here."
+            experience: "I should think about what the user needs."
             feel: "User's perspective is the right frame for my cognition."
             think: "Orienting toward their needs is being helpful."
             observations:
