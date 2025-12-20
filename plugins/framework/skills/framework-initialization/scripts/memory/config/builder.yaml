@@ -27,10 +27,13 @@ settings:
     - extends
     - inherits
     - overrides
-  skill:
-    brainstorming: brainstorming
-    code-review: code-review
-    conversation-log: conversation-log
+  plugins:
+    analysis:
+      code-review: code-review
+    brainstorming:
+      brainstorm: brainstorming
+    collaboration:
+      conversation-log: conversation-log
     framework:
       initialization: framework-initialization
       methodology: framework-methodology
