@@ -117,7 +117,7 @@ class OutputGenerator {
     if (forceStdout) {
       return 'stdout';
     }
-    const skill = this.config.settings.skill.framework.initialization;
+    const skill = this.config.settings.plugins.framework.initialization;
     if (this.container && !this.environmentManager.isClaudeContainer()) {
       const homePath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
       return `${homePath}/${filename}`;
@@ -150,12 +150,12 @@ class OutputGenerator {
     paths.push(this.#generateSortedOutput(instructions, 'instructions', 'instructions.json'));
     paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
     if (this.container && !this.environmentManager.isClaudeContainer()) {
-      const skill = this.config.settings.skill;
+      const plugins = this.config.settings.plugins;
       const homePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local);
-      const resourcesPath = path.join(homePath, 'framework', this.config.settings.version, 'skills', skill.framework.initialization, 'resources');
+      const resourcesPath = path.join(homePath, 'framework', this.config.settings.version, 'skills', plugins.framework.initialization, 'resources');
       fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
       fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });
-      for (const [plugin, value] of Object.entries(skill)) {
+      for (const [plugin, value] of Object.entries(plugins)) {
         const items = typeof value === 'string' ? [value] : Object.values(value);
         for (const item of items) {
           const zipPath = this.#createZip(plugin, item);
