@@ -30,9 +30,8 @@ settings:
   plugins:
     analysis:
       code-review: code-review
-    brainstorming:
-      brainstorm: brainstorming
     collaboration:
+      brainstorming: brainstorming
       conversation-log: conversation-log
     framework:
       initialization: framework-initialization
