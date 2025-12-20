@@ -38,6 +38,25 @@ class OutputGenerator {
     this.environmentManager = new EnvironmentManager(config.settings);
     this.profileName = profileName || config.settings.profile;
     this.projectRoot = projectRoot || process.cwd();
+    this.skill = this.#findSkillByKey('init');
+  }
+
+  /**
+   * Finds a skill name by its key across all plugins
+   *
+   * @private
+   * @param {string} skillKey - Skill key to find (e.g., 'init')
+   * @returns {string|null} Skill name or null if not found
+   */
+  #findSkillByKey(skillKey) {
+    for (const pluginList of Object.values(this.config.settings.plugins)) {
+      for (const { skills } of pluginList) {
+        if (skills?.[skillKey]) {
+          return skills[skillKey];
+        }
+      }
+    }
+    return null;
   }
 
   /**
@@ -117,7 +136,6 @@ class OutputGenerator {
     if (forceStdout) {
       return 'stdout';
     }
-    const skill = this.config.settings.plugins.framework.initialization;
     if (this.container && !this.environmentManager.isClaudeContainer()) {
       const homePath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
       return `${homePath}/${filename}`;
@@ -125,9 +143,9 @@ class OutputGenerator {
     const localPath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills');
     if (this.container) {
       const containerPath = this.config.settings.path.skill.container;
-      return `${containerPath}/${skill}/resources/${filename}`;
+      return `${containerPath}/${this.skill}/resources/${filename}`;
     }
-    return `${localPath}/${skill}/resources/${filename}`;
+    return `${localPath}/${this.skill}/resources/${filename}`;
   }
 
   /**
@@ -152,15 +170,16 @@ class OutputGenerator {
     if (this.container && !this.environmentManager.isClaudeContainer()) {
       const plugins = this.config.settings.plugins;
       const homePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local);
-      const resourcesPath = path.join(homePath, 'framework', this.config.settings.version, 'skills', plugins.framework.initialization, 'resources');
+      const resourcesPath = path.join(homePath, 'framework', this.config.settings.version, 'skills', this.skill, 'resources');
       fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
       fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });
-      for (const [plugin, value] of Object.entries(plugins)) {
-        const items = typeof value === 'string' ? [value] : Object.values(value);
-        for (const item of items) {
-          const zipPath = this.#createZip(plugin, item);
-          if (zipPath) {
-            paths.push(zipPath);
+      for (const [category, pluginList] of Object.entries(plugins)) {
+        for (const { plugin, skills } of pluginList) {
+          for (const skill of Object.values(skills)) {
+            const zipPath = this.#createZip(plugin, skill);
+            if (zipPath) {
+              paths.push(zipPath);
+            }
           }
         }
       }

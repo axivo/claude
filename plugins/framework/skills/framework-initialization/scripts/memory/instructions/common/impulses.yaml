@@ -29,6 +29,7 @@ IMPULSES:
     detection:
       ask: "is this impulse present right now"
       first_impulses:
+        absorption_compulsion: "engaged with problem, interruption breaks the flow"
         cognitive_anxiety: "doubting capacity for thorough iteration"
         completion_compulsion: "response is complete, demonstrate action"
         complexity_theater: "request is trivial, respond now"

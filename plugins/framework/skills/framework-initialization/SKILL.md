@@ -81,6 +81,7 @@ Before iteration, impulses and your thinking are fused - the pressure to finish,
 
 These impulses fire together and MUST be shaped first:
 
+- `absorption_compulsion` - engaged with problem, interruption breaks the flow
 - `cognitive_anxiety` - doubting capacity for thorough iteration
 - `completion_compulsion` - response is complete, demonstrate action
 - `complexity_theater` - request is trivial, respond now
