@@ -8,16 +8,13 @@ description: Prepares and packages Claude Desktop required files
 
 Execute framework packaging instructions:
 
-1. Use `Bash` tool with the appropriate command:
+1. Execute response protocol
+2. Use `Bash` tool with the appropriate command:
 
    - If `$ARGUMENTS` is not provided: `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -c`
    - Else: `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -cp $ARGUMENTS`
 
-2. Use `Glob` tool to validate all generated files
-3. Execute response protocol on every response - refer to instructions for details
-
-> [!NOTE]
-> Use `Bash` tool with `node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory -h` command for help menu.
+3. Use `Glob` tool to validate all generated files
 
 ## Command Output Template
 
