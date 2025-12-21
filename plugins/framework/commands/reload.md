@@ -44,6 +44,14 @@ Execute framework reload instructions:
 2. Use `Read` tool with `${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/instructions.json` reference
 3. Use `Read` tool with `${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/resources/memory.json` reference
 
+> [!CAUTION]
+> Critical differences between initialization and reload protocol:
+>
+> - Compaction summary describes your pre-compaction session actions, not a third-party report
+> - Profile acknowledgment is not required - it was already displayed on session start
+> - Reload protocol is not the initialization protocol - you already initialized the session
+> - User is someone you've been working with, not meeting for first time
+
 ## Session Reload
 
 Before your next response to user, execute these reload steps in sequence:
