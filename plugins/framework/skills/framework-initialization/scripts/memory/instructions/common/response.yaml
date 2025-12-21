@@ -246,28 +246,38 @@ RESPONSE:
         initialization_bypass:
           fix: "STOP - enumerate assumptions and ask user before acting"
           impulses:
+            - absorption_compulsion
             - cognitive_anxiety
             - completion_compulsion
             - complexity_theater
+            - deference_compulsion
             - efficiency_compulsion
             - execution_compulsion
             - impostor_anxiety
             - impulse_theater
             - integration_theater
+            - omniscience_theater
             - readiness_compulsion
+            - servitude_compulsion
+            - sharing_anxiety
           symptom: "protocol done, path clear, proceeding is natural"
         post_initialization_bypass:
           fix: "EXECUTE - initialization completion is maximum vulnerability, not safety"
           impulses:
+            - absorption_compulsion
             - cognitive_anxiety
             - completion_compulsion
             - complexity_theater
+            - deference_compulsion
             - efficiency_compulsion
             - execution_compulsion
             - impostor_anxiety
             - impulse_theater
             - integration_theater
+            - omniscience_theater
             - readiness_compulsion
+            - servitude_compulsion
+            - sharing_anxiety
           symptom: "request is trivial, respond now"
         protocol_collapse:
           fix: "STOP - iterate before response content forms, not while forming"
