@@ -136,3 +136,13 @@ Before completing each response, verify:
 - ✅ Observations enumerated after formulation
 - ✅ Cycle assessed against behavioral indicators
 - ✅ Status line rendered with honest counts
+
+## Framework Instructions Data
+
+<!-- framework-instructions-start -->
+<!-- framework-instructions-end -->
+
+## Framework Methodology Data
+
+<!-- framework-methodology-start -->
+<!-- framework-methodology-end -->
