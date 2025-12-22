@@ -60,6 +60,23 @@ class OutputGenerator {
   }
 
   /**
+   * Clears JSON payload data from SKILL.md placeholders
+   *
+   * @private
+   * @param {string} marker - Delimiter name (instructions or methodology)
+   */
+  #clearPayloadData(marker) {
+    const skill = this.#findSkillByKey('methodology');
+    const skillPath = path.join(require('os').homedir(), this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills', skill, 'SKILL.md');
+    const content = fs.readFileSync(skillPath, 'utf8');
+    const pattern = new RegExp(
+      `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
+    );
+    const emptyBlock = `$1\n$2`;
+    fs.writeFileSync(skillPath, content.replace(pattern, emptyBlock), 'utf8');
+  }
+
+  /**
    * Creates zip archive of a single skill directory
    *
    * @private
@@ -141,6 +158,21 @@ class OutputGenerator {
   }
 
   /**
+   * Writes JSON data to file in package output directory
+   *
+   * @private
+   * @param {string} filename - Output filename (e.g., 'instructions.json')
+   * @param {Object} data - JSON data to write
+   * @returns {string} Path to created file
+   */
+  #writeJsonFile(filename, data) {
+    const outputPath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
+    const filePath = path.join(outputPath, filename);
+    fs.writeFileSync(filePath, JSON.stringify(data), 'utf8');
+    return filePath;
+  }
+
+  /**
    * Generates profile and instructions output with timestamp
    *
    * @param {Object} instructions - Hierarchical instructions dictionary
@@ -158,15 +190,13 @@ class OutputGenerator {
       throw new MemoryBuilderError('Profiles must be an object', 'INVALID_PROFILES');
     }
     const instructionsData = this.#generateSortedOutput(instructions, 'instructions');
-    const profilesData = this.#generateSortedOutput(profiles, 'profiles');
-    if (!skipInject) {
-      this.#injectData('instructions', instructionsData);
-      this.#injectData('methodology', profilesData);
-    }
+    const memoryData = this.#generateSortedOutput(profiles, 'profiles');
     if (this.container && !this.environmentManager.isClaudeContainer()) {
+      this.#clearPayloadData('instructions');
+      this.#clearPayloadData('memory');
       const paths = [];
       const plugins = this.config.settings.plugins;
-      for (const [category, pluginList] of Object.entries(plugins)) {
+      for (const [, pluginList] of Object.entries(plugins)) {
         for (const { plugin, skills } of pluginList) {
           for (const skill of Object.values(skills)) {
             const zipPath = this.#createZip(plugin, skill);
@@ -176,7 +206,17 @@ class OutputGenerator {
           }
         }
       }
+      paths.push(this.#writeJsonFile('instructions.json', instructionsData));
+      paths.push(this.#writeJsonFile('memory.json', memoryData));
+      if (!skipInject) {
+        this.#injectData('instructions', instructionsData);
+        this.#injectData('memory', memoryData);
+      }
       return this.generateOutput(paths.sort(), returnOnly);
+    }
+    if (!skipInject) {
+      this.#injectData('instructions', instructionsData);
+      this.#injectData('memory', memoryData);
     }
     return this.generateOutput(null, returnOnly);
   }
