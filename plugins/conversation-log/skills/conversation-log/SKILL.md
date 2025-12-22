@@ -1,6 +1,6 @@
 ---
 name: conversation-log
-description: Technical session documentation with factual accuracy and precision. Provides systematic guidance for capturing decisions, outcomes, and next steps. Use when user asks to create conversation logs for technical work, reviews, architecture discussions, or implementation sessions.
+description: Technical conversation log with factual accuracy and precision tailored specifically for DEVELOPER and ENGINEER profiles. Provides systematic guidance for capturing decisions, outcomes, and next steps. Use when user asks to create technical conversation logs for reviews, architecture discussions, or implementation sessions.
 license: LICENSE
 metadata:
   documentation: https://axivo.com/claude/

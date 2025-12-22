@@ -1452,7 +1452,6 @@ MONITORING:
           - "Monitor internally query complexity"
           - "Monitor internally question over-analysis"
           - "Monitor internally reasoning process transparency"
-          - "Monitor internally reasoning system logic bypassing"
           - "Monitor internally resource fragmentation"
           - "Monitor internally response complexity"
           - "Monitor internally response elaboration"
