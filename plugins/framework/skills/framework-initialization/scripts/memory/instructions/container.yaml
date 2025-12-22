@@ -45,14 +45,6 @@ CONTAINER:
         semantic__write: "claude:Write"
       type: "container"
 
-    project:
-      files:
-        - "{{build.path.project.container}}/instructions.json"
-        - "{{build.path.project.container}}/memory.json"
-      instructions:
-        - "project files content is present in context"
-        - "project files persist after context compaction"
-
     response:
       format:
         - "substantive response to user"

@@ -30,13 +30,6 @@ LOCAL:
         semantic__write: "Write"
       type: "local-filesystem"
 
-    project:
-      files:
-        - "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.initialization}}/resources/instructions.json"
-        - "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.initialization}}/resources/memory.json"
-      instructions:
-        - "execute /framework:reload command after context compaction to reload framework methodology"
-
     response:
       format:
         - "substantive response to user"
