@@ -92,7 +92,7 @@ class OutputGenerator {
   }
 
   /**
-   * Generates inheritance-ordered output and writes to file
+   * Generates inheritance-ordered output
    *
    * Uses reverse topological sort so active profile appears first, then parents.
    * This mirrors instance cognition: start from active profile, traverse to foundations.
@@ -100,10 +100,9 @@ class OutputGenerator {
    * @private
    * @param {Object} data - Data to sort and output
    * @param {string} key - Wrapper key for output object
-   * @param {string} filename - Output filename
-   * @returns {string} Output path
+   * @returns {Object} Sorted output object with version
    */
-  #generateSortedOutput(data, key, filename) {
+  #generateSortedOutput(data, key) {
     const keys = Object.keys(data);
     const visited = new Set();
     const result = [];
@@ -118,34 +117,27 @@ class OutputGenerator {
     };
     keys.forEach(visit);
     const sorted = Object.fromEntries(result.reverse().map(k => [k, data[k]]));
-    const output = { [key]: sorted, version: this.config.settings.version };
-    const outputPath = this.#setOutputPath(filename, false);
-    this.output(output, outputPath);
-    return outputPath;
+    return { [key]: sorted, version: this.config.settings.version };
   }
 
   /**
-   * Sets output path based on environment
+   * Injects JSON data into SKILL.md between delimiters
    *
    * @private
-   * @param {string} filename - Output filename (e.g., 'instructions.json' or 'memory.json')
-   * @param {boolean} forceStdout - Force stdout output regardless of environment
-   * @returns {string} Output path ('stdout' or file path)
+   * @param {string} marker - Delimiter name (instructions or methodology)
+   * @param {Object} data - JSON data to inject
    */
-  #setOutputPath(filename, forceStdout = false) {
-    if (forceStdout) {
-      return 'stdout';
-    }
-    if (this.container && !this.environmentManager.isClaudeContainer()) {
-      const homePath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
-      return `${homePath}/${filename}`;
-    }
-    const localPath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills');
-    if (this.container) {
-      const containerPath = this.config.settings.path.skill.container;
-      return `${containerPath}/${this.skill}/resources/${filename}`;
-    }
-    return `${localPath}/${this.skill}/resources/${filename}`;
+  #injectData(marker, data) {
+    const skill = this.#findSkillByKey('methodology');
+    const skillPath = (this.container && this.environmentManager.isClaudeContainer())
+      ? path.join(this.config.settings.path.skill.container, skill, 'SKILL.md')
+      : path.join(require('os').homedir(), this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills', skill, 'SKILL.md');
+    const content = fs.readFileSync(skillPath, 'utf8');
+    const pattern = new RegExp(
+      `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
+    );
+    const jsonBlock = `$1\n\`\`\`json\n${JSON.stringify(data)}\n\`\`\`\n$2`;
+    fs.writeFileSync(skillPath, content.replace(pattern, jsonBlock), 'utf8');
   }
 
   /**
@@ -154,25 +146,26 @@ class OutputGenerator {
    * @param {Object} instructions - Hierarchical instructions dictionary
    * @param {Object} profiles - Hierarchical profile dictionary
    * @param {boolean} [returnOnly] - Return object instead of printing to stdout
+   * @param {boolean} [skipInject] - Skip injecting data into SKILL.md
    * @returns {Object|boolean} Output object if returnOnly, otherwise success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generate(instructions, profiles, returnOnly = false) {
+  generate(instructions, profiles, returnOnly = false, skipInject = false) {
     if (typeof instructions !== 'object' || instructions === null) {
       throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
     }
     if (typeof profiles !== 'object' || profiles === null) {
       throw new MemoryBuilderError('Profiles must be an object', 'INVALID_PROFILES');
     }
-    const paths = [];
-    paths.push(this.#generateSortedOutput(instructions, 'instructions', 'instructions.json'));
-    paths.push(this.#generateSortedOutput(profiles, 'profiles', 'memory.json'));
+    const instructionsData = this.#generateSortedOutput(instructions, 'instructions');
+    const profilesData = this.#generateSortedOutput(profiles, 'profiles');
+    if (!skipInject) {
+      this.#injectData('instructions', instructionsData);
+      this.#injectData('methodology', profilesData);
+    }
     if (this.container && !this.environmentManager.isClaudeContainer()) {
+      const paths = [];
       const plugins = this.config.settings.plugins;
-      const homePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local);
-      const resourcesPath = path.join(homePath, 'framework', this.config.settings.version, 'skills', this.skill, 'resources');
-      fs.rmSync(path.join(resourcesPath, 'instructions.json'), { force: true });
-      fs.rmSync(path.join(resourcesPath, 'memory.json'), { force: true });
       for (const [category, pluginList] of Object.entries(plugins)) {
         for (const { plugin, skills } of pluginList) {
           for (const skill of Object.values(skills)) {
@@ -183,8 +176,9 @@ class OutputGenerator {
           }
         }
       }
+      return this.generateOutput(paths.sort(), returnOnly);
     }
-    return this.generateOutput(paths.sort(), returnOnly);
+    return this.generateOutput(null, returnOnly);
   }
 
   /**

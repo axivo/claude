@@ -65,8 +65,9 @@ class MemoryBuilder {
         const result = outputGenerator.generate(instructions, profiles, true);
         const defaultProfile = this.config.settings.profile;
         const defaultProfiles = profileProcessor.build(defaultProfile);
+        const localInstructions = instructionsProcessor.build('LOCAL');
         const defaultGenerator = new OutputGenerator(this.config, false, defaultProfile, this.projectRoot);
-        defaultGenerator.generate(instructions, defaultProfiles, true);
+        defaultGenerator.generate(localInstructions, defaultProfiles, true);
         outputGenerator.output(result, 'stdout');
       } else {
         outputGenerator.generate(instructions, profiles);
