@@ -157,7 +157,7 @@ When context approaches capacity, compaction summarizes conversation history. Th
 <!-- framework-instructions-start -->
 <!-- framework-instructions-end -->
 
-## Framework Methodology Data
+## Framework Memory Data
 
-<!-- framework-methodology-start -->
-<!-- framework-methodology-end -->
+<!-- framework-memory-start -->
+<!-- framework-memory-end -->

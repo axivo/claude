@@ -141,7 +141,17 @@ class ContentProcessor {
     const result = {};
     for (const [key, value] of Object.entries(obj)) {
       const path = `${prefix}.${key}`;
-      if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      if (key === 'plugins' && typeof value === 'object') {
+        for (const [, pluginList] of Object.entries(value)) {
+          for (const { skills } of pluginList) {
+            if (skills) {
+              for (const [skillKey, skillValue] of Object.entries(skills)) {
+                result[`{{settings.skill.${skillKey}}}`] = skillValue;
+              }
+            }
+          }
+        }
+      } else if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
         Object.assign(result, this.#flattenSettings(value, path));
       } else {
         result[`{{${path}}}`] = value;

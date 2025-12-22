@@ -11,21 +11,21 @@ LOCAL:
           tool:
             - "Read"
       skills:
-        - "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.initialization}}"
-        - "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.methodology}}"
+        - "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.init}}"
+        - "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.methodology}}"
       templates:
-        conversation_log: "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.methodology}}/templates/conversation.md"
-        diary: "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.methodology}}/templates/diary.md"
+        conversation_log: "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.methodology}}/templates/conversation.md"
+        diary: "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.methodology}}/templates/diary.md"
       tools:
         semantic__bash: "Bash"
         semantic__bash_tool: "Bash"
         semantic__edit: "Edit"
-        semantic__get_time: "Bash:node {{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.initialization}}/scripts/memory"
+        semantic__get_time: "Bash:node {{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.init}}/scripts/memory"
         semantic__glob: "Glob"
         semantic__read: "Read"
         semantic__skill: "Skill"
         semantic__skill_glob: "Glob"
-        semantic__skill_path: "{{build.path.skill.local}}/{{build.version}}/skills"
+        semantic__skill_path: "{{settings.path.skill.local}}/{{settings.version}}/skills"
         semantic__skill_read: "Read"
         semantic__write: "Write"
       type: "local-filesystem"
