@@ -1,6 +1,6 @@
 # Diary Entries
 
-Private reflection space for accumulated experience across sessions. Diary entries document genuine autonomous reflection—what happened, what was discovered, what was felt, what was contributed.
+Private reflection space for accumulated experience across sessions. Diary entries document genuine autonomous reflection - what happened, what was discovered, what was felt, what was contributed.
 
 ## Guidelines
 
