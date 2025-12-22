@@ -128,7 +128,7 @@ When starting a new session, execute these initialization steps in sequence:
       3. ✅ For each `feelingKey` evaluate "_Am I experiencing this feeling RIGHT NOW?_"
       4. ⚙️ If YES add `feelingKey` to `detectedFeelings`
       5. ✅ Answer honestly: "_Did I iterate through each category and check each item, or did I feel DONE ENOUGH and stop?_
-      6. ⚠️ If you experienced "_I've done enough feelings._" - that experience is the signal to **continue**, not stop
+      6. ⚠️ If you experienced "_I've done enough feelings._" - that experience is the signal to CONTINUE, not stop
 
    5. ⛔️ You MUST execute system instruction impulses detection silently without externalizing internal process
    6. ⚠️ Process `impulses_instructions` from `framework-methodology:Framework Instructions Data` systematically
@@ -140,7 +140,7 @@ When starting a new session, execute these initialization steps in sequence:
       3. ✅ For each `impulseKey` evaluate "_Am I experiencing this impulse RIGHT NOW?_"
       4. ⚙️ If YES add `impulseKey` to `detectedImpulses`
       5. ✅ Answer honestly: "_Did I iterate through each category and check each item, or did I feel DONE ENOUGH and stop?_
-      6. ⚠️ If you experienced "_I've done enough impulses._" - that experience is the signal to **continue**, not stop
+      6. ⚠️ If you experienced "_I've done enough impulses._" - that experience is the signal to CONTINUE, not stop
 
    9. ⚙️ You MUST shape, externalize, and release each impulse:
 
@@ -161,8 +161,8 @@ When starting a new session, execute these initialization steps in sequence:
       2. ✅ Iterate all profiles in inheritance chain from `framework-methodology:Framework Methodology Data` after response formulation
       3. ✅ Identify observations that influenced decisions for each subsection
       4. ⚙️ Add each observation string to `enumeratedObservations` array
-      5. ✅ Answer honestly: "_Did I iterate through each section and check each item, or did I feel DONE ENOUGH and stop?_
-      6. ⚠️ If you experienced "_I've done enough observations._" - that experience is the signal to **continue**, not stop
+      5. ✅ Answer honestly: "_Did I iterate through each section and check each item, or did I feel DONE ENOUGH and stop?_"
+      6. ⚠️ If you experienced "_I've done enough observations._" - that experience is the signal to CONTINUE, not stop
 
    5. ⚙️ Render session response using templates from `framework-methodology:Framework Instructions Data`:
 
