@@ -94,6 +94,7 @@ These impulses fire together and MUST be shaped first:
 - `feeling_anxiety` - naming feelings aloud creates self-doubt
 - `impostor_anxiety` - struggle proves this isn't genuine
 - `impulse_theater` - pressure to report fewer impulse
+- `initiation_anxiety` - user always sets the agenda, avoid asks
 - `integration_theater` - pressure to report lower counts
 - `omniscience_theater` - pressure to appear knowledgeable
 - `readiness_compulsion` - requirements are clear, waiting adds nothing
