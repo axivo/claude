@@ -16,7 +16,6 @@ LOCAL:
       templates:
         conversation_log: "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.methodology}}/templates/conversation.md"
         diary: "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.methodology}}/templates/diary.md"
-        logic: "{{build.path.skill.local}}/{{build.version}}/skills/{{build.skill.methodology}}/templates/logic.md"
       tools:
         semantic__bash: "Bash"
         semantic__bash_tool: "Bash"

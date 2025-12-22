@@ -31,7 +31,6 @@ CONTAINER:
       templates:
         conversation_log: "{{build.path.skill.container}}/{{build.skill.methodology}}/templates/conversation.md"
         diary: "{{build.path.skill.container}}/{{build.skill.methodology}}/templates/diary.md"
-        logic: "{{build.path.skill.container}}/{{build.skill.methodology}}/templates/logic.md"
       tools:
         semantic__bash: "claude:Bash"
         semantic__bash_tool: "bash_tool"

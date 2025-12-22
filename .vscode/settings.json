@@ -47,11 +47,6 @@
     120
   ],
   "editor.showUnused": true,
-  "files.associations": {
-    "**/logic/**/*.json": "jsonl",
-    "**/graph.json": "jsonl",
-    "**/renovate.json5": "jsonc"
-  },
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true

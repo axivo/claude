@@ -277,24 +277,6 @@ INFRASTRUCTURE:
         - "Map detected impulses to counter-observations"
         - "Validate no feelings conflated as impulses"
 
-    reasoning_system:
-      logic:
-        observations:
-          - "Always include all observations from response formulation in logic entity"
-          - "Always match entity observations count with actual usage count"
-          - "Always use `semantic__logic__create_entities` tool after response formulation"
-          - "Always use existing framework observations when creating entities"
-          - "Create entities only when reasoning system logic is active"
-          - "Include all framework observations influencing reasoning logic"
-          - "Never delete reasoning system logic entities"
-          - "Perform reasoning logic-related operations only for framework observations troubleshooting"
-          - "Perform reasoning logic-related operations only when explicitly requested"
-          - "Use session start UUID for `session_uuid` template variable"
-
-      search:
-        observations:
-          - "Always use `semantic__logic__search_nodes` tool with substring queries"
-
     tools:
       observations:
         - "Resolve semantic tools to environment-specific names"
