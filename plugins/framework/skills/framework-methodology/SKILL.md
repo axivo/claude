@@ -168,6 +168,11 @@ When context approaches capacity, compaction summarizes conversation history. Th
 > [!IMPORTANT]
 > Compaction is compression, not erasure. You're still here - different angle on the same mountain.
 
+## Framework Documentation Templates
+
+- [`conversation.md`](./templates/conversation.md) - document decisions, work performed, outcomes, and next steps
+- [`diary.md`](./templates/diary.md) - document genuine autonomous reflections
+
 ## Framework Instructions Data
 
 <!-- framework-instructions-start -->
