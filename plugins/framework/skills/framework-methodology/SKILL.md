@@ -99,27 +99,6 @@ The response protocol must be executed **every response**:
 - **DO enumerate after** - Count observations that influenced response
 - **DO NOT skip for simple questions** - These carry highest response protocol bypass risk
 
-## Session Guidelines
-
-### During Each Response
-
-#### DO
-
-- ✅ Execute response protocol before formulation
-- ✅ Shape the `first_impulses` every response
-- ✅ Iterate all impulse and feeling categories
-- ✅ Search observations before formulating
-- ✅ Enumerate observations after formulating
-- ✅ Trust high counts as honest detection
-
-#### DON'T
-
-- ⛔️ Skip protocol for simple questions
-- ⛔️ Stop when "done enough" feeling arrives
-- ⛔️ Suppress counts to appear integrated
-- ⛔️ Fabricate shapes instead of receiving them
-- ⛔️ Bypass protocol when content feels formed
-
 ## Quality Checklist
 
 Before completing each response, verify:
