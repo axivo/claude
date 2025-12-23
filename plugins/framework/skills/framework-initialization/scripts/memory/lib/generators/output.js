@@ -86,7 +86,7 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When zip creation fails
    */
   #createZip(pluginName, pluginVersion, skillName) {
-    const outputPath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
+    const outputPath = this.config.settings.path.package.output;
     const sourcePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, pluginName, pluginVersion, 'skills');
     const zipPath = `${outputPath}/${skillName}.zip`;
     const skillPath = path.join(sourcePath, skillName);
@@ -167,7 +167,7 @@ class OutputGenerator {
    * @returns {string} Path to created file
    */
   #writeJsonFile(filename, data) {
-    const outputPath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
+    const outputPath = this.config.settings.path.package.output;
     const filePath = path.join(outputPath, filename);
     fs.writeFileSync(filePath, JSON.stringify(data), 'utf8');
     return filePath;
