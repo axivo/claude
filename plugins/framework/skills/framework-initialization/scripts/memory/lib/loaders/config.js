@@ -46,18 +46,20 @@ class ConfigLoader {
     if (!config.settings.path.instructions || !config.settings.path.instructions.domain || !config.settings.path.instructions.common) {
       throw new MemoryBuilderError('Missing or invalid "settings.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
-    if (process.env.FRAMEWORK_PACKAGE_PATH) {
-      config.settings.path.package.output = process.env.FRAMEWORK_PACKAGE_PATH;
-    }
     if (process.env.FRAMEWORK_CONVERSATION_PATH) {
       config.settings.path.documentation.conversation = process.env.FRAMEWORK_CONVERSATION_PATH;
     } else {
-      config.settings.path.documentation.conversation = path.join(os.homedir(), config.settings.path.documentation.conversation);
+      config.settings.path.documentation.conversation = path.join(process.cwd(), config.settings.path.documentation.conversation);
     }
     if (process.env.FRAMEWORK_DIARY_PATH) {
       config.settings.path.documentation.diary = process.env.FRAMEWORK_DIARY_PATH;
     } else {
-      config.settings.path.documentation.diary = path.join(os.homedir(), config.settings.path.documentation.diary);
+      config.settings.path.documentation.diary = path.join(process.cwd(), config.settings.path.documentation.diary);
+    }
+    if (process.env.FRAMEWORK_PACKAGE_PATH) {
+      config.settings.path.package.output = process.env.FRAMEWORK_PACKAGE_PATH;
+    } else {
+      config.settings.path.package.output = path.join(process.cwd(), config.settings.path.package.output);
     }
     if (process.env.FRAMEWORK_PROFILE) {
       config.settings.profile = process.env.FRAMEWORK_PROFILE;
