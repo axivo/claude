@@ -30,29 +30,28 @@ class OutputGenerator {
    * @param {Object} config - Configuration object for output generation
    * @param {boolean} [container] - Running in container or container mode requested
    * @param {string} [profileName] - Profile name for output
-   * @param {string} [projectRoot] - Project root directory path
    */
-  constructor(config, container = false, profileName = null, projectRoot = null) {
+  constructor(config, container = false, profileName = null) {
     this.config = config;
     this.container = container;
     this.environmentManager = new EnvironmentManager(config.settings);
     this.profileName = profileName || config.settings.profile;
-    this.projectRoot = projectRoot || process.cwd();
-    this.skill = this.#findSkillByKey('init');
   }
 
   /**
-   * Finds a skill name by its key across all plugins
+   * Finds a skill and its plugin info by skill key
    *
    * @private
-   * @param {string} skillKey - Skill key to find (e.g., 'init')
-   * @returns {string|null} Skill name or null if not found
+   * @param {string} skillKey - Skill key to find (e.g., 'init', 'methodology')
+   * @returns {Object|null} Object with plugin and skill info, or null if not found
    */
   #findSkillByKey(skillKey) {
     for (const pluginList of Object.values(this.config.settings.plugins)) {
-      for (const { skills } of pluginList) {
+      for (const { plugin, skills } of pluginList) {
         if (skills?.[skillKey]) {
-          return skills[skillKey];
+          const pluginName = plugin.name;
+          const pluginVersion = plugin.version;
+          return { pluginName, pluginVersion, skillName: skills[skillKey] };
         }
       }
     }
@@ -66,8 +65,8 @@ class OutputGenerator {
    * @param {string} marker - Delimiter name (instructions or methodology)
    */
   #clearPayloadData(marker) {
-    const skill = this.#findSkillByKey('methodology');
-    const skillPath = path.join(require('os').homedir(), this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills', skill, 'SKILL.md');
+    const skillInfo = this.#findSkillByKey('methodology');
+    const skillPath = path.join(require('os').homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
     const content = fs.readFileSync(skillPath, 'utf8');
     const pattern = new RegExp(
       `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
@@ -80,16 +79,17 @@ class OutputGenerator {
    * Creates zip archive of a single skill directory
    *
    * @private
-   * @param {string} plugin - Name of the plugin containing the skill
-   * @param {string} skill - Name of the skill to zip
+   * @param {string} pluginName - Name of the plugin containing the skill
+   * @param {string} pluginVersion - Version of the plugin
+   * @param {string} skillName - Name of the skill to zip
    * @returns {string} Path to created zip file
    * @throws {MemoryBuilderError} When zip creation fails
    */
-  #createZip(plugin, skill) {
+  #createZip(pluginName, pluginVersion, skillName) {
     const outputPath = path.resolve(require('os').homedir(), this.config.settings.path.package.output);
-    const sourcePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, plugin, this.config.settings.version, 'skills');
-    const zipPath = `${outputPath}/${skill}.zip`;
-    const skillPath = path.join(sourcePath, skill);
+    const sourcePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, pluginName, pluginVersion, 'skills');
+    const zipPath = `${outputPath}/${skillName}.zip`;
+    const skillPath = path.join(sourcePath, skillName);
     if (!fs.existsSync(skillPath)) {
       return null;
     }
@@ -99,12 +99,12 @@ class OutputGenerator {
       }
       const excludePaths = this.config.settings.path.package.excludes;
       const exclusions = excludePaths
-        .map(pattern => `--exclude="${skill}/${pattern}/*"`)
+        .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
-      execSync(`tar -acf "${zipPath}" ${exclusions} "${skill}/"`, { cwd: sourcePath, stdio: 'pipe' });
+      execSync(`tar -acf "${zipPath}" ${exclusions} "${skillName}/"`, { cwd: sourcePath, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
-      throw new MemoryBuilderError(`Failed to create ${skill} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
+      throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
     }
   }
 
@@ -134,7 +134,8 @@ class OutputGenerator {
     };
     keys.forEach(visit);
     const sorted = Object.fromEntries(result.reverse().map(k => [k, data[k]]));
-    return { [key]: sorted, version: this.config.settings.version };
+    const skillInfo = this.#findSkillByKey('methodology');
+    return { [key]: sorted, version: skillInfo.pluginVersion };
   }
 
   /**
@@ -145,10 +146,10 @@ class OutputGenerator {
    * @param {Object} data - JSON data to inject
    */
   #injectData(marker, data) {
-    const skill = this.#findSkillByKey('methodology');
+    const skillInfo = this.#findSkillByKey('methodology');
     const skillPath = (this.container && this.environmentManager.isClaudeContainer())
-      ? path.join(this.config.settings.path.skill.container, skill, 'SKILL.md')
-      : path.join(require('os').homedir(), this.config.settings.path.skill.local, 'framework', this.config.settings.version, 'skills', skill, 'SKILL.md');
+      ? path.join(this.config.settings.path.skill.container, skillInfo.skillName, 'SKILL.md')
+      : path.join(require('os').homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
     const content = fs.readFileSync(skillPath, 'utf8');
     const pattern = new RegExp(
       `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
@@ -198,8 +199,8 @@ class OutputGenerator {
       const plugins = this.config.settings.plugins;
       for (const [, pluginList] of Object.entries(plugins)) {
         for (const { plugin, skills } of pluginList) {
-          for (const skill of Object.values(skills)) {
-            const zipPath = this.#createZip(plugin, skill);
+          for (const skillName of Object.values(skills)) {
+            const zipPath = this.#createZip(plugin.name, plugin.version, skillName);
             if (zipPath) {
               paths.push(zipPath);
             }

@@ -143,7 +143,9 @@ class ContentProcessor {
       const path = `${prefix}.${key}`;
       if (key === 'plugins' && typeof value === 'object') {
         for (const [, pluginList] of Object.entries(value)) {
-          for (const { skills } of pluginList) {
+          for (const { plugin, skills } of pluginList) {
+            result[`{{settings.plugin.${plugin.name}.name}}`] = plugin.name;
+            result[`{{settings.plugin.${plugin.name}.version}}`] = plugin.version;
             if (skills) {
               for (const [skillKey, skillValue] of Object.entries(skills)) {
                 result[`{{settings.skill.${skillKey}}}`] = skillValue;

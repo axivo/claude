@@ -76,28 +76,29 @@ class ConfigLoader {
   resolveTemplatePath(config, isContainer) {
     if (process.env.FRAMEWORK_TEMPLATE_PATH) {
       config.settings.path.template = process.env.FRAMEWORK_TEMPLATE_PATH;
-    } else if (isContainer) {
-      const skillName = this.#findSkillByKey(config, 'methodology');
-      config.settings.path.template = `${config.settings.path.skill.container}/${skillName}/templates`;
     } else {
-      const skillName = this.#findSkillByKey(config, 'methodology');
-      config.settings.path.template = path.join(os.homedir(), config.settings.path.skill.local, 'framework', config.settings.version, 'skills', skillName, 'templates');
+      const skillInfo = this.#findSkillByKey(config, 'methodology');
+      if (isContainer) {
+        config.settings.path.template = `${config.settings.path.skill.container}/${skillInfo.skillName}/templates`;
+      } else {
+        config.settings.path.template = path.join(os.homedir(), config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'templates');
+      }
     }
   }
 
   /**
-   * Finds a skill name by its key across all plugins
+   * Finds a skill and its plugin info by skill key
    *
    * @private
    * @param {Object} config - Configuration object
    * @param {string} skillKey - Skill key to find (e.g., 'methodology')
-   * @returns {string|null} Skill name or null if not found
+   * @returns {Object|null} Object with plugin and skill info, or null if not found
    */
   #findSkillByKey(config, skillKey) {
     for (const pluginList of Object.values(config.settings.plugins)) {
-      for (const { skills } of pluginList) {
+      for (const { plugin, skills } of pluginList) {
         if (skills?.[skillKey]) {
-          return skills[skillKey];
+          return { pluginName: plugin.name, pluginVersion: plugin.version, skillName: skills[skillKey] };
         }
       }
     }
