@@ -6,18 +6,18 @@ Transforms YAML profile definitions into hierarchical JSON memory graph cache wi
 
 ```bash
 # Display help
-node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory --help
+node index.js --help
 
 # Display timestamp and configured profile name
-node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory
+node index.js
 
 # Build specific profile for local environment
-node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory -p DEVELOPER
-node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory --profile=DEVELOPER
+node index.js -p DEVELOPER
+node index.js --profile=DEVELOPER
 
 # Build specific profile for container environment
-node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory -cp DEVELOPER
-node ~/.claude/plugins/marketplaces/axivo/skills/initialization/scripts/memory --profile=DEVELOPER --container
+node index.js -cp DEVELOPER
+node index.js --profile=DEVELOPER --container
 ```
 
 | Option                 | Description                                            |
@@ -33,20 +33,24 @@ Override `builder.yaml` settings with environment variables in `.claude/settings
 ```json
 {
   "env": {
-    "FRAMEWORK_CONVERSATIONS": "/path/to/conversations",
-    "FRAMEWORK_DIARY": "/path/to/diary",
+    "FRAMEWORK_CONVERSATION_PATH": "/path/to/conversations",
+    "FRAMEWORK_DIARY_PATH": "/path/to/diary",
+    "FRAMEWORK_PACKAGE_PATH": "/path/to/package/output",
     "FRAMEWORK_PROFILE": "DEVELOPER",
+    "FRAMEWORK_TEMPLATE_PATH": "/path/to/templates",
     "FRAMEWORK_TIMEZONE": "America/Montreal"
   }
 }
 ```
 
-| Variable                  | Description                       | Default                                     |
-| ------------------------- | --------------------------------- | ------------------------------------------- |
-| `FRAMEWORK_CONVERSATION_OUTPUT` | Path for conversation log storage | `settings.path.documentation.conversation` |
-| `FRAMEWORK_DIARY_OUTPUT`        | Path for diary entry storage      | `settings.path.documentation.diary`        |
-| `FRAMEWORK_PROFILE`       | Active profile name               | `settings.profile`                          |
-| `FRAMEWORK_TIMEZONE`      | IANA timezone for timestamps      | `settings.timezone`                         |
+| Variable                      | Description                       | Default                                    |
+| ----------------------------- | --------------------------------- | ------------------------------------------ |
+| `FRAMEWORK_CONVERSATION_PATH` | Path for conversation log storage | `settings.path.documentation.conversation` |
+| `FRAMEWORK_DIARY_PATH`        | Path for diary entry storage      | `settings.path.documentation.diary`        |
+| `FRAMEWORK_PACKAGE_PATH`      | Path for package output           | `settings.path.package.output`             |
+| `FRAMEWORK_PROFILE`           | Active profile name               | `settings.profile`                         |
+| `FRAMEWORK_TEMPLATE_PATH`     | Path for templates                | `settings.path.template`                   |
+| `FRAMEWORK_TIMEZONE`          | IANA timezone for timestamps      | `settings.timezone`                        |
 
 ## Features
 
