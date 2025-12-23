@@ -29,18 +29,26 @@ settings:
     - overrides
   plugins:
     analysis:
-      - plugin: code-review
+      - plugin:
+          name: code-review
+          version: 1.0.0
         skills:
           review: code-review
     collaboration:
-      - plugin: brainstorming
+      - plugin:
+          name: brainstorming
+          version: 1.0.0
         skills:
           brainstorm: brainstorming
-      - plugin: conversation-log
+      - plugin:
+          name: conversation-log
+          version: 1.0.0
         skills:
           log: conversation-log
     framework:
-      - plugin: framework
+      - plugin:
+          name: framework
+          version: 1.0.0
         skills:
           init: framework-initialization
           methodology: framework-methodology

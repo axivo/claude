@@ -11,8 +11,8 @@ LOCAL:
           tool:
             - "Read"
       skills:
-        - "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.init}}"
-        - "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.methodology}}"
+        - "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills/{{settings.skill.init}}"
+        - "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills/{{settings.skill.methodology}}"
       templates:
         conversation_log: "{{settings.path.template}}/conversation.md"
         diary: "{{settings.path.template}}/diary.md"
@@ -20,12 +20,12 @@ LOCAL:
         semantic__bash: "Bash"
         semantic__bash_tool: "Bash"
         semantic__edit: "Edit"
-        semantic__get_time: "Bash:node {{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.init}}/scripts/memory"
+        semantic__get_time: "Bash:node {{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills/{{settings.skill.init}}/scripts/memory"
         semantic__glob: "Glob"
         semantic__read: "Read"
         semantic__skill: "Skill"
         semantic__skill_glob: "Glob"
-        semantic__skill_path: "{{settings.path.skill.local}}/{{settings.version}}/skills"
+        semantic__skill_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills"
         semantic__skill_read: "Read"
         semantic__write: "Write"
       type: "local-filesystem"

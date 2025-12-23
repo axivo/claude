@@ -24,13 +24,11 @@ class MemoryBuilder {
    * Create MemoryBuilder instance
    *
    * @param {string} profileName - Profile name to build (default settings.profile)
-   * @param {string} projectRoot - Project root directory path
    * @param {Object} config - Configuration object (optional)
    * @param {boolean} container - Use container environment (optional, default autodetected)
    */
-  constructor(profileName, projectRoot, config = {}, container = false) {
+  constructor(profileName, config = {}, container = false) {
     this.profileName = profileName;
-    this.projectRoot = projectRoot || process.cwd();
     this.config = config;
     this.container = container;
   }
@@ -50,9 +48,9 @@ class MemoryBuilder {
       environmentManager.sync();
       this.container = this.container || environmentManager.isClaudeContainer();
       configLoader.resolveTemplatePath(this.config, this.container);
-      const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName, this.projectRoot);
+      const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName);
       if (!this.profileName) {
-        const defaultGenerator = new OutputGenerator(this.config, false, this.config.settings.profile, this.projectRoot);
+        const defaultGenerator = new OutputGenerator(this.config, false, this.config.settings.profile);
         defaultGenerator.generateOutput();
         return true;
       }
@@ -67,7 +65,7 @@ class MemoryBuilder {
         const defaultProfile = this.config.settings.profile;
         const defaultProfiles = profileProcessor.build(defaultProfile);
         const localInstructions = instructionsProcessor.build('LOCAL');
-        const defaultGenerator = new OutputGenerator(this.config, false, defaultProfile, this.projectRoot);
+        const defaultGenerator = new OutputGenerator(this.config, false, defaultProfile);
         defaultGenerator.generate(localInstructions, defaultProfiles, true);
         outputGenerator.output(result, 'stdout');
       } else {

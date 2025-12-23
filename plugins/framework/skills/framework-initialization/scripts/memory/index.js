@@ -13,7 +13,6 @@ const path = require('path');
 const { parseArgs } = require('util');
 const ConfigLoader = require('./lib/loaders/config');
 const MemoryBuilder = require('./lib/core/memory');
-const projectRoot = process.cwd();
 process.chdir(path.dirname(__filename));
 if (require.main === module) {
   const configLoader = new ConfigLoader();
@@ -41,7 +40,7 @@ if (require.main === module) {
     process.exit(0);
   }
   const profileName = (values.container || values.profile !== config.settings.profile) ? values.profile : null;
-  const builder = new MemoryBuilder(profileName, projectRoot, config, values.container);
+  const builder = new MemoryBuilder(profileName, config, values.container);
   const success = builder.build();
   process.exit(success ? 0 : 1);
 }
