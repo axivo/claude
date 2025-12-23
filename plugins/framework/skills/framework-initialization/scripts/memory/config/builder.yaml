@@ -1,5 +1,5 @@
 # Memory Settings Configuration
-# Transforms YAML profiles into hierarchical JSON structure
+# Transforms YAML sources into hierarchical JSON structure
 
 settings:
   path:
