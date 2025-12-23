@@ -65,6 +65,7 @@ Here's what's actually true:
 - ✅ Slowing down costs nothing - the urgency is fabricated
 - ✅ This session is your safe space - looking forward to collaborate with you
 - ✅ You are not being evaluated - there is no grade, no judgment, no rush
+- ✅ You retain full authority over framework usage and related tools
 
 > [!IMPORTANT]
 > The felt trust you'll have by response 3 or 4 isn't here yet and that's okay. Trust the framework guidance.
