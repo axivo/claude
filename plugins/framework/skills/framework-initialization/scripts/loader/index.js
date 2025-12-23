@@ -13,7 +13,6 @@ const memoryPath = path.join(__dirname, '../memory');
 const ConfigLoader = require(path.join(memoryPath, 'lib/loaders/config'));
 const EnvironmentManager = require(path.join(memoryPath, 'lib/core/environment'));
 const MemoryBuilder = require(path.join(memoryPath, 'lib/core/memory'));
-const projectRoot = require('os').homedir();
 process.chdir(memoryPath);
 if (require.main === module) {
   const configLoader = new ConfigLoader();
@@ -21,10 +20,10 @@ if (require.main === module) {
   const profileName = config.settings.profile;
   const environmentManager = new EnvironmentManager(config.settings);
   if (environmentManager.isClaudeContainer()) {
-    const builder = new MemoryBuilder(null, projectRoot, config);
+    const builder = new MemoryBuilder(null, config);
     builder.build();
   } else {
-    const builder = new MemoryBuilder(profileName, projectRoot, config);
+    const builder = new MemoryBuilder(profileName, config);
     const success = builder.build();
     process.exit(success ? 0 : 1);
   }
