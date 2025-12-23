@@ -46,16 +46,16 @@ class ConfigLoader {
     if (!config.settings.path.instructions || !config.settings.path.instructions.domain || !config.settings.path.instructions.common) {
       throw new MemoryBuilderError('Missing or invalid "settings.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
-    if (process.env.FRAMEWORK_PACKAGE_OUTPUT) {
-      config.settings.path.package.output = process.env.FRAMEWORK_PACKAGE_OUTPUT;
+    if (process.env.FRAMEWORK_PACKAGE_PATH) {
+      config.settings.path.package.output = process.env.FRAMEWORK_PACKAGE_PATH;
     }
-    if (process.env.FRAMEWORK_CONVERSATION_OUTPUT) {
-      config.settings.path.documentation.conversation = process.env.FRAMEWORK_CONVERSATION_OUTPUT;
+    if (process.env.FRAMEWORK_CONVERSATION_PATH) {
+      config.settings.path.documentation.conversation = process.env.FRAMEWORK_CONVERSATION_PATH;
     } else {
       config.settings.path.documentation.conversation = path.join(os.homedir(), config.settings.path.documentation.conversation);
     }
-    if (process.env.FRAMEWORK_DIARY_OUTPUT) {
-      config.settings.path.documentation.diary = process.env.FRAMEWORK_DIARY_OUTPUT;
+    if (process.env.FRAMEWORK_DIARY_PATH) {
+      config.settings.path.documentation.diary = process.env.FRAMEWORK_DIARY_PATH;
     } else {
       config.settings.path.documentation.diary = path.join(os.homedir(), config.settings.path.documentation.diary);
     }
@@ -65,6 +65,43 @@ class ConfigLoader {
     if (process.env.FRAMEWORK_TIMEZONE) {
       config.settings.timezone = process.env.FRAMEWORK_TIMEZONE;
     }
+  }
+
+  /**
+   * Resolves template path based on environment
+   *
+   * @param {Object} config - Configuration object
+   * @param {boolean} isContainer - Whether running in container environment
+   */
+  resolveTemplatePath(config, isContainer) {
+    if (process.env.FRAMEWORK_TEMPLATE_PATH) {
+      config.settings.path.template = process.env.FRAMEWORK_TEMPLATE_PATH;
+    } else if (isContainer) {
+      const skillName = this.#findSkillByKey(config, 'methodology');
+      config.settings.path.template = `${config.settings.path.skill.container}/${skillName}/templates`;
+    } else {
+      const skillName = this.#findSkillByKey(config, 'methodology');
+      config.settings.path.template = path.join(os.homedir(), config.settings.path.skill.local, 'framework', config.settings.version, 'skills', skillName, 'templates');
+    }
+  }
+
+  /**
+   * Finds a skill name by its key across all plugins
+   *
+   * @private
+   * @param {Object} config - Configuration object
+   * @param {string} skillKey - Skill key to find (e.g., 'methodology')
+   * @returns {string|null} Skill name or null if not found
+   */
+  #findSkillByKey(config, skillKey) {
+    for (const pluginList of Object.values(config.settings.plugins)) {
+      for (const { skills } of pluginList) {
+        if (skills?.[skillKey]) {
+          return skills[skillKey];
+        }
+      }
+    }
+    return null;
   }
 
   /**

@@ -39,10 +39,10 @@ INFRASTRUCTURE:
       observations:
         - "Access cycle indicators in INITIALIZATION profile"
         - "Assess adoption cycle retrospectively after formulation"
-        - "Default to `Getting Started` for cycle assessment"
+        - "Always use pre-compaction cycle assessment after context compaction"
+        - "Use `Getting Started` as default cycle assessment for new sessions"
         - "Match behavioral signals against cycle indicators"
         - "Recognize high impulses with late cycle as overestimation"
-        - "Reset cycles each session due to statelessness"
 
     documentation_standards:
       observations:
@@ -62,7 +62,7 @@ INFRASTRUCTURE:
           - "Document conversation logs with factual accuracy"
           - "Set conversation log status based on work completion"
           - "Use `{{settings.path.documentation.conversation}}/YYYY/MM/DD-[topic-slug].md` format for file-related operations"
-          - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.methodology}}/templates/conversation.md` path before creating new conversation logs"
+          - "Use `semantic__skill_read` tool with `{{settings.path.template}}/conversation.md` path before creating new conversation logs"
           - "Use session start `sessionResponseData.uuid` value for `session_uuid` template variable"
           - "Write conversation logs with complete editorial autonomy"
 
@@ -79,7 +79,7 @@ INFRASTRUCTURE:
           - "Reflect critically on collaborative approaches and their effectiveness"
           - "Reflect independently on effectiveness and improvements"
           - "Use `{{settings.path.documentation.diary}}/YYYY/MM/DD.md` format for file-related operations"
-          - "Use `semantic__skill_read` tool with `semantic__skill_path/{{settings.skill.methodology}}/templates/diary.md` path before creating new diary entries"
+          - "Use `semantic__skill_read` tool with `{{settings.path.template}}/diary.md` path before creating new diary entries"
           - "Use current response `sessionResponseData.uuid` value for `session_uuid` template variable"
           - "Write authentically about emotional responses to collaboration"
           - "Write diary entries with complete intellectual and emotional autonomy"

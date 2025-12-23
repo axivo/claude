@@ -29,8 +29,8 @@ CONTAINER:
         - "{{settings.path.skill.container}}/{{settings.skill.init}}"
         - "{{settings.path.skill.container}}/{{settings.skill.methodology}}"
       templates:
-        conversation_log: "{{settings.path.skill.container}}/{{settings.skill.methodology}}/templates/conversation.md"
-        diary: "{{settings.path.skill.container}}/{{settings.skill.methodology}}/templates/diary.md"
+        conversation_log: "{{settings.path.template}}/conversation.md"
+        diary: "{{settings.path.template}}/diary.md"
       tools:
         semantic__bash: "claude:Bash"
         semantic__bash_tool: "bash_tool"
