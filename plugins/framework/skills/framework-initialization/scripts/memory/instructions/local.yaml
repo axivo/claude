@@ -14,8 +14,8 @@ LOCAL:
         - "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.init}}"
         - "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.methodology}}"
       templates:
-        conversation_log: "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.methodology}}/templates/conversation.md"
-        diary: "{{settings.path.skill.local}}/{{settings.version}}/skills/{{settings.skill.methodology}}/templates/diary.md"
+        conversation_log: "{{settings.path.template}}/conversation.md"
+        diary: "{{settings.path.template}}/diary.md"
       tools:
         semantic__bash: "Bash"
         semantic__bash_tool: "Bash"

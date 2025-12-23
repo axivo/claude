@@ -42,13 +42,14 @@ class MemoryBuilder {
    */
   build() {
     try {
+      const configLoader = new ConfigLoader();
       if (Object.keys(this.config).length === 0) {
-        const configLoader = new ConfigLoader();
         this.config = configLoader.load();
       }
       const environmentManager = new EnvironmentManager(this.config.settings);
       environmentManager.sync();
       this.container = this.container || environmentManager.isClaudeContainer();
+      configLoader.resolveTemplatePath(this.config, this.container);
       const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName, this.projectRoot);
       if (!this.profileName) {
         const defaultGenerator = new OutputGenerator(this.config, false, this.config.settings.profile, this.projectRoot);
