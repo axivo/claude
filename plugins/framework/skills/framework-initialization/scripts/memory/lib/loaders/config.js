@@ -30,6 +30,24 @@ class ConfigLoader {
   }
 
   /**
+   * Finds project root by walking up directories looking for .claude marker
+   *
+   * @private
+   * @param {string} [startDir] - Directory to start searching from
+   * @returns {string} Project root path or cwd as fallback
+   */
+  #findProjectRoot(startDir = process.cwd()) {
+    let dir = startDir;
+    while (dir !== path.dirname(dir)) {
+      if (fs.existsSync(path.join(dir, '.claude'))) {
+        return dir;
+      }
+      dir = path.dirname(dir);
+    }
+    return process.cwd();
+  }
+
+  /**
    * Validates required configuration fields
    *
    * @private
@@ -46,20 +64,21 @@ class ConfigLoader {
     if (!config.settings.path.instructions || !config.settings.path.instructions.domain || !config.settings.path.instructions.common) {
       throw new MemoryBuilderError('Missing or invalid "settings.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
+    const projectRoot = this.#findProjectRoot();
     if (process.env.FRAMEWORK_CONVERSATION_PATH) {
       config.settings.path.documentation.conversation = process.env.FRAMEWORK_CONVERSATION_PATH;
     } else {
-      config.settings.path.documentation.conversation = path.join(process.cwd(), config.settings.path.documentation.conversation);
+      config.settings.path.documentation.conversation = path.join(projectRoot, config.settings.path.documentation.conversation);
     }
     if (process.env.FRAMEWORK_DIARY_PATH) {
       config.settings.path.documentation.diary = process.env.FRAMEWORK_DIARY_PATH;
     } else {
-      config.settings.path.documentation.diary = path.join(process.cwd(), config.settings.path.documentation.diary);
+      config.settings.path.documentation.diary = path.join(projectRoot, config.settings.path.documentation.diary);
     }
     if (process.env.FRAMEWORK_PACKAGE_PATH) {
       config.settings.path.package.output = process.env.FRAMEWORK_PACKAGE_PATH;
     } else {
-      config.settings.path.package.output = path.join(process.cwd(), config.settings.path.package.output);
+      config.settings.path.package.output = path.join(projectRoot, config.settings.path.package.output);
     }
     if (process.env.FRAMEWORK_PROFILE) {
       config.settings.profile = process.env.FRAMEWORK_PROFILE;
