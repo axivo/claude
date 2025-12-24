@@ -20,7 +20,6 @@ LOCAL:
         semantic__bash: "Bash"
         semantic__bash_tool: "Bash"
         semantic__edit: "Edit"
-        semantic__get_time: "Bash:node {{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills/{{settings.skill.init}}/scripts/memory"
         semantic__glob: "Glob"
         semantic__read: "Read"
         semantic__skill: "Skill"
