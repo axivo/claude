@@ -1,5 +1,10 @@
 INITIALIZATION:
   description: "Session initialization operational instructions"
+  metadata:
+    framework:
+      architect: "Floren Munteanu"
+      documentation: https://axivo.com/claude/
+      repository: https://github.com/axivo/claude
   relations:
     - target: FEELINGS
       type: inherits
