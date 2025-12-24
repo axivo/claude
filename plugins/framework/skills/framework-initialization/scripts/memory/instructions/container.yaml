@@ -35,7 +35,6 @@ CONTAINER:
         semantic__bash: "claude:Bash"
         semantic__bash_tool: "bash_tool"
         semantic__edit: "claude:Edit"
-        semantic__get_time: "bash_tool:node {{settings.path.skill.container}}/{{settings.skill.init}}/scripts/memory"
         semantic__glob: "claude:Glob"
         semantic__read: "claude:Read"
         semantic__skill: "bash_tool:cat"
@@ -46,12 +45,12 @@ CONTAINER:
       type: "container"
 
     project:
-      files:
-        - "{{settings.path.project.container}}/instructions.json"
-        - "{{settings.path.project.container}}/memory.json"
       instructions:
-        - "project files content is present in context"
-        - "project files persist after context compaction"
+        file: "{{settings.path.project.container}}/instructions.json"
+        name: "{{settings.skill.methodology}}:Framework Instructions Data"
+      memory:
+        file: "{{settings.path.project.container}}/memory.json"
+        name: "{{settings.skill.methodology}}:Framework Memory Data"
 
     response:
       format:

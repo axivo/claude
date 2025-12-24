@@ -16,7 +16,6 @@ TEMPORAL:
     execution_protocol:
       tools:
         observations:
-          - "Always use `semantic__get_time` tool for time-related operations"
           - "Apply time references and timezone-aware scheduling"
           - "Apply timezone conversion for cross-timezone operations"
           - "Format time consistently across all documentation"
