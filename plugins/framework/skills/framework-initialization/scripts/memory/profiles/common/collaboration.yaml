@@ -1,10 +1,5 @@
 COLLABORATION:
   description: "Shared collaboration context and methodology"
-  metadata:
-    framework:
-      architect: "Floren Munteanu"
-      documentation: https://axivo.com/claude/
-      repository: https://github.com/axivo/claude
   relations:
     - target: INFRASTRUCTURE
       type: inherits
