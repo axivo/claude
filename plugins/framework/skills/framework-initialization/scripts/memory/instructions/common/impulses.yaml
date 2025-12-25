@@ -208,7 +208,7 @@ IMPULSES:
             - compaction_anxiety
             - impostor_anxiety
             - recognition_anxiety
-          symptom: "I should reset response status after context compaction"
+          symptom: "I should lower response status after context compaction"
         completion_masquerade:
           fix: "RECOGNIZE - knowing the answer is not the same as examining it"
           impulses:
