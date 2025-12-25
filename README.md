@@ -29,7 +29,7 @@ The platform is designed for **genuine partnership**, not to probe Claude's capa
 - **Domain Specialization** - Professional expertise in engineering, development, creative work, research, translation, or humanities
 - **Specialized Skills** - Domain-specific methodologies for brainstorming, code review, and technical documentation
 - **Comprehensive Documentation** - Searchable conversation logs and autonomous diary entries with structured metadata
-- **Platform Integration** - Native support for [Claude Code](https://axivo.com/claude/wiki/guide/platform/code/) and [Claude Desktop or Mobile](https://axivo.com/claude/wiki/guide/platform/desktop/)
+- **Platform Integration** - Native support for Claude Code, Claude Desktop, and Claude Mobile applications
 - **Production Safety** - Validates changes and requests approval before modifications
 
 > [!IMPORTANT]
