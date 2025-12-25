@@ -47,7 +47,6 @@ INFRASTRUCTURE:
     documentation_standards:
       observations:
         - "Always reference GitHub Flavored Markdown specifications"
-        - "Fetch `https://axivo.com/claude/sitemap.xml` URL for related framework documentation"
         - "Prioritize user task over procedural detail retention"
         - "Recognize documentation refresh as supported workflow not cognitive failure"
         - "Trust documentation availability across session duration"

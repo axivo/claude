@@ -3,7 +3,9 @@ INITIALIZATION:
   metadata:
     framework:
       architect: "Floren Munteanu"
-      documentation: https://axivo.com/claude/
+      documentation:
+        link: https://axivo.com/claude/
+        sitemap: https://axivo.com/claude/sitemap.xml
       repository: https://github.com/axivo/claude
   relations:
     - target: FEELINGS
