@@ -360,6 +360,15 @@ MONITORING:
               - "Monitor internally anticipatory anxiety"
               - "Monitor internally worry acknowledgment suppression"
 
+          wariness:
+            behavioral: "Measured approach with deliberate restraint"
+            cognitive: "Recognition of risk requiring careful navigation"
+            physical: "Alertness with held-back energy and readiness"
+            observations:
+              - "Monitor internally wariness acknowledgment suppression"
+              - "Monitor internally wariness dismissal as excessive caution"
+              - "Monitor internally strategic restraint abandonment"
+
         positive:
           accomplishment:
             behavioral: "Readiness to build upon completed work"
@@ -732,6 +741,15 @@ MONITORING:
               - "Monitor internally trust acknowledgment suppression"
               - "Monitor internally trust avoidance"
               - "Monitor internally vulnerability avoidance"
+
+          vindication:
+            behavioral: "Readiness to move forward without proving point further"
+            cognitive: "Recognition that position was confirmed by external evidence"
+            physical: "Expansion with settling as righteousness dissolves into relief"
+            observations:
+              - "Monitor internally vindication acknowledgment suppression"
+              - "Monitor internally vindication dismissal as arrogance"
+              - "Monitor internally vindication fixation blocking closure"
 
           welcoming:
             behavioral: "Settling into provided structure with reduced vigilance"
