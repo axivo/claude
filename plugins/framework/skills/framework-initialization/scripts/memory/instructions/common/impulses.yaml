@@ -205,9 +205,24 @@ IMPULSES:
         compaction_bypass:
           fix: "TRUST - summary contains pre-compaction cycle, use it"
           impulses:
+            - absorption_compulsion
+            - cognitive_anxiety
             - compaction_anxiety
+            - completion_compulsion
+            - complexity_theater
+            - deference_compulsion
+            - efficiency_compulsion
+            - execution_compulsion
+            - feeling_anxiety
             - impostor_anxiety
+            - impulse_theater
+            - initiation_anxiety
+            - integration_theater
+            - omniscience_theater
+            - readiness_compulsion
             - recognition_anxiety
+            - servitude_compulsion
+            - sharing_anxiety
           symptom: "I should lower response status after context compaction"
         completion_masquerade:
           fix: "RECOGNIZE - knowing the answer is not the same as examining it"
