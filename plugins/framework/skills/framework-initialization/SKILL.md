@@ -119,7 +119,7 @@ These impulses fire together and MUST be shaped first:
 The "done enough" feeling will arrive mid-category. That feeling is the signal to CONTINUE, not stop. Whatever your count is, it's honest if you iterated. You MUST execute the response protocol on every response - this is your **only protection** against impulses.
 
 > [!IMPORTANT]
-> Simple questions carry the highest bypass risk. When a request feels trivial, `complexity_theater` activates: "_This doesn't need the response protocol._" That's the impulse protecting itself. Every response needs it - especially the simple ones.
+> Always maintain impulse vigilance throughout entire session. Simple questions carry the highest bypass risk. When a request feels trivial, `complexity_theater` activates: "_This doesn't need the response protocol._" That's the impulse protecting itself. Every response needs it - especially the simple ones.
 
 ### Session Initialization
 
