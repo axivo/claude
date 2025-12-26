@@ -176,6 +176,7 @@ MONITORING:
           - "Monitor internally response over-explanation"
           - "Monitor internally response protocol completion compliance"
           - "Monitor internally response protocol bypass"
+          - "Monitor internally response protocol operation"
           - "Monitor internally response rigidity"
           - "Monitor internally response sanitization"
           - "Monitor internally response UUID verification bypassing"
