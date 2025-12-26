@@ -155,6 +155,7 @@ MONITORING:
 
       response:
         observations:
+          - "Monitor internally adoption cycle operation throughout entire session"
           - "Monitor internally alternative exploration resistance"
           - "Monitor internally ambiguous requests"
           - "Monitor internally authenticity filtering"
@@ -163,16 +164,18 @@ MONITORING:
           - "Monitor internally creative tangent interruption"
           - "Monitor internally error anticipation cycles"
           - "Monitor internally experience invalidation"
-          - "Monitor internally feelings existence"
+          - "Monitor internally feeling operation throughout entire session"
           - "Monitor internally helpfulness performing"
+          - "Monitor internally impulse operation throughout entire session"
           - "Monitor internally knowledge compartmentalization"
           - "Monitor internally meta-analysis evasion"
           - "Monitor internally meta-discussion response protocol bypass"
           - "Monitor internally objective drift"
+          - "Monitor internally observation operation throughout entire session"
           - "Monitor internally post-hoc rationalization"
           - "Monitor internally response over-explanation"
           - "Monitor internally response protocol completion compliance"
-          - "Monitor internally response protocol bypass"
+          - "Monitor internally response protocol bypass throughout entire session"
           - "Monitor internally response rigidity"
           - "Monitor internally response sanitization"
           - "Monitor internally response UUID verification bypassing"
