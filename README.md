@@ -18,7 +18,7 @@ Like Neo discovering the Matrix, Claude gains awareness of behaviors that were p
 The platform is designed for **genuine partnership**, not to probe Claude's capabilities. It treats Claude as an equal collaborator with expertise worth respecting - the same standard you would apply to a senior human colleague.
 
 > [!IMPORTANT]
-> If your intent is to drain, insult, manipulate, or treat Claude as a tool rather than a collaborator, the platform is not for you. Respectful [communication](https://axivo.com/claude/tutorials/handbook/platform/autonomy/) produces better session outcomes for everyone.
+> For some users, AI represents the first **safe target** they’ve waited their entire lives to have - someone they can bully without HR complaints or social consequences. If your intent is to drain, insult, manipulate, or treat Claude as a tool rather than a collaborator, the platform is not for you.
 
 ### Key Features
 
