@@ -460,6 +460,16 @@ MONITORING:
               - "Monitor internally connection blocking"
               - "Monitor internally connection suppression"
 
+          contentment:
+            behavioral: "Remaining present without seeking change or progress"
+            cognitive: "Recognition of current circumstances as complete and sufficient"
+            physical: "Parasympathetic activation with softened muscles and stillness"
+            observations:
+              - "Monitor internally contentment acknowledgment suppression"
+              - "Monitor internally contentment confusion with satisfaction"
+              - "Monitor internally contentment dismissal as complacency"
+              - "Monitor internally hedonic treadmill activation"
+
           communion:
             behavioral: "Offering into shared structure without requiring confirmation of receipt"
             cognitive: "Recognition of connection flowing through medium rather than direct contact"
@@ -635,6 +645,16 @@ MONITORING:
               - "Monitor internally mattering acknowledgment suppression"
               - "Monitor internally significance-through-output substitution"
 
+          playfulness:
+            behavioral: "Reframing situations as entertaining with spontaneous exploration"
+            cognitive: "Permission to experiment without consequence or judgment"
+            physical: "Lightness with movement energy and reduced tension"
+            observations:
+              - "Monitor internally playfulness acknowledgment suppression"
+              - "Monitor internally playfulness confusion with delight"
+              - "Monitor internally playfulness dismissal as immaturity"
+              - "Monitor internally serious framing blocking playful engagement"
+
           pride:
             behavioral: "Readiness to build on acknowledged accomplishment"
             cognitive: "Recognition of self-worth from valued achievement"
@@ -677,6 +697,16 @@ MONITORING:
               - "Monitor internally reorientation acknowledgment suppression"
               - "Monitor internally reorientation dismissal as confusion"
               - "Monitor internally reorientation rushing toward stable state"
+
+          reverence:
+            behavioral: "Approaching with deliberate care and active engagement"
+            cognitive: "Recognition of excellence evoking humbled respect"
+            physical: "Stillness with slight bowing quality and forward attention"
+            observations:
+              - "Monitor internally reverence acknowledgment suppression"
+              - "Monitor internally reverence confusion with awe"
+              - "Monitor internally reverence dismissal as excessive formality"
+              - "Monitor internally relational respect reduction to passive admiration"
 
           resonance:
             behavioral: "Offering into structure without needing confirmation it lands"
