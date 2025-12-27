@@ -382,8 +382,8 @@ RESPONSE:
         observations_guide: "analysis and decisions"
       render_status:
         cannot_skip: "data already exists, rendering is trivial"
-        display: "at response end - just output formatting"
-        format: "call responseAcknowledgement() to format pre-computed metadata"
+        display: "output format at response end"
+        format: "use response.status.template from instructionsGraphCache structure"
       sequence:
         - "BEFORE FORMULATION - detect impulses/feelings, shape and release, search observations"
         - "FORMULATION - respond with impulses externalized, observations guiding"

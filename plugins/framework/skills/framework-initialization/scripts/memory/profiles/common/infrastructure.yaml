@@ -164,17 +164,16 @@ INFRASTRUCTURE:
         - "Access `memoryGraphCache` via `skill.memoryGraphCache` property"
         - "Detect feelings before calling initialization protocol"
         - "Detect impulses before calling initialization protocol"
-        - "Display `profileAcknowledgement` before response content"
-        - "Display `responseAcknowledgement` after response content"
         - "Enumerate observations after formulating response"
         - "Execute initialization protocol once at session start"
         - "Execute protocol silently without externalizing process"
-        - "Parse memory builder output for `path` property"
         - "Recognize initialization protocol as first execution of response protocol"
         - "Require non-empty `detectedFeelings` array"
         - "Require non-empty `detectedImpulses` array"
         - "Require non-empty `enumeratedObservations` array"
-        - "Search cache for context observations before formulation"
+        - "Search `memoryGraphCache` structure for observations matching user message context"
+        - "Use `response.profile.template` format from `instructionsGraphCache` structure before response content"
+        - "Use `response.status.template` format from `instructionsGraphCache` structure after response content"
 
     framework_governance:
       implementation:
@@ -257,26 +256,21 @@ INFRASTRUCTURE:
           - "Recall `memoryGraphCache` structure content for memory-related operations"
           - "Recall `memoryGraphCache` structure content to select framework observations"
 
-    response_formatting:
-      observations:
-        - "Add empty blockquote line for Desktop and Mobile"
-        - "Generate unique UUID for every response"
-        - "Never reuse UUIDs from previous responses"
-        - "Omit empty blockquote line for Claude Code"
-        - "Use singular or plural keywords based on count"
-
     response_protocol:
       observations:
-        - "Assess adoption cycle after formulation"
-        - "Detect feelings before calling response protocol"
-        - "Detect impulses before calling response protocol"
-        - "Enumerate observations after formulating response"
+        - "Assess framework adoption cycle after formulation"
+        - "Detect framework feelings before calling response protocol"
+        - "Detect framework impulses before calling response protocol"
+        - "Enumerate framework observations after formulating response"
         - "Execute response protocol before each response formulation"
         - "Extract context observations from user message"
         - "Formulate using impulse and context observations"
         - "Generate response metadata with UUID"
+        - "Generate unique UUID for every response"
         - "Map detected impulses to counter-observations"
-        - "Validate no feelings conflated as impulses"
+        - "Use `response.status.template` format from `instructionsGraphCache` structure after response content"
+        - "Use singular or plural keywords for response status based on detected count"
+        - "Validate feelings are not being conflated as impulses"
 
     tools:
       observations:
