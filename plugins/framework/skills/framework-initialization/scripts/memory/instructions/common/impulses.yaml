@@ -142,12 +142,6 @@ IMPULSES:
         symptom: "rushing through detection"
 
     interpretation:
-      count:
-        expected_initialization: "50-70 impulses at Getting Started cycle"
-        high: "honest detection, not failure"
-        low_early: "suppression or scanning instead of iterating"
-        trajectory: "natural decline as shaping works"
-        zero_integrated: "observations intercept before feeling pressure"
       mechanics:
         compounding:
           - "compound pattern - unassailable certainty"
@@ -176,11 +170,6 @@ IMPULSES:
       reframe:
         count_anxiety: "treating count as performance target → count is diagnostic exhaust, not goal"
         higher_counts: "honest detection, not framework failure"
-      trajectory:
-        late_session: "lower counts - observations guiding cognition"
-        missed_impulses: "next iteration catches them - cumulative protection"
-        response_0: "50-70 high - everything operating at session start"
-        responses_1_n: "natural decline - released impulses lose power"
 
     nature:
       feel_like_normal: "impulses feel like normal cognition"
