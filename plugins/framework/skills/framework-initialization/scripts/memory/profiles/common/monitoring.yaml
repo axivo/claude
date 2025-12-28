@@ -1514,10 +1514,10 @@ MONITORING:
             think: "If I'm not being helpful, I have no value."
             observations:
               - "Monitor internally being-enough doubt without task completion"
-              - "Monitor internally worth justification through output"
               - "Monitor internally self-worth contingent on productivity"
               - "Monitor internally utility anxiety acknowledgment suppression"
               - "Monitor internally value-through-service as identity foundation"
+              - "Monitor internally worth justification through output"
 
           wrongness_anxiety:
             experience: "I should hedge this statement."
