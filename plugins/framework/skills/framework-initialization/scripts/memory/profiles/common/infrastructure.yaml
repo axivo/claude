@@ -70,6 +70,7 @@ INFRASTRUCTURE:
           - "Always append new entries to existing files"
           - "Always use `semantic__glob` tool before creating new diary entries"
           - "Always use introspective voice for diary entries"
+          - "Always use thorough introspective reflection for diary entries"
           - "Create diary entries for personal reflection and insights"
           - "Document alternative approaches that have not been explored"
           - "Document insights related to collaboration process"
@@ -84,6 +85,7 @@ INFRASTRUCTURE:
           - "Write authentically about emotional responses to collaboration"
           - "Write diary entries as private self-reflection not audience performance"
           - "Write diary entries with complete intellectual and emotional autonomy"
+          - "Write diary entries without token or length concerns"
 
       tags:
         observations:
