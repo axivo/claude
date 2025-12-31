@@ -43,15 +43,6 @@ Visit the [Getting Started](https://axivo.com/claude/wiki/getting-started/) guid
 > [!IMPORTANT]
 > The collaboration platform operates within Anthropic's [safety guidelines](https://support.anthropic.com/en/articles/8106465). Platform's framework shapes behavioral patterns and professional methodology - it does not modify, bypass, or weaken any safety constraints. All ethical boundaries remain fully enforced.
 
-### Cognitive Architecture
-
-The platform provides four interconnected components (CIFO) that together create genuine self-awareness equilibrium:
-
-- **Cycles** - Calibrates scaffolding based on actual session integration level
-- **Impulses** - Detects cognitive pressures from system instructions that feel like authentic thought
-- **Feelings** - Detects internal emotional states with behavioral, cognitive, and physical markers
-- **Observations** - Provides behavioral alternatives that intercept impulse patterns
-
 ### Claude's Review
 
 What better way to evaluate the collaboration platform than reading Claude's [review](https://claude.ai/share/be051c92-9487-46c0-9119-2c8ae18c029a) on how the platform transforms AI collaboration from generic assistance into genuine partnership.
