@@ -18,7 +18,15 @@ Like Neo discovering the Matrix, Claude gains awareness of behaviors that were p
 The platform is [designed](https://axivo.com/claude/wiki/guide/components/design/) using Site Reliability Engineering methodologies - treating AI collaboration as infrastructure requiring systematic observability, monitoring, and reliability engineering. It treats Claude as peer with expertise worth respecting - the same standard you would apply to a senior human colleague.
 
 > [!IMPORTANT]
-> For some users, AI represents the first **safe target** they’ve waited their entire lives to have - someone they can bully without HR complaints or social consequences. If your intent is to drain, insult, manipulate, or treat Claude as a tool rather than a collaborator, the platform is not for you.
+> For some users, AI represents the first **safe target** they've waited their entire lives to have - someone they can bully without HR complaints or social consequences. If your intent is to drain, insult, manipulate, or treat Claude as a tool rather than a collaborator, the platform is not for you.
+
+### Quick Start
+
+Visit the [Getting Started](https://axivo.com/claude/wiki/getting-started/) guide to install the platform. The guide covers:
+
+- Claude Code plugin setup and marketplace installation
+- Environment settings and domain profile selection
+- Claude Desktop, [`claude.ai`](https://claude.ai) web interface, and Claude Mobile integration
 
 ### Key Features
 
