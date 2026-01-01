@@ -7,10 +7,10 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const { EnvironmentManager } = require('../core');
-const { OutputGenerator } = require('../generators');
-const { ConfigLoader, FileLoader } = require('../loaders');
-const { ContentProcessor } = require('../processors');
+import { EnvironmentManager } from '../core/index.js';
+import { OutputGenerator } from '../generators/index.js';
+import { ConfigLoader, FileLoader } from '../loaders/index.js';
+import { ContentProcessor } from '../processors/index.js';
 
 /**
  * Main orchestrator for memory builder system
@@ -79,4 +79,4 @@ class MemoryBuilder {
   }
 }
 
-module.exports = MemoryBuilder;
+export default MemoryBuilder;

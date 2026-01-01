@@ -1,17 +1,21 @@
 /**
  * Configuration Loader
- * 
+ *
  * Loads and validates builder.yaml configuration
- * 
+ *
  * @module lib/loaders/ConfigLoader
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const yaml = require('../vendor/js-yaml.min.js');
-const MemoryBuilderError = require('../core/error');
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import yaml from '../vendor/js-yaml.min.mjs';
+import MemoryBuilderError from '../core/error.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Configuration loader for MemoryBuilder
@@ -148,4 +152,4 @@ class ConfigLoader {
   }
 }
 
-module.exports = ConfigLoader;
+export default ConfigLoader;

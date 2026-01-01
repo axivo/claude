@@ -5,8 +5,8 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const ContentProcessor = require('./content');
+import ContentProcessor from './content.js';
 
-module.exports = {
+export {
   ContentProcessor
 };
