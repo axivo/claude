@@ -116,4 +116,4 @@ class TimeGenerator {
   }
 }
 
-module.exports = TimeGenerator;
+export default TimeGenerator;

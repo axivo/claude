@@ -1,0 +1,8 @@
+{
+  "name": "loader",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Framework initialization loader",
+  "author": "AXIVO",
+  "license": "BSD-3-Clause"
+}

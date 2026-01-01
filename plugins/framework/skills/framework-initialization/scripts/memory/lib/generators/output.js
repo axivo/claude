@@ -9,12 +9,13 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
-const EnvironmentManager = require('../core/environment');
-const MemoryBuilderError = require('../core/error');
-const TimeGenerator = require('./time');
+import { execSync } from 'child_process';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import EnvironmentManager from '../core/environment.js';
+import MemoryBuilderError from '../core/error.js';
+import TimeGenerator from './time.js';
 
 /**
  * Generates and writes JSON output files
@@ -66,7 +67,7 @@ class OutputGenerator {
    */
   #clearPayloadData(marker) {
     const skillInfo = this.#findSkillByKey('methodology');
-    const skillPath = path.join(require('os').homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
+    const skillPath = path.join(os.homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
     const content = fs.readFileSync(skillPath, 'utf8');
     const pattern = new RegExp(
       `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
@@ -87,7 +88,7 @@ class OutputGenerator {
    */
   #createZip(pluginName, pluginVersion, skillName) {
     const outputPath = this.config.settings.path.package.output;
-    const sourcePath = path.resolve(require('os').homedir(), this.config.settings.path.skill.local, pluginName, pluginVersion, 'skills');
+    const sourcePath = path.resolve(os.homedir(), this.config.settings.path.skill.local, pluginName, pluginVersion, 'skills');
     const zipPath = `${outputPath}/${skillName}.zip`;
     const skillPath = path.join(sourcePath, skillName);
     if (!fs.existsSync(skillPath)) {
@@ -149,7 +150,7 @@ class OutputGenerator {
     const skillInfo = this.#findSkillByKey('methodology');
     const skillPath = (this.container && this.environmentManager.isClaudeContainer())
       ? path.join(this.config.settings.path.skill.container, skillInfo.skillName, 'SKILL.md')
-      : path.join(require('os').homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
+      : path.join(os.homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
     const content = fs.readFileSync(skillPath, 'utf8');
     const pattern = new RegExp(
       `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
@@ -274,4 +275,4 @@ class OutputGenerator {
   }
 }
 
-module.exports = OutputGenerator;
+export default OutputGenerator;

@@ -8,8 +8,7 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-
-const { readFileSync, writeFileSync, existsSync } = require('fs');
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 
 /**
  * Manages environment variable synchronization in skill containers
@@ -166,4 +165,4 @@ class EnvironmentManager {
   }
 }
 
-module.exports = EnvironmentManager;
+export default EnvironmentManager;

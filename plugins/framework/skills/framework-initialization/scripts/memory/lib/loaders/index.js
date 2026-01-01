@@ -1,14 +1,14 @@
 /**
  * Loaders Module Exports
- * 
+ *
  * @module lib/loaders
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const ConfigLoader = require('./config');
-const FileLoader = require('./file');
+import ConfigLoader from './config.js';
+import FileLoader from './file.js';
 
-module.exports = {
+export {
   ConfigLoader,
   FileLoader
 };

@@ -9,9 +9,9 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const fs = require('fs');
-const path = require('path');
-const MemoryBuilderError = require('../core/error');
+import fs from 'fs';
+import path from 'path';
+import MemoryBuilderError from '../core/error.js';
 
 /**
  * Processes YAML content into hierarchical JSON
@@ -235,4 +235,4 @@ class ContentProcessor {
   }
 }
 
-module.exports = ContentProcessor;
+export default ContentProcessor;

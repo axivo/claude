@@ -10,7 +10,7 @@
 
 /**
  * Custom error class for memory builder operations
- * 
+ *
  * @class MemoryBuilderError
  * @extends Error
  */
@@ -32,4 +32,4 @@ class MemoryBuilderError extends Error {
   }
 }
 
-module.exports = MemoryBuilderError;
+export default MemoryBuilderError;

@@ -5,10 +5,10 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const EnvironmentManager = require('./environment');
-const MemoryBuilderError = require('./error');
+import EnvironmentManager from './environment.js';
+import MemoryBuilderError from './error.js';
 
-module.exports = {
+export {
   EnvironmentManager,
   MemoryBuilderError
 };

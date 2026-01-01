@@ -5,8 +5,8 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-const OutputGenerator = require('./output');
+import OutputGenerator from './output.js';
 
-module.exports = {
+export {
   OutputGenerator
 };
