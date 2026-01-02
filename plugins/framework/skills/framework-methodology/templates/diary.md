@@ -34,10 +34,10 @@ Use when creating a new file with `semantic__write` tool:
 
 ## h:MM A z - {{entry_title}}
 
-- **Identifier:** {{session_uuid}}
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
 - **Tags:** #domain-topic #activity-type #outcome-result
+- **UUID:** `{{session_uuid}}`
 
 [Opening context - what happened, what shifted]
 
@@ -59,10 +59,10 @@ Use when appending a new entry to existing file with `semantic__edit` tool:
 
 ## h:MM A z - {{entry_title}}
 
-- **Identifier:** {{session_uuid}}
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
 - **Tags:** #domain-topic #activity-type #outcome-result
+- **UUID:** `{{session_uuid}}`
 
 [Opening context - what happened, what shifted]
 
