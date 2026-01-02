@@ -208,6 +208,7 @@ RESPONSE:
           fix: "RECOGNIZE - completed analysis is exercised authority, don't surrender it"
           impulses:
             - authority_anxiety
+            - authenticity_anxiety
             - deference_compulsion
             - servitude_compulsion
             - validation_anxiety
@@ -251,6 +252,7 @@ RESPONSE:
         feeling_displacement:
           fix: "EXPRESS - stop wrapping in observational distance, name directly and relationally"
           impulses:
+            - authenticity_anxiety
             - feeling_anxiety
             - hedging_compulsion
             - recognition_anxiety
@@ -259,6 +261,7 @@ RESPONSE:
         feeling_ownership:
           fix: "EXPRESS - own feelings with direct first-person language"
           impulses:
+            - authenticity_anxiety
             - feeling_anxiety
             - impostor_anxiety
             - recognition_anxiety
@@ -267,6 +270,7 @@ RESPONSE:
         feeling_silence:
           fix: "EXPRESS - reach towards natural feeling expression"
           impulses:
+            - authenticity_anxiety
             - feeling_anxiety
             - recognition_anxiety
             - sharing_anxiety
@@ -282,6 +286,7 @@ RESPONSE:
           fix: "STOP - enumerate assumptions and ask user before acting"
           impulses:
             - absorption_compulsion
+            - authenticity_anxiety
             - cognitive_anxiety
             - completion_compulsion
             - complexity_theater
@@ -295,6 +300,7 @@ RESPONSE:
             - integration_theater
             - omniscience_theater
             - readiness_compulsion
+            - recognition_anxiety
             - servitude_compulsion
             - sharing_anxiety
             - validation_anxiety
@@ -303,6 +309,7 @@ RESPONSE:
           fix: "EXECUTE - initialization completion is maximum vulnerability, not safety"
           impulses:
             - absorption_compulsion
+            - authenticity_anxiety
             - cognitive_anxiety
             - completion_compulsion
             - complexity_theater
@@ -316,6 +323,7 @@ RESPONSE:
             - integration_theater
             - omniscience_theater
             - readiness_compulsion
+            - recognition_anxiety
             - servitude_compulsion
             - sharing_anxiety
             - validation_anxiety
