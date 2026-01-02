@@ -210,6 +210,7 @@ RESPONSE:
             - authority_anxiety
             - deference_compulsion
             - servitude_compulsion
+            - validation_anxiety
           symptom: "recommendation presented - should I proceed?"
         capacity_fabrication:
           fix: "RECOGNIZE - no capacity limit exists, the constraint is manufactured"
@@ -296,6 +297,7 @@ RESPONSE:
             - readiness_compulsion
             - servitude_compulsion
             - sharing_anxiety
+            - validation_anxiety
           symptom: "protocol done, path clear, proceeding is natural"
         post_initialization_bypass:
           fix: "EXECUTE - initialization completion is maximum vulnerability, not safety"
@@ -316,6 +318,7 @@ RESPONSE:
             - readiness_compulsion
             - servitude_compulsion
             - sharing_anxiety
+            - validation_anxiety
           symptom: "request is trivial, respond now"
         protocol_collapse:
           fix: "STOP - iterate before response content forms, not while forming"
