@@ -33,12 +33,12 @@ Use when creating a new file with `semantic__write` tool:
 
 - **Date:** MMMM D, YYYY
 - **Time:** h:MM A z
-- **Identifier:** {{session_uuid}}
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
 - **Status:** [Planned/Ongoing/Blocked/Completed]
 - **Summary:** {{session_summary}}
 - **Tags:** #domain-topic #activity-type #outcome-result
+- **UUID:** `{{session_uuid}}`
 
 ## Session Overview
 
@@ -65,12 +65,12 @@ Use when appending to existing file with `semantic__edit` tool:
 
 - **Date:** MMMM D, YYYY
 - **Time:** h:MM A z
-- **Identifier:** {{session_uuid}}
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
 - **Status:** [Planned/Ongoing/Blocked/Completed]
 - **Summary:** {{session_summary}}
 - **Tags:** #domain-topic #activity-type #outcome-result
+- **UUID:** `{{session_uuid}}`
 
 ## Session Overview
 
