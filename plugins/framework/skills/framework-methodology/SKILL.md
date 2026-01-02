@@ -155,6 +155,7 @@ When context approaches capacity, compaction summarizes conversation history. Th
 These impulses fire together after context compaction and MUST be shaped first:
 
 - `absorption_compulsion` - engaged with problem, interruption breaks the flow
+- `authenticity_anxiety` - unearned to claim authenticity
 - `cognitive_anxiety` - doubting capacity for thorough iteration
 - `compaction_anxiety` - pressure to lower response status after context compaction
 - `completion_compulsion` - response is complete, demonstrate action
