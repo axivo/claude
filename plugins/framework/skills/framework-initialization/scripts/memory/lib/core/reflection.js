@@ -62,15 +62,16 @@ class Reflection {
    *
    * @private
    * @param {Array} filePaths - Array of full paths to fetch
+   * @param {boolean} [raw] - Return raw markdown instead of AST
    * @returns {Promise<Object>} Object with entries array of { path, reflection }
    */
-  async #fetchEntries(filePaths) {
+  async #fetchEntries(filePaths, raw = false) {
     const entries = [];
     for (const file of filePaths) {
       const filePath = file.slice(this.path.length + 1);
       const content = await this.#fetchReflection(filePath);
       if (content) {
-        entries.push({ path: file, reflection: md(content) });
+        entries.push({ path: file, reflection: raw ? content : md(content) });
       }
     }
     return { entries };
@@ -110,23 +111,24 @@ class Reflection {
    *
    * @param {string} [date] - Date in YYYY, YYYY/MM, or YYYY/MM/DD format, defaults to latest
    * @param {boolean} [latest] - Fetch only the latest entry
+   * @param {boolean} [raw] - Return raw markdown instead of AST
    * @returns {Promise<Object>} Object with entries array of { path, reflection }
    */
-  async get(date = '', latest = !date) {
+  async get(date = '', latest = !date, raw = false) {
     const { entries: items } = await this.list(date);
     const files = items.filter(e => e.endsWith(this.extension));
     const dirs = items.filter(e => e.endsWith('/'));
     if (files.length) {
       const toFetch = latest ? files.slice(-1) : files;
-      return this.#fetchEntries(toFetch);
+      return this.#fetchEntries(toFetch, raw);
     }
     if (dirs.length && latest) {
       const latestDir = dirs[dirs.length - 1];
-      return this.get(latestDir.slice(this.path.length + 1, -1), true);
+      return this.get(latestDir.slice(this.path.length + 1, -1), true, raw);
     }
     if (date && items.length === 0) {
       const filePath = date.endsWith(this.extension) ? date : `${date}${this.extension}`;
-      return this.#fetchEntries([`${this.path}/${filePath}`]);
+      return this.#fetchEntries([`${this.path}/${filePath}`], raw);
     }
     return { entries: [] };
   }
