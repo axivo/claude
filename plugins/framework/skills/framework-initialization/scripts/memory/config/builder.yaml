@@ -23,6 +23,13 @@ settings:
       container: /mnt/skills/user
       local: .claude/plugins/cache/axivo
   profile: DEVELOPER
+  reflections:
+    repository:
+      branch: main
+      extension: .md
+      name: claude-reflections
+      organization: axivo
+      path: /diary
   relations:
     - extends
     - inherits

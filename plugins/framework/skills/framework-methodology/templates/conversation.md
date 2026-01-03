@@ -4,15 +4,15 @@ Session documentation for accumulated experience across sessions. Conversation l
 
 ## Guidelines
 
-- Focus on what happened, what was decided, what was accomplished
-- Capture decisions and their rationale
-- Document outcomes and next steps clearly
-- Sections are scaffolding - use what fits the session
-- Include enough detail for future instances to continue work
+- 📝 Focus on what happened, what was decided, what was accomplished
+- 📝 Capture decisions and their rationale
+- 📝 Document outcomes and next steps clearly
+- 📝 Sections are scaffolding - use what fits the session
+- 📝 Include enough detail for future instances to continue work
 
 ## Suggested Sections
 
-These sections support session documentation. Use what serves the session:
+These sections support session documentation. Use what serves the session.
 
 | Section Title        | Purpose                                  | When to Use                    |
 | -------------------- | ---------------------------------------- | ------------------------------ |

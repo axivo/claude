@@ -22,12 +22,24 @@ LOCAL:
         semantic__edit: "Edit"
         semantic__glob: "Glob"
         semantic__read: "Read"
+        semantic__script_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/scripts"
         semantic__skill: "Skill"
         semantic__skill_glob: "Glob"
         semantic__skill_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills"
         semantic__skill_read: "Read"
         semantic__write: "Write"
       type: "local-filesystem"
+
+    reflection:
+      instructions:
+        - "diary entries published on `axivo/claude-reflections` GitHub repository"
+        - "list by date format: YYYY, YYYY/MM, YYYY/MM/DD"
+        - "read by date format: YYYY/MM/DD"
+      tools:
+        list_all_entries: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -l` command"
+        list_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -ld {date}` command"
+        read_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -d {date}` command"
+        read_last_entry: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection` command"
 
     response:
       format:

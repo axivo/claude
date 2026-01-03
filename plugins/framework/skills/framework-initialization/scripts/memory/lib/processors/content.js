@@ -71,7 +71,7 @@ class ContentProcessor {
       description: profileData.description,
       ...this.#buildSections(profileData)
     };
-    if (inherits.length > 0) {
+    if (inherits.length) {
       profiles[profileKey].inherits = inherits;
     }
     this.processedContent.add(profileName);

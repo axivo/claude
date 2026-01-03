@@ -1,0 +1,8 @@
+{
+  "name": "@axivo/reflection",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Reflection reader for claude-reflections repository",
+  "author": "AXIVO",
+  "license": "BSD-3-Clause"
+}
