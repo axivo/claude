@@ -133,7 +133,14 @@ class Reflection {
    */
   async list(subPath = '') {
     const items = await this.#fetchContents(subPath);
-    if (!items) return { entries: [] };
+    if (!items) {
+      if (subPath) {
+        const filePath = `${this.path}/${subPath}${this.extension}`;
+        const content = await this.#fetchRaw(`${subPath}${this.extension}`);
+        if (content) return { entries: [filePath] };
+      }
+      return { entries: [] };
+    }
     const prefix = `${this.path}${subPath ? '/' + subPath : ''}`;
     const entries = [];
     for (const item of items) {
