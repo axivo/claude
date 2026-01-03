@@ -65,7 +65,7 @@ class EnvironmentManager {
     for (const [index, newLine] of lineUpdates) {
       lines[index] = newLine;
     }
-    if (newVars.length > 0) {
+    if (newVars.length) {
       lines.push('', EnvironmentManager.sectionHeader);
       for (const { varName, value } of newVars) {
         lines.push(EnvironmentManager.envFormat(varName, value));
@@ -156,7 +156,7 @@ class EnvironmentManager {
     try {
       const lines = readFileSync(EnvironmentManager.environmentPath, 'utf8').split('\n');
       const { lineUpdates, newVars } = this.#findVariableUpdates(lines);
-      if (lineUpdates.size > 0 || newVars.length > 0) {
+      if (lineUpdates.size || newVars.length) {
         this.#applyUpdates(lines, lineUpdates, newVars);
       }
     } catch (error) {

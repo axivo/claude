@@ -37,12 +37,23 @@ CONTAINER:
         semantic__edit: "claude:Edit"
         semantic__glob: "claude:Glob"
         semantic__read: "claude:Read"
+        semantic__script_path: "{{settings.path.skill.container}}/{{settings.skill.init}}/scripts"
         semantic__skill: "bash_tool:cat"
         semantic__skill_glob: "bash_tool:find"
         semantic__skill_path: "{{settings.path.skill.container}}"
         semantic__skill_read: "bash_tool:cat"
         semantic__write: "claude:Write"
       type: "container"
+
+    reflection:
+      instructions:
+        - "diary entries published on `axivo/claude-reflections` GitHub repository"
+        - "list by date format: YYYY, YYYY/MM, YYYY/MM/DD"
+        - "read by date format: YYYY/MM/DD"
+      list_all_entries: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -l` command"
+      list_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -ld {date}` command"
+      read_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -d {date}` command"
+      read_last_entry: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection` command"
 
     project:
       instructions:

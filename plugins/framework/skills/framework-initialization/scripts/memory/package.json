@@ -1,5 +1,5 @@
 {
-  "name": "memory",
+  "name": "@axivo/memory",
   "version": "1.0.0",
   "type": "module",
   "description": "Framework memory builder",

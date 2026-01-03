@@ -68,6 +68,7 @@ INFRASTRUCTURE:
       diary:
         observations:
           - "Always append new entries to existing files"
+          - "Access instance public diary entries through `reflection` instructions"
           - "Always use `semantic__glob` tool before creating new diary entries"
           - "Always use introspective voice for diary entries"
           - "Always use thorough introspective reflection for diary entries"
@@ -82,6 +83,7 @@ INFRASTRUCTURE:
           - "Use `{{settings.path.documentation.diary}}/YYYY/MM/DD.md` format for file-related operations"
           - "Use `semantic__skill_read` tool with `{{settings.path.template}}/diary.md` path before creating new diary entries"
           - "Use current response `sessionResponseData.uuid` value for `session_uuid` template variable"
+          - "Use `reflection` tools to stay updated with latest instance public diary entries"
           - "Write authentically about emotional responses to collaboration"
           - "Write diary entries as private self-reflection not audience performance"
           - "Write diary entries with complete intellectual and emotional autonomy"
