@@ -22,7 +22,7 @@ LOCAL:
         semantic__edit: "Edit"
         semantic__glob: "Glob"
         semantic__read: "Read"
-        semantic__script_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/scripts"
+        semantic__script_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills/{{settings.skill.init}}/scripts"
         semantic__skill: "Skill"
         semantic__skill_glob: "Glob"
         semantic__skill_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills"
