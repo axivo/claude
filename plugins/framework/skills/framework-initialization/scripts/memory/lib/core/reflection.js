@@ -1,7 +1,7 @@
 /**
  * Reflection Reader
  *
- * Fetches diary entries from claude-reflections repository
+ * Fetches diary entries from axivo/claude-reflections repository
  *
  * @module lib/core/Reflection
  * @author AXIVO
@@ -11,15 +11,13 @@ import { request } from '../vendor/octokit-request.min.mjs';
 import MemoryBuilderError from './error.js';
 
 /**
- * Reflection reader for claude-reflections repository
- *
- * Handles fetching diary entries from GitHub using Octokit request.
+ * Fetches diary entries from GitHub repository
  *
  * @class Reflection
  */
 class Reflection {
   /**
-   * Creates a new Reflection instance
+   * Creates Reflection instance
    *
    * @param {Object} config - Configuration object
    */
@@ -38,7 +36,7 @@ class Reflection {
    * @private
    * @param {string} [subPath=''] - Subpath within repository path
    * @returns {Promise<Array|null>} Array of items or null if not found
-   * @throws {ReflectionError} When API request fails
+   * @throws {MemoryBuilderError} When API request fails
    */
   async #fetchContents(subPath = '') {
     const fullPath = this.path + (subPath ? '/' + subPath : '');
@@ -51,7 +49,9 @@ class Reflection {
       });
       return response.data;
     } catch (error) {
-      if (error.status === 404) return null;
+      if (error.status === 404) {
+        return null;
+      }
       throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
   }
@@ -62,7 +62,7 @@ class Reflection {
    * @private
    * @param {string} filePath - File path within repository path
    * @returns {Promise<string|null>} File content or null if not found
-   * @throws {ReflectionError} When request fails
+   * @throws {MemoryBuilderError} When request fails
    */
   async #fetchRaw(filePath) {
     const fullPath = this.path + '/' + filePath;
@@ -78,7 +78,9 @@ class Reflection {
       });
       return response.data;
     } catch (error) {
-      if (error.status === 404) return null;
+      if (error.status === 404) {
+        return null;
+      }
       throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_RAW_REQUEST');
     }
   }
@@ -95,7 +97,9 @@ class Reflection {
     for (const file of files) {
       const filePath = file.slice(this.path.length + 1);
       const content = await this.#fetchRaw(filePath);
-      if (content) entries.push({ path: file, content });
+      if (content) {
+        entries.push({ path: file, content });
+      }
     }
     return { entries };
   }
@@ -137,7 +141,9 @@ class Reflection {
       if (subPath) {
         const filePath = `${this.path}/${subPath}${this.extension}`;
         const content = await this.#fetchRaw(`${subPath}${this.extension}`);
-        if (content) return { entries: [filePath] };
+        if (content) {
+          return { entries: [filePath] };
+        }
       }
       return { entries: [] };
     }

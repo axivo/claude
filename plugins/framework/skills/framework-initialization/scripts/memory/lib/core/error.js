@@ -16,11 +16,10 @@
  */
 class MemoryBuilderError extends Error {
   /**
-   * Create a MemoryBuilderError
+   * Creates MemoryBuilderError instance
    *
    * @param {string} message - The error message
    * @param {string} [code] - Optional error code
-   * @returns {MemoryBuilderError} New error instance
    */
   constructor(message, code) {
     super(message);

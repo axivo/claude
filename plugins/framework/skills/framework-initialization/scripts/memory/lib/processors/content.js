@@ -25,7 +25,7 @@ import MemoryBuilderError from '../core/error.js';
  */
 class ContentProcessor {
   /**
-   * Create ContentProcessor instance
+   * Creates ContentProcessor instance
    *
    * @param {Object} config - Configuration object
    * @param {Object} fileLoader - FileLoader instance for YAML loading
@@ -220,7 +220,7 @@ class ContentProcessor {
   }
 
   /**
-   * Build profile with hierarchical structure and inheritance chain
+   * Builds profile with hierarchical structure and inheritance chain
    *
    * @param {string} profileName - Profile name (e.g., "DEVELOPER")
    * @returns {Object} Hierarchical dictionary of profile and inherited profiles

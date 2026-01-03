@@ -21,7 +21,7 @@ import { ContentProcessor } from '../processors/index.js';
  */
 class MemoryBuilder {
   /**
-   * Create MemoryBuilder instance
+   * Creates MemoryBuilder instance
    *
    * @param {string} profileName - Profile name to build (default settings.profile)
    * @param {Object} config - Configuration object (optional)
@@ -34,7 +34,7 @@ class MemoryBuilder {
   }
 
   /**
-   * Build profile with hierarchical structure
+   * Builds profile with hierarchical structure
    *
    * @returns {boolean} Build success status
    */

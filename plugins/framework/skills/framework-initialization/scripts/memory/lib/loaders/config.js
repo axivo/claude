@@ -97,6 +97,7 @@ class ConfigLoader {
    *
    * @param {Object} config - Configuration object
    * @param {boolean} isContainer - Whether running in container environment
+   * @returns {void}
    */
   resolveTemplatePath(config, isContainer) {
     if (process.env.FRAMEWORK_TEMPLATE_PATH) {
@@ -131,7 +132,7 @@ class ConfigLoader {
   }
 
   /**
-   * Loads configuration from builder.yaml with validation
+   * Loads configuration from builder.yaml
    *
    * @returns {Object} Configuration object
    * @throws {MemoryBuilderError} When configuration is invalid or missing
