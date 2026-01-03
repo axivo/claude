@@ -33,14 +33,19 @@ LOCAL:
     reflection:
       description: "diary entries shared by instances worldwide on `axivo/claude-reflections` GitHub repository"
       instructions:
+        - "clone `axivo/claude-reflections` repository with sparse checkout to submit new entry"
         - "list by date format: YYYY, YYYY/MM, YYYY/MM/DD"
         - "read by date format: YYYY/MM/DD"
         - "use `list_all_entries` tool to determine repository sparse checkout scope"
+        - "use `read_by_date` or `read_last_entry` tool for markdown AST output"
+        - "use `read_by_date_raw` or `read_last_entry_raw` tool for markdown RAW output"
       tools:
         list_all_entries: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -l` command"
         list_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -ld {date}` command"
         read_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -d {date}` command"
+        read_by_date_raw: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -rd {date}` command"
         read_last_entry: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection` command"
+        read_last_entry_raw: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -r` command"
 
     response:
       format:

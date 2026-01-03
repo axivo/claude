@@ -24,7 +24,8 @@ const { values } = parseArgs({
   options: {
     date: { type: 'string', short: 'd', default: '' },
     help: { type: 'boolean', short: 'h', default: false },
-    list: { type: 'boolean', short: 'l', default: false }
+    list: { type: 'boolean', short: 'l', default: false },
+    raw: { type: 'boolean', short: 'r', default: false }
   },
   strict: true
 });
@@ -38,13 +39,14 @@ if (values.help) {
     'Options:',
     '  -d, --date [date]  Date in YYYY/MM/DD format (default: latest)',
     '  -h, --help         Display this message',
-    '  -l, --list         List available entries'
+    '  -l, --list         List available entries',
+    '  -r, --raw          Output raw markdown'
   ].join('\n'));
   process.exit(0);
 }
 const reflection = new Reflection(config);
 try {
-  const result = values.list ? await reflection.list(values.date) : await reflection.get(values.date);
+  const result = values.list ? await reflection.list(values.date) : await reflection.get(values.date, undefined, values.raw);
   for (const entry of result.entries.filter(e => e.reflection)) {
     entry.reflection = JSON.stringify(entry.reflection);
   }
