@@ -19,7 +19,7 @@
  */
 class TimeGenerator {
   /**
-   * Create TimeGenerator instance
+   * Creates TimeGenerator instance
    *
    * @param {Object} config - Configuration object
    */
@@ -28,7 +28,7 @@ class TimeGenerator {
   }
 
   /**
-   * Calculate DST status for date and timezone
+   * Calculates DST status for date and timezone
    *
    * @private
    * @param {Date} date - Date to check
@@ -55,7 +55,7 @@ class TimeGenerator {
   }
 
   /**
-   * Format date to ISO 8601 with timezone offset
+   * Formats date to ISO 8601 with timezone offset
    *
    * @private
    * @param {Date} date - Date to format
@@ -84,7 +84,7 @@ class TimeGenerator {
   }
 
   /**
-   * Get day of week name
+   * Gets day of week name
    *
    * @private
    * @param {Date} date - Date to format

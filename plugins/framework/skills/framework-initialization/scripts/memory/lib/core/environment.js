@@ -43,7 +43,7 @@ class EnvironmentManager {
   static envFormat = (name, value) => `${name}=${value}`;
 
   /**
-   * Create EnvironmentManager instance
+   * Creates EnvironmentManager instance
    *
    * @param {Object} settings - Configuration settings object
    */
@@ -75,7 +75,7 @@ class EnvironmentManager {
   }
 
   /**
-   * Check if running in container environment
+   * Checks if running in container environment
    *
    * @private
    * @returns {boolean} True if in container
@@ -133,7 +133,7 @@ class EnvironmentManager {
   }
 
   /**
-   * Check if running in Claude container
+   * Checks if running in Claude container
    *
    * @returns {boolean} True if both container and has container mount
    */
@@ -142,10 +142,7 @@ class EnvironmentManager {
   }
 
   /**
-   * Synchronize environment variables with configuration
-   *
-   * Reads /etc/environment and ensures all variables from configuration
-   * are present with correct values. Only executes in Claude containers.
+   * Synchronizes environment variables with configuration
    *
    * @returns {void}
    */

@@ -22,7 +22,7 @@ import MemoryBuilderError from '../core/error.js';
  */
 class FileLoader {
   /**
-   * Loads and parses a YAML file
+   * Loads and parses YAML file
    *
    * @param {string} filePath - Path to the YAML file
    * @returns {Object} Parsed YAML content as JavaScript object

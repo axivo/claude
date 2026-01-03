@@ -26,7 +26,7 @@ import TimeGenerator from './time.js';
  */
 class OutputGenerator {
   /**
-   * Create OutputGenerator instance
+   * Creates OutputGenerator instance
    *
    * @param {Object} config - Configuration object for output generation
    * @param {boolean} [container] - Running in container or container mode requested
