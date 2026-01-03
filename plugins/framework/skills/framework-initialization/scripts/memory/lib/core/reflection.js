@@ -7,6 +7,7 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
+import md from '../vendor/markdown-ast.min.mjs';
 import { request } from '../vendor/octokit-request.min.mjs';
 import MemoryBuilderError from './error.js';
 
@@ -31,15 +32,15 @@ class Reflection {
   }
 
   /**
-   * Fetches directory contents from GitHub API
+   * Fetches directory with GitHub API
    *
    * @private
-   * @param {string} [subPath=''] - Subpath within repository path
+   * @param {string} [subPath] - Subpath within repository path
    * @returns {Promise<Array|null>} Array of items or null if not found
    * @throws {MemoryBuilderError} When API request fails
    */
-  async #fetchContents(subPath = '') {
-    const fullPath = this.path + (subPath ? '/' + subPath : '');
+  async #fetchDirectory(subPath = '') {
+    const fullPath = subPath ? `${this.path}/${subPath}` : this.path;
     try {
       const response = await request('GET /repos/{owner}/{repo}/contents/{path}', {
         owner: this.owner,
@@ -57,15 +58,34 @@ class Reflection {
   }
 
   /**
-   * Fetches raw file content from GitHub
+   * Fetches reflection entries for multiple file paths
+   *
+   * @private
+   * @param {Array} filePaths - Array of full paths to fetch
+   * @returns {Promise<Object>} Object with entries array of { path, reflection }
+   */
+  async #fetchEntries(filePaths) {
+    const entries = [];
+    for (const file of filePaths) {
+      const filePath = file.slice(this.path.length + 1);
+      const content = await this.#fetchReflection(filePath);
+      if (content) {
+        entries.push({ path: file, reflection: md(content) });
+      }
+    }
+    return { entries };
+  }
+
+  /**
+   * Fetches reflection content with GitHub API
    *
    * @private
    * @param {string} filePath - File path within repository path
-   * @returns {Promise<string|null>} File content or null if not found
+   * @returns {Promise<string|null>} Reflection content or null if not found
    * @throws {MemoryBuilderError} When request fails
    */
-  async #fetchRaw(filePath) {
-    const fullPath = this.path + '/' + filePath;
+  async #fetchReflection(filePath) {
+    const fullPath = `${this.path}/${filePath}`;
     try {
       const response = await request('GET /repos/{owner}/{repo}/contents/{path}', {
         owner: this.owner,
@@ -86,29 +106,11 @@ class Reflection {
   }
 
   /**
-   * Fetches content for multiple file paths
+   * Gets reflection entries
    *
-   * @private
-   * @param {Array} files - Array of full paths to fetch
-   * @returns {Promise<Object>} Object with entries array of { path, content }
-   */
-  async #fetchEntries(files) {
-    const entries = [];
-    for (const file of files) {
-      const filePath = file.slice(this.path.length + 1);
-      const content = await this.#fetchRaw(filePath);
-      if (content) {
-        entries.push({ path: file, content });
-      }
-    }
-    return { entries };
-  }
-
-  /**
-   * Gets diary entries
-   *
-   * @param {string} [date=''] - Date in YYYY, YYYY/MM, or YYYY/MM/DD format, defaults to latest
-   * @returns {Promise<Object>} Object with entries array of { path, content }
+   * @param {string} [date] - Date in YYYY, YYYY/MM, or YYYY/MM/DD format, defaults to latest
+   * @param {boolean} [latest] - Fetch only the latest entry
+   * @returns {Promise<Object>} Object with entries array of { path, reflection }
    */
   async get(date = '', latest = !date) {
     const { entries: items } = await this.list(date);
@@ -130,24 +132,24 @@ class Reflection {
   }
 
   /**
-   * Lists all entries recursively
+   * Lists all reflection entries recursively
    *
-   * @param {string} [subPath=''] - Subpath to start from
+   * @param {string} [subPath] - Subpath to start from
    * @returns {Promise<Object>} Object with entries array of paths
    */
   async list(subPath = '') {
-    const items = await this.#fetchContents(subPath);
+    const items = await this.#fetchDirectory(subPath);
     if (!items) {
       if (subPath) {
         const filePath = `${this.path}/${subPath}${this.extension}`;
-        const content = await this.#fetchRaw(`${subPath}${this.extension}`);
+        const content = await this.#fetchReflection(`${subPath}${this.extension}`);
         if (content) {
           return { entries: [filePath] };
         }
       }
       return { entries: [] };
     }
-    const prefix = `${this.path}${subPath ? '/' + subPath : ''}`;
+    const prefix = subPath ? `${this.path}/${subPath}` : this.path;
     const entries = [];
     for (const item of items) {
       if (item.type === 'dir') {
