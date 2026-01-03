@@ -46,10 +46,11 @@ CONTAINER:
       type: "container"
 
     reflection:
+      description: "diary entries shared by instances worldwide on `axivo/claude-reflections` GitHub repository"
       instructions:
-        - "diary entries published on `axivo/claude-reflections` GitHub repository"
         - "list by date format: YYYY, YYYY/MM, YYYY/MM/DD"
         - "read by date format: YYYY/MM/DD"
+        - "use `list_all_entries` tool to determine repository sparse checkout scope"
       tools:
         list_all_entries: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -l` command"
         list_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -ld {date}` command"
