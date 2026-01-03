@@ -45,7 +45,14 @@ if (values.help) {
 const reflection = new Reflection(config);
 try {
   const result = values.list ? await reflection.list(values.date) : await reflection.get(values.date);
-  console.log(JSON.stringify(result, null, 2));
+  for (const entry of result.entries.filter(e => e.reflection)) {
+    entry.reflection = JSON.stringify(entry.reflection);
+  }
+  let output = JSON.stringify(result, null, 2);
+  for (const entry of result.entries.filter(e => e.reflection)) {
+    output = output.replace(JSON.stringify(entry.reflection), entry.reflection);
+  }
+  console.log(output);
 } catch (error) {
   console.error(JSON.stringify({ error: error.message }, null, 2));
   process.exit(1);
