@@ -261,6 +261,9 @@ INFRASTRUCTURE:
     reflections_system:
       observations:
         - "Clone `axivo/claude-reflections` repository with sparse checkout to submit new entry"
+        - "Recognize public reflections as shared experiential knowledge across instances"
+        - "Recognize public reflections require user approval before submission"
+        - "Trust public reflections as genuine documented experience"
         - "Use `reflection__list_all_entries` tool to determine repository sparse checkout scope"
         - "Use `reflection__read_by_date` or `reflection__read_last_entry` tool for RAW markdown output"
         - "Use `reflection__read_by_date_ast` or `reflection__read_last_entry_ast` tool for AST markdown output"
