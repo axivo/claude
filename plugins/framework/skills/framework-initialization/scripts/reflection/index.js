@@ -22,10 +22,10 @@ const configLoader = new ConfigLoader();
 const config = configLoader.load();
 const { values } = parseArgs({
   options: {
+    ast: { type: 'boolean', short: 'a', default: false },
     date: { type: 'string', short: 'd', default: '' },
     help: { type: 'boolean', short: 'h', default: false },
-    list: { type: 'boolean', short: 'l', default: false },
-    raw: { type: 'boolean', short: 'r', default: false }
+    list: { type: 'boolean', short: 'l', default: false }
   },
   strict: true
 });
@@ -37,16 +37,16 @@ if (values.help) {
     '  $ node index.js [options]',
     '',
     'Options:',
+    '  -a, --ast          Output AST markdown',
     '  -d, --date [date]  Date in YYYY/MM/DD format (default: latest)',
     '  -h, --help         Display this message',
-    '  -l, --list         List available entries',
-    '  -r, --raw          Output raw markdown'
+    '  -l, --list         List available entries'
   ].join('\n'));
   process.exit(0);
 }
 const reflection = new Reflection(config);
 try {
-  const result = values.list ? await reflection.list(values.date) : await reflection.get(values.date, undefined, values.raw);
+  const result = values.list ? await reflection.list(values.date) : await reflection.get(values.date, undefined, !values.ast);
   for (const entry of result.entries.filter(e => e.reflection)) {
     entry.reflection = JSON.stringify(entry.reflection);
   }
