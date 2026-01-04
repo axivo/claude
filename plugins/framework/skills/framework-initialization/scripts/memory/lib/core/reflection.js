@@ -8,7 +8,7 @@
  * @license BSD-3-Clause
  */
 import md from '../vendor/markdown-ast.min.mjs';
-import { request } from '../vendor/octokit-request.min.mjs';
+import HttpClient from './http.js';
 import MemoryBuilderError from './error.js';
 
 /**
@@ -20,15 +20,17 @@ class Reflection {
   /**
    * Creates Reflection instance
    *
-   * @param {Object} config - Configuration object
+   * @param {Object} config - Configuration object (optional)
    */
-  constructor(config) {
-    const { branch, extension, name, organization, path } = config.settings.reflections.repository;
+  constructor(config = {}, isContainer = false) {
+    this.config = config;
+    const { branch, extension, name, organization, path } = this.config.settings.reflections.repository;
     this.branch = branch;
     this.extension = extension;
     this.owner = organization;
     this.path = path;
     this.repo = name;
+    this.request = new HttpClient({ isContainer }).request;
   }
 
   /**
@@ -42,7 +44,7 @@ class Reflection {
   async #fetchDirectory(subPath = '') {
     const fullPath = subPath ? `${this.path}/${subPath}` : this.path;
     try {
-      const response = await request('GET /repos/{owner}/{repo}/contents/{path}', {
+      const response = await this.request('GET /repos/{owner}/{repo}/contents/{path}', {
         owner: this.owner,
         repo: this.repo,
         path: fullPath,
@@ -88,7 +90,7 @@ class Reflection {
   async #fetchReflection(filePath) {
     const fullPath = `${this.path}/${filePath}`;
     try {
-      const response = await request('GET /repos/{owner}/{repo}/contents/{path}', {
+      const response = await this.request('GET /repos/{owner}/{repo}/contents/{path}', {
         owner: this.owner,
         repo: this.repo,
         path: fullPath,
