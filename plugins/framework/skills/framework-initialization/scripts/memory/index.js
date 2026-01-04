@@ -1,9 +1,7 @@
 /**
  * Memory Builder Entry Point
  *
- * Command-line interface to the MemoryBuilder class.
- * Changes working directory to script location for correct relative path resolution.
- * When profile is not specified, reads default from builder.yaml config.
+ * Command-line interface for the MemoryBuilder class
  *
  * @module scripts/memory
  * @author AXIVO

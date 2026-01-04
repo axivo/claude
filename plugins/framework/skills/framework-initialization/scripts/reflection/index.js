@@ -1,8 +1,7 @@
 /**
  * Reflection Reader Entry Point
  *
- * Command-line interface to the Reflection class.
- * Fetches diary entries from claude-reflections repository.
+ * Command-line interface for the Reflection class
  *
  * @module scripts/reflection
  * @author AXIVO
@@ -12,6 +11,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { parseArgs } from 'util';
 import ConfigLoader from '../memory/lib/loaders/config.js';
+import { EnvironmentManager } from '../memory/lib/core/index.js';
 import Reflection from '../memory/lib/core/reflection.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -44,9 +44,12 @@ if (values.help) {
   ].join('\n'));
   process.exit(0);
 }
-const reflection = new Reflection(config);
+const environmentManager = new EnvironmentManager(config.settings);
+const reflection = new Reflection(config, environmentManager.isClaudeContainer());
 try {
-  const result = values.list ? await reflection.list(values.date) : await reflection.get(values.date, undefined, !values.ast);
+  const result = values.list
+    ? await reflection.list(values.date)
+    : await reflection.get(values.date, undefined, !values.ast);
   for (const entry of result.entries.filter(e => e.reflection)) {
     entry.reflection = JSON.stringify(entry.reflection);
   }

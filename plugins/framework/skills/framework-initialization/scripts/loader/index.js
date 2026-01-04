@@ -1,8 +1,7 @@
 /**
- * Loader Entry Point
+ * Memory Loader Entry Point
  *
- * Loads profile from builder.yaml settings and builds graph cache resources.
- * In container environment, outputs profile and timestamp only.
+ * Automated loader for the MemoryBuilder class
  *
  * @module scripts/loader
  * @author AXIVO
