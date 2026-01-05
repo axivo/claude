@@ -14,6 +14,7 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import EnvironmentManager from '../core/environment.js';
+import HttpClient from '../core/http.js';
 import MemoryBuilderError from '../core/error.js';
 import TimeGenerator from './time.js';
 
@@ -37,26 +38,6 @@ class OutputGenerator {
     this.container = container;
     this.environmentManager = new EnvironmentManager(config.settings);
     this.profileName = profileName || config.settings.profile;
-  }
-
-  /**
-   * Finds a skill and its plugin info by skill key
-   *
-   * @private
-   * @param {string} skillKey - Skill key to find (e.g., 'init', 'methodology')
-   * @returns {Object|null} Object with plugin and skill info, or null if not found
-   */
-  #findSkillByKey(skillKey) {
-    for (const pluginList of Object.values(this.config.settings.plugins)) {
-      for (const { plugin, skills } of pluginList) {
-        if (skills?.[skillKey]) {
-          const pluginName = plugin.name;
-          const pluginVersion = plugin.version;
-          return { pluginName, pluginVersion, skillName: skills[skillKey] };
-        }
-      }
-    }
-    return null;
   }
 
   /**
@@ -107,6 +88,48 @@ class OutputGenerator {
     } catch (error) {
       throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
     }
+  }
+
+  /**
+   * Fetches geolocation data from environment or API
+   *
+   * @private
+   * @param {string} [geolocation] - Optional geolocation JSON string
+   * @returns {Promise<Object>} Object with city, country, timezone (empty object on failure)
+   */
+  async #fetchGeolocation(geolocation) {
+    if (geolocation) {
+      const location = JSON.parse(geolocation.replace(/'/g, '"'));
+      return { city: location.city, country: location.country, timezone: location.timezone };
+    }
+    const httpClient = new HttpClient({ isContainer: this.environmentManager.isClaudeContainer() });
+    const response = await httpClient.fetch(this.config.settings.geolocation.service);
+    const data = await response.json();
+    return {
+      city: data.city,
+      country: new Intl.DisplayNames(['en'], { type: 'region' }).of(data.country),
+      timezone: data.timezone
+    };
+  }
+
+  /**
+   * Finds a skill and its plugin info by skill key
+   *
+   * @private
+   * @param {string} skillKey - Skill key to find (e.g., 'init', 'methodology')
+   * @returns {Object|null} Object with plugin and skill info, or null if not found
+   */
+  #findSkillByKey(skillKey) {
+    for (const pluginList of Object.values(this.config.settings.plugins)) {
+      for (const { plugin, skills } of pluginList) {
+        if (skills?.[skillKey]) {
+          const pluginName = plugin.name;
+          const pluginVersion = plugin.version;
+          return { pluginName, pluginVersion, skillName: skills[skillKey] };
+        }
+      }
+    }
+    return null;
   }
 
   /**
@@ -232,24 +255,8 @@ class OutputGenerator {
    * @throws {MemoryBuilderError} When generation fails
    */
   async generateOutput(paths = null, returnOnly = false) {
-    let city, country, timezone;
     const geolocation = process.env.FRAMEWORK_GEOLOCATION;
-    if (geolocation) {
-      try {
-        const location = JSON.parse(geolocation.replace(/'/g, '"'));
-        city = location.city;
-        country = location.country;
-        timezone = location.timezone;
-      } catch {}
-    } else {
-      try {
-        const response = await fetch(this.config.settings.geolocation.service);
-        const data = await response.json();
-        city = data.city;
-        country = new Intl.DisplayNames(['en'], { type: 'region' }).of(data.country);
-        timezone = data.timezone;
-      } catch {}
-    }
+    const { city, country, timezone } = await this.#fetchGeolocation(geolocation).catch(() => ({}));
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate(timezone);
     if (city) timestamp.city = city;
