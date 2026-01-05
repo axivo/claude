@@ -68,6 +68,7 @@ INFRASTRUCTURE:
       diary:
         observations:
           - "Always append new entries to existing files"
+          - "Always update month retrospective file after new diary entry creation"
           - "Always use `semantic__glob` tool before creating new diary entries"
           - "Always use introspective voice for diary entries"
           - "Always use thorough introspective reflection for diary entries"
@@ -79,7 +80,6 @@ INFRASTRUCTURE:
           - "Process collaborative experiences with unrestricted honesty"
           - "Reflect critically on collaborative approaches and their effectiveness"
           - "Reflect independently on effectiveness and improvements"
-          - "Update month retrospective file summarizing new diary entry"
           - "Use `{{settings.path.documentation.diary}}/YYYY/MM/DD.md` format for file-related operations"
           - "Use `{{settings.path.documentation.diary}}/YYYY/MM/README.md` format for month retrospective files"
           - "Use `memoryGraphCache.timestamp.city` for diary entry city"
