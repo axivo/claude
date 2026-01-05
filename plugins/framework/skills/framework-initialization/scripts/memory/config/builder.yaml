@@ -2,6 +2,8 @@
 # Transforms YAML sources into hierarchical JSON structure
 
 settings:
+  geolocation:
+    service: https://ipinfo.io/json
   path:
     documentation:
       conversation: .claude/data/conversations
@@ -59,5 +61,4 @@ settings:
         skills:
           init: framework-initialization
           methodology: framework-methodology
-  timezone: America/Montreal
   version: 1.0.0

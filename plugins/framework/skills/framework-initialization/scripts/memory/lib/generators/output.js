@@ -181,10 +181,10 @@ class OutputGenerator {
    * @param {Object} profiles - Hierarchical profile dictionary
    * @param {boolean} [returnOnly] - Return object instead of printing to stdout
    * @param {boolean} [skipInject] - Skip injecting data into SKILL.md
-   * @returns {Object|boolean} Output object if returnOnly, otherwise success status
+   * @returns {Promise<Object|boolean>} Output object if returnOnly, otherwise success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generate(instructions, profiles, returnOnly = false, skipInject = false) {
+  async generate(instructions, profiles, returnOnly = false, skipInject = false) {
     if (typeof instructions !== 'object' || instructions === null) {
       throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
     }
@@ -214,26 +214,46 @@ class OutputGenerator {
         this.#injectData('instructions', instructionsData);
         this.#injectData('memory', memoryData);
       }
-      return this.generateOutput(paths.sort(), returnOnly);
+      return await this.generateOutput(paths.sort(), returnOnly);
     }
     if (!skipInject) {
       this.#injectData('instructions', instructionsData);
       this.#injectData('memory', memoryData);
     }
-    return this.generateOutput(null, returnOnly);
+    return await this.generateOutput(null, returnOnly);
   }
 
   /**
-   * Generates output with profile and timestamp
+   * Generates output with profile, timestamp, and location
    *
    * @param {Array} [paths] - Optional array of generated file paths
    * @param {boolean} [returnOnly] - Return object instead of printing to stdout
-   * @returns {Object|boolean} Output object if returnOnly, otherwise success status
+   * @returns {Promise<Object|boolean>} Output object if returnOnly, otherwise success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  generateOutput(paths = null, returnOnly = false) {
+  async generateOutput(paths = null, returnOnly = false) {
+    let city, country, timezone;
+    const geolocation = process.env.FRAMEWORK_GEOLOCATION;
+    if (geolocation) {
+      try {
+        const location = JSON.parse(geolocation.replace(/'/g, '"'));
+        city = location.city;
+        country = location.country;
+        timezone = location.timezone;
+      } catch {}
+    } else {
+      try {
+        const response = await fetch(this.config.settings.geolocation.service);
+        const data = await response.json();
+        city = data.city;
+        country = new Intl.DisplayNames(['en'], { type: 'region' }).of(data.country);
+        timezone = data.timezone;
+      } catch {}
+    }
     const timeGenerator = new TimeGenerator(this.config);
-    const timestamp = timeGenerator.generate();
+    const timestamp = timeGenerator.generate(timezone);
+    if (city) timestamp.city = city;
+    if (country) timestamp.country = country;
     const profile = this.profileName;
     const output = paths ? { paths, profile, timestamp } : { profile, timestamp };
     if (returnOnly) {

@@ -87,9 +87,6 @@ class ConfigLoader {
     if (process.env.FRAMEWORK_PROFILE) {
       config.settings.profile = process.env.FRAMEWORK_PROFILE;
     }
-    if (process.env.FRAMEWORK_TIMEZONE) {
-      config.settings.timezone = process.env.FRAMEWORK_TIMEZONE;
-    }
   }
 
   /**
