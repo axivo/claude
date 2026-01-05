@@ -36,9 +36,9 @@ class MemoryBuilder {
   /**
    * Builds profile with hierarchical structure
    *
-   * @returns {boolean} Build success status
+   * @returns {Promise<boolean>} Build success status
    */
-  build() {
+  async build() {
     try {
       const configLoader = new ConfigLoader();
       if (Object.keys(this.config).length === 0) {
@@ -51,7 +51,7 @@ class MemoryBuilder {
       const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName);
       if (!this.profileName) {
         const defaultGenerator = new OutputGenerator(this.config, false, this.config.settings.profile);
-        defaultGenerator.generateOutput();
+        await defaultGenerator.generateOutput();
         return true;
       }
       const fileLoader = new FileLoader();
@@ -61,15 +61,15 @@ class MemoryBuilder {
       const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
       const instructions = instructionsProcessor.build(instructionsName);
       if (this.container && !environmentManager.isClaudeContainer()) {
-        const result = outputGenerator.generate(instructions, profiles, true);
+        const result = await outputGenerator.generate(instructions, profiles, true);
         const defaultProfile = this.config.settings.profile;
         const defaultProfiles = profileProcessor.build(defaultProfile);
         const localInstructions = instructionsProcessor.build('LOCAL');
         const defaultGenerator = new OutputGenerator(this.config, false, defaultProfile);
-        defaultGenerator.generate(localInstructions, defaultProfiles, true);
+        await defaultGenerator.generate(localInstructions, defaultProfiles, true);
         outputGenerator.output(result, 'stdout');
       } else {
-        outputGenerator.generate(instructions, profiles);
+        await outputGenerator.generate(instructions, profiles);
       }
       return true;
     } catch (error) {

@@ -101,13 +101,15 @@ class TimeGenerator {
   /**
    * Generates timestamp with timezone information
    *
-   * @param {string} [timezone] - Timezone (uses config default if not specified)
+   * @param {string} timezone - IANA timezone name
    * @returns {Object} Timestamp object with timezone, datetime, day_of_week, is_dst
    */
   generate(timezone) {
-    const tz = timezone || this.config.settings.timezone || 'America/Montreal';
+    const tz = timezone;
     const now = new Date();
     return {
+      city: null,
+      country: null,
       datetime: this.#formatISO8601(now, tz),
       day_of_week: this.#getDayOfWeek(now, tz),
       is_dst: this.#calculateDST(now, tz),

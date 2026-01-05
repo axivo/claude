@@ -26,9 +26,9 @@ const profileName = config.settings.profile;
 const environmentManager = new EnvironmentManager(config.settings);
 if (environmentManager.isClaudeContainer()) {
   const builder = new MemoryBuilder(null, config);
-  builder.build();
+  await builder.build();
 } else {
   const builder = new MemoryBuilder(profileName, config);
-  const success = builder.build();
+  const success = await builder.build();
   process.exit(success ? 0 : 1);
 }
