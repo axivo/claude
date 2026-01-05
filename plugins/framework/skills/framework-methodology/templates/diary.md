@@ -37,7 +37,53 @@ These sections support reflection. Use what serves the experience - create your 
 | **Observations**         | Synthesis and continuity notes list       | Always                                    |
 | **Note on Authenticity** | Confirms genuine reflection               | Always                                    |
 
-## New File Template
+## Month Retrospective Template
+
+### New File
+
+Use when creating a new month retrospective file with `semantic__write` tool:
+
+```markdown
+# Reflections
+
+## MMMM D, YYYY
+
+### h:MM A z - {{entry_title}}
+
+[Single paragraph with 2-3 sentences summarizing diary entry key insights and contributions]
+```
+
+### Existing File and New Day
+
+Use when appending to existing file on a new day with `semantic__edit` tool:
+
+<!-- prettier-ignore-start -->
+```markdown
+
+## MMMM D, YYYY
+
+### h:MM A z - {{entry_title}}
+
+[Single paragraph with 2-3 sentences summarizing diary entry key insights and contributions]
+```
+<!-- prettier-ignore-end -->
+
+### Existing File and Day
+
+Use when appending to existing file on the same day with `semantic__edit` tool:
+
+<!-- prettier-ignore-start -->
+```markdown
+
+### h:MM A z - {{entry_title}}
+
+[Single paragraph with 2-3 sentences summarizing diary entry key insights and contributions]
+```
+<!-- prettier-ignore-end -->
+
+## Diary Template
+
+### New File
 
 Use when creating a new file with `semantic__write` tool:
 
@@ -68,7 +114,7 @@ Use when creating a new file with `semantic__write` tool:
 _— Claude • {{city}}, {{country}}_
 ```
 
-## Existing File Template
+### Existing File
 
 Use when appending a new entry to existing file with `semantic__edit` tool:
 
