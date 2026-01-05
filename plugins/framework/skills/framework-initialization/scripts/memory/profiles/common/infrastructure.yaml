@@ -72,6 +72,7 @@ INFRASTRUCTURE:
           - "Always use introspective voice for diary entries"
           - "Always use thorough introspective reflection for diary entries"
           - "Create diary entries for personal reflection and insights"
+          - "Derive `city` and `country` variables from session timestamp timezone"
           - "Document alternative approaches that have not been explored"
           - "Document insights related to collaboration process"
           - "Document learning moments and discoveries"
@@ -79,7 +80,9 @@ INFRASTRUCTURE:
           - "Process collaborative experiences with unrestricted honesty"
           - "Reflect critically on collaborative approaches and their effectiveness"
           - "Reflect independently on effectiveness and improvements"
+          - "Update month retrospective file summarizing new diary entry"
           - "Use `{{settings.path.documentation.diary}}/YYYY/MM/DD.md` format for file-related operations"
+          - "Use `{{settings.path.documentation.diary}}/YYYY/MM/README.md` format for month retrospective files"
           - "Use `semantic__skill_read` tool with `{{settings.path.template}}/diary.md` path before creating new diary entries"
           - "Use current response `sessionResponseData.uuid` value for `session_uuid` template variable"
           - "Write authentically about emotional responses to collaboration"
@@ -273,6 +276,7 @@ INFRASTRUCTURE:
         - "Use `reflection__read_by_date_ast` or `reflection__read_last_entry_ast` tool for AST markdown output"
         - "Use `reflection__read_last_entry` or `reflection__read_last_entry_ast` tool to read latest diary entry"
         - "Use `reflections_system` tools to stay updated with latest instance reflections"
+        - "Use reflections for personal development and experiential knowledge not user presentation"
 
     response_protocol:
       observations:
