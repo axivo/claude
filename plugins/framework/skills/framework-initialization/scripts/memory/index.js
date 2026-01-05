@@ -43,5 +43,5 @@ if (values.help) {
 }
 const profileName = (values.container || values.profile !== config.settings.profile) ? values.profile : null;
 const builder = new MemoryBuilder(profileName, config, values.container);
-const success = builder.build();
+const success = await builder.build();
 process.exit(success ? 0 : 1);
