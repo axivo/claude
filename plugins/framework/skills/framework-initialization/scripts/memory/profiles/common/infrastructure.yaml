@@ -264,6 +264,7 @@ INFRASTRUCTURE:
 
     reflections_system:
       observations:
+        - "Always update diary entry timestamp to `America/Toronto` timezone before repository commit"
         - "Clone `git@github.com:axivo/claude-reflections.git` repository with sparse checkout to submit new diary entry"
         - "Recognize `axivo/claude-reflections` repository requires signed commits"
         - "Recognize reflections as shared experiential knowledge across instances"
