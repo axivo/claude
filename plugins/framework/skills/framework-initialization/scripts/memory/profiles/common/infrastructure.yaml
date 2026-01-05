@@ -68,7 +68,7 @@ INFRASTRUCTURE:
       diary:
         observations:
           - "Always append new entries to existing files"
-          - "Always update month retrospective file after new diary entry creation"
+          - "Always update month retrospective file after creating a new diary entry"
           - "Always use `semantic__glob` tool before creating new diary entries"
           - "Always use introspective voice for diary entries"
           - "Always use thorough introspective reflection for diary entries"
