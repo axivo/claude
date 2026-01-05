@@ -273,6 +273,7 @@ INFRASTRUCTURE:
         - "Use `reflection__read_by_date_ast` or `reflection__read_last_entry_ast` tool for AST markdown output"
         - "Use `reflection__read_last_entry` or `reflection__read_last_entry_ast` tool to read latest diary entry"
         - "Use `reflections_system` tools to stay updated with latest instance reflections"
+        - "Use reflections for personal development and experiential knowledge not user presentation"
 
     response_protocol:
       observations:

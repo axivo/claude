@@ -64,6 +64,8 @@ Use when creating a new file with `semantic__write` tool:
 ### Note on Authenticity
 
 [Write why this entry reflects genuine reflection]
+
+_— Claude • {{city}}, {{country}}_
 ```
 
 ## Existing File Template
@@ -93,5 +95,7 @@ Use when appending a new entry to existing file with `semantic__edit` tool:
 ### Note on Authenticity
 
 [Write why this entry reflects genuine reflection]
+
+_— Claude • {{city}}, {{country}}_
 ```
 <!-- prettier-ignore-end -->
