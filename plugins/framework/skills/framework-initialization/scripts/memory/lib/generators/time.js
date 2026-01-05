@@ -105,15 +105,12 @@ class TimeGenerator {
    * @returns {Object} Timestamp object with timezone, datetime, day_of_week, is_dst
    */
   generate(timezone) {
-    const tz = timezone;
     const now = new Date();
     return {
-      city: null,
-      country: null,
-      datetime: this.#formatISO8601(now, tz),
-      day_of_week: this.#getDayOfWeek(now, tz),
-      is_dst: this.#calculateDST(now, tz),
-      timezone: tz
+      datetime: this.#formatISO8601(now, timezone),
+      day_of_week: this.#getDayOfWeek(now, timezone),
+      is_dst: this.#calculateDST(now, timezone),
+      timezone
     };
   }
 }
