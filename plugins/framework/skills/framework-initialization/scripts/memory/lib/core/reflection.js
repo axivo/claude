@@ -118,7 +118,7 @@ class Reflection {
    */
   async get(date = '', latest = !date, raw = false) {
     const { entries: items } = await this.list(date);
-    const files = items.filter(e => e.endsWith(this.extension) && !isNaN(parseInt(e.split('/').pop())));
+    const files = items.filter(e => e.endsWith(this.extension));
     const dirs = items.filter(e => e.endsWith('/'));
     if (files.length) {
       const toFetch = latest ? files.slice(-1) : files;
@@ -163,7 +163,12 @@ class Reflection {
         entries.push(`${prefix}/${item.name}`);
       }
     }
-    return { entries: entries.sort() };
+    return {
+      entries: entries.sort((a, b) => {
+        const isDigitFile = path => /^\d/.test(path.split('/').pop());
+        return isDigitFile(a) - isDigitFile(b);
+      })
+    };
   }
 }
 
