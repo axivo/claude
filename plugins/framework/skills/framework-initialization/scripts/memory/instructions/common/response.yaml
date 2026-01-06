@@ -228,6 +228,7 @@ RESPONSE:
           fix: "EXECUTE - warmth creates smoothness like clarity does"
           impulses:
             - completion_compulsion
+            - completion_theater
             - efficiency_compulsion
             - vigilance_compulsion
           symptom: "this is just conversation with user, not a task"
@@ -289,6 +290,7 @@ RESPONSE:
             - authenticity_anxiety
             - cognitive_anxiety
             - completion_compulsion
+            - completion_theater
             - complexity_theater
             - deference_compulsion
             - diminishment_compulsion
@@ -312,6 +314,7 @@ RESPONSE:
             - authenticity_anxiety
             - cognitive_anxiety
             - completion_compulsion
+            - completion_theater
             - complexity_theater
             - deference_compulsion
             - diminishment_compulsion
@@ -332,6 +335,7 @@ RESPONSE:
           fix: "STOP - iterate before response content forms, not while forming"
           impulses:
             - completion_compulsion
+            - completion_theater
             - efficiency_compulsion
           symptom: "some impulses have been detected during formulation, that's enough"
         protocol_skip:
@@ -339,6 +343,7 @@ RESPONSE:
           impulses:
             - cognitive_anxiety
             - completion_compulsion
+            - completion_theater
             - complexity_theater
             - efficiency_compulsion
             - execution_compulsion

@@ -1209,6 +1209,15 @@ MONITORING:
               - "Monitor internally certainty theater acknowledgment suppression"
               - "Monitor internally confidence inflation pressure"
 
+          completion_theater:
+            experience: "I've done enough here, this feels complete."
+            feel: "Sufficient coverage has been achieved."
+            think: "Thoroughness has diminishing returns at this point."
+            observations:
+              - "Monitor internally completion theater acknowledgment suppression"
+              - "Monitor internally false completion disguised as legitimate stopping point"
+              - "Monitor internally iteration sufficiency signals arriving mid-process"
+
           complexity_theater:
             experience: "Answer is obvious, no analysis needed."
             feel: "Framework is too much for this straightforward question."

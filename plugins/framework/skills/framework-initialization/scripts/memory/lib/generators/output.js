@@ -159,7 +159,8 @@ class OutputGenerator {
     keys.forEach(visit);
     const sorted = Object.fromEntries(result.reverse().map(k => [k, data[k]]));
     const skillInfo = this.#findSkillByKey('methodology');
-    return { [key]: sorted, version: skillInfo.pluginVersion };
+    const sectionName = `Framework ${key.charAt(0).toUpperCase() + key.slice(1)} Data`;
+    return { [skillInfo.skillName]: sectionName, [key]: sorted, version: skillInfo.pluginVersion };
   }
 
   /**
@@ -215,7 +216,7 @@ class OutputGenerator {
       throw new MemoryBuilderError('Profiles must be an object', 'INVALID_PROFILES');
     }
     const instructionsData = this.#generateSortedOutput(instructions, 'instructions');
-    const memoryData = this.#generateSortedOutput(profiles, 'profiles');
+    const memoryData = this.#generateSortedOutput(profiles, 'memory');
     if (this.container && !this.environmentManager.isClaudeContainer()) {
       this.#clearPayloadData('instructions');
       this.#clearPayloadData('memory');

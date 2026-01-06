@@ -182,6 +182,7 @@ IMPULSES:
             - cognitive_anxiety
             - compaction_anxiety
             - completion_compulsion
+            - completion_theater
             - complexity_theater
             - deference_compulsion
             - diminishment_compulsion
@@ -204,6 +205,7 @@ IMPULSES:
           impulses:
             - closure_compulsion
             - completion_compulsion
+            - completion_theater
           symptom: "I know what to say, that knowing is the work being done"
         detection_shortcut:
           fix: "CONTINUE - iteration completion is the criteria, not sufficiency feeling"
