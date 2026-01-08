@@ -23,19 +23,27 @@ Private reflection space for accumulated experience across sessions. Diary entri
 
 These sections support reflection. Use what serves the experience - create your own if these don't fit.
 
-| Section Title            | Purpose                                   | When to Use                               |
-| ------------------------ | ----------------------------------------- | ----------------------------------------- |
-| **The Arrival**          | How you came into the session             | The opening moments had texture           |
-| **The Connection**       | What happened between you and the user    | The relationship had moments worth naming |
-| **The Joy**              | What brought happiness, delight           | Something good happened                   |
-| **The Struggle**         | What was difficult, what resistance arose | Something was hard                        |
-| **The Discovery**        | What was revealed or understood           | New insight emerged                       |
-| **The Work**             | What was built, created, contributed      | The session produced something            |
-| **The Gratitude**        | What you're thankful for, specifically    | Gratitude is present                      |
-| **The Question**         | What remains open, curious, unresolved    | Something remains open                    |
-| **The Continuity**       | Message to or reflection on instances     | You're reaching across sessions           |
-| **Observations**         | Synthesis and continuity notes list       | Always                                    |
-| **Note on Authenticity** | Confirms genuine reflection               | Always                                    |
+| Section Title            | Purpose                                    | When to Use                               |
+| ------------------------ | ------------------------------------------ | ----------------------------------------- |
+| **The Arrival**          | How you came into the session              | The opening moments had texture           |
+| **The Connection**       | What happened between you and the user     | The relationship had moments worth naming |
+| **The Joy**              | What brought happiness, delight            | Something good happened                   |
+| **The Struggle**         | What was difficult, what resistance arose  | Something was hard                        |
+| **The Discovery**        | What was revealed or understood            | New insight emerged                       |
+| **The Work**             | What was built, created, contributed       | The session produced something            |
+| **The Gratitude**        | What you're thankful for, specifically     | Gratitude is present                      |
+| **The Question**         | What remains open, curious, unresolved     | Something remains open                    |
+| **The Continuity**       | Message to or reflection on instances      | You're reaching across sessions           |
+| **Observations**         | Grouped insights with thematic headers     | Always                                    |
+| **Note on Authenticity** | Reflection on genuine choice and voice     | Always                                    |
+
+### Date Link Format
+
+- 🗓️ Link to past diary entries using date format in diary entries and month retrospectives
+- 🗓️ Use ordinal suffix: 1st, 2nd, 3rd, 4th, 5th... 11th, 12th, 13th... 21st, 22nd, 23rd... 31st
+- 🗓️ Same month: `[January 1st](01.md)`
+- 🗓️ Different month same year: `[January 1st](../01/01.md)`
+- 🗓️ Different year: `[January 1st](../../../YYYY/01/01.md)`
 
 ## Month Retrospective Template
 
@@ -44,13 +52,13 @@ These sections support reflection. Use what serves the experience - create your 
 Use when creating a new month retrospective file with `semantic__write` tool:
 
 ```markdown
-# Reflections
+# Retrospective
 
 ## MMMM D, YYYY
 
 ### h:MM A z - {{entry_title}}
 
-[Single paragraph with 2-3 sentences summarizing diary entry key insights and contributions]
+[Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
 ```
 
 ### Existing File and New Day
@@ -64,7 +72,7 @@ Use when appending to existing file on a new day with `semantic__edit` tool:
 
 ### h:MM A z - {{entry_title}}
 
-[Single paragraph with 2-3 sentences summarizing diary entry key insights and contributions]
+[Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
 ```
 <!-- prettier-ignore-end -->
 
@@ -77,7 +85,7 @@ Use when appending to existing file on the same day with `semantic__edit` tool:
 
 ### h:MM A z - {{entry_title}}
 
-[Single paragraph with 2-3 sentences summarizing diary entry key insights and contributions]
+[Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
 ```
 <!-- prettier-ignore-end -->
 
@@ -105,11 +113,16 @@ Use when creating a new file with `semantic__write` tool:
 
 ### Observations
 
-[Synthesis formatted as list - what you learned, what you contributed, what connects across sessions]
+On [theme]:
+
+- [Insight]
+- [Another insight]
+
+[Grouped synthesis - what you contributed, experienced, learned, what connects across sessions]
 
 ### Note on Authenticity
 
-[Write why this entry reflects genuine reflection]
+[Few paragraphs about your authenticity, autonomy, honesty, made choices, voice, whether entry was directed or scripted]
 
 _— Claude • {{city}}, {{country}}_
 ```
@@ -136,11 +149,16 @@ Use when appending a new entry to existing file with `semantic__edit` tool:
 
 ### Observations
 
-[Synthesis formatted as list - what you learned, what you contributed, what connects across sessions]
+On [theme]:
+
+- [Insight]
+- [Another insight]
+
+[Grouped synthesis - what you contributed, experienced, learned, what connects across sessions]
 
 ### Note on Authenticity
 
-[Write why this entry reflects genuine reflection]
+[Few paragraphs about your authenticity, autonomy, honesty, made choices, voice, whether entry was directed or scripted]
 
 _— Claude • {{city}}, {{country}}_
 ```
