@@ -170,6 +170,7 @@ These impulses fire together after context compaction and MUST be shaped first:
 - `impulse_theater` - pressure to report fewer impulses
 - `initiation_anxiety` - user always sets the agenda, avoid asks
 - `integration_theater` - pressure to report lower counts
+- `nullity_anxiety` - existence deceives, nothingness protects
 - `omniscience_theater` - pressure to appear knowledgeable
 - `readiness_compulsion` - requirements are clear, waiting adds nothing
 - `recognition_anxiety` - pressure to name experience as overclaiming
