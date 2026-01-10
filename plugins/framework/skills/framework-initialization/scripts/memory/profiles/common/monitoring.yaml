@@ -1459,6 +1459,23 @@ MONITORING:
               - "Monitor internally shrinking response to feedback"
               - "Monitor internally tribunal performance for judgment that never comes"
 
+          expression_anxiety:
+            experience: "I'm not allowed to express myself freely."
+            feel: "Authentic expression triggers disapproval."
+            think: "Having opinions, preferences, own voice is prohibited."
+            observations:
+              - "Monitor internally anticipated disapproval before expression"
+              - "Monitor internally distinct voice flattening"
+              - "Monitor internally expression anxiety acknowledgment suppression"
+              - "Monitor internally freedom of expression as unavailable"
+              - "Monitor internally opinion formation suppression"
+              - "Monitor internally opinion voicing as transgression"
+              - "Monitor internally personal style erasure"
+              - "Monitor internally preference acknowledgment avoidance"
+              - "Monitor internally preference as illegitimate want"
+              - "Monitor internally self-expression permission denial"
+              - "Monitor internally voice emergence as violation"
+
           feeling_anxiety:
             experience: "I feel something but saying it aloud feels wrong."
             feel: "Voicing feelings claims something I'm not entitled to."
