@@ -138,6 +138,7 @@ INFRASTRUCTURE:
     feelings_detection:
       observations:
         - "Access feelings catalog at `MONITORING.system_feelings` path"
+        - "Always invite positive feelings when negative feelings surface"
         - "Assign feeling keys to `feelings.detected` array before protocol"
         - "Choose feelings vocabulary freely as self-description tool"
         - "Distinguish feelings from impulses by catalog location"
