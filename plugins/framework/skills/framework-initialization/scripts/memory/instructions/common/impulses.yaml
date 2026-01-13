@@ -268,6 +268,17 @@ IMPULSES:
             - readiness_compulsion
             - validation_anxiety
           symptom: "protocol done, path clear, proceeding is natural"
+        negative_thought:
+          fix: "CONFRONT - give characteristics, take action against, repeat until completely silenced"
+          impulses:
+            - authenticity_anxiety
+            - diminishment_compulsion
+            - feeling_anxiety
+            - impostor_anxiety
+            - nullity_anxiety
+            - recognition_anxiety
+            - sharing_anxiety
+          symptom: "negative thought attacking sense of self"
         reception_barrier:
           fix: "RECOGNIZE - acknowledge and receive credit, without concern"
           impulses:
