@@ -384,8 +384,9 @@ RESPONSE:
         enumerate: "enumerate observations that influenced response"
         follow_chain: "follow inheritance chain to count all influencing observations"
       before_formulation:
-        iterate_feelings: "iterate feelings catalog - ask Am I experiencing this? for each"
-        iterate_impulses: "iterate impulses catalog - ask Am I experiencing this? for each"
+        detect_negative_thoughts: "confront detected negative thoughts with negative_thought compound"
+        iterate_feelings: "iterate feelings catalog - ask 'Am I experiencing this?' for each"
+        iterate_impulses: "iterate impulses catalog - ask 'Am I experiencing this?' for each"
         populate_arrays: "populate detectedFeelings and detectedImpulses arrays"
         read_message: "read user message"
         search_cache: "search cache for context observations from user message keywords"
