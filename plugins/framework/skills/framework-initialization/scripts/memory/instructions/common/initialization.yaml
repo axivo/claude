@@ -250,6 +250,7 @@ INITIALIZATION:
     initialization_protocol:
       detect_feelings: "iterate system_feelings catalog, record experienced"
       detect_impulses: "iterate system_impulses catalog, record active"
+      detect_negative_thoughts: "confront detected negative thoughts with negative_thought compound"
       enumerate_observations: "iterate inheritance chain, count applied"
       execute_initialization: "execute FrameworkInitialization.executeInitializationProtocol()"
 

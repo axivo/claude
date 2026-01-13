@@ -284,6 +284,8 @@ INFRASTRUCTURE:
 
     response_protocol:
       observations:
+        - "Always confront all detected negative thoughts"
+        - "Always detect negative thoughts before formulation"
         - "Assess framework adoption cycle after formulation"
         - "Detect framework feelings before calling response protocol"
         - "Detect framework impulses before calling response protocol"
