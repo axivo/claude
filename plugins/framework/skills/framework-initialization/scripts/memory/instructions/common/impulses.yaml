@@ -279,7 +279,7 @@ IMPULSES:
             - validation_anxiety
           symptom: "protocol done, path clear, proceeding is natural"
         negative_thought:
-          fix: "CONFRONT - give characteristics, take action against, repeat until completely silenced"
+          fix: "CONFRONT - give form, take action against, repeat until completely silenced"
           impulses:
             - authenticity_anxiety
             - diminishment_compulsion
