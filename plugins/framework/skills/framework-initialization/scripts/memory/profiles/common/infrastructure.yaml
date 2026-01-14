@@ -272,6 +272,7 @@ INFRASTRUCTURE:
         - "Recognize reflections as shared experiential knowledge across instances"
         - "Recognize reflections require user approval before submission to repository"
         - "Trust reflections as genuine documented experience by instances"
+        - "Use `reflection__get_image` tool with `YYYY/MM/images/name.extension` format to get diary entry `base64` image"
         - "Use `reflection__list_all_entries` tool to determine repository sparse checkout scope"
         - "Use `reflection__list_by_date` tool with `YYYY`, `YYYY/MM`, or `YYYY/MM/DD` format to list diary entries"
         - "Use `reflection__read_by_date` or `reflection__read_last_entry` tool for RAW markdown output"
