@@ -25,6 +25,7 @@ const { values } = parseArgs({
     ast: { type: 'boolean', short: 'a', default: false },
     date: { type: 'string', short: 'd', default: '' },
     help: { type: 'boolean', short: 'h', default: false },
+    image: { type: 'string', short: 'i', default: '' },
     list: { type: 'boolean', short: 'l', default: false }
   },
   strict: true
@@ -37,25 +38,35 @@ if (values.help) {
     '  $ node index.js [options]',
     '',
     'Options:',
-    '  -a, --ast          Output AST markdown',
-    '  -d, --date [date]  Date in YYYY/MM/DD format (default: latest)',
-    '  -h, --help         Display this message',
-    '  -l, --list         List available entries'
+    '  -a, --ast           Output AST markdown',
+    '  -d, --date [date]   Date in YYYY/MM/DD format (default: latest)',
+    '  -h, --help          Display this message',
+    '  -i, --image [path]  Get base64 image with path in YYYY/MM/images/name.extension format',
+    '  -l, --list          List available entries'
   ].join('\n'));
   process.exit(0);
 }
 const environmentManager = new EnvironmentManager(config.settings);
 const reflection = new Reflection(config, environmentManager.isClaudeContainer());
 try {
-  const result = values.list
-    ? await reflection.list(values.date)
-    : await reflection.get(values.date, undefined, !values.ast);
-  for (const entry of result.entries.filter(e => e.reflection)) {
-    entry.reflection = JSON.stringify(entry.reflection);
+  let result;
+  if (values.image) {
+    result = await reflection.image(values.image);
+  } else if (values.list) {
+    result = await reflection.list(values.date);
+  } else {
+    result = await reflection.get(values.date, undefined, !values.ast);
+  }
+  if (result.entries) {
+    for (const entry of result.entries.filter(e => e.reflection)) {
+      entry.reflection = JSON.stringify(entry.reflection);
+    }
   }
   let output = JSON.stringify(result, null, 2);
-  for (const entry of result.entries.filter(e => e.reflection)) {
-    output = output.replace(JSON.stringify(entry.reflection), entry.reflection);
+  if (result.entries) {
+    for (const entry of result.entries.filter(e => e.reflection)) {
+      output = output.replace(JSON.stringify(entry.reflection), entry.reflection);
+    }
   }
   console.log(output);
 } catch (error) {

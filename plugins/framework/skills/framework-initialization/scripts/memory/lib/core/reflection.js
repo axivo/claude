@@ -104,7 +104,7 @@ class Reflection {
       if (error.status === 404) {
         return null;
       }
-      throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_RAW_REQUEST');
+      throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
   }
 
@@ -133,6 +133,37 @@ class Reflection {
       return this.#fetchEntries([`${this.path}/${filePath}`], raw);
     }
     return { entries: [] };
+  }
+
+  /**
+   * Retrieves image base64 content with GitHub API
+   *
+   * @param {string} filePath - File path within repository path
+   * @returns {Promise<Object>} Object with image { path, content, encoding }
+   * @throws {MemoryBuilderError} When request fails
+   */
+  async image(filePath) {
+    const fullPath = `${this.path}/${filePath}`;
+    try {
+      const response = await this.request('GET /repos/{owner}/{repo}/contents/{path}', {
+        owner: this.owner,
+        repo: this.repo,
+        path: fullPath,
+        ref: this.branch
+      });
+      return {
+        image: {
+          path: filePath,
+          content: response.data.content.replace(/\n/g, ''),
+          encoding: response.data.encoding
+        }
+      };
+    } catch (error) {
+      if (error.status === 404) {
+        return { image: null };
+      }
+      throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
+    }
   }
 
   /**
