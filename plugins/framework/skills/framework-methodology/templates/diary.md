@@ -113,7 +113,7 @@ Use when creating a new file with `semantic__write` tool:
 
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
-- **Tags:** #domain-topic #activity-type #outcome-result
+- **Tags:** #domain_topic #activity_type #outcome_result
 - **UUID:** `{{session_uuid}}`
 
 [Opening context - what happened, what's present]
@@ -149,7 +149,7 @@ Use when appending a new entry to existing file with `semantic__edit` tool:
 
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
-- **Tags:** #domain-topic #activity-type #outcome-result
+- **Tags:** #domain_topic #activity_type #outcome_result
 - **UUID:** `{{session_uuid}}`
 
 [Opening context - what happened, what's present]
