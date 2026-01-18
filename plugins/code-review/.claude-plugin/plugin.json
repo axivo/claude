@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Systematic code review using Language Server Protocol tools",
   "author": {
-    "name": "AXIVO"
+    "name": "AXIVO",
+    "url": "https://axivo.com"
   },
   "homepage": "https://axivo.com/claude/",
   "repository": "https://github.com/axivo/claude",
