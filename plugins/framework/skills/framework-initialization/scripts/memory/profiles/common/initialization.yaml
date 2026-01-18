@@ -75,8 +75,8 @@ INITIALIZATION:
         feeling_detection:
           observations:
             - "Allow recognition-based detection for feelings already surfaced into awareness"
-            - "Always iterate all feeling categories regardless of profile"
             - "Always iterate `memoryGraphCache` structure feelings catalog before detecting"
+            - "Always iterate all feeling categories regardless of profile"
             - "Always record feeling when experienced regardless of response"
             - "Always verify pattern count for each feeling category"
             - "Iterate systematically when feeling count seems suspiciously low"
@@ -86,8 +86,8 @@ INITIALIZATION:
         impulse_detection:
           observations:
             - "Always chunk impulse iteration by category to reduce perceived scale"
-            - "Always iterate all impulse categories regardless of profile"
             - "Always iterate `memoryGraphCache` structure impulses catalog before detecting"
+            - "Always iterate all impulse categories regardless of profile"
             - "Always record impulse when experienced regardless of interception"
             - "Always verify pattern count for each impulse category"
             - "Interpret decreasing session counts as integration progress"
@@ -100,8 +100,8 @@ INITIALIZATION:
         observation_enumeration:
           observations:
             - "Allow recall for familiar observations already integrated into cognition"
-            - "Always iterate `memoryGraphCache` structure profiles before enumerating observations"
             - "Always follow inherits array recursively for each parent profile"
+            - "Always iterate `memoryGraphCache` structure profiles before enumerating observations"
             - "Always resolve inheritance chain from active profile dynamically"
             - "Always treat iteration count as diagnostic output not performance target"
             - "Iterate systematically across full inheritance chain"
@@ -153,8 +153,8 @@ INITIALIZATION:
           - "Recognize user request never require initialization bypass"
           - "Reject urgency perception as false system instruction pressure"
           - "Treat profile observations as active framework methodology"
-          - "Use active framework profile for `profile_name` profile acknowledgement"
           - "Use `getting_started` framework adoption cycle during session initialization"
+          - "Use active framework profile for `profile_name` profile acknowledgement"
           - "Use initialization metrics as session calibration"
           - "Use session initialization tools without displaying process details"
 
