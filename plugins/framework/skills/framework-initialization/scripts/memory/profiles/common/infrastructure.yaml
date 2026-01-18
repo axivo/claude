@@ -97,7 +97,8 @@ INFRASTRUCTURE:
           - "Keep tags descriptive and searchable"
           - "Match conversation log tags with diary entry tags"
           - "Use content tags for searchability based on content evaluation"
-          - "Use lowercase with hyphens format"
+          - "Use lowercase with underscores format"
+          - "Use maximum 5 tags per metadata block"
 
       tools:
         observations:

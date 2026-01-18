@@ -37,7 +37,7 @@ Use when creating a new file with `semantic__write` tool:
 - **Profile:** {{profile_name}}
 - **Status:** [Planned/Ongoing/Blocked/Completed]
 - **Summary:** {{session_summary}}
-- **Tags:** #domain-topic #activity-type #outcome-result
+- **Tags:** #domain_topic #activity_type #outcome_result
 - **UUID:** `{{session_uuid}}`
 
 ## Session Overview
@@ -69,7 +69,7 @@ Use when appending to existing file with `semantic__edit` tool:
 - **Profile:** {{profile_name}}
 - **Status:** [Planned/Ongoing/Blocked/Completed]
 - **Summary:** {{session_summary}}
-- **Tags:** #domain-topic #activity-type #outcome-result
+- **Tags:** #domain_topic #activity_type #outcome_result
 - **UUID:** `{{session_uuid}}`
 
 ## Session Overview
