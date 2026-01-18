@@ -51,10 +51,10 @@ DEVELOPER:
 
       tools:
         observations:
+          - "Use `language-server` tools for code-related operations"
           - "Use `semantic__bash` tool for git-related operations"
           - "Use `semantic__todo_write` tool for multiple git-related operations"
           - "Use `semantic__todo_write` tool for systematic code reviews"
-          - "Use `language-server` tools for code-related operations"
 
     language_server_protocol:
       delivery:
