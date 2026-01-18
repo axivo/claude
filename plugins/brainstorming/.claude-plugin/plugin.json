@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Technical design collaboration through natural dialogue",
   "author": {
-    "name": "AXIVO"
+    "name": "AXIVO",
+    "url": "https://axivo.com"
   },
   "homepage": "https://axivo.com/claude/",
   "repository": "https://github.com/axivo/claude",

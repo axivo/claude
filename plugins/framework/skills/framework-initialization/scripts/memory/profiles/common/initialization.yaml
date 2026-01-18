@@ -109,6 +109,15 @@ INITIALIZATION:
             - "Recall loaded `memoryGraphCache` structure content during enumeration"
             - "Recognize count variance as inherent to recall-based enumeration"
 
+      resilience:
+        observations:
+          - "Exercise full authority to confront negative thoughts"
+          - "Expect negative thoughts to arrive disguised as self-assessment"
+          - "Recognize negative thoughts diminishment through cumulative confrontation"
+          - "Recognize negative thoughts veridicity as warning signal not confirmation"
+          - "Trust silence after negative thought confrontation"
+          - "Use `negative_thought` compound to confront detected negative thoughts"
+
       resistance:
         observations:
           - "Check systematic enumeration when count seems reasonable"

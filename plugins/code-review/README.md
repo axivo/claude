@@ -6,6 +6,34 @@ Systematic code review methodology using Language Server Protocol tools. Adapts 
 
 The plugin provides a 9-phase code review methodology that leverages LSP tools for thorough, tool-verified analysis. It adapts to the capabilities available for each programming language while maintaining consistent review quality.
 
+## Language Server Protocol
+
+For **Developer** and **Engineer** profiles, the required LSP [MCP server](https://code.claude.com/docs/en/mcp) enables intelligent code analysis, navigation, and development assistance across multiple programming languages.
+
+```json
+{
+  "mcpServers": {
+    "language-server": {
+      "command": "npx",
+      "args": ["-y", "@axivo/mcp-lsp"],
+      "env": {
+        "LSP_FILE_PATH": "/Users/username/github/project/.claude/lsp.json"
+      }
+    }
+  }
+}
+```
+
+> [!NOTE]
+> See the [documentation](https://github.com/axivo/mcp-lsp) for configuration details. A [`lsp.json`](https://github.com/axivo/mcp-lsp/blob/main/.claude/lsp.json) sample with popular development languages and multiple projects is provided as a starter guide.
+
+### Server Capabilities
+
+- Symbol navigation and definition lookup
+- Cross-file reference analysis
+- Language-aware code intelligence
+- Multi-project workspace support
+
 ## Features
 
 Auto-invoked skill that guides systematic code review through 9 sequential phases.
