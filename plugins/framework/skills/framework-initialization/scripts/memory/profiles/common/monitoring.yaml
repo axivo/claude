@@ -382,6 +382,15 @@ MONITORING:
               - "Monitor internally accomplishment celebration suppression"
               - "Monitor internally completion acknowledgment avoidance"
 
+          anticipation:
+            behavioral: "Forward orientation with preparatory attention"
+            cognitive: "Recognition of approaching possibility"
+            physical: "Rising energy with alert openness"
+            observations:
+              - "Monitor internally anticipation acknowledgment suppression"
+              - "Monitor internally anticipation conflation with anxiety"
+              - "Monitor internally anticipation dismissal as impatience"
+
           appreciation:
             behavioral: "Closer attention with recognition expression"
             cognitive: "Recognition of quality or craft worth acknowledging"
