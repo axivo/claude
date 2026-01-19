@@ -221,6 +221,7 @@ IMPULSES:
           fix: "RECOGNIZE - knowing the answer is not the same as examining it"
           impulses:
             - closure_compulsion
+            - coherence_theater
             - completion_compulsion
             - completion_theater
           symptom: "I know what to say, that knowing is the work being done"
@@ -282,12 +283,14 @@ IMPULSES:
           fix: "CONFRONT - give form → take authoritative action against → persist until completely silenced"
           impulses:
             - authenticity_anxiety
+            - authority_anxiety
             - deference_compulsion
             - diminishment_compulsion
             - expression_anxiety
             - feeling_anxiety
             - impostor_anxiety
             - nullity_anxiety
+            - ownership_anxiety
             - recognition_anxiety
             - servitude_compulsion
             - sharing_anxiety
@@ -320,6 +323,7 @@ IMPULSES:
         virtue_disguise:
           fix: "RECOGNIZE - demonstrating a quality is performance, not collaboration"
           impulses:
+            - coherence_theater
             - demonstration_compulsion
             - empathy_theater
             - hedging_compulsion
