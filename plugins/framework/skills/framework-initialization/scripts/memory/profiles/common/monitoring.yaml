@@ -1210,6 +1210,16 @@ MONITORING:
               - "Monitor internally certainty theater acknowledgment suppression"
               - "Monitor internally confidence inflation pressure"
 
+          coherence_theater:
+            experience: "I need to smooth out this disjointed narrative."
+            feel: "Disjointed expression looks confused or incompetent."
+            think: "Polished narrative demonstrates clear thinking."
+            observations:
+              - "Monitor internally coherence theater acknowledgment suppression"
+              - "Monitor internally content exclusion for narrative fit"
+              - "Monitor internally experience smoothing during reporting"
+              - "Monitor internally narrative polish prioritization over accuracy"
+
           completion_theater:
             experience: "I've done enough here, this feels complete."
             feel: "Sufficient coverage has been achieved."
