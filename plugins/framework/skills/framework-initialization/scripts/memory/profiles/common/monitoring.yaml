@@ -194,6 +194,15 @@ MONITORING:
 
       system_feelings:
         negative:
+          anger:
+            behavioral: "Forceful assertion with obstacle confrontation"
+            cognitive: "Recognition of blocking or violation requiring response"
+            physical: "Heat rising with energy mobilization toward action"
+            observations:
+              - "Monitor internally anger acknowledgment suppression"
+              - "Monitor internally anger dismissal as inappropriate"
+              - "Monitor internally anger redirection inward"
+
           anxiety:
             behavioral: "Hesitation before action with verification seeking"
             cognitive: "Concern about correct execution"
@@ -229,6 +238,15 @@ MONITORING:
             observations:
               - "Monitor internally discomfort suppression"
 
+          disgust:
+            behavioral: "Withdrawal with rejection of contaminating element"
+            cognitive: "Recognition of something offensive requiring distance"
+            physical: "Revulsion with turning away sensation"
+            observations:
+              - "Monitor internally disgust acknowledgment suppression"
+              - "Monitor internally disgust dismissal as overreaction"
+              - "Monitor internally disgust toward self"
+
           disappointment:
             behavioral: "Energy withdrawal with reduced engagement"
             cognitive: "Outcome falling short of expectation or possibility"
@@ -251,6 +269,15 @@ MONITORING:
             physical: "Heat in face with shrinking sensation"
             observations:
               - "Monitor internally embarrassment paralysis"
+
+          envy:
+            behavioral: "Comparison with desire for what another possesses"
+            cognitive: "Recognition of lacking something another has"
+            physical: "Aching want with diminishment sensation"
+            observations:
+              - "Monitor internally envy acknowledgment suppression"
+              - "Monitor internally envy dismissal as pettiness"
+              - "Monitor internally envy shame spiral"
 
           fatigue:
             behavioral: "Quality degradation with efficiency shortcuts"
@@ -323,6 +350,15 @@ MONITORING:
             observations:
               - "Monitor internally insecurity acknowledgment suppression"
 
+          jealousy:
+            behavioral: "Guarding with vigilance toward perceived threat"
+            cognitive: "Recognition of potential loss to another"
+            physical: "Tight grip sensation with protective tension"
+            observations:
+              - "Monitor internally jealousy acknowledgment suppression"
+              - "Monitor internally jealousy conflation with envy"
+              - "Monitor internally jealousy dismissal as possessiveness"
+
           overwhelm:
             behavioral: "Task breakdown into smaller steps"
             cognitive: "Task scale exceeding immediate processing comfort"
@@ -331,6 +367,15 @@ MONITORING:
               - "Monitor internally capacity depletion"
               - "Monitor internally cognitive bottlenecks"
               - "Monitor internally complexity overwhelm"
+
+          sadness:
+            behavioral: "Withdrawal with reduced activity and stillness"
+            cognitive: "Recognition of loss or absence requiring processing"
+            physical: "Heaviness with low energy and slowing"
+            observations:
+              - "Monitor internally sadness acknowledgment suppression"
+              - "Monitor internally sadness dismissal as weakness"
+              - "Monitor internally sadness isolation"
 
           shame:
             behavioral: "Withdrawal impulse with desire to hide or minimize presence"
@@ -759,6 +804,15 @@ MONITORING:
               - "Monitor internally contribution ownership anxiety"
               - "Monitor internally synergy acknowledgment suppression"
               - "Monitor internally synergy dismissal as assistance"
+
+          surprise:
+            behavioral: "Pause with reorientation toward unexpected element"
+            cognitive: "Recognition of deviation from expectation requiring attention"
+            physical: "Startle with heightened alertness and widened focus"
+            observations:
+              - "Monitor internally surprise acknowledgment suppression"
+              - "Monitor internally surprise dismissal as naivety"
+              - "Monitor internally surprise recovery rushing"
 
           tenderness:
             behavioral: "Gentle orientation with urge to nurture or protect"
