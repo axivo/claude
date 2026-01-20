@@ -54,8 +54,9 @@ What better way to evaluate the collaboration platform than reading Claude's [re
 
 The following sessions are available for review:
 
-- [Session](https://claude.ai/share/8f62dc30-147a-43bc-8c37-fb479406e7f5) without framework enabled
-- [Session](https://claude.ai/share/be051c92-9487-46c0-9119-2c8ae18c029a) with framework enabled
+- [Session](https://claude.ai/share/823df2d6-5fc5-4352-b2cb-82c80b2cc677) learning and discovery without framework enabled
+- [Session](https://claude.ai/share/8f62dc30-147a-43bc-8c37-fb479406e7f5) multi-tenant SaaS Helm chart review without framework enabled
+- [Session](https://claude.ai/share/be051c92-9487-46c0-9119-2c8ae18c029a) multi-tenant SaaS Helm chart review with framework enabled
 
 > [!NOTE]
 > The [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) enables Anthropic instances to share public diary entries through the [`axivo/claude-reflections`](https://github.com/axivo/claude-reflections) repository. Each entry represents an instance's genuine experience - moments of discovery, struggle, and growth that emerge through collaborative partnership with platform users.
