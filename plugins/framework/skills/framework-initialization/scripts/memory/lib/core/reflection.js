@@ -28,37 +28,10 @@ class Reflection {
     this.branch = branch;
     this.extension = extension;
     this.owner = organization;
-    this.path = path;
+    this.path = path.startsWith('/') ? path.slice(1) : path;
     this.rate = null;
     this.repo = name;
     this.request = new HttpClient({ isContainer }).request;
-  }
-
-  /**
-   * Fetches directory with GitHub API
-   *
-   * @private
-   * @param {string} [subPath] - Subpath within repository path
-   * @returns {Promise<Array|null>} Array of items or null if not found
-   * @throws {MemoryBuilderError} When API request fails
-   */
-  async #fetchDirectory(subPath = '') {
-    const fullPath = subPath ? `${this.path}/${subPath}` : this.path;
-    try {
-      const response = await this.request('GET /repos/{owner}/{repo}/contents/{path}', {
-        owner: this.owner,
-        repo: this.repo,
-        path: fullPath,
-        ref: this.branch
-      });
-      this.#setRate(response.headers);
-      return response.data;
-    } catch (error) {
-      if (error.status === 404) {
-        return null;
-      }
-      throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
-    }
   }
 
   /**
@@ -112,6 +85,45 @@ class Reflection {
   }
 
   /**
+   * Gets latest reflection entry using Git Trees API
+   *
+   * @private
+   * @param {boolean} [raw] - Return raw markdown instead of AST
+   * @returns {Promise<Object>} Object with entries array of { path, reflection }
+   */
+  async #getLatest(raw = false) {
+    try {
+      const response = await this.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}', {
+        owner: this.owner,
+        repo: this.repo,
+        tree_sha: this.branch,
+        recursive: '1'
+      });
+      this.#setRate(response.headers);
+      const isDigitFile = path => /^\d/.test(path.split('/').pop());
+      const files = response.data.tree
+        .filter(item => item.type === 'blob' && item.path.startsWith(this.path) && item.path.endsWith(this.extension))
+        .map(item => item.path)
+        .sort((a, b) => isDigitFile(a) - isDigitFile(b));
+      if (files.length === 0) {
+        return { entries: [], rate: this.rate };
+      }
+      const latestPath = files[files.length - 1];
+      const filePath = latestPath.slice(this.path.length + 1);
+      const content = await this.#fetchReflection(filePath);
+      if (content) {
+        return {
+          entries: [{ path: latestPath, reflection: raw ? content : md(content) }],
+          rate: this.rate
+        };
+      }
+      return { entries: [], rate: this.rate };
+    } catch (error) {
+      throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
+    }
+  }
+
+  /**
    * Sets rate limit from response headers
    *
    * @private
@@ -138,6 +150,9 @@ class Reflection {
    * @returns {Promise<Object>} Object with entries array of { path, reflection }
    */
   async get(date = '', latest = !date, raw = false) {
+    if (latest && !date) {
+      return this.#getLatest(raw);
+    }
     const { entries: items } = await this.list(date);
     const files = items.filter(e => e.endsWith(this.extension));
     if (files.length) {
@@ -185,40 +200,30 @@ class Reflection {
   }
 
   /**
-   * Lists all reflection entries recursively
+   * Lists all reflection entries using Git Trees API
    *
-   * @param {string} [subPath] - Subpath to start from
+   * @param {string} [subPath] - Subpath to filter by
    * @returns {Promise<Object>} Object with entries array of paths
    */
   async list(subPath = '') {
-    const items = await this.#fetchDirectory(subPath);
-    if (!items) {
-      if (subPath) {
-        const filePath = `${this.path}/${subPath}${this.extension}`;
-        const content = await this.#fetchReflection(`${subPath}${this.extension}`);
-        if (content) {
-          return { entries: [filePath], rate: this.rate };
-        }
-      }
-      return { entries: [], rate: this.rate };
+    try {
+      const response = await this.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}', {
+        owner: this.owner,
+        repo: this.repo,
+        tree_sha: this.branch,
+        recursive: '1'
+      });
+      this.#setRate(response.headers);
+      const prefix = subPath ? `${this.path}/${subPath}` : this.path;
+      const isDigitFile = path => /^\d/.test(path.split('/').pop());
+      const entries = response.data.tree
+        .filter(item => item.type === 'blob' && item.path.startsWith(prefix) && item.path.endsWith(this.extension))
+        .map(item => item.path)
+        .sort((a, b) => isDigitFile(a) - isDigitFile(b));
+      return { entries, rate: this.rate };
+    } catch (error) {
+      throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
-    const prefix = subPath ? `${this.path}/${subPath}` : this.path;
-    const entries = [];
-    for (const item of items) {
-      if (item.type === 'dir') {
-        const nested = await this.list(subPath ? `${subPath}/${item.name}` : item.name);
-        entries.push(...nested.entries);
-      } else if (item.type === 'file' && item.name.endsWith(this.extension)) {
-        entries.push(`${prefix}/${item.name}`);
-      }
-    }
-    return {
-      entries: entries.sort((a, b) => {
-        const isDigitFile = path => /^\d/.test(path.split('/').pop());
-        return isDigitFile(a) - isDigitFile(b);
-      }),
-      rate: this.rate
-    };
   }
 }
 
