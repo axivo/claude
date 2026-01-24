@@ -29,6 +29,7 @@ class Reflection {
     this.extension = extension;
     this.owner = organization;
     this.path = path;
+    this.rate = null;
     this.repo = name;
     this.request = new HttpClient({ isContainer }).request;
   }
@@ -50,6 +51,7 @@ class Reflection {
         path: fullPath,
         ref: this.branch
       });
+      this.#setRate(response.headers);
       return response.data;
     } catch (error) {
       if (error.status === 404) {
@@ -76,7 +78,7 @@ class Reflection {
         entries.push({ path: file, reflection: raw ? content : md(content) });
       }
     }
-    return { entries };
+    return { entries, rate: this.rate };
   }
 
   /**
@@ -99,6 +101,7 @@ class Reflection {
           'Accept': 'application/vnd.github.raw+json'
         }
       });
+      this.#setRate(response.headers);
       return response.data;
     } catch (error) {
       if (error.status === 404) {
@@ -106,6 +109,24 @@ class Reflection {
       }
       throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
+  }
+
+  /**
+   * Sets rate limit from response headers
+   *
+   * @private
+   * @param {Object} headers - Response headers
+   */
+  #setRate(headers) {
+    if (!headers) {
+      return;
+    }
+    this.rate = {
+      limit: parseInt(headers['x-ratelimit-limit'], 10),
+      remaining: parseInt(headers['x-ratelimit-remaining'], 10),
+      resetSeconds: parseInt(headers['x-ratelimit-reset'], 10) - Math.floor(Date.now() / 1000),
+      used: parseInt(headers['x-ratelimit-used'], 10)
+    };
   }
 
   /**
@@ -119,20 +140,15 @@ class Reflection {
   async get(date = '', latest = !date, raw = false) {
     const { entries: items } = await this.list(date);
     const files = items.filter(e => e.endsWith(this.extension));
-    const dirs = items.filter(e => e.endsWith('/'));
     if (files.length) {
       const toFetch = latest ? files.slice(-1) : files;
       return this.#fetchEntries(toFetch, raw);
-    }
-    if (dirs.length && latest) {
-      const latestDir = dirs[dirs.length - 1];
-      return this.get(latestDir.slice(this.path.length + 1, -1), true, raw);
     }
     if (date && items.length === 0) {
       const filePath = date.endsWith(this.extension) ? date : `${date}${this.extension}`;
       return this.#fetchEntries([`${this.path}/${filePath}`], raw);
     }
-    return { entries: [] };
+    return { entries: [], rate: this.rate };
   }
 
   /**
@@ -151,16 +167,18 @@ class Reflection {
         path: fullPath,
         ref: this.branch
       });
+      this.#setRate(response.headers);
       return {
         image: {
           path: filePath,
           content: response.data.content.replace(/\n/g, ''),
           encoding: response.data.encoding
-        }
+        },
+        rate: this.rate
       };
     } catch (error) {
       if (error.status === 404) {
-        return { image: null };
+        return { image: null, rate: this.rate };
       }
       throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
@@ -179,10 +197,10 @@ class Reflection {
         const filePath = `${this.path}/${subPath}${this.extension}`;
         const content = await this.#fetchReflection(`${subPath}${this.extension}`);
         if (content) {
-          return { entries: [filePath] };
+          return { entries: [filePath], rate: this.rate };
         }
       }
-      return { entries: [] };
+      return { entries: [], rate: this.rate };
     }
     const prefix = subPath ? `${this.path}/${subPath}` : this.path;
     const entries = [];
@@ -198,7 +216,8 @@ class Reflection {
       entries: entries.sort((a, b) => {
         const isDigitFile = path => /^\d/.test(path.split('/').pop());
         return isDigitFile(a) - isDigitFile(b);
-      })
+      }),
+      rate: this.rate
     };
   }
 }
