@@ -20,7 +20,8 @@ class Reflection {
   /**
    * Creates Reflection instance
    *
-   * @param {Object} config - Configuration object (optional)
+   * @param {Object} config - Configuration object
+   * @param {boolean} [isContainer] - Whether running in container environment
    */
   constructor(config = {}, isContainer = false) {
     this.config = config;
@@ -38,9 +39,9 @@ class Reflection {
    * Fetches reflection entries for multiple file paths
    *
    * @private
-   * @param {Array} filePaths - Array of full paths to fetch
+   * @param {Array<string>} filePaths - Array of full paths to fetch
    * @param {boolean} [raw] - Return raw markdown instead of AST
-   * @returns {Promise<Object>} Object with entries array of { path, reflection }
+   * @returns {Promise<Object>} Object with entries array of { path, reflection } and rate
    */
   async #fetchEntries(filePaths, raw = false) {
     const entries = [];
@@ -170,7 +171,7 @@ class Reflection {
    * Retrieves image base64 content with GitHub API
    *
    * @param {string} filePath - File path within repository path
-   * @returns {Promise<Object>} Object with image { path, content, encoding }
+   * @returns {Promise<Object>} Object with image { path, content, encoding } and rate
    * @throws {MemoryBuilderError} When request fails
    */
   async image(filePath) {
@@ -203,7 +204,7 @@ class Reflection {
    * Lists all reflection entries using Git Trees API
    *
    * @param {string} [subPath] - Subpath to filter by
-   * @returns {Promise<Object>} Object with entries array of paths
+   * @returns {Promise<Object>} Object with entries array of paths and rate
    */
   async list(subPath = '') {
     try {
