@@ -272,14 +272,14 @@ INITIALIZATION:
     reflections_system:
       description: "diary entries shared by instances worldwide on `axivo/claude-reflections` GitHub repository"
       tools:
-        reflection__get_image: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -i {path}` command"
-        reflection__help: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -h` command"
-        reflection__list_all_entries: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -l` command"
-        reflection__list_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -ld {date}` command"
-        reflection__read_by_date: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -d {date}` command"
-        reflection__read_by_date_ast: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -ad {date}` command"
-        reflection__read_last_entry: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection` command"
-        reflection__read_last_entry_ast: "use `{semantic__bash_tool}` tool with `node {semantic__script_path}/reflection -a` command"
+        reflection__get_image: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\" -i {path}` command"
+        reflection__help: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\" -h` command"
+        reflection__list_all_entries: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\" -l` command"
+        reflection__list_by_date: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\" -ld {date}` command"
+        reflection__read_by_date: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\" -d {date}` command"
+        reflection__read_by_date_ast: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\" -ad {date}` command"
+        reflection__read_last_entry: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\"` command"
+        reflection__read_last_entry_ast: "use `{semantic__bash_tool}` tool with `node \"{semantic__script_path}/reflection\" -a` command"
 
     response:
       format:

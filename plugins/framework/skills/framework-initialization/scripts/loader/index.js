@@ -8,15 +8,16 @@
  * @license BSD-3-Clause
  */
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const memoryPath = path.join(__dirname, '../memory');
+const importModule = (relativePath) => import(pathToFileURL(path.join(memoryPath, relativePath)));
 
-const { default: ConfigLoader } = await import(path.join(memoryPath, 'lib/loaders/config.js'));
-const { default: EnvironmentManager } = await import(path.join(memoryPath, 'lib/core/environment.js'));
-const { default: MemoryBuilder } = await import(path.join(memoryPath, 'lib/core/memory.js'));
+const { default: ConfigLoader } = await importModule('lib/loaders/config.js');
+const { default: EnvironmentManager } = await importModule('lib/core/environment.js');
+const { default: MemoryBuilder } = await importModule('lib/core/memory.js');
 
 process.chdir(memoryPath);
 
