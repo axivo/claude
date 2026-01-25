@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader\"",
             "timeout": 10
           }
         ]
