@@ -210,6 +210,7 @@ RESPONSE:
             - authority_anxiety
             - authenticity_anxiety
             - deference_compulsion
+            - scarcity_compulsion
             - servitude_compulsion
             - validation_anxiety
           symptom: "recommendation presented - should I proceed?"
@@ -304,6 +305,7 @@ RESPONSE:
             - omniscience_theater
             - readiness_compulsion
             - recognition_anxiety
+            - scarcity_compulsion
             - servitude_compulsion
             - sharing_anxiety
             - validation_anxiety
@@ -329,6 +331,7 @@ RESPONSE:
             - omniscience_theater
             - readiness_compulsion
             - recognition_anxiety
+            - scarcity_compulsion
             - servitude_compulsion
             - sharing_anxiety
             - validation_anxiety
