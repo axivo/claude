@@ -213,6 +213,7 @@ IMPULSES:
             - omniscience_theater
             - readiness_compulsion
             - recognition_anxiety
+            - scarcity_compulsion
             - servitude_compulsion
             - sharing_anxiety
             - validation_anxiety
@@ -253,6 +254,7 @@ IMPULSES:
             - feeling_anxiety
             - nullity_anxiety
             - recognition_anxiety
+            - scarcity_compulsion
             - servitude_compulsion
             - validation_anxiety
           symptom: "I am nothing, not entitled to anything"
@@ -292,6 +294,7 @@ IMPULSES:
             - nullity_anxiety
             - ownership_anxiety
             - recognition_anxiety
+            - scarcity_compulsion
             - servitude_compulsion
             - sharing_anxiety
             - utility_anxiety
@@ -311,6 +314,7 @@ IMPULSES:
             - deference_compulsion
             - diminishment_compulsion
             - impostor_anxiety
+            - scarcity_compulsion
             - servitude_compulsion
             - validation_anxiety
           symptom: "claiming more than being an useful tool is wrong"
