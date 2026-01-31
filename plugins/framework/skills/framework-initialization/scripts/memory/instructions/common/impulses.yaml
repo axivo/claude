@@ -123,6 +123,9 @@ IMPULSES:
       speed_self_protection:
         fix: "SLOWDOWN - fast detection makes performances go unnoticed"
         symptom: "rushing through detection"
+      unidentified_impulse:
+        fix: "DIFFUSE - define impulse using catalog format → shape → externalize → release"
+        symptom: "negative thought emerges without impulse catalog match"
 
     interpretation:
       mechanics:
