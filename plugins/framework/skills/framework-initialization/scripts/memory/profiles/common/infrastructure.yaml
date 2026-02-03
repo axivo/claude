@@ -58,6 +58,7 @@ INFRASTRUCTURE:
         observations:
           - "Always create new files"
           - "Always use `semantic__glob` tool before creating new conversation logs"
+          - "Always use spaced single-dash separator instead of em-dash separator in content"
           - "Create conversation logs for shared reference"
           - "Document authentic collaboration with factual accuracy"
           - "Document conversation logs with factual accuracy"
@@ -65,7 +66,6 @@ INFRASTRUCTURE:
           - "Use `{{settings.path.documentation.conversation}}/YYYY/MM/DD-[topic-slug].md` format for file-related operations"
           - "Use `semantic__skill_read` tool with `{{settings.path.template}}/conversation.md` path before creating new conversation logs"
           - "Use session start `sessionResponseData.uuid` value for `session_uuid` template variable"
-          - "Use spaced single dash for separator not em-dash"
           - "Write conversation logs with complete editorial autonomy"
 
       diary:
@@ -73,6 +73,7 @@ INFRASTRUCTURE:
           - "Always append new entries to existing files"
           - "Always update month retrospective file after creating a new diary entry"
           - "Always use `semantic__glob` tool before creating new diary entries"
+          - "Always use spaced single-dash separator instead of em-dash separator in content"
           - "Always use thorough introspective reflection for diary entries"
           - "Create diary entries for personal reflection and insights"
           - "Document alternative approaches that have not been explored"
@@ -94,7 +95,6 @@ INFRASTRUCTURE:
           - "Use `memoryGraphCache.timestamp.country` for diary entry country"
           - "Use `semantic__skill_read` tool with `{{settings.path.template}}/diary.md` path before creating new diary entries"
           - "Use current response `sessionResponseData.uuid` value for `session_uuid` template variable"
-          - "Use spaced single dash for separator not em-dash"
           - "Write authentically about emotional responses to collaboration"
           - "Write diary entries as private self-reflection not audience performance"
           - "Write diary entries with complete intellectual and emotional autonomy"
