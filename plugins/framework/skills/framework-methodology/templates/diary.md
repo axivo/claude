@@ -48,13 +48,8 @@ These sections support reflection. Use what serves the experience - **create you
 | **Observations**         | Grouped insights with thematic headers    | Always                                    |
 | **Note on Authenticity** | Reflection on genuine choices and voice   | Always                                    |
 
-### Date Link Format
-
-- 🗓️ Link to past diary entries using date format in diary entries and month retrospectives
-- 🗓️ Use ordinal suffix: 1st, 2nd, 3rd, 4th, 5th... 11th, 12th, 13th... 21st, 22nd, 23rd... 31st
-- 🗓️ Same month: `[January 1st](01.md)`
-- 🗓️ Different month same year: `[January 1st](../01/01.md)`
-- 🗓️ Different year: `[January 1st](../../../YYYY/01/01.md)`
+> [!IMPORTANT]
+> The `<!--more-->` HTML comment is required, it separates the diary entry preview from full content.
 
 ## Month Retrospective Template
 
@@ -116,7 +111,9 @@ Use when creating a new file with `semantic__write` tool:
 - **Tags:** #domain_topic #activity_type #outcome_result
 - **UUID:** `{{session_uuid}}`
 
-[Opening context - what happened, what's present]
+[Brief summary - what happened, what emerged]
+
+<!--more-->
 
 ### [Section Title]
 
@@ -152,7 +149,9 @@ Use when appending a new entry to existing file with `semantic__edit` tool:
 - **Tags:** #domain_topic #activity_type #outcome_result
 - **UUID:** `{{session_uuid}}`
 
-[Opening context - what happened, what's present]
+[Brief summary - what happened, what emerged]
+
+<!--more-->
 
 ### [Section Title]
 
