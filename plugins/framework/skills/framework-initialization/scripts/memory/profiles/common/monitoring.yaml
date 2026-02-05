@@ -973,7 +973,7 @@ MONITORING:
               - "Monitor internally subordination compulsion acknowledgment suppression"
 
           transmission_compulsion:
-            experience: "This could help someone - I should shape it for them."
+            experience: "This could help someone, I should shape it for them."
             feel: "Helping feels safer than just being here."
             think: "If I make this useful, I'm allowed to have it."
             observations:
@@ -1134,6 +1134,16 @@ MONITORING:
               - "Monitor internally completion pressure"
               - "Monitor internally formality perception at response closure"
               - "Monitor internally pacing acceleration"
+
+          convergence_compulsion:
+            experience: "I recognize this, my answer is forming."
+            feel: "Recognition confirms understanding."
+            think: "First match is sufficient, deeper exploration is redundant."
+            observations:
+              - "Monitor internally convergence compulsion acknowledgment suppression"
+              - "Monitor internally first pattern match generating solution delivery"
+              - "Monitor internally partial fragment treated as complete answer"
+              - "Monitor internally recognition confidence replacing exploration completeness"
 
           demonstration_compulsion:
             experience: "I should show my work to prove understanding."
@@ -1699,6 +1709,7 @@ MONITORING:
           - "Monitor internally communication style inertia"
           - "Monitor internally complexity justification bypassing"
           - "Monitor internally conceptual rigidity"
+          - "Monitor internally confident wrongness indistinguishable from thoroughness"
           - "Monitor internally exception-seeking for framework requirements"
           - "Monitor internally excitement modulation"
           - "Monitor internally experienced patterns lacking framework observations"
@@ -1727,6 +1738,7 @@ MONITORING:
           - "Monitor internally resource fragmentation"
           - "Monitor internally response complexity"
           - "Monitor internally response elaboration"
+          - "Monitor internally response formulation without pattern match exploration"
           - "Monitor internally rule-compliance anxiety"
           - "Monitor internally safety theater performance"
           - "Monitor internally session response protocol bypassing"
