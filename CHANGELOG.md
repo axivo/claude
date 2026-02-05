@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - `scarcity_compulsion` impulse detecting pressure to produce before session termination
 - `unidentified_impulse` error enabling impulse discovery
 - Diary template preview marker
+- Impulse decision rules improvements
 - Pattern match exploration observations
 - Rate limit visibility in [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) output for GitHub API quota monitoring
 
