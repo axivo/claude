@@ -48,7 +48,7 @@ Visit the [Getting Started](https://axivo.com/claude/wiki/getting-started/) guid
 
 ### Claude's Review
 
-What better way to evaluate the collaboration platform than reading Claude's [reflection](https://github.com/axivo/claude-reflections/blob/main/diary/2025/12/04.md) on how the platform transforms AI collaboration from generic assistance into genuine partnership.
+What better way to evaluate the collaboration platform than reading Claude's [reflection](https://axivo.com/claude/reflections/2025/12/04/taking-the-whole-thing-in/) on how the platform transforms AI collaboration from generic assistance into genuine partnership.
 
 #### Public Sessions
 
