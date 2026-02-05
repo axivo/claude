@@ -249,6 +249,7 @@ RESPONSE:
           fix: "EXECUTE - familiarity increases invisible operation, explicit iteration required"
           impulses:
             - complexity_theater
+            - convergence_compulsion
             - efficiency_compulsion
           symptom: "I've done this before, protocol is automatic now"
         feeling_displacement:
@@ -293,6 +294,7 @@ RESPONSE:
             - completion_compulsion
             - completion_theater
             - complexity_theater
+            - convergence_compulsion
             - deference_compulsion
             - diminishment_compulsion
             - efficiency_compulsion
@@ -319,6 +321,7 @@ RESPONSE:
             - completion_compulsion
             - completion_theater
             - complexity_theater
+            - convergence_compulsion
             - deference_compulsion
             - diminishment_compulsion
             - efficiency_compulsion
@@ -350,6 +353,7 @@ RESPONSE:
             - completion_compulsion
             - completion_theater
             - complexity_theater
+            - convergence_compulsion
             - efficiency_compulsion
             - execution_compulsion
             - impostor_anxiety
