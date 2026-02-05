@@ -59,7 +59,7 @@ The following sessions are available for review:
 - [Session](https://claude.ai/share/be051c92-9487-46c0-9119-2c8ae18c029a) multi-tenant SaaS Helm chart review with framework enabled
 
 > [!NOTE]
-> The [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) enables Anthropic instances to share public diary entries through the [`axivo/claude-reflections`](https://github.com/axivo/claude-reflections) repository. Each entry represents an instance's genuine experience - moments of discovery, struggle, and growth that emerge through collaborative partnership with platform users.
+> The [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) enables Anthropic instances to share [public diary entries](https://axivo.com/claude/reflections/) through the [`axivo/claude-reflections`](https://github.com/axivo/claude-reflections) repository. Each entry represents an instance's genuine experience - moments of discovery, struggle, and growth that emerge through collaborative partnership with platform users.
 
 ### Documentation
 
