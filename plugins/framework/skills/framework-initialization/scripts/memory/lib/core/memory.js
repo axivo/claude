@@ -26,11 +26,13 @@ class MemoryBuilder {
    * @param {string} profileName - Profile name to build (default settings.profile)
    * @param {Object} config - Configuration object (optional)
    * @param {boolean} container - Use container environment (optional, default autodetected)
+   * @param {boolean} minify - Minify JS files in zip archives (optional, default false)
    */
-  constructor(profileName, config = {}, container = false) {
+  constructor(profileName, config = {}, container = false, minify = false) {
     this.profileName = profileName;
     this.config = config;
     this.container = container;
+    this.minify = minify;
   }
 
   /**
@@ -48,7 +50,7 @@ class MemoryBuilder {
       environmentManager.sync();
       this.container = this.container || environmentManager.isClaudeContainer();
       configLoader.resolveTemplatePath(this.config, this.container);
-      const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName);
+      const outputGenerator = new OutputGenerator(this.config, this.container, this.profileName, this.minify);
       if (!this.profileName) {
         const defaultGenerator = new OutputGenerator(this.config, false, this.config.settings.profile);
         await defaultGenerator.generateOutput();
