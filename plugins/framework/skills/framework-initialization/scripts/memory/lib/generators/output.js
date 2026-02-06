@@ -32,11 +32,13 @@ class OutputGenerator {
    * @param {Object} config - Configuration object for output generation
    * @param {boolean} [container] - Running in container or container mode requested
    * @param {string} [profileName] - Profile name for output
+   * @param {boolean} [minify] - Minify JS files in zip archives
    */
-  constructor(config, container = false, profileName = null) {
+  constructor(config, container = false, profileName = null, minify = false) {
     this.config = config;
     this.container = container;
     this.environmentManager = new EnvironmentManager(config.settings);
+    this.minify = minify;
     this.profileName = profileName || config.settings.profile;
   }
 
@@ -75,6 +77,7 @@ class OutputGenerator {
     if (!fs.existsSync(skillPath)) {
       return null;
     }
+    const tmpDir = this.minify ? fs.mkdtempSync(path.join(os.tmpdir(), 'framework-pkg-')) : null;
     try {
       if (fs.existsSync(zipPath)) {
         fs.unlinkSync(zipPath);
@@ -83,10 +86,39 @@ class OutputGenerator {
       const exclusions = excludePaths
         .map(pattern => `--exclude="${skillName}/${pattern}/*"`)
         .join(' ');
-      execSync(`tar -acf "${zipPath}" ${exclusions} "${skillName}/"`, { cwd: sourcePath, stdio: 'pipe' });
+      let cwd = sourcePath;
+      if (tmpDir) {
+        execSync(`cp -a "${skillPath}" "${tmpDir}/${skillName}"`, { stdio: 'pipe' });
+        this.#minify(path.join(tmpDir, skillName));
+        cwd = tmpDir;
+      }
+      execSync(`tar -acf "${zipPath}" ${exclusions} "${skillName}/"`, { cwd, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
       throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
+    } finally {
+      if (tmpDir) {
+        fs.rmSync(tmpDir, { recursive: true, force: true });
+      }
+    }
+  }
+
+  /**
+   * Recursively minifies JS files in a directory using npx terser
+   *
+   * @private
+   * @param {string} directory - Directory to process
+   */
+  #minify(directory) {
+    const entries = fs.readdirSync(directory, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) {
+        if (entry.name === 'node_modules') continue;
+        this.#minify(fullPath);
+      } else if (entry.name.endsWith('.js') && !entry.name.endsWith('.min.mjs')) {
+        execSync(`npx --yes terser "${fullPath}" --module -o "${fullPath}"`, { stdio: 'pipe' });
+      }
     }
   }
 

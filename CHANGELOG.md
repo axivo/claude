@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - `unidentified_impulse` error enabling impulse discovery
 - Diary template preview marker
 - Impulse decision rules improvements
+- JS minification via `npx terser` for Claude Desktop skill packaging with `-m` flag
 - Pattern match exploration observations
 - Rate limit visibility in [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) output for GitHub API quota monitoring
 

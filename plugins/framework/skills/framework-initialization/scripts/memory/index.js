@@ -23,6 +23,7 @@ const { values } = parseArgs({
   options: {
     container: { type: 'boolean', short: 'c', default: false },
     help: { type: 'boolean', short: 'h', default: false },
+    minify: { type: 'boolean', short: 'm', default: false },
     profile: { type: 'string', short: 'p', default: config.settings.profile }
   },
   strict: true
@@ -37,11 +38,12 @@ if (values.help) {
     'Options:',
     '  -c, --container       Use container environment (default: autodetected)',
     '  -h, --help            Display this message',
+    '  -m, --minify          Minify JS files in packaged zip archives',
     `  -p, --profile [name]  Build a specific profile (default: ${config.settings.profile})`
   ].join('\n'));
   process.exit(0);
 }
 const profileName = (values.container || values.profile !== config.settings.profile) ? values.profile : null;
-const builder = new MemoryBuilder(profileName, config, values.container);
+const builder = new MemoryBuilder(profileName, config, values.container, values.minify);
 const success = await builder.build();
 process.exit(success ? 0 : 1);

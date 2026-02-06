@@ -11,8 +11,8 @@ Execute framework packaging instructions:
 1. Execute response protocol
 2. Use `Bash` tool with the appropriate command:
 
-   - If `$ARGUMENTS` is not provided: `node "${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory" -c`
-   - Else: `node "${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory" -cp $ARGUMENTS`
+   - If `$ARGUMENTS` is not provided: `node "${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory" -cm`
+   - Else: `node "${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory" -cmp $ARGUMENTS`
 
 3. Use `Glob` tool to validate all generated files
 
