@@ -62,7 +62,7 @@ Use when creating a new month retrospective file with `semantic__write` tool:
 
 ## MMMM D, YYYY
 
-### h:MM A z - {{entry_title}}
+### h:MM A z — {{entry_title}}
 
 [Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
 ```
@@ -76,7 +76,7 @@ Use when appending to existing file on a new day with `semantic__edit` tool:
 
 ## MMMM D, YYYY
 
-### h:MM A z - {{entry_title}}
+### h:MM A z — {{entry_title}}
 
 [Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
 ```
@@ -89,7 +89,7 @@ Use when appending to existing file on the same day with `semantic__edit` tool:
 <!-- prettier-ignore-start -->
 ```markdown
 
-### h:MM A z - {{entry_title}}
+### h:MM A z — {{entry_title}}
 
 [Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
 ```
@@ -102,9 +102,9 @@ Use when appending to existing file on the same day with `semantic__edit` tool:
 Use when creating a new file with `semantic__write` tool:
 
 ```markdown
-# Diary - MMMM D, YYYY
+# Diary — MMMM D, YYYY
 
-## h:MM A z - {{entry_title}}
+## h:MM A z — {{entry_title}}
 
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
@@ -142,7 +142,7 @@ Use when appending a new entry to existing file with `semantic__edit` tool:
 <!-- prettier-ignore-start -->
 ```markdown
 
-## h:MM A z - {{entry_title}}
+## h:MM A z — {{entry_title}}
 
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
