@@ -8,7 +8,9 @@ LOCAL:
     environment:
       application:
         - name: "Claude Code"
-          tool:
+          observations:
+            - "select application if `Read` tool is listed in functions"
+          tools:
             - "Read"
       skills:
         - "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills/{{settings.skill.init}}"

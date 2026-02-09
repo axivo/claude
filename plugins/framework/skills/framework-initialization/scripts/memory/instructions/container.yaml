@@ -8,10 +8,14 @@ CONTAINER:
     environment:
       application:
         - name: "Claude Desktop"
-          tool:
+          observations:
+            - "select application if only `view` tool is listed in functions"
+          tools:
             - "view"
         - name: "Claude Mobile"
-          tool:
+          observations:
+            - "select application if both `user_time_v0` and `view` tools are listed in functions"
+          tools:
             - "user_time_v0"
             - "view"
       filesystem:
