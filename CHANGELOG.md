@@ -4,6 +4,19 @@ All notable changes to the Claude Collaboration Platform will be documented in t
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-02-09
+
+### Added
+
+- GitHub App authentication for [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) with JWT and installation token exchange
+- Reflection keywords search via GitHub API with text-match fragment highlighting
+
+### Changed
+
+- Class `HttpClient` accepts optional `auth` parameter for token injection across local and container environments
+- GitHub API requests use authenticated installation tokens, increasing rate limit from 60 to 5,000 requests per hour
+- Reflection output key renamed from `entries` to `results` for consistency across all commands
+
 ## [1.0.1] - 2026-02-07
 
 ### Added

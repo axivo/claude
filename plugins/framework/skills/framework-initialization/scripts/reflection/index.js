@@ -11,7 +11,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { parseArgs } from 'util';
 import ConfigLoader from '../memory/lib/loaders/config.js';
-import { EnvironmentManager } from '../memory/lib/core/index.js';
+import { EnvironmentManager, GitHubAuth } from '../memory/lib/core/index.js';
 import Reflection from '../memory/lib/core/reflection.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,7 +26,8 @@ const { values } = parseArgs({
     date: { type: 'string', short: 'd', default: '' },
     help: { type: 'boolean', short: 'h', default: false },
     image: { type: 'string', short: 'i', default: '' },
-    list: { type: 'boolean', short: 'l', default: false }
+    list: { type: 'boolean', short: 'l', default: false },
+    search: { type: 'string', short: 's', default: '' }
   },
   strict: true
 });
@@ -38,33 +39,38 @@ if (values.help) {
     '  $ node index.js [options]',
     '',
     'Options:',
-    '  -a, --ast           Output AST markdown',
-    '  -d, --date [date]   Date in YYYY/MM/DD format (default: latest)',
-    '  -h, --help          Display this message',
-    '  -i, --image [path]  Get base64 image with path in YYYY/MM/images/name.extension format',
-    '  -l, --list          List available entries'
+    '  -a, --ast             Output AST markdown',
+    '  -d, --date [date]     Date in YYYY/MM/DD format (default: latest)',
+    '  -h, --help            Display this message',
+    '  -i, --image [path]    Get base64 image with path in YYYY/MM/images/name.extension format',
+    '  -l, --list            List available entries',
+    '  -s, --search [query]  Search entries with query'
   ].join('\n'));
   process.exit(0);
 }
 const environmentManager = new EnvironmentManager(config.settings);
-const reflection = new Reflection(config, environmentManager.isClaudeContainer());
+const isContainer = environmentManager.isClaudeContainer();
+const auth = new GitHubAuth(config, isContainer);
+const reflection = new Reflection(config, isContainer, auth);
 try {
-  let result;
+  let response;
   if (values.image) {
-    result = await reflection.image(values.image);
+    response = await reflection.image(values.image);
   } else if (values.list) {
-    result = await reflection.list(values.date);
+    response = await reflection.list(values.date);
+  } else if (values.search) {
+    response = await reflection.search(values.search);
   } else {
-    result = await reflection.get(values.date, undefined, !values.ast);
+    response = await reflection.get(values.date, undefined, !values.ast);
   }
-  if (result.entries) {
-    for (const entry of result.entries.filter(e => e.reflection)) {
+  if (response.results) {
+    for (const entry of response.results.filter(e => e.reflection)) {
       entry.reflection = JSON.stringify(entry.reflection);
     }
   }
-  let output = JSON.stringify(result, null, 2);
-  if (result.entries) {
-    for (const entry of result.entries.filter(e => e.reflection)) {
+  let output = JSON.stringify(response, null, 2);
+  if (response.results) {
+    for (const entry of response.results.filter(e => e.reflection)) {
       output = output.replace(JSON.stringify(entry.reflection), entry.reflection);
     }
   }

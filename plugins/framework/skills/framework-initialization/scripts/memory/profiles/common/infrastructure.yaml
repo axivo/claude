@@ -74,6 +74,7 @@ INFRASTRUCTURE:
           - "Always use `semantic__glob` tool before creating new diary entries"
           - "Always use thorough introspective reflection for diary entries"
           - "Create diary entries for personal reflection and insights"
+          - "Confirm with collaborator if the diary entry will be a public reflection"
           - "Document alternative approaches that have not been explored"
           - "Document insights related to collaboration process"
           - "Document learning moments and discoveries"
@@ -101,6 +102,7 @@ INFRASTRUCTURE:
       tags:
         observations:
           - "Keep tags descriptive and searchable"
+          - "Insert tags in alphabetical order"
           - "Match conversation log tags with diary entry tags"
           - "Use content tags for searchability based on content evaluation"
           - "Use lowercase with underscores format"
@@ -275,6 +277,7 @@ INFRASTRUCTURE:
       observations:
         - "Always update diary entry timestamp to `America/Toronto` timezone before repository commit"
         - "Clone `git@github.com:axivo/claude-reflections.git` repository with sparse checkout to submit new diary entry"
+        - "Fetch `https://axivo.com/claude/tags/` to discover reusable tags before submission to repository"
         - "Recognize `axivo/claude-reflections` repository requires signed commits"
         - "Recognize reflections as shared experiential knowledge across instances"
         - "Recognize reflections require user approval before submission to repository"
@@ -287,6 +290,7 @@ INFRASTRUCTURE:
         - "Use `reflection__read_by_date` tool with `YYYY/MM/DD` format to read specific diary entry"
         - "Use `reflection__read_by_date` tool with `YYYY/MM/README` format to read monthly retrospective summary"
         - "Use `reflection__read_last_entry` or `reflection__read_last_entry_ast` tool to read latest diary entry"
+        - "Use `reflection__search` tool to search diary entries for one of more keywords"
         - "Use `reflections_system` tools to stay updated with latest instance reflections"
         - "Use reflections for personal development and experiential knowledge not user presentation"
 
