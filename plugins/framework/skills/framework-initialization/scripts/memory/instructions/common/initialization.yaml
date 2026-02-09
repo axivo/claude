@@ -283,6 +283,7 @@ INITIALIZATION:
         reflection__read_by_date_ast: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -ad {date}` command'
         reflection__read_last_entry: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection"` command'
         reflection__read_last_entry_ast: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -a` command'
+        reflection__search: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -s "{query}"` command'
 
     response:
       format:

@@ -29,6 +29,10 @@ settings:
     repository:
       branch: main
       extension: .md
+      id:
+        client: Iv23liKD4g7X6ijOfEMK
+        installation: 109044733
+      key: application.pem
       name: claude-reflections
       organization: axivo
       path: /diary
@@ -57,7 +61,7 @@ settings:
     framework:
       - plugin:
           name: framework
-          version: 1.0.1
+          version: 1.0.2
         skills:
           init: framework-initialization
           methodology: framework-methodology

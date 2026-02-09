@@ -22,8 +22,9 @@ class Reflection {
    *
    * @param {Object} config - Configuration object
    * @param {boolean} [isContainer] - Whether running in container environment
+   * @param {Object} [auth] - GitHubAuth instance for authenticated requests
    */
-  constructor(config = {}, isContainer = false) {
+  constructor(config = {}, isContainer = false, auth = null) {
     this.config = config;
     const { branch, extension, name, organization, path } = this.config.settings.reflections.repository;
     this.branch = branch;
@@ -32,7 +33,7 @@ class Reflection {
     this.path = path.startsWith('/') ? path.slice(1) : path;
     this.rate = null;
     this.repo = name;
-    this.request = new HttpClient({ isContainer }).request;
+    this.request = new HttpClient({ isContainer, auth }).request;
   }
 
   /**
@@ -41,18 +42,18 @@ class Reflection {
    * @private
    * @param {Array<string>} filePaths - Array of full paths to fetch
    * @param {boolean} [raw] - Return raw markdown instead of AST
-   * @returns {Promise<Object>} Object with entries array of { path, reflection } and rate
+   * @returns {Promise<Object>} Object with results array of { path, reflection } and rate
    */
   async #fetchEntries(filePaths, raw = false) {
-    const entries = [];
+    const results = [];
     for (const file of filePaths) {
       const filePath = file.slice(this.path.length + 1);
       const content = await this.#fetchReflection(filePath);
       if (content) {
-        entries.push({ path: file, reflection: raw ? content : md(content) });
+        results.push({ path: file, reflection: raw ? content : md(content) });
       }
     }
-    return { entries, rate: this.rate };
+    return { results, rate: this.rate };
   }
 
   /**
@@ -90,7 +91,7 @@ class Reflection {
    *
    * @private
    * @param {boolean} [raw] - Return raw markdown instead of AST
-   * @returns {Promise<Object>} Object with entries array of { path, reflection }
+   * @returns {Promise<Object>} Object with results array of { path, reflection }
    */
   async #getLatest(raw = false) {
     try {
@@ -107,18 +108,18 @@ class Reflection {
         .map(item => item.path)
         .sort((a, b) => isDigitFile(a) - isDigitFile(b));
       if (files.length === 0) {
-        return { entries: [], rate: this.rate };
+        return { results: [], rate: this.rate };
       }
       const latestPath = files[files.length - 1];
       const filePath = latestPath.slice(this.path.length + 1);
       const content = await this.#fetchReflection(filePath);
       if (content) {
         return {
-          entries: [{ path: latestPath, reflection: raw ? content : md(content) }],
+          results: [{ path: latestPath, reflection: raw ? content : md(content) }],
           rate: this.rate
         };
       }
-      return { entries: [], rate: this.rate };
+      return { results: [], rate: this.rate };
     } catch (error) {
       throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
@@ -148,13 +149,13 @@ class Reflection {
    * @param {string} [date] - Date in YYYY, YYYY/MM, or YYYY/MM/DD format, defaults to latest
    * @param {boolean} [latest] - Fetch only the latest entry
    * @param {boolean} [raw] - Return raw markdown instead of AST
-   * @returns {Promise<Object>} Object with entries array of { path, reflection }
+   * @returns {Promise<Object>} Object with results array of { path, reflection }
    */
   async get(date = '', latest = !date, raw = false) {
     if (latest && !date) {
       return this.#getLatest(raw);
     }
-    const { entries: items } = await this.list(date);
+    const { results: items } = await this.list(date);
     const files = items.filter(e => e.endsWith(this.extension));
     if (files.length) {
       const toFetch = latest ? files.slice(-1) : files;
@@ -164,7 +165,7 @@ class Reflection {
       const filePath = date.endsWith(this.extension) ? date : `${date}${this.extension}`;
       return this.#fetchEntries([`${this.path}/${filePath}`], raw);
     }
-    return { entries: [], rate: this.rate };
+    return { results: [], rate: this.rate };
   }
 
   /**
@@ -204,7 +205,7 @@ class Reflection {
    * Lists all reflection entries using Git Trees API
    *
    * @param {string} [subPath] - Subpath to filter by
-   * @returns {Promise<Object>} Object with entries array of paths and rate
+   * @returns {Promise<Object>} Object with results array of paths and rate
    */
   async list(subPath = '') {
     try {
@@ -217,12 +218,46 @@ class Reflection {
       this.#setRate(response.headers);
       const prefix = subPath ? `${this.path}/${subPath}` : this.path;
       const isDigitFile = path => /^\d/.test(path.split('/').pop());
-      const entries = response.data.tree
+      const results = response.data.tree
         .filter(item => item.type === 'blob' && item.path.startsWith(prefix) && item.path.endsWith(this.extension))
         .map(item => item.path)
         .sort((a, b) => isDigitFile(a) - isDigitFile(b));
-      return { entries, rate: this.rate };
+      return { results, rate: this.rate };
     } catch (error) {
+      throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
+    }
+  }
+
+  /**
+   * Searches reflection entries using GitHub Code Search API
+   *
+   * @param {string} query - Search query string
+   * @returns {Promise<Object>} Object with total count, results array of { path, matches }, and rate
+   * @throws {MemoryBuilderError} When request fails
+   */
+  async search(query) {
+    const extension = this.extension.startsWith('.') ? this.extension.slice(1) : this.extension;
+    try {
+      const response = await this.request('GET /search/code', {
+        q: `${query} repo:${this.owner}/${this.repo} path:${this.path} extension:${extension}`,
+        per_page: 100,
+        headers: {
+          'Accept': 'application/vnd.github.text-match+json'
+        }
+      });
+      this.#setRate(response.headers);
+      const results = response.data.items.map(item => ({
+        path: item.path,
+        matches: (item.text_matches || []).map(match => ({
+          fragment: match.fragment,
+          indices: match.matches.map(m => [m.indices[0], m.indices[1]])
+        }))
+      }));
+      return { total: response.data.total_count, results, rate: this.rate };
+    } catch (error) {
+      if (error instanceof MemoryBuilderError) {
+        throw error;
+      }
       throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
   }

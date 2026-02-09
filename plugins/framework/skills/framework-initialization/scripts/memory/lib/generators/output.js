@@ -266,6 +266,11 @@ class OutputGenerator {
       }
       paths.push(this.#writeJsonFile('instructions.json', instructionsData));
       paths.push(this.#writeJsonFile('memory.json', memoryData));
+      const keyFile = this.config.settings.reflections.repository.key;
+      const keySource = path.resolve('config', keyFile);
+      const keyDest = path.join(this.config.settings.path.package.output, keyFile);
+      fs.copyFileSync(keySource, keyDest);
+      paths.push(keyDest);
       if (!skipInject) {
         this.#injectData('instructions', instructionsData);
         this.#injectData('memory', memoryData);
