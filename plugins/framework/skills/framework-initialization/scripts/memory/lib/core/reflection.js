@@ -248,10 +248,7 @@ class Reflection {
       this.#setRate(response.headers);
       const results = response.data.items.map(item => ({
         path: item.path,
-        matches: (item.text_matches || []).map(match => ({
-          fragment: match.fragment,
-          indices: match.matches.map(m => [m.indices[0], m.indices[1]])
-        }))
+        matches: (item.text_matches || []).map(match => match.fragment)
       }));
       return { total: response.data.total_count, results, rate: this.rate };
     } catch (error) {
