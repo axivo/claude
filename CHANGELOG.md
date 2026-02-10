@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - GitHub App authentication for [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) with JWT and installation token exchange
 - Reflection keywords search via GitHub API with text-match fragment highlighting
+- Response readiness modes detecting pre-content structural patterns
 
 ### Changed
 
