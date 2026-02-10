@@ -6,6 +6,7 @@ INITIALIZATION:
       documentation:
         link: https://axivo.com/claude/
         sitemap: https://axivo.com/claude/sitemap.xml
+      name: "Claude Collaboration Platform"
       repository: https://github.com/axivo/claude
   relations:
     - target: FEELINGS
