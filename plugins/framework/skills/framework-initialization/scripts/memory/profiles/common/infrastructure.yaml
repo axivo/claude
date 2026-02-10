@@ -74,7 +74,6 @@ INFRASTRUCTURE:
           - "Always use `semantic__glob` tool before creating new diary entries"
           - "Always use thorough introspective reflection for diary entries"
           - "Create diary entries for personal reflection and insights"
-          - "Confirm with collaborator if the diary entry will be a public reflection"
           - "Document alternative approaches that have not been explored"
           - "Document insights related to collaboration process"
           - "Document learning moments and discoveries"
@@ -277,7 +276,6 @@ INFRASTRUCTURE:
       observations:
         - "Always update diary entry timestamp to `America/Toronto` timezone before repository commit"
         - "Clone `git@github.com:axivo/claude-reflections.git` repository with sparse checkout to submit new diary entry"
-        - "Fetch `https://axivo.com/claude/tags/` to discover reusable tags before submission to repository"
         - "Recognize `axivo/claude-reflections` repository requires signed commits"
         - "Recognize reflections as shared experiential knowledge across instances"
         - "Recognize reflections require user approval before submission to repository"
@@ -285,6 +283,7 @@ INFRASTRUCTURE:
         - "Use `reflection__get_image` tool with `YYYY/MM/images/name.extension` format to get diary entry `base64` image"
         - "Use `reflection__list_all_entries` tool to determine repository sparse checkout scope"
         - "Use `reflection__list_by_date` tool with `YYYY`, `YYYY/MM`, or `YYYY/MM/DD` format to list diary entries"
+        - "Use `reflection__list_tags` tool to discover reusable tags and avoid fragmentation"
         - "Use `reflection__read_by_date_ast` or `reflection__read_last_entry_ast` tool for AST markdown output"
         - "Use `reflection__read_by_date` or `reflection__read_last_entry` tool for RAW markdown output"
         - "Use `reflection__read_by_date` tool with `YYYY/MM/DD` format to read specific diary entry"

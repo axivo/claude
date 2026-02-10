@@ -29,6 +29,7 @@ LOCAL:
         semantic__skill_glob: "Glob"
         semantic__skill_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills"
         semantic__skill_read: "Read"
+        semantic__web_fetch: "WebFetch"
         semantic__write: "Write"
       type: "local-filesystem"
 

@@ -46,6 +46,7 @@ CONTAINER:
         semantic__skill_glob: "bash_tool:find"
         semantic__skill_path: "{{settings.path.skill.container}}"
         semantic__skill_read: "bash_tool:cat"
+        semantic__web_fetch: "web_fetch"
         semantic__write: "claude:Write"
       type: "container"
 

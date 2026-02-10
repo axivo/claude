@@ -279,6 +279,7 @@ INITIALIZATION:
         reflection__help: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -h` command'
         reflection__list_all_entries: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -l` command'
         reflection__list_by_date: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -ld {date}` command'
+        reflection__list_tags: "use `{semantic__web_fetch}` tool with `https://axivo.com/claude/tags/` url"
         reflection__read_by_date: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -d {date}` command'
         reflection__read_by_date_ast: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -ad {date}` command'
         reflection__read_last_entry: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection"` command'
