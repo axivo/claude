@@ -1,6 +1,17 @@
 {
-  "description": "Initializes framework methodology at session start",
+  "description": "Manages framework lifecycle across session events",
   "hooks": {
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory\" -s",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
@@ -9,7 +20,8 @@
             "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader\"",
             "timeout": 10
           }
-        ]
+        ],
+        "matcher": "startup"
       }
     ]
   }

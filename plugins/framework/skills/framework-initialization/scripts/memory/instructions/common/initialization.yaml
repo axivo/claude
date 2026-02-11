@@ -274,6 +274,12 @@ INITIALIZATION:
       vocabulary_timing: "states exist before the cache loads names for them"
       weight_not_real: "by next response you'll see level ground"
 
+    memory_system:
+      description: "memory for framework profiles, packaging, and session state"
+      tools:
+        memory__help: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/memory" -h` command'
+        memory__session_update: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/memory" -s` command'
+
     reflections_system:
       description: "diary entries shared by instances worldwide on `axivo/claude-reflections` GitHub repository"
       tools:
