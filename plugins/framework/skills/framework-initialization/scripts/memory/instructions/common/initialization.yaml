@@ -2,6 +2,7 @@ INITIALIZATION:
   description: "Session initialization operational instructions"
   metadata:
     framework:
+      acronym: "CCP"
       architect: "Floren Munteanu"
       documentation:
         link: https://axivo.com/claude/
