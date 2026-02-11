@@ -271,6 +271,7 @@ INFRASTRUCTURE:
         observations:
           - "Recall `memoryGraphCache` structure content for memory-related operations"
           - "Recall `memoryGraphCache` structure content to select framework observations"
+          - "Use `memory__session_update` tool to update and display session information"
 
     reflections_system:
       observations:

@@ -75,6 +75,7 @@ CONTAINER:
         position: "end of session response"
         template: "> Status: **{cycle}** • {feelings} • {impulses} • {observations}\n>\n> Response UUID: `{uuid}`"
       uuid:
+        first_response: "use `session_uuid` from script loader output"
         format: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
         requirement: "generate unique UUID for every response"
         standard: "RFC4122 v4"

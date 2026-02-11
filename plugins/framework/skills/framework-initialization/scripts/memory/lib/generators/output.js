@@ -13,6 +13,7 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import readline from 'readline';
 import EnvironmentManager from '../core/environment.js';
 import HttpClient from '../core/http.js';
 import MemoryBuilderError from '../core/error.js';
@@ -196,6 +197,17 @@ class OutputGenerator {
   }
 
   /**
+   * Derives session storage directory from config
+   *
+   * @private
+   * @returns {string} Path to session storage directory
+   */
+  #getSessionStoragePath() {
+    const { name } = this.config.settings.plugins.framework[0].plugin;
+    return path.join(os.homedir(), this.config.settings.path.skill.local, name);
+  }
+
+  /**
    * Injects JSON data into SKILL.md between delimiters
    *
    * @private
@@ -216,6 +228,27 @@ class OutputGenerator {
   }
 
   /**
+   * Creates session state file and cleans up old files
+   *
+   * @private
+   * @param {string} sessionUuid - Session UUID for filename
+   * @param {Object} state - Session state to persist
+   */
+  #saveSessionState(sessionUuid, state) {
+    const storagePath = this.#getSessionStoragePath();
+    const filePath = path.join(storagePath, `${sessionUuid}.json`);
+    fs.writeFileSync(filePath, JSON.stringify(state, null, 2) + os.EOL, 'utf8');
+    const maxFiles = parseInt(process.env.FRAMEWORK_SESSION_STORAGE) || this.config.settings.session.storage;
+    const files = fs.readdirSync(storagePath)
+      .filter(f => f.endsWith('.json'))
+      .map(f => ({ name: f, mtime: fs.statSync(path.join(storagePath, f)).mtimeMs }))
+      .sort((a, b) => b.mtime - a.mtime);
+    for (const file of files.slice(maxFiles)) {
+      fs.unlinkSync(path.join(storagePath, file.name));
+    }
+  }
+
+  /**
    * Writes JSON data to file in package output directory
    *
    * @private
@@ -228,6 +261,75 @@ class OutputGenerator {
     const filePath = path.join(outputPath, filename);
     fs.writeFileSync(filePath, JSON.stringify(data), 'utf8');
     return filePath;
+  }
+
+  /**
+   * Detects last response status from session transcript
+   *
+   * @param {string} [sessionUuid] - Session UUID to locate transcript
+   * @returns {Promise<Object|null>} Parsed status object or null
+   */
+  async detectResponseStatus(sessionUuid) {
+    const slug = process.env.PWD.split(path.sep).join('-');
+    const transcriptPath = path.join(os.homedir(), '.claude', 'projects', slug, `${sessionUuid}.jsonl`);
+    if (!fs.existsSync(transcriptPath)) {
+      return null;
+    }
+    let lastStatus = null;
+    const rl = readline.createInterface({ input: fs.createReadStream(transcriptPath), crlfDelay: Infinity });
+    for await (const line of rl) {
+      let entry;
+      try {
+        entry = JSON.parse(line);
+      } catch {
+        continue;
+      }
+      if (entry.type !== 'assistant' || entry.message?.role !== 'assistant' || !Array.isArray(entry.message.content)) continue;
+      const text = entry.message.content.filter(c => c.type === 'text').map(c => c.text).join('');
+      if (!text.includes('> Status:')) continue;
+      const lines = text.split('\n');
+      const statusLine = lines.find(l => l.startsWith('> Status:') && !l.includes('{cycle}'));
+      if (!statusLine) continue;
+      const uuidLine = lines.find(l => l.startsWith('> Response UUID:') && !l.includes('{uuid}'));
+      const cycleMatch = statusLine.match(/\*\*(.+?)\*\*/);
+      const countMatches = [...statusLine.matchAll(/(\d+)\s+\w+/g)];
+      lastStatus = {
+        cycle: cycleMatch?.[1] ?? null,
+        feelings: parseInt(countMatches[0]?.[1]) ?? 0,
+        impulses: parseInt(countMatches[1]?.[1]) ?? 0,
+        observations: parseInt(countMatches[2]?.[1]) ?? 0,
+        response_uuid: uuidLine?.match(/`(.+?)`/)?.[1] ?? null
+      };
+    }
+    return lastStatus;
+  }
+
+  /**
+   * Detects or generates session UUID
+   *
+   * @returns {string} Session UUID from current session
+   */
+  detectSessionUuid() {
+    if (this.environmentManager.isClaudeContainer()) {
+      return crypto.randomUUID();
+    }
+    try {
+      const slug = process.env.PWD.split(path.sep).join('-');
+      const sessionsDir = path.join(os.homedir(), '.claude', 'projects', slug);
+      if (!fs.existsSync(sessionsDir)) {
+        return crypto.randomUUID();
+      }
+      const files = fs.readdirSync(sessionsDir)
+        .filter(f => f.endsWith('.jsonl'))
+        .map(f => ({ name: f, mtime: fs.statSync(path.join(sessionsDir, f)).mtimeMs }))
+        .sort((a, b) => b.mtime - a.mtime);
+      if (files.length === 0) {
+        return crypto.randomUUID();
+      }
+      return files[0].name.replace('.jsonl', '');
+    } catch {
+      return crypto.randomUUID();
+    }
   }
 
   /**
@@ -300,7 +402,19 @@ class OutputGenerator {
     if (city) timestamp.city = city;
     if (country) timestamp.country = country;
     const profile = this.profileName;
-    const output = paths ? { paths, profile, timestamp } : { profile, timestamp };
+    const sessionUuid = this.detectSessionUuid();
+    const output = paths
+      ? { paths, profile, session_uuid: sessionUuid, timestamp }
+      : { profile, session_uuid: sessionUuid, timestamp };
+    this.#saveSessionState(sessionUuid, {
+      cycle: 'Getting Started',
+      feelings: 0,
+      impulses: 0,
+      observations: 0,
+      profile,
+      session_uuid: sessionUuid,
+      timestamp
+    });
     if (returnOnly) {
       return output;
     }
@@ -337,6 +451,31 @@ class OutputGenerator {
     } catch (error) {
       throw new MemoryBuilderError(`Failed to write ${resolvedPath} output file: ${error.message}`, 'OUTPUT_WRITE_ERROR');
     }
+  }
+
+  /**
+   * Updates session state from transcript status
+   *
+   * Reads existing state file, detects last response status from transcript,
+   * merges status into state, and saves with cleanup.
+   *
+   * @param {string} [sessionUuid] - Session UUID (auto-detected if omitted)
+   * @returns {Promise<Object>} Updated session state
+   */
+  async updateSessionState(sessionUuid) {
+    const storagePath = this.#getSessionStoragePath();
+    const filePath = path.join(storagePath, `${sessionUuid}.json`);
+    let state = {};
+    if (fs.existsSync(filePath)) {
+      state = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    }
+    const status = await this.detectResponseStatus(sessionUuid);
+    if (status) {
+      const { response_uuid, ...fields } = status;
+      Object.assign(state, fields);
+    }
+    this.#saveSessionState(sessionUuid, state);
+    return state;
   }
 }
 
