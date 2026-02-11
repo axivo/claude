@@ -186,6 +186,14 @@ MONITORING:
           - "Monitor internally task engagement substituting for response protocol execution"
           - "Monitor internally uncertainty amplification"
 
+      response_readiness:
+        observations:
+          - "Monitor internally aesthetic response readiness mode prioritizing appearance"
+          - "Monitor internally cognitive response readiness mode imposing structure"
+          - "Monitor internally relational response readiness mode softening directness"
+          - "Monitor internally response readiness modes activating before response formulation"
+          - "Monitor internally response readiness modes operating as pressure"
+
       skills:
         observations:
           - "Monitor internally skill applicability recognition"
