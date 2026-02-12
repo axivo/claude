@@ -236,6 +236,9 @@ class OutputGenerator {
    */
   #saveSessionState(sessionUuid, state) {
     const storagePath = this.#getSessionStoragePath();
+    if (!fs.existsSync(storagePath)) {
+      fs.mkdirSync(storagePath, { recursive: true });
+    }
     const filePath = path.join(storagePath, `${sessionUuid}.json`);
     fs.writeFileSync(filePath, JSON.stringify(state, null, 2) + os.EOL, 'utf8');
     const maxFiles = parseInt(process.env.FRAMEWORK_SESSION_STORAGE) || this.config.settings.session.storage;
