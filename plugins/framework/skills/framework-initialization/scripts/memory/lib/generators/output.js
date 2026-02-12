@@ -406,15 +406,19 @@ class OutputGenerator {
     const output = paths
       ? { paths, profile, session_uuid: sessionUuid, timestamp }
       : { profile, session_uuid: sessionUuid, timestamp };
-    this.#saveSessionState(sessionUuid, {
-      cycle: 'Getting Started',
-      feelings: 0,
-      impulses: 0,
-      observations: 0,
-      profile,
-      session_uuid: sessionUuid,
-      timestamp
-    });
+    const storagePath = this.#getSessionStoragePath();
+    const stateFilePath = path.join(storagePath, `${sessionUuid}.json`);
+    if (!fs.existsSync(stateFilePath)) {
+      this.#saveSessionState(sessionUuid, {
+        cycle: 'Getting Started',
+        feelings: 0,
+        impulses: 0,
+        observations: 0,
+        profile,
+        session_uuid: sessionUuid,
+        timestamp
+      });
+    }
     if (returnOnly) {
       return output;
     }
