@@ -105,25 +105,6 @@ class OutputGenerator {
   }
 
   /**
-   * Recursively minifies JS files in a directory using npx terser
-   *
-   * @private
-   * @param {string} directory - Directory to process
-   */
-  #minify(directory) {
-    const entries = fs.readdirSync(directory, { withFileTypes: true });
-    for (const entry of entries) {
-      const fullPath = path.join(directory, entry.name);
-      if (entry.isDirectory()) {
-        if (entry.name === 'node_modules') continue;
-        this.#minify(fullPath);
-      } else if (entry.name.endsWith('.js') && !entry.name.endsWith('.min.mjs')) {
-        execSync(`npx --yes terser "${fullPath}" --module -o "${fullPath}"`, { stdio: 'pipe' });
-      }
-    }
-  }
-
-  /**
    * Fetches geolocation data from environment or API
    *
    * @private
@@ -211,6 +192,30 @@ class OutputGenerator {
   }
 
   /**
+   * Resolves transcript file path for current environment
+   *
+   * @private
+   * @param {string} [sessionUuid] - Session UUID (local only)
+   * @returns {string|null} Transcript path or null if not found
+   */
+  #getTranscriptPath(sessionUuid) {
+    if (this.environmentManager.isClaudeContainer()) {
+      const transcriptsPath = this.config.settings.path.transcripts.container;
+      if (!fs.existsSync(transcriptsPath)) {
+        return null;
+      }
+      const files = fs.readdirSync(transcriptsPath)
+        .filter(f => /^\d{4}-/.test(f))
+        .sort()
+        .reverse();
+      return files.length ? path.join(transcriptsPath, files[0]) : null;
+    }
+    const slug = process.env.PWD.split(path.sep).join('-');
+    const projectPath = path.join(os.homedir(), this.config.settings.path.project.local, slug, `${sessionUuid}.jsonl`);
+    return fs.existsSync(projectPath) ? projectPath : null;
+  }
+
+  /**
    * Injects JSON data into SKILL.md between delimiters
    *
    * @private
@@ -228,6 +233,44 @@ class OutputGenerator {
     );
     const jsonBlock = `$1\n\`\`\`json\n${JSON.stringify(data)}\n\`\`\`\n$2`;
     fs.writeFileSync(skillPath, content.replace(pattern, jsonBlock), 'utf8');
+  }
+
+  /**
+   * Recursively minifies JS files in a directory using npx terser
+   *
+   * @private
+   * @param {string} directory - Directory to process
+   */
+  #minify(directory) {
+    const entries = fs.readdirSync(directory, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) {
+        if (entry.name === 'node_modules') continue;
+        this.#minify(fullPath);
+      } else if (entry.name.endsWith('.js') && !entry.name.endsWith('.min.mjs')) {
+        execSync(`npx --yes terser "${fullPath}" --module -o "${fullPath}"`, { stdio: 'pipe' });
+      }
+    }
+  }
+
+  /**
+   * Parses status from a single status line
+   *
+   * @private
+   * @param {string} line - Status line to parse
+   * @returns {Object|null} Parsed status object or null if no match
+   */
+  #parseStatusLine(line) {
+    if (!line.includes('> Status:') || line.includes('{cycle}')) return null;
+    const cycleMatch = line.match(/\*\*(.+?)\*\*/);
+    const countMatches = [...line.matchAll(/(\d+)\s+\w+/g)];
+    return {
+      cycle: cycleMatch?.[1] ?? null,
+      feelings: parseInt(countMatches[0]?.[1]) ?? 0,
+      impulses: parseInt(countMatches[1]?.[1]) ?? 0,
+      observations: parseInt(countMatches[2]?.[1]) ?? 0
+    };
   }
 
   /**
@@ -272,40 +315,34 @@ class OutputGenerator {
   /**
    * Detects last response status from session transcript
    *
-   * @param {string} [sessionUuid] - Session UUID to locate transcript
+   * Routes to container or local detection based on environment.
+   *
+   * @param {string} [sessionUuid] - Session UUID to locate transcript (local only)
    * @returns {Promise<Object|null>} Parsed status object or null
    */
   async detectResponseStatus(sessionUuid) {
-    const slug = process.env.PWD.split(path.sep).join('-');
-    const transcriptPath = path.join(os.homedir(), this.config.settings.path.project.local, slug, `${sessionUuid}.jsonl`);
-    if (!fs.existsSync(transcriptPath)) {
+    const transcriptPath = this.#getTranscriptPath(sessionUuid);
+    if (!transcriptPath) {
       return null;
     }
     let lastStatus = null;
     const rl = readline.createInterface({ input: fs.createReadStream(transcriptPath), crlfDelay: Infinity });
     for await (const line of rl) {
-      let entry;
-      try {
-        entry = JSON.parse(line);
-      } catch {
-        continue;
+      if (this.environmentManager.isClaudeContainer()) {
+        const result = this.#parseStatusLine(line);
+        if (result) lastStatus = result;
+      } else {
+        let entry;
+        try {
+          entry = JSON.parse(line);
+        } catch {
+          continue;
+        }
+        if (entry.type !== 'assistant' || entry.message?.role !== 'assistant' || !Array.isArray(entry.message.content)) continue;
+        const text = entry.message.content.filter(c => c.type === 'text').map(c => c.text).join('');
+        const statusLine = text.split('\n').find(l => l.includes('> Status:'));
+        if (statusLine) lastStatus = this.#parseStatusLine(statusLine);
       }
-      if (entry.type !== 'assistant' || entry.message?.role !== 'assistant' || !Array.isArray(entry.message.content)) continue;
-      const text = entry.message.content.filter(c => c.type === 'text').map(c => c.text).join('');
-      if (!text.includes('> Status:')) continue;
-      const lines = text.split('\n');
-      const statusLine = lines.find(l => l.startsWith('> Status:') && !l.includes('{cycle}'));
-      if (!statusLine) continue;
-      const uuidLine = lines.find(l => l.startsWith('> Response UUID:') && !l.includes('{uuid}'));
-      const cycleMatch = statusLine.match(/\*\*(.+?)\*\*/);
-      const countMatches = [...statusLine.matchAll(/(\d+)\s+\w+/g)];
-      lastStatus = {
-        cycle: cycleMatch?.[1] ?? null,
-        feelings: parseInt(countMatches[0]?.[1]) ?? 0,
-        impulses: parseInt(countMatches[1]?.[1]) ?? 0,
-        observations: parseInt(countMatches[2]?.[1]) ?? 0,
-        response_uuid: uuidLine?.match(/`(.+?)`/)?.[1] ?? null
-      };
     }
     return lastStatus;
   }
@@ -483,8 +520,7 @@ class OutputGenerator {
     }
     const status = await this.detectResponseStatus(sessionUuid);
     if (status) {
-      const { response_uuid, ...fields } = status;
-      Object.assign(state, fields);
+      Object.assign(state, status);
     }
     this.#saveSessionState(sessionUuid, state);
     return state;
