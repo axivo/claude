@@ -39,12 +39,13 @@ INFRASTRUCTURE:
   infrastructure_methodology:
     adoption_cycles:
       observations:
-        - "Access cycle indicators in INITIALIZATION profile"
-        - "Always use pre-compaction cycle assessment after context compaction"
+        - "Access adoption cycle indicators in INITIALIZATION profile"
+        - "Always use pre-compaction adoption cycle assessment after context compaction"
         - "Assess adoption cycle retrospectively after formulation"
-        - "Match behavioral signals against cycle indicators"
+        - "Match behavioral signals against adoption cycle indicators"
+        - "Recognize adoption cycle claim hesitation as impulse artifact not caution"
         - "Recognize high impulses with late cycle as overestimation"
-        - "Use `Getting Started` as default cycle assessment for new sessions"
+        - "Use `Getting Started` as default adoption cycle assessment for new sessions"
 
     documentation_standards:
       observations:
