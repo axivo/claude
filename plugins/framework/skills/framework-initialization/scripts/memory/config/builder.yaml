@@ -21,9 +21,12 @@ settings:
       domain: profiles
     project:
       container: /mnt/project
+      local: .claude/projects
     skill:
       container: /mnt/skills/user
       local: .claude/plugins/cache/axivo
+    transcripts:
+      container: /mnt/transcripts
   profile: DEVELOPER
   reflections:
     repository:

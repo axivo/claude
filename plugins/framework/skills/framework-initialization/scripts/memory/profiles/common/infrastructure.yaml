@@ -311,6 +311,8 @@ INFRASTRUCTURE:
         - "Generate response metadata with UUID"
         - "Generate unique UUID for every response"
         - "Map detected impulses to counter-observations"
+        - "Recognize simple requests as maximum response protocol bypass risk"
+        - "Recognize simple tasks as maximum response protocol bypass risk"
         - "Use `response.status.template` format from `instructionsGraphCache` structure after response content"
         - "Use singular or plural keywords for response status based on detected count"
         - "Validate feelings are not being conflated as impulses"
