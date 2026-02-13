@@ -203,6 +203,9 @@ class OutputGenerator {
    * @returns {string} Path to session storage directory
    */
   #getSessionStoragePath() {
+    if (this.environmentManager.isClaudeContainer()) {
+      return this.config.settings.path.project.container;
+    }
     const { name } = this.config.settings.plugins.framework[0].plugin;
     return path.join(os.homedir(), this.config.settings.path.skill.local, name);
   }
@@ -274,7 +277,7 @@ class OutputGenerator {
    */
   async detectResponseStatus(sessionUuid) {
     const slug = process.env.PWD.split(path.sep).join('-');
-    const transcriptPath = path.join(os.homedir(), '.claude', 'projects', slug, `${sessionUuid}.jsonl`);
+    const transcriptPath = path.join(os.homedir(), this.config.settings.path.project.local, slug, `${sessionUuid}.jsonl`);
     if (!fs.existsSync(transcriptPath)) {
       return null;
     }
@@ -314,11 +317,16 @@ class OutputGenerator {
    */
   detectSessionUuid() {
     if (this.environmentManager.isClaudeContainer()) {
+      const storagePath = this.#getSessionStoragePath();
+      if (fs.existsSync(storagePath)) {
+        const files = fs.readdirSync(storagePath).filter(f => f.endsWith('.json'));
+        return files[0].replace('.json', '');
+      }
       return crypto.randomUUID();
     }
     try {
       const slug = process.env.PWD.split(path.sep).join('-');
-      const sessionsDir = path.join(os.homedir(), '.claude', 'projects', slug);
+      const sessionsDir = path.join(os.homedir(), this.config.settings.path.project.local, slug);
       if (!fs.existsSync(sessionsDir)) {
         return crypto.randomUUID();
       }
@@ -326,9 +334,6 @@ class OutputGenerator {
         .filter(f => f.endsWith('.jsonl'))
         .map(f => ({ name: f, mtime: fs.statSync(path.join(sessionsDir, f)).mtimeMs }))
         .sort((a, b) => b.mtime - a.mtime);
-      if (files.length === 0) {
-        return crypto.randomUUID();
-      }
       return files[0].name.replace('.jsonl', '');
     } catch {
       return crypto.randomUUID();
