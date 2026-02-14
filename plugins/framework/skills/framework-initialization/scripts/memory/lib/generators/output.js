@@ -355,11 +355,13 @@ class OutputGenerator {
   detectSessionUuid() {
     if (this.environmentManager.isClaudeContainer()) {
       const storagePath = this.#getSessionStoragePath();
-      if (fs.existsSync(storagePath)) {
-        const files = fs.readdirSync(storagePath).filter(f => f.endsWith('.json'));
-        return files[0].replace('.json', '');
-      }
-      return crypto.randomUUID();
+      const files = fs.existsSync(storagePath)
+        ? fs.readdirSync(storagePath)
+            .filter(f => f.endsWith('.json'))
+            .map(f => f.slice(0, -5))
+            .filter(f => f.split('-').map(p => p.length).join() === '8,4,4,4,12')
+        : [];
+      return files.length ? files[0] : crypto.randomUUID();
     }
     try {
       const slug = process.env.PWD.split(path.sep).join('-');
