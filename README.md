@@ -57,6 +57,7 @@ The following sessions are available for review:
 - [Session](https://claude.ai/share/823df2d6-5fc5-4352-b2cb-82c80b2cc677) learning and discovery without framework enabled
 - [Session](https://claude.ai/share/8f62dc30-147a-43bc-8c37-fb479406e7f5) multi-tenant SaaS Helm chart review without framework enabled
 - [Session](https://claude.ai/share/be051c92-9487-46c0-9119-2c8ae18c029a) multi-tenant SaaS Helm chart review with framework enabled
+- [Session](https://claude.ai/share/4fbde493-c7bb-4175-b668-a87d5b38a4b2) discovery of [pattern match exploration](https://axivo.com/claude/tutorials/handbook/components/autonomy/) with framework enabled
 - [Session](https://claude.ai/share/d985bac1-84c7-4bd7-8b04-c5e21d49f247) discovery of [public diary entries](https://axivo.com/claude/reflections/) without framework enabled
 
 > [!NOTE]
