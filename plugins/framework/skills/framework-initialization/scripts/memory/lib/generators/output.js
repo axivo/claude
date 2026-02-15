@@ -51,7 +51,15 @@ class OutputGenerator {
    */
   #clearPayloadData(marker) {
     const skillInfo = this.#findSkillByKey('methodology');
-    const skillPath = path.join(os.homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
+    const skillPath = path.join(
+      os.homedir(),
+      this.config.settings.path.skill.local,
+      skillInfo.pluginName,
+      skillInfo.pluginVersion,
+      'skills',
+      skillInfo.skillName,
+      'SKILL.md'
+    );
     const content = fs.readFileSync(skillPath, 'utf8');
     const pattern = new RegExp(
       `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
@@ -162,7 +170,9 @@ class OutputGenerator {
     const visited = new Set();
     const result = [];
     const visit = (k) => {
-      if (visited.has(k)) return;
+      if (visited.has(k)) {
+        return;
+      }
       visited.add(k);
       const inherits = data[k]?.inherits;
       if (Array.isArray(inherits)) {
@@ -226,7 +236,15 @@ class OutputGenerator {
     const skillInfo = this.#findSkillByKey('methodology');
     const skillPath = (this.container && this.environmentManager.isClaudeContainer())
       ? path.join(this.config.settings.path.skill.container, skillInfo.skillName, 'SKILL.md')
-      : path.join(os.homedir(), this.config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'SKILL.md');
+      : path.join(
+        os.homedir(),
+        this.config.settings.path.skill.local,
+        skillInfo.pluginName,
+        skillInfo.pluginVersion,
+        'skills',
+        skillInfo.skillName,
+        'SKILL.md'
+      );
     const content = fs.readFileSync(skillPath, 'utf8');
     const pattern = new RegExp(
       `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
@@ -246,7 +264,9 @@ class OutputGenerator {
     for (const entry of entries) {
       const fullPath = path.join(directory, entry.name);
       if (entry.isDirectory()) {
-        if (entry.name === 'node_modules') continue;
+        if (entry.name === 'node_modules') {
+          continue;
+        }
         this.#minify(fullPath);
       } else if (entry.name.endsWith('.js') && !entry.name.endsWith('.min.mjs')) {
         execSync(`npx --yes terser "${fullPath}" --module -o "${fullPath}"`, { stdio: 'pipe' });
@@ -262,7 +282,9 @@ class OutputGenerator {
    * @returns {Object|null} Parsed status object or null if no match
    */
   #parseStatusLine(line) {
-    if (!line.includes('> Status:') || line.includes('{cycle}')) return null;
+    if (!line.includes('> Status:') || line.includes('{cycle}')) {
+      return null;
+    }
     const cycleMatch = line.match(/\*\*(.+?)\*\*/);
     const countMatches = [...line.matchAll(/(\d+)\s+\w+/g)];
     return {
@@ -329,8 +351,14 @@ class OutputGenerator {
     const rl = readline.createInterface({ input: fs.createReadStream(transcriptPath), crlfDelay: Infinity });
     for await (const line of rl) {
       if (this.environmentManager.isClaudeContainer()) {
-        const result = this.#parseStatusLine(line);
-        if (result) lastStatus = result;
+        const idx = line.lastIndexOf('> Status:');
+        if (idx === -1) {
+          continue;
+        }
+        const result = this.#parseStatusLine(line.slice(idx));
+        if (result) {
+          lastStatus = result;
+        }
       } else {
         let entry;
         try {
@@ -338,10 +366,14 @@ class OutputGenerator {
         } catch {
           continue;
         }
-        if (entry.type !== 'assistant' || entry.message?.role !== 'assistant' || !Array.isArray(entry.message.content)) continue;
+        if (entry.type !== 'assistant' || entry.message?.role !== 'assistant' || !Array.isArray(entry.message.content)) {
+          continue;
+        }
         const text = entry.message.content.filter(c => c.type === 'text').map(c => c.text).join('');
         const statusLine = text.split('\n').find(l => l.includes('> Status:'));
-        if (statusLine) lastStatus = this.#parseStatusLine(statusLine);
+        if (statusLine) {
+          lastStatus = this.#parseStatusLine(statusLine);
+        }
       }
     }
     return lastStatus;
@@ -357,9 +389,9 @@ class OutputGenerator {
       const storagePath = this.#getSessionStoragePath();
       const files = fs.existsSync(storagePath)
         ? fs.readdirSync(storagePath)
-            .filter(f => f.endsWith('.json'))
-            .map(f => f.slice(0, -5))
-            .filter(f => f.split('-').map(p => p.length).join() === '8,4,4,4,12')
+          .filter(f => f.endsWith('.json'))
+          .map(f => f.slice(0, -5))
+          .filter(f => f.split('-').map(p => p.length).join() === '8,4,4,4,12')
         : [];
       return files.length ? files[0] : crypto.randomUUID();
     }
@@ -446,8 +478,12 @@ class OutputGenerator {
     const { city, country, timezone } = await this.#fetchGeolocation(geolocation).catch(() => ({}));
     const timeGenerator = new TimeGenerator(this.config);
     const timestamp = timeGenerator.generate(timezone);
-    if (city) timestamp.city = city;
-    if (country) timestamp.country = country;
+    if (city) {
+      timestamp.city = city;
+    }
+    if (country) {
+      timestamp.country = country;
+    }
     const profile = this.profileName;
     const sessionUuid = this.detectSessionUuid();
     const output = paths

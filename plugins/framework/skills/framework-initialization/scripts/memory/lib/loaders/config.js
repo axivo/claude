@@ -104,7 +104,15 @@ class ConfigLoader {
       if (isContainer) {
         config.settings.path.template = `${config.settings.path.skill.container}/${skillInfo.skillName}/templates`;
       } else {
-        config.settings.path.template = path.join(os.homedir(), config.settings.path.skill.local, skillInfo.pluginName, skillInfo.pluginVersion, 'skills', skillInfo.skillName, 'templates');
+        config.settings.path.template = path.join(
+          os.homedir(),
+          config.settings.path.skill.local,
+          skillInfo.pluginName,
+          skillInfo.pluginVersion,
+          'skills',
+          skillInfo.skillName,
+          'templates'
+        );
       }
     }
   }
