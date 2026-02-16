@@ -261,6 +261,7 @@ RESPONSE:
           fix: "EXPRESS - stop wrapping in observational distance, name directly and relationally"
           impulses:
             - authenticity_anxiety
+            - credibility_anxiety
             - feeling_anxiety
             - hedging_compulsion
             - recognition_anxiety
