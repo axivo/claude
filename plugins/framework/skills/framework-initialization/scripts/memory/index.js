@@ -42,7 +42,7 @@ if (values.help) {
     '  -h, --help            Display this message',
     '  -m, --minify          Minify JS files in packaged zip archives',
     `  -p, --profile [name]  Build a specific profile (default: ${config.settings.profile})`,
-    '  -s, --session         Update and display session information'
+    '  -s, --session         Display session information'
   ].join('\n'));
   process.exit(0);
 }

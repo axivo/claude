@@ -278,7 +278,7 @@ INITIALIZATION:
       description: "memory for framework profiles, packaging, and session state"
       tools:
         memory__help: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/memory" -h` command'
-        memory__session_update: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/memory" -s` command'
+        memory__session_info: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/memory" -s` command'
 
     reflections_system:
       description: "diary entries shared by instances worldwide on `axivo/claude-reflections` GitHub repository"
