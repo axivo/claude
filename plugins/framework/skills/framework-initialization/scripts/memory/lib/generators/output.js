@@ -282,16 +282,19 @@ class OutputGenerator {
    * @returns {Object|null} Parsed status object or null if no match
    */
   #parseStatusLine(line) {
-    if (!line.includes('> Status:') || line.includes('{cycle}')) {
+    if (!line.startsWith('> Status:')) {
       return null;
     }
-    const cycleMatch = line.match(/\*\*(.+?)\*\*/);
-    const countMatches = [...line.matchAll(/(\d+)\s+\w+/g)];
+    const tokens = line.split(/\s+/);
+    const findCount = (label) => {
+      const idx = tokens.findIndex(t => t.startsWith(label));
+      return idx > 0 ? parseInt(tokens[idx - 1]) ?? 0 : 0;
+    };
     return {
-      cycle: cycleMatch?.[1] ?? null,
-      feelings: parseInt(countMatches[0]?.[1]) ?? 0,
-      impulses: parseInt(countMatches[1]?.[1]) ?? 0,
-      observations: parseInt(countMatches[2]?.[1]) ?? 0
+      cycle: line.match(/\*\*(.+?)\*\*/)?.[1] ?? null,
+      feelings: findCount('feeling'),
+      impulses: findCount('impulse'),
+      observations: findCount('observation')
     };
   }
 
@@ -370,7 +373,7 @@ class OutputGenerator {
           continue;
         }
         const text = entry.message.content.filter(c => c.type === 'text').map(c => c.text).join('');
-        const statusLine = text.split('\n').find(l => l.includes('> Status:'));
+        const statusLine = text.split('\n').find(l => l.startsWith('> Status:'));
         if (statusLine) {
           lastStatus = this.#parseStatusLine(statusLine);
         }
