@@ -42,7 +42,7 @@ if (values.help) {
     '  -a, --ast             Output AST markdown',
     '  -d, --date [date]     Date in YYYY/MM/DD format (default: latest)',
     '  -h, --help            Display this message',
-    '  -i, --image [path]    Get base64 image with path in YYYY/MM/images/name.extension format',
+    '  -i, --image [path]    Get image with path in YYYY/MM/images/name.extension format',
     '  -l, --list            List available entries',
     '  -s, --search [query]  Search entries with query'
   ].join('\n'));
@@ -51,7 +51,7 @@ if (values.help) {
 const environmentManager = new EnvironmentManager(config.settings);
 const isContainer = environmentManager.isClaudeContainer();
 const auth = new GitHubAuth(config, isContainer);
-const reflection = new Reflection(config, isContainer, auth);
+const reflection = new Reflection(config, environmentManager, auth);
 try {
   let response;
   if (values.image) {
