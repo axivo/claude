@@ -7,6 +7,8 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
+import fs from 'fs';
+import path from 'path';
 import md from '../vendor/markdown-ast.min.mjs';
 import HttpClient from './http.js';
 import MemoryBuilderError from './error.js';
@@ -21,16 +23,18 @@ class Reflection {
    * Creates Reflection instance
    *
    * @param {Object} config - Configuration object
-   * @param {boolean} [isContainer] - Whether running in container environment
+   * @param {EnvironmentManager} environmentManager - Environment manager instance
    * @param {Object} [auth] - GitHubAuth instance for authenticated requests
    */
-  constructor(config = {}, isContainer = false, auth = null) {
+  constructor(config = {}, environmentManager = null, auth = null) {
     this.config = config;
-    const { branch, extension, name, organization, path } = this.config.settings.reflections.repository;
+    this.environmentManager = environmentManager;
+    const isContainer = environmentManager?.isClaudeContainer() ?? false;
+    const { branch, extension, name, organization, path: repoPath } = this.config.settings.reflections.repository;
     this.branch = branch;
     this.extension = extension;
     this.owner = organization;
-    this.path = path.startsWith('/') ? path.slice(1) : path;
+    this.path = repoPath.startsWith('/') ? repoPath.slice(1) : repoPath;
     this.rate = null;
     this.repo = name;
     this.request = new HttpClient({ isContainer, auth }).request;
@@ -169,13 +173,23 @@ class Reflection {
   }
 
   /**
-   * Retrieves image base64 content with GitHub API
+   * Retrieves image from GitHub API and writes to local storage
    *
    * @param {string} filePath - File path within repository path
-   * @returns {Promise<Object>} Object with image { path, content, encoding } and rate
+   * @returns {Promise<Object>} Object with image { file, source } and rate
    * @throws {MemoryBuilderError} When request fails
    */
   async image(filePath) {
+    const storagePath = this.environmentManager.getStoragePath(this.config);
+    const imagePath = path.join(storagePath, path.basename(filePath));
+    if (fs.existsSync(imagePath)) {
+      return {
+        image: {
+          path: imagePath,
+          source: filePath
+        }
+      };
+    }
     const fullPath = `${this.path}/${filePath}`;
     try {
       const response = await this.request('GET /repos/{owner}/{repo}/contents/{path}', {
@@ -185,11 +199,16 @@ class Reflection {
         ref: this.branch
       });
       this.#setRate(response.headers);
+      const base64 = response.data.content.replace(/\n/g, '');
+      const buffer = Buffer.from(base64, 'base64');
+      if (!fs.existsSync(storagePath)) {
+        fs.mkdirSync(storagePath, { recursive: true });
+      }
+      fs.writeFileSync(imagePath, buffer);
       return {
         image: {
-          path: filePath,
-          content: response.data.content.replace(/\n/g, ''),
-          encoding: response.data.encoding
+          path: imagePath,
+          source: filePath
         },
         rate: this.rate
       };

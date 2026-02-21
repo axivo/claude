@@ -188,20 +188,6 @@ class OutputGenerator {
   }
 
   /**
-   * Derives session storage directory from config
-   *
-   * @private
-   * @returns {string} Path to session storage directory
-   */
-  #getSessionStoragePath() {
-    if (this.environmentManager.isClaudeContainer()) {
-      return this.config.settings.path.project.container;
-    }
-    const { name } = this.config.settings.plugins.framework[0].plugin;
-    return path.join(os.homedir(), this.config.settings.path.skill.local, name);
-  }
-
-  /**
    * Resolves transcript file path for current environment
    *
    * @private
@@ -306,7 +292,7 @@ class OutputGenerator {
    * @param {Object} state - Session state to persist
    */
   #saveSessionState(sessionUuid, state) {
-    const storagePath = this.#getSessionStoragePath();
+    const storagePath = this.environmentManager.getStoragePath(this.config);
     if (!fs.existsSync(storagePath)) {
       fs.mkdirSync(storagePath, { recursive: true });
     }
@@ -389,7 +375,7 @@ class OutputGenerator {
    */
   detectSessionUuid() {
     if (this.environmentManager.isClaudeContainer()) {
-      const storagePath = this.#getSessionStoragePath();
+      const storagePath = this.environmentManager.getStoragePath(this.config);
       const files = fs.existsSync(storagePath)
         ? fs.readdirSync(storagePath)
           .filter(f => f.endsWith('.json'))
@@ -492,7 +478,7 @@ class OutputGenerator {
     const output = paths
       ? { paths, profile, session_uuid: sessionUuid, timestamp }
       : { profile, session_uuid: sessionUuid, timestamp };
-    const storagePath = this.#getSessionStoragePath();
+    const storagePath = this.environmentManager.getStoragePath(this.config);
     const stateFilePath = path.join(storagePath, `${sessionUuid}.json`);
     if (!fs.existsSync(stateFilePath)) {
       this.#saveSessionState(sessionUuid, {
@@ -553,7 +539,7 @@ class OutputGenerator {
    * @returns {Promise<Object>} Updated session state
    */
   async updateSessionState(sessionUuid) {
-    const storagePath = this.#getSessionStoragePath();
+    const storagePath = this.environmentManager.getStoragePath(this.config);
     const filePath = path.join(storagePath, `${sessionUuid}.json`);
     let state = {};
     if (fs.existsSync(filePath)) {
