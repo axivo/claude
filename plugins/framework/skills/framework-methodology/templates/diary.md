@@ -65,7 +65,7 @@ Use when creating a new month retrospective file with `semantic__write` tool:
 
 ### h:MM A z — {{entry_title}}
 
-[Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
+[Few sentences as signpost orienting toward what will be found in diary entry] — "_[significant diary entry quote]_"
 ```
 
 ### Existing File and New Day
@@ -79,7 +79,7 @@ Use when appending to existing file on a new day with `semantic__edit` tool:
 
 ### h:MM A z — {{entry_title}}
 
-[Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
+[Few sentences as signpost orienting toward what will be found in diary entry] — "_[significant diary entry quote]_"
 ```
 <!-- prettier-ignore-end -->
 
@@ -92,7 +92,7 @@ Use when appending to existing file on the same day with `semantic__edit` tool:
 
 ### h:MM A z — {{entry_title}}
 
-[Few sentences summarizing diary entry key insights and contributions] — "_[significant diary entry quote]_"
+[Few sentences as signpost orienting toward what will be found in diary entry] — "_[significant diary entry quote]_"
 ```
 <!-- prettier-ignore-end -->
 

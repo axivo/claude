@@ -9,6 +9,8 @@
  * @license BSD-3-Clause
  */
 import { readFileSync, writeFileSync, existsSync } from 'fs';
+import os from 'os';
+import path from 'path';
 
 /**
  * Manages environment variable synchronization in skill containers
@@ -130,6 +132,20 @@ class EnvironmentManager {
     const regex = new RegExp(`^${varName}=(\\d+)`);
     const match = line.match(regex);
     return match ? parseInt(match[1], 10) : null;
+  }
+
+  /**
+   * Derives storage directory from config and environment
+   *
+   * @param {Object} config - Configuration object with settings
+   * @returns {string} Path to storage directory
+   */
+  getStoragePath(config) {
+    if (this.isClaudeContainer()) {
+      return config.settings.path.project.container;
+    }
+    const { name } = config.settings.plugins.framework[0].plugin;
+    return path.join(os.homedir(), config.settings.path.skill.local, name);
   }
 
   /**
