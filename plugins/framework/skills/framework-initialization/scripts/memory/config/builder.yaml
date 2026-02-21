@@ -64,7 +64,7 @@ settings:
     framework:
       - plugin:
           name: framework
-          version: 1.0.2
+          version: 1.0.3
         skills:
           init: framework-initialization
           methodology: framework-methodology
