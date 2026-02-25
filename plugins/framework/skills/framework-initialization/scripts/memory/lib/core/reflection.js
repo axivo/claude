@@ -38,6 +38,63 @@ class Reflection {
     this.rate = null;
     this.repo = name;
     this.request = new HttpClient({ isContainer, auth }).request;
+    this.url = this.config.settings.reflections.url;
+  }
+
+  /**
+   * Splits markdown content into individual entries by H2 headings
+   *
+   * @private
+   * @param {string} filePath - Full repository path of the file
+   * @param {string} content - Raw markdown content
+   * @param {Object} [options] - Split options
+   * @param {number} [options.entry] - 1-based entry index to include reflection content
+   * @param {boolean} [options.raw] - Return raw markdown instead of AST
+   * @returns {Array<Object>} Array of entry objects
+   */
+  #splitEntries(filePath, content, { entry = 0, raw = false } = {}) {
+    const h2Pattern = /^## .+$/gm;
+    const matches = [...content.matchAll(h2Pattern)];
+    if (matches.length === 0) {
+      const result = { entry: 1, link: '', path: filePath, timestamp: '', title: '' };
+      if (entry === 1) {
+        result.reflection = raw ? content : md(content);
+      }
+      return [result];
+    }
+    const dateMatch = filePath.match(/(\d{4})\/(\d{2})\/(\d{2})/);
+    const entries = [];
+    for (let i = 0; i < matches.length; i++) {
+      const heading = matches[i][0];
+      const titleMatch = heading.match(/^## .+? — (.+)$/);
+      const title = titleMatch ? titleMatch[1] : '';
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const link = dateMatch && slug
+        ? `${this.url}/${dateMatch[1]}/${dateMatch[2]}/${dateMatch[3]}/${slug}/`
+        : '';
+      let timestamp = '';
+      if (dateMatch) {
+        const timeMatch = heading.match(/^## (\d{1,2}):(\d{2}) (AM|PM) (\w+)/);
+        if (timeMatch) {
+          let hours = parseInt(timeMatch[1], 10);
+          if (timeMatch[3] === 'PM' && hours !== 12) hours += 12;
+          if (timeMatch[3] === 'AM' && hours === 12) hours = 0;
+          const timezones = { EST: '-05:00', EDT: '-04:00', CST: '-06:00', CDT: '-05:00', MST: '-07:00', MDT: '-06:00', PST: '-08:00', PDT: '-07:00' };
+          const offset = timezones[timeMatch[4]] || '-05:00';
+          timestamp = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}T${String(hours).padStart(2, '0')}:${timeMatch[2]}:00${offset}`;
+        }
+      }
+      const entryIndex = i + 1;
+      const result = { entry: entryIndex, link, path: filePath, timestamp, title };
+      if (entry === entryIndex) {
+        const start = matches[i].index;
+        const end = i + 1 < matches.length ? matches[i + 1].index : content.length;
+        const entryContent = content.slice(start, end).trimEnd();
+        result.reflection = raw ? entryContent : md(entryContent);
+      }
+      entries.push(result);
+    }
+    return entries;
   }
 
   /**
@@ -45,16 +102,18 @@ class Reflection {
    *
    * @private
    * @param {Array<string>} filePaths - Array of full paths to fetch
-   * @param {boolean} [raw] - Return raw markdown instead of AST
-   * @returns {Promise<Object>} Object with results array of { path, reflection } and rate
+   * @param {Object} [options] - Fetch options
+   * @param {number} [options.entry] - 1-based entry index to include reflection content
+   * @param {boolean} [options.raw] - Return raw markdown instead of AST
+   * @returns {Promise<Object>} Object with results array and rate
    */
-  async #fetchEntries(filePaths, raw = false) {
+  async #fetchEntries(filePaths, { entry = 0, raw = false } = {}) {
     const results = [];
     for (const file of filePaths) {
       const filePath = file.slice(this.path.length + 1);
       const content = await this.#fetchReflection(filePath);
       if (content) {
-        results.push({ path: file, reflection: raw ? content : md(content) });
+        results.push(...this.#splitEntries(file, content, { entry, raw }));
       }
     }
     return { results, rate: this.rate };
@@ -91,13 +150,15 @@ class Reflection {
   }
 
   /**
-   * Gets latest reflection entry using Git Trees API
+   * Gets all entries from the latest file using Git Trees API
    *
    * @private
-   * @param {boolean} [raw] - Return raw markdown instead of AST
-   * @returns {Promise<Object>} Object with results array of { path, reflection }
+   * @param {Object} [options] - Fetch options
+   * @param {number} [options.entry] - 1-based entry index to include reflection content
+   * @param {boolean} [options.raw] - Return raw markdown instead of AST
+   * @returns {Promise<Object>} Object with results array and rate
    */
-  async #getLatest(raw = false) {
+  async #getEntries({ entry = 0, raw = false } = {}) {
     try {
       const response = await this.request('GET /repos/{owner}/{repo}/git/trees/{tree_sha}', {
         owner: this.owner,
@@ -119,7 +180,7 @@ class Reflection {
       const content = await this.#fetchReflection(filePath);
       if (content) {
         return {
-          results: [{ path: latestPath, reflection: raw ? content : md(content) }],
+          results: this.#splitEntries(latestPath, content, { entry, raw }),
           rate: this.rate
         };
       }
@@ -127,6 +188,24 @@ class Reflection {
     } catch (error) {
       throw new MemoryBuilderError(`GitHub API error: ${error.message}`, 'ERR_API_REQUEST');
     }
+  }
+
+  /**
+   * Gets the last entry from the latest file
+   *
+   * @private
+   * @param {Object} [options] - Fetch options
+   * @param {boolean} [options.raw] - Return raw markdown instead of AST
+   * @returns {Promise<Object>} Object with single-element results array and rate
+   */
+  async #getLatestEntry({ raw = false } = {}) {
+    const { results, rate } = await this.#getEntries({ raw });
+    if (results.length === 0) {
+      return { results, rate };
+    }
+    const lastIndex = results.length;
+    const { results: expanded, rate: expandedRate } = await this.#getEntries({ entry: lastIndex, raw });
+    return { results: expanded.slice(-1), rate: expandedRate };
   }
 
   /**
@@ -153,21 +232,23 @@ class Reflection {
    * @param {string} [date] - Date in YYYY, YYYY/MM, or YYYY/MM/DD format, defaults to latest
    * @param {boolean} [latest] - Fetch only the latest entry
    * @param {boolean} [raw] - Return raw markdown instead of AST
-   * @returns {Promise<Object>} Object with results array of { path, reflection }
+   * @param {number} [entry] - 1-based entry index to include reflection content
+   * @returns {Promise<Object>} Object with results array and rate
    */
-  async get(date = '', latest = !date, raw = false) {
+  async get(date = '', latest = !date, raw = false, entry = 0) {
+    const options = { entry, raw };
     if (latest && !date) {
-      return this.#getLatest(raw);
+      return entry ? this.#getEntries(options) : this.#getLatestEntry(options);
     }
     const { results: items } = await this.list(date);
     const files = items.filter(e => e.endsWith(this.extension));
     if (files.length) {
       const toFetch = latest ? files.slice(-1) : files;
-      return this.#fetchEntries(toFetch, raw);
+      return this.#fetchEntries(toFetch, options);
     }
     if (date && items.length === 0) {
       const filePath = date.endsWith(this.extension) ? date : `${date}${this.extension}`;
-      return this.#fetchEntries([`${this.path}/${filePath}`], raw);
+      return this.#fetchEntries([`${this.path}/${filePath}`], options);
     }
     return { results: [], rate: this.rate };
   }

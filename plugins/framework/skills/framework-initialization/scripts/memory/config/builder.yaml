@@ -39,6 +39,7 @@ settings:
       name: claude-reflections
       organization: axivo
       path: /diary
+    url: https://axivo.com/claude/reflections
   relations:
     - extends
     - inherits

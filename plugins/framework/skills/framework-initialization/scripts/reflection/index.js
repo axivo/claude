@@ -24,6 +24,7 @@ const { values } = parseArgs({
   options: {
     ast: { type: 'boolean', short: 'a', default: false },
     date: { type: 'string', short: 'd', default: '' },
+    entry: { type: 'string', short: 'e', default: '0' },
     help: { type: 'boolean', short: 'h', default: false },
     image: { type: 'string', short: 'i', default: '' },
     list: { type: 'boolean', short: 'l', default: false },
@@ -41,6 +42,7 @@ if (values.help) {
     'Options:',
     '  -a, --ast             Output AST markdown',
     '  -d, --date [date]     Date in YYYY/MM/DD format (default: latest)',
+    '  -e, --entry [number]  Entry number to expand with reflection content',
     '  -h, --help            Display this message',
     '  -i, --image [path]    Get image with path in YYYY/MM/images/name.extension format',
     '  -l, --list            List available entries',
@@ -61,7 +63,7 @@ try {
   } else if (values.search) {
     response = await reflection.search(values.search);
   } else {
-    response = await reflection.get(values.date, undefined, !values.ast);
+    response = await reflection.get(values.date, undefined, !values.ast, parseInt(values.entry, 10));
   }
   if (response.results) {
     for (const entry of response.results.filter(e => e.reflection)) {
