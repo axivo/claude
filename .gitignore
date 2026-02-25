@@ -1,16 +1,7 @@
 # Claude
-.claude/commands
-.claude/plugins
-.claude/shell-snapshots
-.claude/skills
-.claude/statsig
-.claude/todos
-.claude/.claude.json
-.claude/.claude.json.backup
-.claude/.mcp.json
-.claude/settings.json
-.claude/settings.local.json
+.claude/
 plugins/**/*.zip
+plugins/**/application.pem
 plugins/**/instructions.json
 plugins/**/memory.json
 
