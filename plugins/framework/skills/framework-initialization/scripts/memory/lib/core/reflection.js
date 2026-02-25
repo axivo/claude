@@ -53,6 +53,14 @@ class Reflection {
    * @returns {Array<Object>} Array of entry objects
    */
   #splitEntries(filePath, content, { entry = 0, raw = false } = {}) {
+    const isReadme = filePath.split('/').pop().toUpperCase().startsWith('README');
+    if (isReadme) {
+      const result = { entry: 1, link: '', path: filePath, timestamp: '', title: 'Retrospective' };
+      if (entry <= 1) {
+        result.reflection = raw ? content : md(content);
+      }
+      return [result];
+    }
     const h2Pattern = /^## .+$/gm;
     const matches = [...content.matchAll(h2Pattern)];
     if (matches.length === 0) {
