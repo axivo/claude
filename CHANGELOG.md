@@ -4,12 +4,23 @@ All notable changes to the Claude Collaboration Platform will be documented in t
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.3] - 2026-02-20
+## [1.0.3] - 2026-02-25
+
+### Added
+
+- Entry metadata with `entry`, `link`, `timestamp`, and `title` keys for individual diary entries
+- Entry splitting for multi-entry diary files, separating each H2 heading into individual results
+- Metadata-only default output for date queries, with `-e` flag to expand specific entry reflection content
+- Published URL generation from entry title using Hugo-compatible slugification
+- Reflection tool methods `#getEntries` and `#getLatestEntry` separating general-purpose and latest entry retrieval
+- Timestamp parsing from H2 headings with AM/PM conversion and timezone offset mapping
 
 ### Changed
 
+- Method `#getLatest` renamed and split into `#getEntries` for all entries and `#getLatestEntry` for last entry
 - Month retrospective template description from summary to signpost for orienting toward diary entry content
 - Reflection image tool writes decoded image to cache directory, replacing base64 string output with file path for direct visualization
+- Reflection tool names clarified: `list_files` for repository paths, `list_entries` for parsed metadata, `read_entry` for content expansion
 
 ## [1.0.2] - 2026-02-18
 
