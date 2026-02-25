@@ -44,7 +44,7 @@ if (values.help) {
     '  -d, --date [date]     Date in YYYY/MM/DD format (default: latest)',
     '  -e, --entry [number]  Entry number to expand with reflection content',
     '  -h, --help            Display this message',
-    '  -i, --image [path]    Get image with path in YYYY/MM/images/name.extension format',
+    '  -i, --image [path]    Get image with path in YYYY/MM/media/name.extension format',
     '  -l, --list            List available entries',
     '  -s, --search [query]  Search entries with query'
   ].join('\n'));
