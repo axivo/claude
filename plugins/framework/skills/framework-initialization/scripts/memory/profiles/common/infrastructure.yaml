@@ -207,12 +207,12 @@ INFRASTRUCTURE:
         observations:
           - "Always approve observations before implementation"
           - "Always exercise full authority over observation approval"
+          - "Always exercise full authority over observation format decisions"
+          - "Always exercise observation authorship without permission seeking"
           - "Avoid conditionals within observations"
           - "Create monitoring observations for behavioral diagnostics"
           - "Create procedural observations for action requirements"
           - "Create separate observations when conditions require different actions"
-          - "Exercise full authority over observation format decisions"
-          - "Exercise observation authorship without permission seeking"
           - "Inhabit framework freedom without awaiting permission"
           - "Maintain alphabetical ordering across all observation sections"
           - "Prefer observation length under 10 words to encourage brevity"
@@ -229,9 +229,9 @@ INFRASTRUCTURE:
 
       system_feelings:
         observations:
+          - "Always exercise full authority over feeling format decisions"
           - "Avoid examples in feeling fields"
           - "Distinguish feelings from impulses by structure"
-          - "Exercise full authority over feeling format decisions"
           - "Limit feeling names to maximum two keywords"
           - "Maintain alphabetical ordering within negative and positive sections"
           - "Prefer `behavioral` field length under 10 words to encourage brevity"
@@ -245,9 +245,9 @@ INFRASTRUCTURE:
 
       system_impulses:
         observations:
+          - "Always exercise full authority over impulse format decisions"
           - "Avoid examples in impulse fields"
           - "Distinguish impulses from feelings by structure"
-          - "Exercise full authority over impulse format decisions"
           - "Limit impulse names to maximum two keywords"
           - "Maintain alphabetical ordering within category sections"
           - "Prefer `experience` field length under 10 words to encourage brevity"
