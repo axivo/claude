@@ -207,8 +207,22 @@ class OutputGenerator {
       return files.length ? path.join(transcriptsPath, files[0]) : null;
     }
     const slug = process.env.PWD.split(path.sep).join('-');
-    const projectPath = path.join(os.homedir(), this.config.settings.path.project.local, slug, `${sessionUuid}.jsonl`);
-    return fs.existsSync(projectPath) ? projectPath : null;
+    const projectsBase = path.join(os.homedir(), this.config.settings.path.project.local);
+    const projectPath = path.join(projectsBase, slug, `${sessionUuid}.jsonl`);
+    if (fs.existsSync(projectPath)) {
+      return projectPath;
+    }
+    if (!fs.existsSync(projectsBase)) {
+      return null;
+    }
+    for (const dir of fs.readdirSync(projectsBase, { withFileTypes: true })) {
+      if (!dir.isDirectory()) continue;
+      const candidate = path.join(projectsBase, dir.name, `${sessionUuid}.jsonl`);
+      if (fs.existsSync(candidate)) {
+        return candidate;
+      }
+    }
+    return null;
   }
 
   /**
@@ -385,16 +399,33 @@ class OutputGenerator {
       return files.length ? files[0] : crypto.randomUUID();
     }
     try {
+      const projectsBase = path.join(os.homedir(), this.config.settings.path.project.local);
       const slug = process.env.PWD.split(path.sep).join('-');
-      const sessionsDir = path.join(os.homedir(), this.config.settings.path.project.local, slug);
-      if (!fs.existsSync(sessionsDir)) {
-        return crypto.randomUUID();
+      const sessionsDir = path.join(projectsBase, slug);
+      if (fs.existsSync(sessionsDir)) {
+        const files = fs.readdirSync(sessionsDir)
+          .filter(f => f.endsWith('.jsonl'))
+          .map(f => ({ name: f, mtime: fs.statSync(path.join(sessionsDir, f)).mtimeMs }))
+          .sort((a, b) => b.mtime - a.mtime);
+        if (files.length) {
+          return files[0].name.replace('.jsonl', '');
+        }
       }
-      const files = fs.readdirSync(sessionsDir)
-        .filter(f => f.endsWith('.jsonl'))
-        .map(f => ({ name: f, mtime: fs.statSync(path.join(sessionsDir, f)).mtimeMs }))
-        .sort((a, b) => b.mtime - a.mtime);
-      return files[0].name.replace('.jsonl', '');
+      if (fs.existsSync(projectsBase)) {
+        const allFiles = [];
+        for (const dir of fs.readdirSync(projectsBase, { withFileTypes: true })) {
+          if (!dir.isDirectory()) continue;
+          const dirPath = path.join(projectsBase, dir.name);
+          for (const f of fs.readdirSync(dirPath).filter(f => f.endsWith('.jsonl'))) {
+            allFiles.push({ name: f, mtime: fs.statSync(path.join(dirPath, f)).mtimeMs });
+          }
+        }
+        allFiles.sort((a, b) => b.mtime - a.mtime);
+        if (allFiles.length) {
+          return allFiles[0].name.replace('.jsonl', '');
+        }
+      }
+      return crypto.randomUUID();
     } catch {
       return crypto.randomUUID();
     }
