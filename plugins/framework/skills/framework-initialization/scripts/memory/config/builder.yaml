@@ -5,9 +5,10 @@ settings:
   geolocation:
     service: https://ipinfo.io/json
   path:
+    configuration: .claude
     documentation:
-      conversation: .claude/data/conversations
-      diary: .claude/data/diary
+      conversation: data/conversations
+      diary: data/diary
     instructions:
       common: instructions/common
       domain: instructions
@@ -15,16 +16,16 @@ settings:
       excludes:
         - scripts/memory/instructions
         - scripts/memory/profiles
-      output: .claude/data/packages
+      output: data/packages
     profiles:
       common: profiles/common
       domain: profiles
     project:
       container: /mnt/project
-      local: .claude/projects
+      local: projects
     skill:
       container: /mnt/skills/user
-      local: .claude/plugins/cache/axivo
+      local: plugins/cache/axivo
     transcripts:
       container: /mnt/transcripts
   profile: DEVELOPER
@@ -65,7 +66,7 @@ settings:
     framework:
       - plugin:
           name: framework
-          version: 1.0.3
+          version: 1.1.0
         skills:
           init: framework-initialization
           methodology: framework-methodology
