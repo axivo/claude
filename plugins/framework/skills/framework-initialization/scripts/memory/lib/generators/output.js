@@ -476,11 +476,6 @@ class OutputGenerator {
     const { city, country, timezone } = await this.#fetchGeolocation(geolocation).catch(() => ({}));
     const timeGenerator = new TimeGenerator(this.config);
     const time = timeGenerator.generate(timezone);
-    const timestamp = {
-      ...(city && { city }),
-      ...(country && { country }),
-      ...time
-    };
     const profile = this.profileName;
     const sessionUuid = this.detectSessionUuid();
     const storagePath = this.environmentManager.getStoragePath(this.config);
@@ -489,7 +484,16 @@ class OutputGenerator {
     let session;
     if (fs.existsSync(sessionFilePath)) {
       session = JSON.parse(fs.readFileSync(sessionFilePath, 'utf8'));
+      time.datetime = { current: time.datetime, session: session.timestamp.datetime.session };
     } else {
+      time.datetime = { current: time.datetime, session: time.datetime };
+    }
+    const timestamp = {
+      ...(city && { city }),
+      ...(country && { country }),
+      ...time
+    };
+    if (!session) {
       session = {
         framework: {
           profile,
@@ -578,6 +582,11 @@ class OutputGenerator {
     if (status) {
       Object.assign(session.framework.status, status);
     }
+    const geolocation = process.env.FRAMEWORK_GEOLOCATION;
+    const { timezone } = await this.#fetchGeolocation(geolocation).catch(() => ({}));
+    const timeGenerator = new TimeGenerator(this.config);
+    const currentDatetime = timeGenerator.generate(timezone).datetime;
+    session.timestamp.datetime = { current: currentDatetime, session: session.timestamp.datetime.session };
     this.#saveSessionState(session, sessionUuid);
     return session;
   }
