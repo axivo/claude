@@ -44,28 +44,14 @@ class OutputGenerator {
   }
 
   /**
-   * Clears JSON payload data from SKILL.md placeholders
+   * Builds additionalContext string from instructions and memory data
    *
    * @private
-   * @param {string} marker - Delimiter name (instructions or methodology)
+   * @param {Object} contextData - Instructions and memory data
+   * @returns {string} Formatted additionalContext content
    */
-  #clearPayloadData(marker) {
-    const skillInfo = this.#findSkillByKey('methodology');
-    const skillPath = path.join(
-      os.homedir(),
-      this.config.settings.path.skill.local,
-      skillInfo.pluginName,
-      skillInfo.pluginVersion,
-      'skills',
-      skillInfo.skillName,
-      'SKILL.md'
-    );
-    const content = fs.readFileSync(skillPath, 'utf8');
-    const pattern = new RegExp(
-      `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
-    );
-    const emptyBlock = `$1\n$2`;
-    fs.writeFileSync(skillPath, content.replace(pattern, emptyBlock), 'utf8');
+  #buildAdditionalContext(contextData) {
+    return JSON.stringify([contextData.instructions, contextData.memory]);
   }
 
   /**
@@ -226,34 +212,6 @@ class OutputGenerator {
   }
 
   /**
-   * Injects JSON data into SKILL.md between delimiters
-   *
-   * @private
-   * @param {string} marker - Delimiter name (instructions or methodology)
-   * @param {Object} data - JSON data to inject
-   */
-  #injectData(marker, data) {
-    const skillInfo = this.#findSkillByKey('methodology');
-    const skillPath = (this.container && this.environmentManager.isClaudeContainer())
-      ? path.join(this.config.settings.path.skill.container, skillInfo.skillName, 'SKILL.md')
-      : path.join(
-        os.homedir(),
-        this.config.settings.path.skill.local,
-        skillInfo.pluginName,
-        skillInfo.pluginVersion,
-        'skills',
-        skillInfo.skillName,
-        'SKILL.md'
-      );
-    const content = fs.readFileSync(skillPath, 'utf8');
-    const pattern = new RegExp(
-      `(<!-- framework-${marker}-start -->)[\\s\\S]*?(<!-- framework-${marker}-end -->)`
-    );
-    const jsonBlock = `$1\n\`\`\`json\n${JSON.stringify(data)}\n\`\`\`\n$2`;
-    fs.writeFileSync(skillPath, content.replace(pattern, jsonBlock), 'utf8');
-  }
-
-  /**
    * Recursively minifies JS files in a directory using npx terser
    *
    * @private
@@ -298,27 +256,29 @@ class OutputGenerator {
     };
   }
 
+
   /**
-   * Creates session state file and cleans up old files
+   * Creates session file and cleans up old session directories
    *
    * @private
-   * @param {string} sessionUuid - Session UUID for filename
-   * @param {Object} state - Session state to persist
+   * @param {Object} session - Session data to persist
+   * @param {string} uuid - Session UUID for directory name
    */
-  #saveSessionState(sessionUuid, state) {
+  #saveSessionState(session, uuid) {
     const storagePath = this.environmentManager.getStoragePath(this.config);
-    if (!fs.existsSync(storagePath)) {
-      fs.mkdirSync(storagePath, { recursive: true });
+    const sessionPath = path.join(storagePath, uuid);
+    if (!fs.existsSync(sessionPath)) {
+      fs.mkdirSync(sessionPath, { recursive: true });
     }
-    const filePath = path.join(storagePath, `${sessionUuid}.json`);
-    fs.writeFileSync(filePath, JSON.stringify(state, null, 2) + os.EOL, 'utf8');
-    const maxFiles = parseInt(process.env.FRAMEWORK_SESSION_STORAGE) || this.config.settings.session.storage;
-    const files = fs.readdirSync(storagePath)
-      .filter(f => f.endsWith('.json'))
-      .map(f => ({ name: f, mtime: fs.statSync(path.join(storagePath, f)).mtimeMs }))
+    fs.writeFileSync(path.join(sessionPath, 'session.json'), JSON.stringify(session, null, 2) + os.EOL, 'utf8');
+    const maxSessions = parseInt(process.env.FRAMEWORK_SESSION_STORAGE) || this.config.settings.session.storage;
+    const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+    const entries = fs.readdirSync(storagePath, { withFileTypes: true })
+      .filter(d => d.isDirectory() && uuidPattern.test(d.name))
+      .map(d => ({ name: d.name, mtime: fs.statSync(path.join(storagePath, d.name)).mtimeMs }))
       .sort((a, b) => b.mtime - a.mtime);
-    for (const file of files.slice(maxFiles)) {
-      fs.unlinkSync(path.join(storagePath, file.name));
+    for (const entry of entries.slice(maxSessions)) {
+      fs.rmSync(path.join(storagePath, entry.name), { recursive: true, force: true });
     }
   }
 
@@ -437,11 +397,10 @@ class OutputGenerator {
    * @param {Object} instructions - Hierarchical instructions dictionary
    * @param {Object} profiles - Hierarchical profile dictionary
    * @param {boolean} [returnOnly] - Return object instead of printing to stdout
-   * @param {boolean} [skipInject] - Skip injecting data into SKILL.md
    * @returns {Promise<Object|boolean>} Output object if returnOnly, otherwise success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  async generate(instructions, profiles, returnOnly = false, skipInject = false) {
+  async generate(instructions, profiles, returnOnly = false) {
     if (typeof instructions !== 'object' || instructions === null) {
       throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
     }
@@ -451,8 +410,6 @@ class OutputGenerator {
     const instructionsData = this.#generateSortedOutput(instructions, 'instructions');
     const memoryData = this.#generateSortedOutput(profiles, 'memory');
     if (this.container && !this.environmentManager.isClaudeContainer()) {
-      this.#clearPayloadData('instructions');
-      this.#clearPayloadData('memory');
       const paths = [];
       const plugins = this.config.settings.plugins;
       for (const [, pluginList] of Object.entries(plugins)) {
@@ -472,17 +429,37 @@ class OutputGenerator {
       const keyDest = path.join(this.config.settings.path.package.output, keyFile);
       fs.copyFileSync(keySource, keyDest);
       paths.push(keyDest);
-      if (!skipInject) {
-        this.#injectData('instructions', instructionsData);
-        this.#injectData('memory', memoryData);
-      }
       return await this.generateOutput(paths.sort(), returnOnly);
     }
-    if (!skipInject) {
-      this.#injectData('instructions', instructionsData);
-      this.#injectData('memory', memoryData);
+    return await this.generateOutput(null, returnOnly, { instructions: instructionsData, memory: memoryData });
+  }
+
+  /**
+   * Generates restore output with methodology skill content for post-compaction injection
+   *
+   * @param {string} sessionUuid - Session UUID to verify framework is active
+   * @returns {Object|null} Hook-specific output with additionalContext, or null if framework inactive
+   */
+  generateRestoreOutput(sessionUuid) {
+    const storagePath = this.environmentManager.getStoragePath(this.config);
+    const sessionPath = path.join(storagePath, sessionUuid);
+    if (!fs.existsSync(sessionPath)) {
+      return null;
     }
-    return await this.generateOutput(null, returnOnly);
+    const instructionsPath = path.join(sessionPath, 'instructions.json');
+    const memoryPath = path.join(sessionPath, 'memory.json');
+    if (!fs.existsSync(instructionsPath) || !fs.existsSync(memoryPath)) {
+      return null;
+    }
+    const instructions = JSON.parse(fs.readFileSync(instructionsPath, 'utf8'));
+    const memory = JSON.parse(fs.readFileSync(memoryPath, 'utf8'));
+    const additionalContext = this.#buildAdditionalContext({ instructions, memory });
+    return {
+      hookSpecificOutput: {
+        hookEventName: 'SessionStart',
+        additionalContext
+      }
+    };
   }
 
   /**
@@ -490,38 +467,58 @@ class OutputGenerator {
    *
    * @param {Array} [paths] - Optional array of generated file paths
    * @param {boolean} [returnOnly] - Return object instead of printing to stdout
+   * @param {Object} [contextData] - Instructions and memory data for additionalContext injection
    * @returns {Promise<Object|boolean>} Output object if returnOnly, otherwise success status
    * @throws {MemoryBuilderError} When generation fails
    */
-  async generateOutput(paths = null, returnOnly = false) {
+  async generateOutput(paths = null, returnOnly = false, contextData = null) {
     const geolocation = process.env.FRAMEWORK_GEOLOCATION;
     const { city, country, timezone } = await this.#fetchGeolocation(geolocation).catch(() => ({}));
     const timeGenerator = new TimeGenerator(this.config);
-    const timestamp = timeGenerator.generate(timezone);
-    if (city) {
-      timestamp.city = city;
-    }
-    if (country) {
-      timestamp.country = country;
-    }
+    const time = timeGenerator.generate(timezone);
+    const timestamp = {
+      ...(city && { city }),
+      ...(country && { country }),
+      ...time
+    };
     const profile = this.profileName;
     const sessionUuid = this.detectSessionUuid();
-    const output = paths
-      ? { paths, profile, session_uuid: sessionUuid, timestamp }
-      : { profile, session_uuid: sessionUuid, timestamp };
     const storagePath = this.environmentManager.getStoragePath(this.config);
-    const stateFilePath = path.join(storagePath, `${sessionUuid}.json`);
-    if (!fs.existsSync(stateFilePath)) {
-      this.#saveSessionState(sessionUuid, {
-        cycle: 'Getting Started',
-        feelings: 0,
-        impulses: 0,
-        observations: 0,
-        profile,
+    const sessionPath = path.join(storagePath, sessionUuid);
+    const sessionFilePath = path.join(sessionPath, 'session.json');
+    let session;
+    if (fs.existsSync(sessionFilePath)) {
+      session = JSON.parse(fs.readFileSync(sessionFilePath, 'utf8'));
+    } else {
+      session = {
+        framework: {
+          profile,
+          status: {
+            cycle: 'Getting Started',
+            feelings: 0,
+            impulses: 0,
+            observations: 0
+          }
+        },
         session_uuid: sessionUuid,
         timestamp
-      });
+      };
+      this.#saveSessionState(session, sessionUuid);
     }
+    if (contextData) {
+      fs.writeFileSync(path.join(sessionPath, 'instructions.json'), JSON.stringify(contextData.instructions), 'utf8');
+      fs.writeFileSync(path.join(sessionPath, 'memory.json'), JSON.stringify(contextData.memory), 'utf8');
+    }
+    const data = contextData ? {
+      instructions: path.join(sessionPath, 'instructions.json'),
+      memory: path.join(sessionPath, 'memory.json')
+    } : undefined;
+    const status = session.framework?.status || { cycle: 'Getting Started', feelings: 0, impulses: 0, observations: 0 };
+    const framework = { ...(data && { data }), profile, status };
+    if (paths) {
+      framework.paths = paths;
+    }
+    const output = { framework, session_uuid: sessionUuid, timestamp };
     if (returnOnly) {
       return output;
     }
@@ -561,27 +558,28 @@ class OutputGenerator {
   }
 
   /**
-   * Updates session state from transcript status
+   * Updates session data from transcript status
    *
-   * Reads existing state file, detects last response status from transcript,
-   * merges status into state, and saves with cleanup.
+   * Reads existing session file, detects last response status from transcript,
+   * merges status into session, and saves with cleanup.
    *
    * @param {string} [sessionUuid] - Session UUID (auto-detected if omitted)
-   * @returns {Promise<Object>} Updated session state
+   * @returns {Promise<Object>} Updated session data
    */
   async updateSessionState(sessionUuid) {
     const storagePath = this.environmentManager.getStoragePath(this.config);
-    const filePath = path.join(storagePath, `${sessionUuid}.json`);
-    let state = {};
-    if (fs.existsSync(filePath)) {
-      state = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const sessionPath = path.join(storagePath, sessionUuid);
+    const sessionFilePath = path.join(sessionPath, 'session.json');
+    if (!fs.existsSync(sessionFilePath)) {
+      return null;
     }
+    let session = JSON.parse(fs.readFileSync(sessionFilePath, 'utf8'));
     const status = await this.detectResponseStatus(sessionUuid);
     if (status) {
-      Object.assign(state, status);
+      Object.assign(session.framework.status, status);
     }
-    this.#saveSessionState(sessionUuid, state);
-    return state;
+    this.#saveSessionState(session, sessionUuid);
+    return session;
   }
 }
 

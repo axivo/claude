@@ -17,11 +17,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory\" -r",
             "timeout": 10
           }
         ],
-        "matcher": "startup"
+        "matcher": "compact"
       }
     ]
   }
