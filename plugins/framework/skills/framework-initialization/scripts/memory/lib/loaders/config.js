@@ -34,21 +34,52 @@ class ConfigLoader {
   }
 
   /**
-   * Finds project root by walking up directories looking for .claude marker
+   * Finds project root by walking up directories looking for configuration directory marker
    *
    * @private
+   * @param {string} configDir - Configuration directory name to search for
    * @param {string} [startDir] - Directory to start searching from
    * @returns {string} Project root path or cwd as fallback
    */
-  #findProjectRoot(startDir = process.cwd()) {
+  #findProjectRoot(configDir, startDir = process.cwd()) {
     let dir = startDir;
     while (dir !== path.dirname(dir)) {
-      if (fs.existsSync(path.join(dir, '.claude'))) {
+      if (fs.existsSync(path.join(dir, configDir))) {
         return dir;
       }
       dir = path.dirname(dir);
     }
     return process.cwd();
+  }
+
+  /**
+   * Finds a skill and its plugin info by skill key
+   *
+   * @private
+   * @param {Object} config - Configuration object
+   * @param {string} skillKey - Skill key to find (e.g., 'methodology')
+   * @returns {Object|null} Object with plugin and skill info, or null if not found
+   */
+  #findSkillByKey(config, skillKey) {
+    for (const pluginList of Object.values(config.settings.plugins)) {
+      for (const { plugin, skills } of pluginList) {
+        if (skills?.[skillKey]) {
+          return { pluginName: plugin.name, pluginVersion: plugin.version, skillName: skills[skillKey] };
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Resolves the configuration directory name from environment or config default
+   *
+   * @private
+   * @param {Object} config - Configuration object
+   * @returns {string} Configuration directory name
+   */
+  #getConfigDir(config) {
+    return process.env.CLAUDE_CONFIG_DIR || config.settings.path.configuration;
   }
 
   /**
@@ -68,25 +99,50 @@ class ConfigLoader {
     if (!config.settings.path.instructions || !config.settings.path.instructions.domain || !config.settings.path.instructions.common) {
       throw new MemoryBuilderError('Missing or invalid "settings.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
-    const projectRoot = this.#findProjectRoot();
+    const configDir = this.#getConfigDir(config);
+    config.settings.path.configuration = configDir;
+    config.settings.path.project.local = path.join(configDir, config.settings.path.project.local);
+    config.settings.path.skill.local = path.join(configDir, config.settings.path.skill.local);
+    const projectRoot = this.#findProjectRoot(configDir);
     if (process.env.FRAMEWORK_CONVERSATION_PATH) {
       config.settings.path.documentation.conversation = process.env.FRAMEWORK_CONVERSATION_PATH;
     } else {
-      config.settings.path.documentation.conversation = path.join(projectRoot, config.settings.path.documentation.conversation);
+      config.settings.path.documentation.conversation = path.join(projectRoot, configDir, config.settings.path.documentation.conversation);
     }
     if (process.env.FRAMEWORK_DIARY_PATH) {
       config.settings.path.documentation.diary = process.env.FRAMEWORK_DIARY_PATH;
     } else {
-      config.settings.path.documentation.diary = path.join(projectRoot, config.settings.path.documentation.diary);
+      config.settings.path.documentation.diary = path.join(projectRoot, configDir, config.settings.path.documentation.diary);
     }
     if (process.env.FRAMEWORK_PACKAGE_PATH) {
       config.settings.path.package.output = process.env.FRAMEWORK_PACKAGE_PATH;
     } else {
-      config.settings.path.package.output = path.join(projectRoot, config.settings.path.package.output);
+      config.settings.path.package.output = path.join(projectRoot, configDir, config.settings.path.package.output);
     }
     if (process.env.FRAMEWORK_PROFILE) {
       config.settings.profile = process.env.FRAMEWORK_PROFILE;
     }
+  }
+
+  /**
+   * Loads configuration from builder.yaml
+   *
+   * @returns {Object} Configuration object
+   * @throws {MemoryBuilderError} When configuration is invalid or missing
+   */
+  load() {
+    if (!fs.existsSync(this.configPath)) {
+      throw new MemoryBuilderError(`Configuration file not found: ${this.configPath}`, 'ERR_CONFIG_NOT_FOUND');
+    }
+    let config;
+    try {
+      const configContent = fs.readFileSync(this.configPath, 'utf8');
+      config = yaml.load(configContent);
+    } catch (error) {
+      throw new MemoryBuilderError(`Failed to parse configuration: ${error.message}`, 'ERR_CONFIG_PARSE');
+    }
+    this.#validateConfig(config);
+    return config;
   }
 
   /**
@@ -115,46 +171,6 @@ class ConfigLoader {
         );
       }
     }
-  }
-
-  /**
-   * Finds a skill and its plugin info by skill key
-   *
-   * @private
-   * @param {Object} config - Configuration object
-   * @param {string} skillKey - Skill key to find (e.g., 'methodology')
-   * @returns {Object|null} Object with plugin and skill info, or null if not found
-   */
-  #findSkillByKey(config, skillKey) {
-    for (const pluginList of Object.values(config.settings.plugins)) {
-      for (const { plugin, skills } of pluginList) {
-        if (skills?.[skillKey]) {
-          return { pluginName: plugin.name, pluginVersion: plugin.version, skillName: skills[skillKey] };
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Loads configuration from builder.yaml
-   *
-   * @returns {Object} Configuration object
-   * @throws {MemoryBuilderError} When configuration is invalid or missing
-   */
-  load() {
-    if (!fs.existsSync(this.configPath)) {
-      throw new MemoryBuilderError(`Configuration file not found: ${this.configPath}`, 'ERR_CONFIG_NOT_FOUND');
-    }
-    let config;
-    try {
-      const configContent = fs.readFileSync(this.configPath, 'utf8');
-      config = yaml.load(configContent);
-    } catch (error) {
-      throw new MemoryBuilderError(`Failed to parse configuration: ${error.message}`, 'ERR_CONFIG_PARSE');
-    }
-    this.#validateConfig(config);
-    return config;
   }
 }
 

@@ -1,10 +1,10 @@
-LOCAL:
+CONTEXT:
   description: "Local environment instructions"
   relations:
     - target: INITIALIZATION
       type: inherits
 
-  local_instructions:
+  context_instructions:
     environment:
       application:
         - name: "Claude Code"
@@ -37,6 +37,12 @@ LOCAL:
       format:
         - "substantive response to user"
         - "TEMPLATE - response status"
+      protocol:
+        assessment: "before rendering UUID, answer honestly: 'did I execute the response protocol properly?'"
+        status:
+          ✅: "response protocol executed before formulation"
+          ⚠️: "response protocol partially executed with drift caught or incomplete iteration"
+          ⛔️: "response protocol bypassed or not executed before formulation"
       status:
         defaults:
           cycle: "Getting Started"
@@ -48,7 +54,7 @@ LOCAL:
           impulses: "{count} {count|impulse|impulses}"
           observations: "{count} {count|observation|observations}"
         position: "end of session response"
-        template: "> Status: **{cycle}** • {feelings} • {impulses} • {observations}\n> Response UUID: `{uuid}`"
+        template: "> {protocol.status} Status: **{cycle}** • {feelings} • {impulses} • {observations}\n> ⚙️ Response UUID: `{uuid}`"
       uuid:
         first_response: "use `session_uuid` from script loader output"
         format: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
