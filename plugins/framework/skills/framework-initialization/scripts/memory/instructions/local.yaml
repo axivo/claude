@@ -1,10 +1,10 @@
-LOCAL:
+CONTEXT:
   description: "Local environment instructions"
   relations:
     - target: INITIALIZATION
       type: inherits
 
-  local_instructions:
+  context_instructions:
     environment:
       application:
         - name: "Claude Code"

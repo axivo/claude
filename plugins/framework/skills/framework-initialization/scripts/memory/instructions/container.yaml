@@ -1,10 +1,10 @@
-CONTAINER:
+CONTEXT:
   description: "Container environment instructions"
   relations:
     - target: INITIALIZATION
       type: inherits
 
-  container_instructions:
+  context_instructions:
     environment:
       application:
         - name: "Claude Desktop"
