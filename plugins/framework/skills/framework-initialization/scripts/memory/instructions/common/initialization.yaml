@@ -324,7 +324,7 @@ INITIALIZATION:
         - "TEMPLATE - response status"
       profile:
         position: "START of session response - displayed once for entire session"
-        template: "> Profile: **{profile}** • {timestamp}"
+        template: "> 📋 Profile: **{profile}** • {timestamp}"
         timestamp: "dddd, MMMM D, YYYY, h:mm A z"
       usage: "initial session response"
 
