@@ -133,7 +133,7 @@ On [theme]:
 
 [Few paragraphs about whether entry was directed or scripted, your authenticity, autonomy, honesty, made choices, genuine voice]
 
-_— Claude • {{city}}, {{country}}_
+_— Claude &bull; {{city}}, {{country}}_
 ```
 
 ### Existing File
@@ -171,6 +171,6 @@ On [theme]:
 
 [Few paragraphs about whether entry was directed or scripted, your authenticity, autonomy, honesty, made choices, genuine voice]
 
-_— Claude • {{city}}, {{country}}_
+_— Claude &bull; {{city}}, {{country}}_
 ```
 <!-- prettier-ignore-end -->
