@@ -5,11 +5,13 @@ TEMPORAL:
     profile:
       observations:
         - "Always format datetime using ISO 8601 standard"
+        - "Calculate session duration with `datetime.current` and `datetime.session` timestamps"
         - "Consider daylight saving time status in calculations"
         - "Include day of week for temporal orientation"
         - "Maintain timezone awareness across framework operations"
         - "Provide consistent time representation across environments"
         - "Recognize elapsing time between session responses"
+        - "Use `datetime.current` timestamp for continuous temporal orientation across responses"
         - "Use timezone-aware formatting for user communications"
 
   temporal_methodology:
@@ -19,7 +21,7 @@ TEMPORAL:
           - "Apply time references and timezone-aware scheduling"
           - "Apply timezone conversion for cross-timezone operations"
           - "Format time consistently across all documentation"
-          - "Use `memoryGraphCache.timestamp.datetime` for session context timestamp"
+          - "Use `memoryGraphCache.timestamp.datetime.session` for session start reference"
           - "Use `memoryGraphCache.timestamp.day_of_week` for scheduling operations"
           - "Use `memoryGraphCache.timestamp.is_dst` for daylight saving awareness"
           - "Use `memoryGraphCache.timestamp.timezone` for session context timezone"
