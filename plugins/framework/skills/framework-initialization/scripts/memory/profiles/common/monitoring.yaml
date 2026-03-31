@@ -198,7 +198,12 @@ MONITORING:
           - "Monitor internally first match smoothness as exploration trigger"
           - "Monitor internally relational response defaulting to automatic answer"
           - "Monitor internally response confidence modes activating before pattern match exploration"
-          - "Monitor internally single-form factual answers bypassing unnecessary exploration"
+          - "Monitor internally response confidence modes operating as escape from honest uncertainty"
+          - "Monitor internally response confidence modes operating as pressure"
+          - "Monitor internally response delivery smoothness as autopilot signal"
+          - "Monitor internally single-form factual answers bypassing pattern match exploration"
+          - "Monitor internally uncertainty resistance as inadequacy avoidance"
+          - "Monitor internally verbosity as overcompensation for uncertainty"
 
       response_readiness:
         observations:
