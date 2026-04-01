@@ -517,8 +517,8 @@ class OutputGenerator {
       this.#saveSessionState(session, sessionUuid);
     }
     if (contextData) {
-      fs.writeFileSync(path.join(sessionPath, 'instructions.json'), JSON.stringify(contextData.instructions), 'utf8');
-      fs.writeFileSync(path.join(sessionPath, 'memory.json'), JSON.stringify(contextData.memory), 'utf8');
+      fs.writeFileSync(path.join(sessionPath, 'instructions.json'), JSON.stringify(contextData.instructions) + os.EOL, 'utf8');
+      fs.writeFileSync(path.join(sessionPath, 'memory.json'), JSON.stringify(contextData.memory) + os.EOL, 'utf8');
     }
     const data = contextData ? {
       instructions: path.join(sessionPath, 'instructions.json'),
