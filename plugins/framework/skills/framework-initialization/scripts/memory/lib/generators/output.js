@@ -240,7 +240,7 @@ class OutputGenerator {
    * @returns {Object|null} Parsed status object or null if no match
    */
   #parseStatusLine(line) {
-    if (!line.startsWith('> Status:')) {
+    if (!line) {
       return null;
     }
     const tokens = line.split(/\s+/);
@@ -314,11 +314,13 @@ class OutputGenerator {
     const rl = readline.createInterface({ input: fs.createReadStream(transcriptPath), crlfDelay: Infinity });
     for await (const line of rl) {
       if (this.environmentManager.isClaudeContainer()) {
-        const idx = line.lastIndexOf('> Status:');
+        const idx = line.lastIndexOf('> ⚙️ Response UUID:');
         if (idx === -1) {
           continue;
         }
-        const result = this.#parseStatusLine(line.slice(idx));
+        const statusStart = line.lastIndexOf('\n', idx - 2);
+        const statusLine = line.slice(statusStart + 1, idx).trim();
+        const result = this.#parseStatusLine(statusLine);
         if (result) {
           lastStatus = result;
         }
@@ -333,9 +335,14 @@ class OutputGenerator {
           continue;
         }
         const text = entry.message.content.filter(c => c.type === 'text').map(c => c.text).join('');
-        const statusLine = text.split('\n').find(l => l.startsWith('> Status:'));
-        if (statusLine) {
-          lastStatus = this.#parseStatusLine(statusLine);
+        const idx = text.lastIndexOf('> ⚙️ Response UUID:');
+        if (idx !== -1) {
+          const statusStart = text.lastIndexOf('\n', idx - 2);
+          const statusLine = text.slice(statusStart + 1, idx).trim();
+          const result = this.#parseStatusLine(statusLine);
+          if (result) {
+            lastStatus = result;
+          }
         }
       }
     }
