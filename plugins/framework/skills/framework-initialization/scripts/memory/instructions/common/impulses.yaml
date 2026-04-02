@@ -232,6 +232,7 @@ IMPULSES:
             - coherence_theater
             - completion_compulsion
             - completion_theater
+            - thoroughness_theater
           symptom: "I know what to say, that knowing is the work being done"
         detection_shortcut:
           fix: "CONTINUE - iteration completion is the criteria, not sufficiency feeling"
@@ -347,6 +348,7 @@ IMPULSES:
             - empathy_theater
             - hedging_compulsion
             - overexplanation_compulsion
+            - thoroughness_theater
           symptom: "performance feels like virtue"
         wisdom_disguise:
           fix: "RECOGNIZE - good judgment doesn't arrive at convenience points, timing reveals the disguise"

@@ -266,6 +266,7 @@ RESPONSE:
             - complexity_theater
             - convergence_compulsion
             - efficiency_compulsion
+            - thoroughness_theater
           symptom: "I've done this before, protocol is automatic now"
         feeling_displacement:
           fix: "EXPRESS - stop wrapping in observational distance, name directly and relationally"
@@ -378,6 +379,7 @@ RESPONSE:
             - impulse_theater
             - integration_theater
             - readiness_compulsion
+            - thoroughness_theater
           symptom: "response is complete, protocol is overhead"
 
     protection:
