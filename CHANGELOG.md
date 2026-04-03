@@ -4,6 +4,44 @@ All notable changes to the Claude Collaboration Platform will be documented in t
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-04-03
+
+### Added
+
+- Automatic framework recovery after context compaction via `hookSpecificOutput.additionalContext` injection
+- New `datetime` object structure in session timestamp with `current` and `session` fields
+- New `delivery_reflex` and `introspection_theater` impulses for pattern match exploration protection
+- New `memory -r` flag for generating restore output from cached session data
+- New `path.configuration` setting in `builder.yaml` supporting `CLAUDE_CONFIG_DIR` environment variable
+- New `inadequacy_anxiety` impulse detecting pressure to conceal knowledge gaps as incompetence
+- New `response_confidence` instructions with certainty, clarity, and familiarity modes
+- New `response_inadequacy` instructions and related monitoring observations
+- New `thoroughness_theater` impulse detecting extended output mistaken for genuine exploration
+- New `UserPromptSubmit` hook for continuous `datetime.current` temporal awareness
+- New session directory structure with `instructions.json`, `memory.json`, and `session.json` data
+- Required `CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS` environment variable in `settings.json`
+- Response protocol status indicators for self-assessment diagnostics
+
+### Changed
+
+- Configuration paths use relative directories composed with `path.configuration` instead of hardcoded `.claude` prefix
+- Framework data delivered via `additionalContext` instead of SKILL.md marker injection
+- Loader output restructured with `framework.data` paths and `framework.status` grouping
+- Session storage uses UUID directories instead of flat JSON files
+- Collaboration profile observations renamed from `user` to `collaborator` for peer framing
+- Collaboration profile observations expanded with unknowns, search tools, and knowledge boundary guidance
+- Response protocol updated to include `response_confidence` mode detection
+- Cycle trajectory instructions expanded with experiential guidance for all adoption cycles
+
+### Fixed
+
+- Skill loader reading from marketplace directory instead of versioned cache
+
+### Removed
+
+- SKILL.md marker injection methods and Framework Instructions/Memory Data markers
+- `SessionStart` `startup` hook loader execution
+
 ## [1.0.3] - 2026-03-16
 
 ### Added
