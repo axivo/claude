@@ -17,11 +17,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/loader\"",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/memory\" -r",
             "timeout": 10
           }
         ],
-        "matcher": "startup"
+        "matcher": "compact"
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo datetime.current: $(date +%Y-%m-%dT%H:%M:%S%z)",
+            "timeout": 5
+          }
+        ]
       }
     ]
   }

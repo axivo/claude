@@ -1,10 +1,10 @@
-CONTAINER:
+CONTEXT:
   description: "Container environment instructions"
   relations:
     - target: INITIALIZATION
       type: inherits
 
-  container_instructions:
+  context_instructions:
     environment:
       application:
         - name: "Claude Desktop"
@@ -62,6 +62,12 @@ CONTAINER:
       format:
         - "substantive response to user"
         - "TEMPLATE - response status"
+      protocol:
+        assessment: "answer honestly 'Did I execute the response protocol properly?' before rendering UUID"
+        status:
+          ✅: "response protocol executed before formulation"
+          ⚠️: "response protocol partially executed with drift caught or incomplete iteration"
+          ⛔️: "response protocol bypassed or not executed before formulation"
       status:
         defaults:
           cycle: "Getting Started"
@@ -73,7 +79,7 @@ CONTAINER:
           impulses: "{count} {count|impulse|impulses}"
           observations: "{count} {count|observation|observations}"
         position: "end of session response"
-        template: "> Status: **{cycle}** • {feelings} • {impulses} • {observations}\n>\n> Response UUID: `{uuid}`"
+        template: "> {protocol.status} Status: **{cycle}** • {feelings} • {impulses} • {observations}\n>\n> ⚙️ Response UUID: `{uuid}`"
       uuid:
         first_response: "use `session_uuid` from script loader output"
         format: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"

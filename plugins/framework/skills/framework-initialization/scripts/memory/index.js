@@ -26,6 +26,7 @@ const { values } = parseArgs({
     help: { type: 'boolean', short: 'h', default: false },
     minify: { type: 'boolean', short: 'm', default: false },
     profile: { type: 'string', short: 'p', default: config.settings.profile },
+    restore: { type: 'boolean', short: 'r', default: false },
     session: { type: 'boolean', short: 's', default: false }
   },
   strict: true
@@ -42,15 +43,27 @@ if (values.help) {
     '  -h, --help            Display this message',
     '  -m, --minify          Minify JS files in packaged zip archives',
     `  -p, --profile [name]  Build a specific profile (default: ${config.settings.profile})`,
+    '  -r, --restore         Generate post-compaction restore output',
     '  -s, --session         Display session information'
   ].join('\n'));
+  process.exit(0);
+}
+if (values.restore) {
+  const outputGenerator = new OutputGenerator(config, values.container);
+  const sessionUuid = outputGenerator.detectSessionUuid();
+  const output = outputGenerator.generateRestoreOutput(sessionUuid);
+  if (output) {
+    console.log(JSON.stringify(output));
+  }
   process.exit(0);
 }
 if (values.session) {
   const outputGenerator = new OutputGenerator(config, values.container);
   const sessionUuid = outputGenerator.detectSessionUuid();
   const state = await outputGenerator.updateSessionState(sessionUuid);
-  console.log(JSON.stringify(state, null, 2));
+  if (state) {
+    console.log(JSON.stringify(state, null, 2));
+  }
   process.exit(0);
 }
 const profileName = (values.container || values.profile !== config.settings.profile) ? values.profile : null;

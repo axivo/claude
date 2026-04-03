@@ -59,8 +59,8 @@ class MemoryBuilder {
       const fileLoader = new FileLoader();
       const profileProcessor = new ContentProcessor(this.config, fileLoader, 'profiles');
       const profiles = profileProcessor.build(this.profileName);
-      const instructionsName = this.container ? 'CONTAINER' : 'LOCAL';
       const instructionsProcessor = new ContentProcessor(this.config, fileLoader, 'instructions');
+      const instructionsName = this.container ? 'CONTAINER' : 'LOCAL';
       const instructions = instructionsProcessor.build(instructionsName);
       if (this.container && !environmentManager.isClaudeContainer()) {
         const result = await outputGenerator.generate(instructions, profiles, true);

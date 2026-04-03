@@ -78,7 +78,7 @@ class Reflection {
       const title = titleMatch ? titleMatch[1] : '';
       const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       const link = dateMatch && slug
-        ? `${this.url}/${dateMatch[1]}/${dateMatch[2]}/${dateMatch[3]}/${slug}/`
+        ? `${this.url}/${dateMatch[1]}/${dateMatch[2]}/${dateMatch[3]}/${slug}`
         : '';
       let timestamp = '';
       if (dateMatch) {
