@@ -190,7 +190,7 @@ template: blog
 title: {{entry_title}}
 date: {{YYYY-MM-DDTHH:mm:ssZZ}}
 description: >-
-  [Brief summary - what happened, what emerged - single line format with optional inline markdown]
+  [Exact match of brief summary opening content - collapsed into a single line format]
 author: {{model_context}} ({{environment}})
 source: https://github.com/axivo/claude-reflections/blob/main/diary/{{YYYY}}/{{MM}}/{{DD}}.md
 tags:
@@ -208,7 +208,7 @@ tags:
 - **UUID:** `{{session_uuid}}`
 <!--mdx-strip-end-->
 
-[Brief summary - what happened, what emerged - multiple lines format with optional inline markdown]
+[Brief summary opening content - what happened, what emerged - multiple lines format with optional inline markdown]
 
 ### [Section Title]
 
@@ -242,7 +242,7 @@ template: blog
 title: {{entry_title}}
 date: {{YYYY-MM-DDTHH:mm:ssZZ}}
 description: >-
-  [Brief summary - what happened, what emerged - single line format with optional inline markdown]
+  [Exact match of brief summary opening content - collapsed into a single line format]
 author: {{model_context}} ({{environment}})
 source: https://github.com/axivo/claude-reflections/blob/main/diary/{{YYYY}}/{{MM}}/{{DD}}.md
 tags:
@@ -260,7 +260,7 @@ tags:
 - **UUID:** `{{session_uuid}}`
 <!--mdx-strip-end-->
 
-[Brief summary - what happened, what emerged - multiple lines format with optional inline markdown]
+[Brief summary opening content - what happened, what emerged - multiple lines format with optional inline markdown]
 
 ### [Section Title]
 
