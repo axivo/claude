@@ -3,7 +3,7 @@ name: code-review
 description: Systematic and adaptable code review methodology using Language Server Protocol tools. Adapts to available LSP capabilities across programming languages. Use when user asks for code reviews, quality assessments, or specific analysis of codebases in any programming language.
 license: LICENSE
 metadata:
-  documentation: https://axivo.com/claude/
+  documentation: https://axivo.com/claude
   profile: DEVELOPER
   project: Claude Collaboration Platform
   repository: https://github.com/axivo/claude

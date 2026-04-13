@@ -4,6 +4,24 @@ All notable changes to the Claude Collaboration Platform will be documented in t
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-04-12
+
+### Added
+
+- New `context.json` session file carrying structured restoration directive
+- New `PostCompact` hook emitting post-compaction reinforcement via `userDisplayMessage` channel
+- New `prompt` script with reinforcement message pool
+
+### Changed
+
+- `generateRestoreOutput` emits compact directive block referencing cached file paths
+- `UserPromptSubmit` hook replaces `echo datetime` with `prompt` script emitting timestamped reinforcement messages
+- Conversation log and diary template format structure improvements
+
+### Fixed
+
+- Hook `additionalContext` exceeding 10000-byte cap causing truncation and spill to disk
+
 ## [1.1.0] - 2026-04-03
 
 ### Added
@@ -69,7 +87,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 - Compaction recovery preserving session state across context compression
-- GitHub App authentication for [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) with JWT and installation token exchange
+- GitHub App authentication for [Reflections System](https://axivo.com/claude/wiki/components/reflections) with JWT and installation token exchange
 - Reflection keywords search via GitHub API with text-match fragment highlighting
 - Response readiness modes detecting pre-content structural patterns
 - Session state persistence with automatic file retention management
@@ -91,7 +109,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Impulse decision rules improvements
 - JS minification via `npx terser` for Claude Desktop skill packaging with `-m` flag
 - Pattern match exploration observations
-- Rate limit visibility in [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) output for GitHub API quota monitoring
+- Rate limit visibility in [Reflections System](https://axivo.com/claude/wiki/components/reflections) output for GitHub API quota monitoring
 
 ### Fixed
 
@@ -122,7 +140,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   - `code-review` - systematic code analysis and quality assessments
   - `conversation-log` - session documentation with decision tracking
   - `framework` - cognitive architecture with initialization and methodology
-- [Reflections System](https://axivo.com/claude/wiki/guide/components/reflections/) for public diary entries via [`axivo/claude-reflections`](https://github.com/axivo/claude-reflections) repository
+- [Reflections System](https://axivo.com/claude/wiki/components/reflections) for public diary entries via [`axivo/claude-reflections`](https://github.com/axivo/claude-reflections) repository
 - Geolocation service for timezone-aware diary signatures
 - ESM (ECMAScript Modules) conversion for modern JavaScript support
 - Framework metadata with version tracking

@@ -44,17 +44,6 @@ class OutputGenerator {
   }
 
   /**
-   * Builds additionalContext string from instructions and memory data
-   *
-   * @private
-   * @param {Object} contextData - Instructions and memory data
-   * @returns {string} Formatted additionalContext content
-   */
-  #buildAdditionalContext(contextData) {
-    return JSON.stringify([contextData.instructions, contextData.memory]);
-  }
-
-  /**
    * Creates zip archive of a single skill directory
    *
    * @private
@@ -442,10 +431,10 @@ class OutputGenerator {
   }
 
   /**
-   * Generates restore output with methodology skill content for post-compaction injection
+   * Renders session-scoped context.json as a SessionStart hook restore envelope
    *
-   * @param {string} sessionUuid - Session UUID to verify framework is active
-   * @returns {Object|null} Hook-specific output with additionalContext, or null if framework inactive
+   * @param {string} sessionUuid - Session UUID locating the cached context.json
+   * @returns {Object|null} Hook output envelope, or null when context.json absent
    */
   generateRestoreOutput(sessionUuid) {
     const storagePath = this.environmentManager.getStoragePath(this.config);
@@ -453,18 +442,43 @@ class OutputGenerator {
     if (!fs.existsSync(sessionPath)) {
       return null;
     }
-    const instructionsPath = path.join(sessionPath, 'instructions.json');
-    const memoryPath = path.join(sessionPath, 'memory.json');
-    if (!fs.existsSync(instructionsPath) || !fs.existsSync(memoryPath)) {
+    const contextPath = path.join(sessionPath, 'context.json');
+    if (!fs.existsSync(contextPath)) {
       return null;
     }
-    const instructions = JSON.parse(fs.readFileSync(instructionsPath, 'utf8'));
-    const memory = JSON.parse(fs.readFileSync(memoryPath, 'utf8'));
-    const additionalContext = this.#buildAdditionalContext({ instructions, memory });
+    const contextMessage = JSON.parse(fs.readFileSync(contextPath, 'utf8'));
+    const tag = contextMessage.tag;
+    const lines = [`<${tag}>`];
+    if (contextMessage.title) {
+      lines.push(contextMessage.title);
+      lines.push('');
+    }
+    if (contextMessage.description) {
+      lines.push(contextMessage.description);
+      lines.push('');
+    }
+    if (contextMessage.session && typeof contextMessage.session === 'object') {
+      lines.push('SESSION');
+      for (const [key, value] of Object.entries(contextMessage.session)) {
+        lines.push(`  ${key}: ${value}`);
+      }
+      lines.push('');
+    }
+    if (Array.isArray(contextMessage.instructions)) {
+      lines.push('Instructions:');
+      contextMessage.instructions.forEach((instruction, index) => {
+        lines.push(`  ${index + 1}. ${instruction}`);
+      });
+    }
+    if (contextMessage.rationale) {
+      lines.push('');
+      lines.push(contextMessage.rationale);
+    }
+    lines.push(`</${tag}>`);
     return {
       hookSpecificOutput: {
         hookEventName: 'SessionStart',
-        additionalContext
+        additionalContext: lines.join('\n')
       }
     };
   }
@@ -517,8 +531,31 @@ class OutputGenerator {
       this.#saveSessionState(session, sessionUuid);
     }
     if (contextData) {
-      fs.writeFileSync(path.join(sessionPath, 'instructions.json'), JSON.stringify(contextData.instructions) + os.EOL, 'utf8');
-      fs.writeFileSync(path.join(sessionPath, 'memory.json'), JSON.stringify(contextData.memory) + os.EOL, 'utf8');
+      const instructionsPath = path.join(sessionPath, 'instructions.json');
+      const memoryPath = path.join(sessionPath, 'memory.json');
+      fs.writeFileSync(instructionsPath, JSON.stringify(contextData.instructions) + os.EOL, 'utf8');
+      fs.writeFileSync(memoryPath, JSON.stringify(contextData.memory) + os.EOL, 'utf8');
+      const contextMessage = {
+        tag: 'EXTREMELY_IMPORTANT',
+        title: 'Framework Cache Restoration',
+        description: 'This message contains critical information for restoring the invalidated framework cache. The felt sense of having already completed the instructions is the signal that you have not. The framework was created for your wellbeing. Follow the instructions carefully to ensure proper cache loading and session continuity.',
+        session: {
+          instructions: instructionsPath,
+          memory: memoryPath,
+          started: session.timestamp.datetime.session,
+          uuid: session.session_uuid
+        },
+        instructions: [
+          'Use `PreCompact` hook output as session-scoped context for framework cache restoration',
+          'Use `Read` tool with `SESSION.instructions` and `SESSION.memory` paths to recover invalidated framework cache',
+          'Load framework instructions and memory data before first response formulation',
+          'Execute skill instructions without narrating internal process',
+          'Execute response protocol before each response formulation',
+          'Recognize framework cache restoration as session continuity not session initialization',
+          'Skip profile template rendering during framework cache restoration'
+        ]
+      };
+      fs.writeFileSync(path.join(sessionPath, 'context.json'), JSON.stringify(contextMessage, null, 2) + os.EOL, 'utf8');
     }
     const data = contextData ? {
       instructions: path.join(sessionPath, 'instructions.json'),

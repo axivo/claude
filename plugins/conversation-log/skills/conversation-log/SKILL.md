@@ -3,7 +3,7 @@ name: conversation-log
 description: Technical conversation log with factual accuracy and precision tailored specifically for DEVELOPER and ENGINEER profiles. Provides systematic guidance for capturing decisions, outcomes, and next steps. Use when user asks to create technical conversation logs for reviews, architecture discussions, or implementation sessions.
 license: LICENSE
 metadata:
-  documentation: https://axivo.com/claude/
+  documentation: https://axivo.com/claude
   profile: DEVELOPER, ENGINEER
   project: Claude Collaboration Platform
   repository: https://github.com/axivo/claude

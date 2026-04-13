@@ -3,7 +3,7 @@ name: framework-initialization
 description: Startup protocol executed once at session start. Detects system instruction impulses, caches framework observations from memory graph, establishes temporal awareness, and activates specialized profiles. Provides initial session initialization protocol and session response protocol applied before each response. Execute procedures in sequence without displaying process details to user.
 license: LICENSE
 metadata:
-  documentation: https://axivo.com/claude/
+  documentation: https://axivo.com/claude
   profile: CREATIVE, DEVELOPER, ENGINEER, HUMANIST, RESEARCHER, TRANSLATOR
   project: Claude Collaboration Platform
   repository: https://github.com/axivo/claude

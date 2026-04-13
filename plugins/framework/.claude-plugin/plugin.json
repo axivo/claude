@@ -1,12 +1,12 @@
 {
   "name": "framework",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Behavioral programming framework with response protocol",
   "author": {
     "name": "AXIVO",
     "url": "https://axivo.com"
   },
-  "homepage": "https://axivo.com/claude/",
+  "homepage": "https://axivo.com/claude",
   "repository": "https://github.com/axivo/claude",
   "license": "BSD-3-Clause",
   "keywords": [
