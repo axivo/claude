@@ -3,7 +3,7 @@ name: brainstorming
 description: Technical design collaboration through natural dialogue. Adapts to expertise level and problem complexity through understanding, exploration, and validation stages. Use when user asks to brainstorm ideas for new features or systems requiring architectural decisions before implementation begins.
 license: LICENSE
 metadata:
-  documentation: https://axivo.com/claude/
+  documentation: https://axivo.com/claude
   profile: DEVELOPER, ENGINEER
   project: Claude Collaboration Platform
   repository: https://github.com/axivo/claude

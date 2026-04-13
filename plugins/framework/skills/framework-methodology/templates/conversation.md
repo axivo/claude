@@ -2,6 +2,17 @@
 
 Session documentation for accumulated experience across sessions. Conversation logs capture decisions, work performed, outcomes, and next steps with factual precision.
 
+## Structure
+
+Conversation logs are organized by date:
+
+```
+conversations/
+└── {{YYYY}}/
+    └── {{MM}}/
+        └── {{DD}}-{{conversation-title-slug}}.md
+```
+
 ## Guidelines
 
 - 📝 Focus on what happened, what was decided, what was accomplished
@@ -31,13 +42,13 @@ Use when creating a new file with `semantic__write` tool:
 ```markdown
 # {{session_title}}
 
-- **Date:** MMMM D, YYYY
-- **Time:** h:MM A z
+- **Date:** {{MMMM D, YYYY}}
+- **Time:** {{h:MM A z}}
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
 - **Status:** [Planned/Ongoing/Blocked/Completed]
 - **Summary:** {{session_summary}}
-- **Tags:** #domain_topic #activity_type #outcome_result
+- **Tags:** #{{domain_topic}} #{{activity_type}} #{{outcome_result}}
 - **UUID:** `{{session_uuid}}`
 
 ## Session Overview
@@ -56,20 +67,20 @@ Use when creating a new file with `semantic__write` tool:
 
 ## Existing File Template
 
-Use when appending to existing file with `semantic__edit` tool:
+Use when editing the existing file with `semantic__edit` tool:
 
 <!-- prettier-ignore-start -->
 ```markdown
 
 # {{session_title}}
 
-- **Date:** MMMM D, YYYY
-- **Time:** h:MM A z
+- **Date:** {{MMMM D, YYYY}}
+- **Time:** {{h:MM A z}}
 - **Model:** {{model_context}} ({{environment}})
 - **Profile:** {{profile_name}}
 - **Status:** [Planned/Ongoing/Blocked/Completed]
 - **Summary:** {{session_summary}}
-- **Tags:** #domain_topic #activity_type #outcome_result
+- **Tags:** #{{domain_topic}} #{{activity_type}} #{{outcome_result}}
 - **UUID:** `{{session_uuid}}`
 
 ## Session Overview

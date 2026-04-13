@@ -1,6 +1,17 @@
 {
   "description": "Manages framework lifecycle across session events",
   "hooks": {
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/prompt\" -k message.cache_restoration",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "PreCompact": [
       {
         "hooks": [
@@ -21,7 +32,7 @@
             "timeout": 10
           }
         ],
-        "matcher": "compact"
+        "matcher": "clear|compact"
       }
     ],
     "UserPromptSubmit": [
@@ -29,7 +40,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo datetime.current: $(date +%Y-%m-%dT%H:%M:%S%z)",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/framework-initialization/scripts/prompt\"",
             "timeout": 5
           }
         ]

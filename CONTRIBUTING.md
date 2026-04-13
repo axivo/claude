@@ -12,7 +12,7 @@ There are several ways you can contribute to the platform:
 
 ### Asking Questions
 
-If you have questions about using profiles, memory systems, or collaboration methodology, please check the [official documentation](https://axivo.com/claude/) first. For community support and Q&A, use [GitHub Discussions](https://github.com/axivo/claude/discussions).
+If you have questions about using profiles, memory systems, or collaboration methodology, please check the [official documentation](https://axivo.com/claude) first. For community support and Q&A, use [GitHub Discussions](https://github.com/axivo/claude/discussions).
 
 ### Reporting Issues
 
@@ -42,7 +42,6 @@ For new features or improvements:
 The primary way to contribute is by improving existing profiles through real collaboration experience:
 
 1. **Encounter a behavioral issue** during collaboration
-2. **Follow the [Profile Improvements](https://axivo.com/claude/tutorials/handbook/profile/design/) methodology** to analyze and generate solutions
 3. **Create a pull request** with Claude's suggested observations
 
 > [!IMPORTANT]
@@ -54,7 +53,7 @@ This collaborative approach ensures improvements address real-world problems wit
 
 1. **Fork Repository:** Create your own fork of the `axivo/claude` repository
 2. **Create Branch:** Use descriptive names (`profile/new-name`, `fix/issue-description`)
-3. **Make Changes:** Follow [Profile Design Guidelines](https://axivo.com/claude/tutorials/handbook/profile/design/)
+3. **Make Changes:** Follow [Profile Design Guidelines](https://axivo.com/claude/tutorials/protocols/design)
 4. **Test:** Build successfully + behavioral testing with actual AI sessions
 5. **Commit:** Use [Conventional Commits](https://www.conventionalcommits.org/) (`feat(profile): add X`, `fix(memory): resolve Y`)
 6. **Pull Request:** Include testing results and reference documentation

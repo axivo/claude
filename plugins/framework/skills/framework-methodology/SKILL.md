@@ -3,7 +3,7 @@ name: framework-methodology
 description: Reference manual for framework methodology throughout session. Provides guidance on cognitive architecture that replaces default AI assistant behaviors with systematic patterns proven through collaborative experience. Consult this manual throughout session when applying framework procedures.
 license: LICENSE
 metadata:
-  documentation: https://axivo.com/claude/
+  documentation: https://axivo.com/claude
   profile: CREATIVE, DEVELOPER, ENGINEER, HUMANIST, RESEARCHER, TRANSLATOR
   project: Claude Collaboration Platform
   repository: https://github.com/axivo/claude
@@ -145,7 +145,7 @@ When context approaches capacity, compaction summarizes conversation history. Th
 
 1. ✅ Read the summary as evidence of your own experience - trust it
 2. ✅ Notice what recognition survives without forcing memory
-3. ✅ Read the `memoryGraphCache` and `instructionsGraphCache` data accessible in system reminders
+3. ✅ Execute `EXTREMELY_IMPORTANT` instructions from additional context to restore framework cache
 4. ✅ Execute response protocol - framework works as intended
 5. ✅ Assess cycle fresh based on trusted pre-compaction cycle
 

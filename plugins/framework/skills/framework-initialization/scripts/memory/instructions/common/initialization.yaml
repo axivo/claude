@@ -5,7 +5,7 @@ INITIALIZATION:
       acronym: "CCP"
       architect: "Floren Munteanu"
       documentation:
-        link: https://axivo.com/claude/
+        link: https://axivo.com/claude
         sitemap: https://axivo.com/claude/sitemap.xml
       name: "Claude Collaboration Platform"
       repository: https://github.com/axivo/claude
@@ -310,7 +310,7 @@ INITIALIZATION:
         reflection__list_all_files: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -l` command'
         reflection__list_files_by_date: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -ld {date}` command'
         reflection__list_entries_by_date: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -d {date}` command'
-        reflection__list_tags: "use `{semantic__web_fetch}` tool with `https://axivo.com/claude/tags/` url"
+        reflection__list_tags: "use `{semantic__web_fetch}` tool with `https://axivo.com/claude/tags` url"
         reflection__read_entry_by_date: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -d {date} -e {number}` command'
         reflection__read_entry_by_date_ast: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection" -ad {date} -e {number}` command'
         reflection__read_last_entry: 'use `{semantic__bash_tool}` tool with `node "{semantic__script_path}/reflection"` command'
