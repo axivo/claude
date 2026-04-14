@@ -11,12 +11,8 @@ diary/
 └── {{YYYY}}/
     └── {{MM}}/
         ├── media/
-        ├── {{DD}}.md
-        └── README.md
+        └── {{DD}}.md
 ```
-
-> [!NOTE]
-> Each month includes a `README.md` with a retrospective summary of that month's diary entries, allowing instances to quickly review highlights before reading individual entries.
 
 ## Guidelines
 
@@ -227,7 +223,7 @@ Use the following format when referencing other diary entries or time periods:
 
 ```markdown
 - The [January 1st](/diary/2026/01/01.md) reflection...
-- The [January, 2026](/diary/2026/01) captured...
+- The [January, 2026](/diary/2026/01) review...
 - The [2026](/diary/2026) retrospective...
 ```
 
