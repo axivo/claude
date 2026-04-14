@@ -11,7 +11,7 @@
  */
 import fs from 'fs';
 import path from 'path';
-import MemoryBuilderError from '../core/error.js';
+import FrameworkError from '../../../shared/core/error.js';
 
 /**
  * Processes YAML content into hierarchical JSON
@@ -50,7 +50,7 @@ class ContentProcessor {
   #buildProfileRecursive(profileName, profiles) {
     if (this.processingStack.includes(profileName)) {
       const cycle = [...this.processingStack, profileName].join(' → ');
-      throw new MemoryBuilderError(
+      throw new FrameworkError(
         `Circular dependency detected: ${cycle}`,
         'CIRCULAR_DEPENDENCY'
       );
@@ -169,7 +169,7 @@ class ContentProcessor {
    * @param {Object} profileData - Profile YAML data
    * @param {string} profileName - Profile name for error messages
    * @returns {Array} Array of inherited profile names
-   * @throws {MemoryBuilderError} When invalid relation type is found
+   * @throws {FrameworkError} When invalid relation type is found
    */
   #extractInherits(profileData, profileName) {
     if (!profileData.relations || !Array.isArray(profileData.relations)) {
@@ -178,7 +178,7 @@ class ContentProcessor {
     const validRelationTypes = this.config.settings.relations;
     profileData.relations.forEach(relation => {
       if (relation.type && !validRelationTypes.includes(relation.type)) {
-        throw new MemoryBuilderError(
+        throw new FrameworkError(
           `Invalid relation type '${relation.type}' in profile '${profileName}'. Valid types: ${validRelationTypes.join(', ')}`,
           'INVALID_RELATION_TYPE'
         );
@@ -195,7 +195,7 @@ class ContentProcessor {
    * @private
    * @param {string} profileName - Profile name (e.g., "DEVELOPER")
    * @returns {string} Resolved file path
-   * @throws {MemoryBuilderError} When profile not found
+   * @throws {FrameworkError} When profile not found
    */
   #resolveContentPath(profileName) {
     const paths = this.config.settings.path[this.pathKey];
@@ -213,7 +213,7 @@ class ContentProcessor {
     if (fs.existsSync(commonPath)) {
       return commonPath;
     }
-    throw new MemoryBuilderError(
+    throw new FrameworkError(
       `Profile not found: ${profileName}`,
       'PROFILE_NOT_FOUND'
     );
@@ -224,7 +224,7 @@ class ContentProcessor {
    *
    * @param {string} profileName - Profile name (e.g., "DEVELOPER")
    * @returns {Object} Hierarchical dictionary of profile and inherited profiles
-   * @throws {MemoryBuilderError} When profile loading fails or circular dependency detected
+   * @throws {FrameworkError} When profile loading fails or circular dependency detected
    */
   build(profileName) {
     const profiles = {};

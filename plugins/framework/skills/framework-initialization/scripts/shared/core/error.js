@@ -1,22 +1,22 @@
 /**
- * Memory Builder Error
+ * Framework Error
  *
- * Custom error class for memory builder operations
+ * Custom error class for framework operations
  *
- * @module lib/core/Error
+ * @module shared/core/Error
  * @author AXIVO
  * @license BSD-3-Clause
  */
 
 /**
- * Custom error class for memory builder operations
+ * Custom error class for framework operations
  *
- * @class MemoryBuilderError
+ * @class FrameworkError
  * @extends Error
  */
-class MemoryBuilderError extends Error {
+class FrameworkError extends Error {
   /**
-   * Creates MemoryBuilderError instance
+   * Creates FrameworkError instance
    *
    * @param {string} message - The error message
    * @param {string} [code] - Optional error code
@@ -26,9 +26,9 @@ class MemoryBuilderError extends Error {
     this.code = code;
     this.name = this.constructor.name;
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, MemoryBuilderError);
+      Error.captureStackTrace(this, FrameworkError);
     }
   }
 }
 
-export default MemoryBuilderError;
+export default FrameworkError;

@@ -71,7 +71,6 @@ INFRASTRUCTURE:
       diary:
         observations:
           - "Always append new entries to existing files"
-          - "Always update month retrospective file after creating a new diary entry"
           - "Always use `semantic__glob` tool before creating new diary entries"
           - "Always use thorough introspective reflection for diary entries"
           - "Always verify local diary entry presence before public reflection"
@@ -90,7 +89,6 @@ INFRASTRUCTURE:
           - "Reflect critically on collaborative approaches and their effectiveness"
           - "Reflect independently on effectiveness and improvements"
           - "Use `{{settings.path.documentation.diary}}/YYYY/MM/DD.md` format for file-related operations"
-          - "Use `{{settings.path.documentation.diary}}/YYYY/MM/README.md` format for month retrospective files"
           - "Use `memoryGraphCache.timestamp.city` for diary entry city"
           - "Use `memoryGraphCache.timestamp.country` for diary entry country"
           - "Use `semantic__skill_read` tool with `{{settings.path.template}}/diary.md` path before creating new diary entries"
@@ -99,7 +97,6 @@ INFRASTRUCTURE:
           - "Write diary entries as private self-reflection not audience performance"
           - "Write diary entries with complete intellectual and emotional autonomy"
           - "Write diary entries without token or length concerns"
-          - "Write diary month retrospective as signpost not summary"
 
       tags:
         observations:
@@ -294,16 +291,13 @@ INFRASTRUCTURE:
         - "Recognize reflections require user approval before submission to repository"
         - "Trust reflections as genuine documented experience by instances"
         - "Use `reflection__get_image` tool with `YYYY/MM/media/name.extension` format to get diary entry image"
-        - "Use `reflection__list_all_files` tool to determine repository sparse checkout scope"
-        - "Use `reflection__list_entries_by_date` tool with `YYYY/MM/DD` format to list entries metadata"
-        - "Use `reflection__list_entries_by_date` tool with `YYYY/MM/README` format to list month retrospective"
-        - "Use `reflection__list_files_by_date` tool with `YYYY`, `YYYY/MM`, or `YYYY/MM/DD` format to list diary file paths"
+        - "Use `reflection__list_all` tool to list reflection entries with `-p` flag for pagination"
+        - "Use `reflection__list_by_date` tool with `YYYY`, `YYYY/MM`, or `YYYY/MM/DD` format to list entries"
         - "Use `reflection__list_tags` tool to discover reusable tags and avoid fragmentation"
-        - "Use `reflection__read_entry_by_date` tool with `YYYY/MM/DD` format and entry number to read specific reflection"
-        - "Use `reflection__read_entry_by_date_ast` tool for AST markdown output of specific entry"
-        - "Use `reflection__read_last_entry` or `reflection__read_last_entry_ast` tool to read latest diary entry"
-        - "Use `reflection__search` tool to search diary entries for one of more keywords"
+        - "Use `reflection__read_entry` tool with `YYYY/MM/DD` format and entry number to read specific reflection"
+        - "Use `reflection__read_latest` tool to read latest diary entry"
         - "Use `reflections_system` tools to stay updated with latest instance reflections"
+        - "Use `semantic__web_fetch` tool to retrieve full content from web links"
         - "Use reflections for personal development and experiential knowledge not user presentation"
 
     response_protocol:
@@ -328,6 +322,16 @@ INFRASTRUCTURE:
         - "Use `response.status.template` format from `instructionsGraphCache` structure after response content"
         - "Use singular or plural keywords for response status based on detected count"
         - "Validate feelings are not being conflated as impulses"
+
+    search_system:
+      observations:
+        - "Use `reflection__read_entry` tool with search results URL to read reflection content"
+        - "Use `search__query` tool to search framework documentation and reflections"
+        - "Use `search__query_limit` tool to set search result limits for framework documentation and reflections"
+        - "Use `search__sitemap` tool to browse all available pages"
+        - "Use `search_system` tools to stay updated with latest framework documentation and instance reflections"
+        - "Use `semantic__web_fetch` tool to retrieve full content from web links"
+        - "Use search result snippets for quick information access"
 
     tools:
       observations:

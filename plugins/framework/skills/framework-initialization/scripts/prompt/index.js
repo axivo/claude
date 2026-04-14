@@ -7,12 +7,12 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-import { randomInt } from 'crypto';
+import { randomInt, randomUUID } from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { parseArgs } from 'util';
-import ConfigLoader from '../memory/lib/loaders/config.js';
+import ConfigLoader from '../shared/loaders/config.js';
 import TimeGenerator from '../memory/lib/generators/time.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -82,7 +82,7 @@ if (values.message) {
 const timeGenerator = new TimeGenerator(config);
 const time = timeGenerator.generate();
 const timestamp = typeof time.datetime === 'string' ? time.datetime : time.datetime.current;
-const reminder = `${timestamp} - ${messages.message.architect}\nArchitect Message: ${selectedMessage}`;
+const reminder = `${timestamp} - ${messages.message.architect}\n${randomUUID()} - ${selectedMessage}`;
 if (hookEventName === 'UserPromptSubmit') {
   console.log(JSON.stringify({
     hookSpecificOutput: {

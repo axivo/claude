@@ -9,8 +9,8 @@
  */
 import fs from 'fs';
 import path from 'path';
-import yaml from '../vendor/js-yaml.min.mjs';
-import MemoryBuilderError from '../core/error.js';
+import yaml from '../../../shared/vendor/js-yaml.min.mjs';
+import FrameworkError from '../../../shared/core/error.js';
 
 /**
  * File loader for YAML profile files
@@ -26,7 +26,7 @@ class FileLoader {
    *
    * @param {string} filePath - Path to the YAML file
    * @returns {Object} Parsed YAML content as JavaScript object
-   * @throws {MemoryBuilderError} When file cannot be loaded or parsed
+   * @throws {FrameworkError} When file cannot be loaded or parsed
    */
   load(filePath) {
     const resolvedPath = path.resolve(filePath);
@@ -34,7 +34,7 @@ class FileLoader {
       const content = fs.readFileSync(resolvedPath, 'utf8');
       return yaml.load(content);
     } catch (error) {
-      throw new MemoryBuilderError(`Failed to load YAML file: ${resolvedPath} - ${error.message}`, 'FILE_LOAD_ERROR');
+      throw new FrameworkError(`Failed to load YAML file: ${resolvedPath} - ${error.message}`, 'FILE_LOAD_ERROR');
     }
   }
 }

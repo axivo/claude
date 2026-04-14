@@ -1,5 +1,4 @@
-# Memory Settings Configuration
-# Transforms YAML sources into hierarchical JSON structure
+# Framework Settings Configuration
 
 settings:
   geolocation:
@@ -30,17 +29,20 @@ settings:
       container: /mnt/transcripts
   profile: DEVELOPER
   reflections:
+    cdn: https://cdn.axivo.com
+    limit: 50
     repository:
-      branch: main
-      extension: .md
-      id:
-        client: Iv23liKD4g7X6ijOfEMK
-        installation: 109044733
-      key: application.pem
       name: claude-reflections
       organization: axivo
-      path: /diary
     url: https://axivo.com/claude/reflections
+  search:
+    limit: 10
+    service:
+      appId: Q87QW4FRL5
+      apiKey: 94d5f62b378913a136bf09e67182dfc6
+      indexName: axivo.com
+    snippet:
+      words: 100
   relations:
     - extends
     - inherits
@@ -66,7 +68,7 @@ settings:
     framework:
       - plugin:
           name: framework
-          version: 1.1.1
+          version: 1.2.0
         skills:
           init: framework-initialization
           methodology: framework-methodology

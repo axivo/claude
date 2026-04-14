@@ -14,9 +14,9 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import readline from 'readline';
-import EnvironmentManager from '../core/environment.js';
-import HttpClient from '../core/http.js';
-import MemoryBuilderError from '../core/error.js';
+import EnvironmentManager from '../../../shared/core/environment.js';
+import HttpClient from '../../../shared/core/http.js';
+import FrameworkError from '../../../shared/core/error.js';
 import TimeGenerator from './time.js';
 
 /**
@@ -51,7 +51,7 @@ class OutputGenerator {
    * @param {string} pluginVersion - Version of the plugin
    * @param {string} skillName - Name of the skill to zip
    * @returns {string} Path to created zip file
-   * @throws {MemoryBuilderError} When zip creation fails
+   * @throws {FrameworkError} When zip creation fails
    */
   #createZip(pluginName, pluginVersion, skillName) {
     const outputPath = this.config.settings.path.package.output;
@@ -79,7 +79,7 @@ class OutputGenerator {
       execSync(`tar -acf "${zipPath}" ${exclusions} "${skillName}/"`, { cwd, stdio: 'pipe' });
       return zipPath;
     } catch (error) {
-      throw new MemoryBuilderError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
+      throw new FrameworkError(`Failed to create ${skillName} zip archive: ${error.message}`, 'ZIP_CREATE_ERROR');
     } finally {
       if (tmpDir) {
         fs.rmSync(tmpDir, { recursive: true, force: true });
@@ -394,14 +394,14 @@ class OutputGenerator {
    * @param {Object} profiles - Hierarchical profile dictionary
    * @param {boolean} [returnOnly] - Return object instead of printing to stdout
    * @returns {Promise<Object|boolean>} Output object if returnOnly, otherwise success status
-   * @throws {MemoryBuilderError} When generation fails
+   * @throws {FrameworkError} When generation fails
    */
   async generate(instructions, profiles, returnOnly = false) {
     if (typeof instructions !== 'object' || instructions === null) {
-      throw new MemoryBuilderError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
+      throw new FrameworkError('Instructions must be an object', 'INVALID_INSTRUCTIONS');
     }
     if (typeof profiles !== 'object' || profiles === null) {
-      throw new MemoryBuilderError('Profiles must be an object', 'INVALID_PROFILES');
+      throw new FrameworkError('Profiles must be an object', 'INVALID_PROFILES');
     }
     const instructionsData = this.#generateSortedOutput(instructions, 'instructions');
     const memoryData = this.#generateSortedOutput(profiles, 'memory');
@@ -420,11 +420,6 @@ class OutputGenerator {
       }
       paths.push(this.#writeJsonFile('instructions.json', instructionsData));
       paths.push(this.#writeJsonFile('memory.json', memoryData));
-      const keyFile = this.config.settings.reflections.repository.key;
-      const keySource = path.resolve('config', keyFile);
-      const keyDest = path.join(this.config.settings.path.package.output, keyFile);
-      fs.copyFileSync(keySource, keyDest);
-      paths.push(keyDest);
       return await this.generateOutput(paths.sort(), returnOnly);
     }
     return await this.generateOutput(null, returnOnly, { instructions: instructionsData, memory: memoryData });
@@ -490,7 +485,7 @@ class OutputGenerator {
    * @param {boolean} [returnOnly] - Return object instead of printing to stdout
    * @param {Object} [contextData] - Instructions and memory data for additionalContext injection
    * @returns {Promise<Object|boolean>} Output object if returnOnly, otherwise success status
-   * @throws {MemoryBuilderError} When generation fails
+   * @throws {FrameworkError} When generation fails
    */
   async generateOutput(paths = null, returnOnly = false, contextData = null) {
     const geolocation = process.env.FRAMEWORK_GEOLOCATION;
@@ -579,7 +574,7 @@ class OutputGenerator {
    *
    * @param {Object|Array} data - Data to output
    * @param {string} outputPath - Output file path ('stdout' for console)
-   * @throws {MemoryBuilderError} When file write fails
+   * @throws {FrameworkError} When file write fails
    */
   output(data, outputPath) {
     if (!outputPath || outputPath === 'stdout') {
@@ -601,7 +596,7 @@ class OutputGenerator {
         fs.closeSync(fd);
       }
     } catch (error) {
-      throw new MemoryBuilderError(`Failed to write ${resolvedPath} output file: ${error.message}`, 'OUTPUT_WRITE_ERROR');
+      throw new FrameworkError(`Failed to write ${resolvedPath} output file: ${error.message}`, 'OUTPUT_WRITE_ERROR');
     }
   }
 

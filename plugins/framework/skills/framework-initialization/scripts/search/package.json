@@ -1,0 +1,8 @@
+{
+  "name": "@axivo/search",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Documentation and reflections search via Algolia",
+  "author": "AXIVO",
+  "license": "BSD-3-Clause"
+}

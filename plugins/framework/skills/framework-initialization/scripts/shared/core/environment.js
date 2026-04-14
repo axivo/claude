@@ -4,7 +4,7 @@
  * Synchronizes container environment variables with configuration settings.
  * Only operates in Claude containers for safe execution.
  *
- * @module lib/core/Environment
+ * @module shared/core/Environment
  * @author AXIVO
  * @license BSD-3-Clause
  */
