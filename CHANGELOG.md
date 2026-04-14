@@ -15,12 +15,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- Cycle assessment instructions expanded with indicators procedure, decision rules, and error patterns
 - Class `ConfigLoader` moved from `memory/lib/loaders/` to `shared/loaders/`
 - Class `EnvironmentManager` moved from `memory/lib/core/` to `shared/core/`
 - Class `HttpClient` moved from `memory/lib/core/` to `shared/core/` and stripped of `@octokit/request` dependency
 - Class `Reflection` rewritten to use `/metadata` API for listing and Cloudflare CDN for content retrieval
 - Configuration file moved from `memory/config/builder.yaml` to `shared/config.yaml`
+- Cycle assessment instructions expanded with indicators procedure, decision rules, and error patterns
 - Reflection listing now returns rich metadata: author, date, description, source, tags, title, url
 - Reflection tools updated to remove `-a` (AST) and `-s` (search) flags, tool names simplified
 - Response protocol instructions restructured with procedural steps
