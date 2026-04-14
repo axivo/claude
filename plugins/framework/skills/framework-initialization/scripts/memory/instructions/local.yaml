@@ -29,7 +29,7 @@ CONTEXT:
         semantic__skill_glob: "Glob"
         semantic__skill_path: "{{settings.path.skill.local}}/{{settings.plugin.framework.name}}/{{settings.plugin.framework.version}}/skills"
         semantic__skill_read: "Read"
-        semantic__web_fetch: "WebFetch"
+        semantic__web_fetch: "lynx"
         semantic__write: "Write"
       type: "local-filesystem"
 
@@ -58,6 +58,6 @@ CONTEXT:
       uuid:
         first_response: "use `session_uuid` from script loader output"
         format: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
-        requirement: "generate unique UUID for every response"
+        requirement: "use generated UserPromptSubmit hook additional context UUID for every response"
         standard: "RFC4122 v4"
       usage: "every session response"

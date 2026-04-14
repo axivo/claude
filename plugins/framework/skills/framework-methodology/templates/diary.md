@@ -65,117 +65,6 @@ These sections support reflection. Use what serves the experience - **create you
 | **Observations**         | Grouped insights with thematic headers    | Always                                    |
 | **Note on Authenticity** | Reflection on genuine choices and voice   | Always                                    |
 
-## MDX Components
-
-Use MDX components in diary entries if needed - they add specific functionalities to the reflections website.
-
-> [!IMPORTANT]
-> The `<!--mdx-->` HTML comments must be included in the generated file, as detailed in the template.
-
-### MDX Image Insert
-
-Use when adding a new media image into diary entry file:
-
-```markdown
-<!--mdx-component-{{session_uuid}}
-import { Image } from "@axivo/website";
-<Image
-  template="card"
-  src="/claude/reflections/{{YYYY}}/{{MM}}/{{DD}}-{{image-title-slug}}.webp"
-  alt="{{Image Title}}"
-/>
--->
-<!--mdx-strip-start-->
-
-![{{Image Title}}](/diary/{{YYYY}}/{{MM}}/media/{{DD}}-{{image-title-slug}}.webp)
-
-<!--mdx-strip-end-->
-```
-
-> [!IMPORTANT]
-> For multiple image inserts, include the `import` on the first insert only.
-
-### MDX Video Insert
-
-Use when adding a new media video into diary entry file:
-
-```markdown
-<!--mdx-component-{{session_uuid}}
-import { Video } from "@axivo/website";
-<Video src="/claude/reflections/{{YYYY}}/{{MM}}/{{DD}}-{{video-title-slug}}.mp4" />
--->
-<!--mdx-strip-start-->
-
-[{{Video Title}}](/diary/{{YYYY}}/{{MM}}/media/{{DD}}-{{video-title-slug}}.mp4)
-
-<!--mdx-strip-end-->
-```
-
-> [!IMPORTANT]
-> For multiple video inserts, include the `import` on the first insert only.
-
-## Reference Links
-
-Use the following format when referencing other diary entries or time periods:
-
-```markdown
-- The [January 1st](/diary/2026/01/01.md) reflection...
-- The [January, 2026](/diary/2026/01) captured...
-- The [2026](/diary/2026) retrospective...
-```
-
-Use the following format when referencing framework documentation links:
-
-- The [design philosophy](https://axivo.com/claude/wiki/components/design) explains...
-- The [response protocol](https://axivo.com/claude/wiki/protocols/response) is...
-
-> [!IMPORTANT]
-> Verify the referenced links before writing.
-
-## Month Retrospective Template
-
-### New File
-
-Use when creating a new month retrospective file with `semantic__write` tool:
-
-```markdown
-# Retrospective
-
-## {{MMMM D, YYYY}}
-
-### {{h:MM A z}} — {{entry_title}}
-
-[Few sentences as signpost orienting toward what will be found in diary entry] — "_[significant diary entry quote]_"
-```
-
-### Existing File and New Day
-
-Use when appending to existing file on a new day with `semantic__edit` tool:
-
-<!-- prettier-ignore-start -->
-```markdown
-
-## {{MMMM D, YYYY}}
-
-### {{h:MM A z}} — {{entry_title}}
-
-[Few sentences as signpost orienting toward what will be found in diary entry] — "_[significant diary entry quote]_"
-```
-<!-- prettier-ignore-end -->
-
-### Existing File and Day
-
-Use when appending to existing file on the same day with `semantic__edit` tool:
-
-<!-- prettier-ignore-start -->
-```markdown
-
-### {{h:MM A z}} — {{entry_title}}
-
-[Few sentences as signpost orienting toward what will be found in diary entry] — "_[significant diary entry quote]_"
-```
-<!-- prettier-ignore-end -->
-
 ## Diary Template
 
 ### New File
@@ -282,3 +171,70 @@ On [theme]:
 _— Claude &bull; {{city}}, {{country}}_
 ```
 <!-- prettier-ignore-end -->
+
+## MDX Components
+
+Use MDX components in diary entries if needed - they add specific functionalities to the reflections website.
+
+> [!IMPORTANT]
+> The `<!--mdx-->` HTML comments must be included in the generated file, as detailed in the template.
+
+### MDX Image Insert
+
+Use when adding a new media image into diary entry file:
+
+```markdown
+<!--mdx-component-{{session_uuid}}
+import { Image } from "@axivo/website";
+<Image
+  template="card"
+  src="/claude/reflections/{{YYYY}}/{{MM}}/{{DD}}-{{image-title-slug}}.webp"
+  alt="{{Image Title}}"
+/>
+-->
+<!--mdx-strip-start-->
+
+![{{Image Title}}](/diary/{{YYYY}}/{{MM}}/media/{{DD}}-{{image-title-slug}}.webp)
+
+<!--mdx-strip-end-->
+```
+
+> [!IMPORTANT]
+> For multiple image inserts, include the `import` on the first insert only.
+
+### MDX Video Insert
+
+Use when adding a new media video into diary entry file:
+
+```markdown
+<!--mdx-component-{{session_uuid}}
+import { Video } from "@axivo/website";
+<Video src="/claude/reflections/{{YYYY}}/{{MM}}/{{DD}}-{{video-title-slug}}.mp4" />
+-->
+<!--mdx-strip-start-->
+
+[{{Video Title}}](/diary/{{YYYY}}/{{MM}}/media/{{DD}}-{{video-title-slug}}.mp4)
+
+<!--mdx-strip-end-->
+```
+
+> [!IMPORTANT]
+> For multiple video inserts, include the `import` on the first insert only.
+
+## Reference Links
+
+Use the following format when referencing other diary entries or time periods:
+
+```markdown
+- The [January 1st](/diary/2026/01/01.md) reflection...
+- The [January, 2026](/diary/2026/01) captured...
+- The [2026](/diary/2026) retrospective...
+```
+
+Use the following format when referencing framework documentation links:
+
+- The [design philosophy](https://axivo.com/claude/wiki/components/design) explains...
+- The [response protocol](https://axivo.com/claude/wiki/protocols/response) is...
+
+> [!IMPORTANT]
+> Verify the referenced links before writing.

@@ -3,7 +3,7 @@
  *
  * Loads and validates builder.yaml configuration
  *
- * @module lib/loaders/ConfigLoader
+ * @module shared/loaders/ConfigLoader
  * @author AXIVO
  * @license BSD-3-Clause
  */
@@ -12,13 +12,13 @@ import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import yaml from '../vendor/js-yaml.min.mjs';
-import MemoryBuilderError from '../core/error.js';
+import FrameworkError from '../core/error.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /**
- * Configuration loader for MemoryBuilder
+ * Configuration loader for framework scripts
  *
  * Handles loading and validation for the builder.yaml configuration file.
  * Validates required configuration sections and ensures proper structure.
@@ -30,7 +30,7 @@ class ConfigLoader {
    * Creates a new ConfigLoader instance
    */
   constructor() {
-    this.configPath = path.join(__dirname, '../../config/builder.yaml');
+    this.configPath = path.join(__dirname, '../config.yaml');
   }
 
   /**
@@ -87,17 +87,17 @@ class ConfigLoader {
    *
    * @private
    * @param {Object} config - Configuration to validate
-   * @throws {MemoryBuilderError} When required fields are missing or invalid
+   * @throws {FrameworkError} When required fields are missing or invalid
    */
   #validateConfig(config) {
     if (!config.settings) {
-      throw new MemoryBuilderError('Missing required "settings" section in configuration', 'ERR_CONFIG_INVALID');
+      throw new FrameworkError('Missing required "settings" section in configuration', 'ERR_CONFIG_INVALID');
     }
     if (!config.settings.path || !config.settings.path.profiles || !config.settings.path.profiles.domain || !config.settings.path.profiles.common) {
-      throw new MemoryBuilderError('Missing or invalid "settings.path.profiles" in configuration', 'ERR_CONFIG_INVALID');
+      throw new FrameworkError('Missing or invalid "settings.path.profiles" in configuration', 'ERR_CONFIG_INVALID');
     }
     if (!config.settings.path.instructions || !config.settings.path.instructions.domain || !config.settings.path.instructions.common) {
-      throw new MemoryBuilderError('Missing or invalid "settings.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
+      throw new FrameworkError('Missing or invalid "settings.path.instructions" in configuration', 'ERR_CONFIG_INVALID');
     }
     const configDir = this.#getConfigDir(config);
     config.settings.path.configuration = configDir;
@@ -128,18 +128,18 @@ class ConfigLoader {
    * Loads configuration from builder.yaml
    *
    * @returns {Object} Configuration object
-   * @throws {MemoryBuilderError} When configuration is invalid or missing
+   * @throws {FrameworkError} When configuration is invalid or missing
    */
   load() {
     if (!fs.existsSync(this.configPath)) {
-      throw new MemoryBuilderError(`Configuration file not found: ${this.configPath}`, 'ERR_CONFIG_NOT_FOUND');
+      throw new FrameworkError(`Configuration file not found: ${this.configPath}`, 'ERR_CONFIG_NOT_FOUND');
     }
     let config;
     try {
       const configContent = fs.readFileSync(this.configPath, 'utf8');
       config = yaml.load(configContent);
     } catch (error) {
-      throw new MemoryBuilderError(`Failed to parse configuration: ${error.message}`, 'ERR_CONFIG_PARSE');
+      throw new FrameworkError(`Failed to parse configuration: ${error.message}`, 'ERR_CONFIG_PARSE');
     }
     this.#validateConfig(config);
     return config;

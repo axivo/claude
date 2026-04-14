@@ -4,6 +4,38 @@ All notable changes to the Claude Collaboration Platform will be documented in t
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-04-14
+
+### Added
+
+- New `FrameworkError` class replacing `MemoryBuilderError` in shared library
+- New `search` script with Algolia REST API for framework documentation and reflections search
+- New `search_system` instructions with tools and observations
+- New `shared/` directory for common modules reused across scripts
+
+### Changed
+
+- Cycle assessment instructions expanded with indicators procedure, decision rules, and error patterns
+- Class `ConfigLoader` moved from `memory/lib/loaders/` to `shared/loaders/`
+- Class `EnvironmentManager` moved from `memory/lib/core/` to `shared/core/`
+- Class `HttpClient` moved from `memory/lib/core/` to `shared/core/` and stripped of `@octokit/request` dependency
+- Class `Reflection` rewritten to use `/metadata` API for listing and Cloudflare CDN for content retrieval
+- Configuration file moved from `memory/config/builder.yaml` to `shared/config.yaml`
+- Reflection listing now returns rich metadata: author, date, description, source, tags, title, url
+- Reflection tools updated to remove `-a` (AST) and `-s` (search) flags, tool names simplified
+- Response protocol instructions restructured with procedural steps
+- Vendored `js-yaml.min.mjs` library moved from `memory/lib/vendor/` to `shared/vendor/`
+
+### Removed
+
+- AST-related reflection tools
+- Class `GitHubAuth` and `application.pem` key file
+- Class `Reflection` from `memory/lib/core/`
+- GitHub API dependency for reflection tools
+- Vendored `markdown-ast.min.mjs` library
+- Vendored `octokit-request.min.mjs` library
+- Tool `reflection__search` replaced by `search__query`
+
 ## [1.1.1] - 2026-04-13
 
 ### Added

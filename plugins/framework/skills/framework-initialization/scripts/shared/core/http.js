@@ -1,17 +1,16 @@
 /**
  * HTTP Client
  *
- * HTTP client using curl binary for container environment
+ * HTTP client using native fetch with curl fallback for container environments
  *
- * @module lib/core/HttpClient
+ * @module shared/core/HttpClient
  * @author AXIVO
  * @license BSD-3-Clause
  */
 import { spawnSync } from 'node:child_process';
-import { request } from '../vendor/octokit-request.min.mjs';
 
 /**
- * HTTP client using system curl binary
+ * HTTP client using native fetch with system curl fallback
  *
  * @class HttpClient
  */
@@ -23,14 +22,11 @@ class HttpClient {
    * @param {number} [options.timeout=30] - Request timeout in seconds
    * @param {number} [options.maxBuffer=52428800] - Max response buffer (50MB)
    * @param {boolean} [options.isContainer=false] - Whether running in container
-   * @param {Object} [options.auth] - GitHubAuth instance for authenticated requests
    */
   constructor(options = {}) {
-    this.auth = options.auth || null;
     this.timeout = options.timeout || 30;
     this.maxBuffer = options.maxBuffer || 50 * 1024 * 1024;
     this.isContainer = options.isContainer || false;
-    this.request = request.defaults({ request: { fetch: this.fetch.bind(this) } });
   }
 
   /**
@@ -113,10 +109,6 @@ class HttpClient {
    * @returns {Promise<Response>} Response object
    */
   async fetch(url, options = {}) {
-    if (this.auth) {
-      const token = await this.auth.getToken();
-      options.headers = { ...options.headers, authorization: `token ${token}` };
-    }
     if (!this.isContainer) {
       return fetch(url, options);
     }

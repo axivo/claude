@@ -10,7 +10,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { parseArgs } from 'util';
-import ConfigLoader from './lib/loaders/config.js';
+import ConfigLoader from '../shared/loaders/config.js';
 import MemoryBuilder from './lib/core/memory.js';
 import OutputGenerator from './lib/generators/output.js';
 

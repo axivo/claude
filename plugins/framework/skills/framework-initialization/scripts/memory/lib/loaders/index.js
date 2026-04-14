@@ -5,7 +5,7 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-import ConfigLoader from './config.js';
+import ConfigLoader from '../../../shared/loaders/config.js';
 import FileLoader from './file.js';
 
 export {
