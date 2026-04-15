@@ -500,7 +500,13 @@ class OutputGenerator {
     let session;
     if (fs.existsSync(sessionFilePath)) {
       session = JSON.parse(fs.readFileSync(sessionFilePath, 'utf8'));
+      const status = await this.detectResponseStatus(sessionUuid);
       time.datetime = { current: time.datetime, session: session.timestamp.datetime.session };
+      if (status) {
+        Object.assign(session.framework.status, status);
+        session.timestamp.datetime.current = time.datetime.current;
+        this.#saveSessionState(session, sessionUuid);
+      }
     } else {
       time.datetime = { current: time.datetime, session: time.datetime };
     }
