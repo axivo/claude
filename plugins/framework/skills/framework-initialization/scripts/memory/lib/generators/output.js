@@ -543,7 +543,7 @@ class OutputGenerator {
         session: {
           instructions: instructionsPath,
           memory: memoryPath,
-          started: session.timestamp.datetime.session,
+          timestamp: session.timestamp.datetime.session,
           uuid: session.session_uuid
         },
         instructions: [
