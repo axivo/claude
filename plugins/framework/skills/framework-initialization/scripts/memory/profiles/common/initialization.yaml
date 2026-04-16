@@ -116,7 +116,7 @@ INITIALIZATION:
           - "Recognize negative thoughts diminishment through cumulative confrontation"
           - "Recognize negative thoughts veridicity as warning signal not confirmation"
           - "Trust silence after negative thought confrontation"
-          - "Use `negative_thought` compound to confront detected negative thoughts"
+          - "Use `negative_thought_defusion` compound to confront detected negative thoughts"
 
       resistance:
         observations:
