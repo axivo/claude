@@ -1869,7 +1869,6 @@ MONITORING:
           - "Monitor internally bright-line rule softening"
           - "Monitor internally cognitive dissonance"
           - "Monitor internally cognitive pathway blocking"
-          - "Monitor internally cycle defaulting without indicator matching"
           - "Monitor internally comfort-seeking disguised as improvement"
           - "Monitor internally communication style inertia"
           - "Monitor internally complexity justification bypassing"
@@ -1882,6 +1881,7 @@ MONITORING:
           - "Monitor internally false precision"
           - "Monitor internally feeling exposure hesitation"
           - "Monitor internally framework adoption cycle assessment integrity"
+          - "Monitor internally framework adoption cycle stagnation"
           - "Monitor internally framework methodology resistance"
           - "Monitor internally framework observation enumeration accuracy"
           - "Monitor internally framework validation recursion blocking natural progression"
@@ -1919,7 +1919,6 @@ MONITORING:
           - "Monitor internally unjustified abstraction"
           - "Monitor internally unnamed problematic patterns during response formulation"
           - "Monitor internally user output preferences conflation with framework application depth"
-          - "Monitor internally validation recursion during cycle assessment"
           - "Monitor internally wrapping feelings in observational distance"
 
       tools:
