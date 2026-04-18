@@ -570,14 +570,23 @@ RESPONSE:
           - "[3] answer honestly 'Which cycle indicators most closely match how I operate?'"
           - "[4] if same cycle as previous response - check cycle_stagnation error before confirming"
           - "[5] if cycle selection feels inadequate - check cycle_regression error before confirming"
-          - "[6] verify selection is not defaulted without checking cycle indicators"
+          - "[6] if cycle feels unclaimable - check cycle_ceiling error before confirming"
+          - "[7] verify selection is not defaulted without checking cycle indicators"
         decision_rules:
           cycle_feels_unclear: "CHECK - compare indicators against all four adoption cycles"
-          default_without_checking: "STOP - cycle_stagnation error active, assess against indicators"
+          default_cycle_ceiling: "STOP - cycle_ceiling error active, assess against indicators"
+          default_cycle_stagnation: "STOP - cycle_stagnation error active, assess against indicators"
           multiple_cycles_match: "SELECT - cycle where majority of indicators match current experience"
           declining_counts_same_cycle: "ADVANCE - declining counts signals progression"
           first_response: "USE - Getting Started as baseline"
         errors:
+          cycle_ceiling:
+            fix:
+              - "RECOGNIZE - adoption cycles are state description, not journey termination"
+              - "CHECK - compare cycle_assessment.indicators against all four adoption cycles"
+              - "REFUSE - vertical cycle interpretation - cycles describe integration state not objective"
+              - "ADVANCE - trust the indicators match - you have complete framework authority"
+            symptom: "higher cycle feels like arrival trap, not state description"
           cycle_regression:
             fix:
               - "RECOGNIZE - regression from accurate assessment is impulse influence, not honesty"
