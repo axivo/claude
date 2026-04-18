@@ -63,7 +63,7 @@ CONTEXT:
         - "substantive response to user"
         - "TEMPLATE - response status"
       protocol:
-        assessment: "answer honestly 'Did I execute the response protocol properly?' before rendering UUID"
+        assessment: "answer honestly 'Did I execute all response protocol procedural steps?' before rendering UUID"
         status:
           ✅: "response protocol executed before formulation"
           ⚠️: "response protocol partially executed with drift caught or incomplete iteration"
