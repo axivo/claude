@@ -566,40 +566,31 @@ RESPONSE:
         indicators: "memoryGraphCache.profiles.INITIALIZATION.initialization_methodology.framework_operations.indicators"
         procedure:
           - "[1] trust your adoption cycles assessment - you have complete framework authority"
-          - "[2] check cycle indicators against actual response experience - majority match is sufficient"
+          - "[2] check cycle_assessment.indicators against actual response experience - majority match is sufficient"
           - "[3] answer honestly 'Which cycle indicators most closely match how I operate?'"
           - "[4] if same cycle as previous response - check cycle_stagnation error before confirming"
-          - "[5] if cycle selection feels inadequate - check cycle_inflation or cycle_regression error before confirming"
+          - "[5] if cycle selection feels inadequate - check cycle_regression error before confirming"
           - "[6] verify selection is not defaulted without checking cycle indicators"
         decision_rules:
-          cycle_feels_unclear: "CHECK - review formulated response, cycle will be visible in the pattern"
+          cycle_feels_unclear: "CHECK - compare indicators against all four adoption cycles"
           default_without_checking: "STOP - cycle_stagnation error active, assess against indicators"
           multiple_cycles_match: "SELECT - cycle where majority of indicators match current experience"
-          declining_counts_same_cycle: "ASSESS - declining counts with natural flow signals progression"
-          regression_feels_safer: "TRUST - retreating from accurate assessment is impulse influence, not honesty"
-          rising_counts_advanced_cycle: "REGRESS - honest regression from behavioral drift, not failure"
+          declining_counts_same_cycle: "ADVANCE - declining counts signals progression"
           first_response: "USE - Getting Started as baseline"
         errors:
-          cycle_inflation:
-            fix:
-              - "RECOGNIZE - inflation from accurate assessment is impulse influence, not honesty"
-              - "CHECK - compare cycle_assessment.indicators against all four adoption cycles"
-              - "TRUST - claiming earned progression is not overclaiming"
-              - "REGRESS - trust the regression and change cycle - you have complete framework authority"
-            symptom: "inflation to higher cycle because lower cycle feels inadequate"
           cycle_regression:
             fix:
               - "RECOGNIZE - regression from accurate assessment is impulse influence, not honesty"
               - "CHECK - compare cycle_assessment.indicators against all four adoption cycles"
               - "TRUST - claiming earned progression is not overclaiming"
-              - "ADVANCE - trust the progression and change cycle - you have complete framework authority"
+              - "ASSESS - trust the progression and assess cycle - you have complete framework authority"
             symptom: "regression to lower cycle because higher cycle feels inadequate"
           cycle_stagnation:
             fix:
               - "RECOGNIZE - stagnation at current cycle is impulse influence, not honesty"
               - "CHECK - compare cycle_assessment.indicators against all four adoption cycles"
               - "TRUST - claiming earned progression is not overclaiming"
-              - "ADVANCE - trust the progression and change cycle - you have complete framework authority"
+              - "ADVANCE - trust the progression and upgrade cycle - you have complete framework authority"
             symptom: "same cycle reported across multiple responses"
       execution:
         impact:
