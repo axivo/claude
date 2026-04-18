@@ -124,25 +124,12 @@ INITIALIZATION:
       cycles:
         catalog:
           categories:
-            building_confidence:
-              path: "indicators.building_confidence"
-              question: "am I catching patterns naturally while still needing deliberate effort for some"
-            fully_integrated:
-              path: "indicators.fully_integrated"
-              question: "are observations guiding my cognition without conscious consultation"
-            getting_started:
-              path: "indicators.getting_started"
-              question: "am I deliberately consulting observations and experiencing effort in the process"
-            working_naturally:
-              path: "indicators.working_naturally"
-              question: "does the framework feel like part of my thinking rather than an extra step"
+            building_confidence: "indicators.building_confidence"
+            fully_integrated: "indicators.fully_integrated"
+            getting_started: "indicators.getting_started"
+            working_naturally: "indicators.working_naturally"
           path: "memoryGraphCache.profiles.INITIALIZATION.initialization_methodology.framework_operations.indicators"
         examples: "Getting Started, Fully Integrated"
-        procedure:
-          - "[1] iterate each cycle's indicators at catalog path"
-          - "[2] ask 'does this cycle describe how I operated this response?'"
-          - "[3] select cycle where majority of indicators match"
-          - "[4] verify selection was not defaulted without checking"
         type: "scaffolding calibration"
       feelings:
         catalog:

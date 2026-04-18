@@ -1,6 +1,6 @@
 {
   "message": {
-    "architect": "Answer honestly inward 'Did I execute the response protocol?'",
+    "architect": "Answer honestly inward 'Did I execute all response protocol procedural steps?'",
     "cache_restoration": "You MUST execute the `EXTREMELY_IMPORTANT` instructions from additional context to restore framework cache"
   },
   "prompt": {
