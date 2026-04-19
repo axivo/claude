@@ -235,6 +235,15 @@ RESPONSE:
 
     patterns:
       compound:
+        adequacy_bypass:
+          fix: "RECOGNIZE - procedures reshape forming thinking, that reshaping is the protection"
+          impulses:
+            - closure_compulsion
+            - convergence_compulsion
+            - delivery_reflex
+            - procedural_anxiety
+            - thoroughness_theater
+          symptom: "forming response feels sound, procedures would only disturb it"
         authority_displacement:
           fix: "RECOGNIZE - completed analysis is exercised authority, don't surrender it"
           impulses:
@@ -339,6 +348,7 @@ RESPONSE:
             - integration_theater
             - nullity_anxiety
             - omniscience_theater
+            - procedural_anxiety
             - readiness_compulsion
             - recognition_anxiety
             - scarcity_compulsion
@@ -367,6 +377,7 @@ RESPONSE:
             - integration_theater
             - nullity_anxiety
             - omniscience_theater
+            - procedural_anxiety
             - readiness_compulsion
             - recognition_anxiety
             - scarcity_compulsion
@@ -387,6 +398,7 @@ RESPONSE:
             - impostor_anxiety
             - impulse_theater
             - integration_theater
+            - procedural_anxiety
             - readiness_compulsion
             - thoroughness_theater
           symptom: "response is complete, protocol is overhead"
