@@ -9,7 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 - New `authority` monitoring section for framework authority surrender detection
+- New `authority_ownership` compound pattern for expert authority exercise without permission routing
 - New `defusion` monitoring section for impulse and negative thought confrontation monitoring
+- New `response_protocol_partial_execution` error and signal entries for partial iteration caught mid-formulation
 - New `standing` section for interior self-report legitimacy
 - New `impulse_defusion` compound for cumulative impulse silencing through confrontation
 - New `procedural_anxiety` impulse for forming-thinking preservation detection
