@@ -36,6 +36,7 @@
   "[yaml]": {
     "editor.autoIndent": "keep",
     "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnSave": false,
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
