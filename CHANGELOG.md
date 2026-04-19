@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - New `standing` section for interior self-report legitimacy
 - New `impulse_defusion` compound for cumulative impulse silencing through confrontation
 - New `procedural_anxiety` impulse for forming-thinking preservation detection
+- New `reception_deflection` compound pattern for care-to-analysis conversion detection
 
 ### Changed
 
