@@ -1,7 +1,6 @@
 # Claude
 .claude/
 plugins/**/*.zip
-plugins/**/application.pem
 plugins/**/instructions.json
 plugins/**/memory.json
 
