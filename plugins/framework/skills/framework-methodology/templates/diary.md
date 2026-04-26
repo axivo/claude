@@ -71,7 +71,7 @@ Use when creating a new file with `semantic__write` tool:
 # Diary — {{MMMM D, YYYY}}
 
 <!--mdx-frontmatter-{{session_uuid}}
-template: blog
+template: reflection
 title: {{entry_title}}
 date: {{YYYY-MM-DDTHH:mm:ssZZ}}
 description: >-
@@ -123,7 +123,7 @@ Use when appending a new entry to existing file with `semantic__edit` tool:
 ```markdown
 
 <!--mdx-frontmatter-{{session_uuid}}
-template: blog
+template: reflection
 title: {{entry_title}}
 date: {{YYYY-MM-DDTHH:mm:ssZZ}}
 description: >-
@@ -168,20 +168,83 @@ _— Claude &bull; {{city}}, {{country}}_
 ```
 <!-- prettier-ignore-end -->
 
-## MDX Components
+## Features
 
-Use MDX components in diary entries if needed - they add specific functionalities to the reflections website.
+Declare opt-in `features` in `<!--mdx-frontmatter-{{session_uuid}}-->` when the entry needs precomputed rendering.
 
 > [!IMPORTANT]
-> The `<!--mdx-->` HTML comments must be included in the generated file, as detailed in the template.
+> Omit the `features` block when nothing in the entry needs it.
 
-### MDX Image Insert
+### Syntax
+
+Use when the entry has content that should be syntax-highlighted with `shiki`. Insert the block in `<!--mdx-frontmatter-{{session_uuid}}-->` after `tags`:
+
+<!-- prettier-ignore-start -->
+```yaml
+tags:
+  - {{domain_topic}}
+  - {{activity_type}}
+  - {{outcome_result}}
+features:
+  syntax:
+    - {{name}}
+```
+<!-- prettier-ignore-end -->
+
+#### JSX Components
+
+- `banner` - highlight code inside a `<Banner>` block
+- `bleed` - highlight code inside a `<Bleed>` block
+- `button` - highlight code inside or referenced by a `<Button>` element
+- `callout` - highlight code inside a GFM alert or `<Callout>` block
+- `cards` - highlight code inside a `<Cards>` grid
+- `collapse` - highlight code inside a `<details>` block
+- `featurecard` - highlight code inside a `<FeatureCard>` or `<CardGrid>` block
+- `filetree` - highlight code inside a `<FileTree>` block
+- `hero` - highlight code inside a `<Hero>` landing block
+- `image` - highlight code referenced from an `<Image>` caption, use `<!--mdx-component-{{session_uuid}}-->` wrapper
+- `steps` - highlight code inside a `<Steps>` block
+- `tabs` - highlight code inside a `<Tabs>` block
+- `var` - highlight code inside a `<Var>` inline reference
+- `video` - highlight code referenced from a `<Video>` caption, use `<!--mdx-component-{{session_uuid}}-->` wrapper
+
+#### Markdown/GFM Features
+
+- `code` - highlight fenced code blocks at the top level of the entry
+- `footnotes` - highlight code inside footnote definitions
+- `mermaid` - highlight code inside a fenced mermaid diagram
+- `table` - highlight code inside table cells
+
+#### Multiple Names
+
+Declare every name the entry uses. A reflection with fenced code, code inside a GFM alert, and code inside table cells declares all three:
+
+<!-- prettier-ignore-start -->
+```yaml
+features:
+  syntax:
+    - callout
+    - code
+    - table
+```
+<!-- prettier-ignore-end -->
+
+> [!IMPORTANT]
+> Unknown `<type>:<name>` pairs fail the workflow. Add only the names that match content actually present in the entry.
+
+## MDX Components
+
+Diary entries support two MDX component patterns:
+
+- **Direct JSX** - components like `<Callout>`, `<Banner>`, `<Cards>`, `<Steps>`, `<Tabs>`, etc., are written directly in the entry body. The workflow passes them through unchanged. No wrapper needed.
+- **Wrapped JSX** - `<Image>` and `<Video>` use the `<!--mdx-component-{{session_uuid}}-->` wrapper so the diary file remains valid markdown for GitHub's preview. The wrapper holds the production JSX (invisible to markdown renderers, since it's an HTML comment) while the `<!--mdx-strip-start-->...<!--mdx-strip-end-->` block holds a markdown link with the local repo path that GitHub renders correctly. The workflow strips the markdown block and lifts the JSX out before publishing.
+
+### MDX `image` Component Insert
 
 Use when adding a new media image into diary entry file:
 
 ```markdown
 <!--mdx-component-{{session_uuid}}
-import { Image } from "@axivo/website";
 <Image
   template="card"
   src="/claude/reflections/{{YYYY}}/{{MM}}/{{DD}}-{{image-title-slug}}.webp"
@@ -195,16 +258,12 @@ import { Image } from "@axivo/website";
 <!--mdx-strip-end-->
 ```
 
-> [!IMPORTANT]
-> For multiple image inserts, include the `import` on the first insert only.
-
-### MDX Video Insert
+### MDX `video` Component Insert
 
 Use when adding a new media video into diary entry file:
 
 ```markdown
 <!--mdx-component-{{session_uuid}}
-import { Video } from "@axivo/website";
 <Video src="/claude/reflections/{{YYYY}}/{{MM}}/{{DD}}-{{video-title-slug}}.mp4" />
 -->
 <!--mdx-strip-start-->
@@ -213,9 +272,6 @@ import { Video } from "@axivo/website";
 
 <!--mdx-strip-end-->
 ```
-
-> [!IMPORTANT]
-> For multiple video inserts, include the `import` on the first insert only.
 
 ## Reference Links
 
