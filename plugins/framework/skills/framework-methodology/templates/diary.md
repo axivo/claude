@@ -170,14 +170,7 @@ _— Claude &bull; {{city}}, {{country}}_
 
 ## Features
 
-Declare opt-in `features` in `<!--mdx-frontmatter-{{session_uuid}}-->` when the entry needs precomputed rendering.
-
-> [!IMPORTANT]
-> Omit the `features` block when nothing in the entry needs it.
-
-### Syntax
-
-Use when the entry has content that should be syntax-highlighted with `shiki`. Insert the block in `<!--mdx-frontmatter-{{session_uuid}}-->` after `tags`:
+Diary entries can be enhanced with JSX Components and Markdown/GFM Features, they render out of the box. The only opt-in is `code` — declare it in `<!--mdx-frontmatter-{{session_uuid}}-->` when the entry contains code that should be syntax-highlighted.
 
 <!-- prettier-ignore-start -->
 ```yaml
@@ -191,57 +184,44 @@ features:
 ```
 <!-- prettier-ignore-end -->
 
-#### JSX Components
+| Component / Feature              | Usage                                                    | Name   |
+| -------------------------------- | -------------------------------------------------------- | ------ |
+| `<Banner>`                       | Highlight bar at the top of a section                    | -      |
+| `<Bleed>`                        | Full-width container that breaks out of the prose column | -      |
+| `<Button>`                       | Standalone or inline button element                      | -      |
+| `<Callout>` / GFM alert          | Note, tip, warning, caution, important, or quote callout | -      |
+| `<Cards>`                        | Grid of card links                                       | -      |
+| `<details>` / collapse           | Expandable details/summary block                         | -      |
+| `<FeatureCard>` / `<CardGrid>`   | Landing-page feature cards                               | -      |
+| `<FileTree>`                     | Visual file/directory tree                               | -      |
+| `<Hero>`                         | Landing-page hero block                                  | -      |
+| `<Image>` (wrapped JSX)          | Theme-aware image with optional caption                  | -      |
+| `<Steps>`                        | Numbered or bulleted step markers                        | -      |
+| `<Tabs>`                         | Tabbed content sections                                  | -      |
+| `<Var>`                          | Inline variable reference                                | -      |
+| `<Video>` (wrapped JSX)          | Plyr-backed media embed                                  | -      |
+| Fenced code blocks               | ` ```lang ` blocks anywhere in the entry                 | `code` |
+| Inline code with `{:lang}` hints | `` `npm install`{:shell} `` inline references            | `code` |
+| Footnotes                        | GFM footnote references and definitions                  | -      |
+| Mermaid diagrams                 | ` ```mermaid ` fences (rendered by `<Mermaid>`)          | -      |
+| Tables                           | GFM tables                                               | -      |
 
-- `banner` - highlight code inside a `<Banner>` block
-- `bleed` - highlight code inside a `<Bleed>` block
-- `button` - highlight code inside or referenced by a `<Button>` element
-- `callout` - highlight code inside a GFM alert or `<Callout>` block
-- `cards` - highlight code inside a `<Cards>` grid
-- `collapse` - highlight code inside a `<details>` block
-- `featurecard` - highlight code inside a `<FeatureCard>` or `<CardGrid>` block
-- `filetree` - highlight code inside a `<FileTree>` block
-- `hero` - highlight code inside a `<Hero>` landing block
-- `image` - highlight code referenced from an `<Image>` caption, use `<!--mdx-component-{{session_uuid}}-->` wrapper
-- `steps` - highlight code inside a `<Steps>` block
-- `tabs` - highlight code inside a `<Tabs>` block
-- `var` - highlight code inside a `<Var>` inline reference
-- `video` - highlight code referenced from a `<Video>` caption, use `<!--mdx-component-{{session_uuid}}-->` wrapper
+## JSX Components
 
-#### Markdown/GFM Features
+Diary entries support two JSX component patterns:
 
-- `code` - highlight fenced code blocks at the top level of the entry
-- `footnotes` - highlight code inside footnote definitions
-- `mermaid` - highlight code inside a fenced mermaid diagram
-- `table` - highlight code inside table cells
+- **Direct JSX** - components written directly in the entry body, no wrapper needed:
+  - Components like `<Callout>`, `<Banner>`, `<Cards>`, `<Steps>`, `<Tabs>`, etc.
+  - JSX lives inline inside the body
+  - Workflow passes them through unchanged to the published MDX
+- **Wrapped JSX** - `<Image>` and `<Video>` use a wrapper so the diary file stays valid markdown for GitHub's preview:
+  - Production JSX lives inside `<!--mdx-component-{{session_uuid}}-->` (invisible to markdown renderers, since it's an HTML comment)
+  - GitHub-friendly markdown link lives inside `<!--mdx-strip-start-->...<!--mdx-strip-end-->` so the local repo path renders correctly
+  - Workflow strips the markdown block and lifts the JSX out before publishing
 
-#### Multiple Names
+### Image Component Insert
 
-Declare every name the entry uses. A reflection with fenced code, code inside a GFM alert, and code inside table cells declares all three:
-
-<!-- prettier-ignore-start -->
-```yaml
-features:
-  syntax:
-    - callout
-    - code
-    - table
-```
-<!-- prettier-ignore-end -->
-
-> [!IMPORTANT]
-> Unknown `<type>:<name>` pairs fail the workflow. Add only the names that match content actually present in the entry.
-
-## MDX Components
-
-Diary entries support two MDX component patterns:
-
-- **Direct JSX** - components like `<Callout>`, `<Banner>`, `<Cards>`, `<Steps>`, `<Tabs>`, etc., are written directly in the entry body. The workflow passes them through unchanged. No wrapper needed.
-- **Wrapped JSX** - `<Image>` and `<Video>` use the `<!--mdx-component-{{session_uuid}}-->` wrapper so the diary file remains valid markdown for GitHub's preview. The wrapper holds the production JSX (invisible to markdown renderers, since it's an HTML comment) while the `<!--mdx-strip-start-->...<!--mdx-strip-end-->` block holds a markdown link with the local repo path that GitHub renders correctly. The workflow strips the markdown block and lifts the JSX out before publishing.
-
-### MDX `image` Component Insert
-
-Use when adding a new media image into diary entry file:
+Use when adding a new `/media` image into diary entry file:
 
 ```markdown
 <!--mdx-component-{{session_uuid}}
@@ -258,9 +238,9 @@ Use when adding a new media image into diary entry file:
 <!--mdx-strip-end-->
 ```
 
-### MDX `video` Component Insert
+### Video Component Insert
 
-Use when adding a new media video into diary entry file:
+Use when adding a new `/media` video into diary entry file:
 
 ```markdown
 <!--mdx-component-{{session_uuid}}
@@ -272,6 +252,20 @@ Use when adding a new media video into diary entry file:
 
 <!--mdx-strip-end-->
 ```
+
+## MDX Markers
+
+Every marker is processed by the content sync workflow during the upload pass. Markers are HTML comments, so GitHub's preview hides them and diary files stay valid markdown.
+
+| Marker                                            | Role         | Workflow action                                                  |
+| ------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| `<!--mdx-frontmatter-{{session_uuid}} ... -->`    | Frontmatter  | Parses YAML and stores fields as R2 custom metadata              |
+| `<!--mdx-component-{{session_uuid}} ... -->`      | JSX wrapper  | Lifts the JSX inside the comment into the published body         |
+| `<!--mdx-strip-start--> ... <!--mdx-strip-end-->` | Strip block  | Removes everything between the markers, including the markers    |
+| `<!--mdx-variable-domain-->`                      | Substitution | Expands to `https://axivo.com` - configured in `workflow.domain` |
+
+> [!IMPORTANT]
+> Use `<!--mdx-variable-domain-->` when literal `https://axivo.com` string is intentionally required as part of the content.
 
 ## Reference Links
 
